@@ -2,7 +2,7 @@ DarkRP = DarkRP or {}
 DarkRP.disabledDefaults = DarkRP.disabledDefaults or {}
 DarkRP.disabledDefaults["modules"] = DarkRP.disabledDefaults["modules"] or {}
 
-WhenGMLoaded('NCompatibilities GM',function()
+WhenGMLoaded('CW Compatibilities GM',function()
     local ENT = FindMetaTable('Entity')
 
     if ENT.IsDoor then

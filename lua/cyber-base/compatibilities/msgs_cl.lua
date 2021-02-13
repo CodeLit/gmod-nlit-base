@@ -6,7 +6,7 @@ DarkRP.notify = DarkRP.notify or function(ply, ntype, seconds, text, bForce)
 	end
 end
 
-GNet.OnPacketReceive(NCompat.netStr, function(pkt)
+GNet.OnPacketReceive(CW.Compat.netStr, function(pkt)
 	local netCmd = pkt:ReadUInt(GNet.CalculateRequiredBits(100))
 	
 	if netCmd == 1 then -- Notify

@@ -1,6 +1,6 @@
-local N = {}
+local HTML = {}
 
-function N:MakeInPanel(panel)
+function HTML:MakeInPanel(panel)
   local html = vgui.Create('DHTML', panel)
   html:Dock(FILL)
   html:SetAllowLua(true)
@@ -21,4 +21,4 @@ function N:MakeInPanel(panel)
   return html
 end
 
-return N
+return HTML

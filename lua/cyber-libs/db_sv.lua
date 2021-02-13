@@ -1,5 +1,7 @@
 local CWDB = {}
 
+local dbg_prefix = '[CWDB]'
+
 -- ГЛАВНОЕ
 function CWDB:Q(query, qtype)
   local q
@@ -9,7 +11,7 @@ function CWDB:Q(query, qtype)
 
   if q == false then
     local info = debug.getinfo(2, 'S')
-    local errText = '[NDB] ' .. sql.LastError()
+    local errText = dbg_prefix..' ' .. sql.LastError()
     if info then
       errText = errText .. ' [' .. info.source:sub(2) .. ' line ' .. info.linedefined .. ']'
     end
@@ -31,13 +33,13 @@ function CWDB:SetTableName(tblName)
   tblName = string.Trim(tblName)
 
   if not isstring(tblName) then
-    PrintError('[NDB] Table name must be a string! ' .. NFiles:curPath())
+    PrintError(dbg_prefix..' Table name must be a string! ' .. NFiles:curPath())
 
     return
   end
 
   if string.find(tblName, ' ') then
-    PrintError('[NDB] Name must not contain spaces! ' .. NFiles:curPath())
+    PrintError(dbg_prefix..' Name must not contain spaces! ' .. NFiles:curPath())
 
     return
   end
@@ -59,7 +61,7 @@ end
 -- пример steamid TEXT NOT NULL,nick TEXT,lastjoin DATETIME,total_sum INTEGER,is_endless_priv BOOLEAN,reprimands INTEGER
 function CWDB:CreateTable(sqlStrColumns)
   local name = CWDB:GetTableName()
-  if not name then PrintError('[NDB] Creating table name is not set! ' .. NFiles:curPath()) return end
+  if not name then PrintError(dbg_prefix..' Creating table name is not set! ' .. NFiles:curPath()) return end
   return self:Q('CREATE TABLE IF NOT EXISTS ' .. name .. '(' .. string.Trim(sqlStrColumns) .. ')')
 end
 

@@ -1,4 +1,4 @@
 DarkRP = DarkRP or {}
-NCompat = NCompat or {}
+CW.Compat = CW.Compat or {}
 
-NCompat.netStr = 'NCompatibility'
+CW.Compat.netStr = 'CW.Compatibility'

@@ -2,7 +2,7 @@ if game.SinglePlayer() then
 
     local cantUse
 
-    net.Receive(NCompat.SP.NUseNet, function()
+    net.Receive(CW.Compat.SP.NUseNet, function()
         if cantUse then return end
         local ent = net.ReadEntity()
         if ent.NUse then
@@ -14,7 +14,7 @@ if game.SinglePlayer() then
         end
     end)
 
-    GNet.OnPacketReceive(NCompat.SP.ToolsNet, function(pkt)
+    GNet.OnPacketReceive(CW.Compat.SP.ToolsNet, function(pkt)
         local ply = LocalPlayer()
         local btn = pkt:ReadUInt(GNet.CalculateRequiredBits(300))
         local wep = ply:GetActiveWeapon()
