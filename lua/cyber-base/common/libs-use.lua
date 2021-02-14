@@ -1,3 +1,7 @@
+local function IsStringContains(str,text)
+	return tobool(string.find(str, text))
+end
+
 local pathToLibs = 'cyber-libs'
 
 CW:AddAllInFolder(pathToLibs,true)
@@ -6,7 +10,7 @@ local finders = {}
 
 function finders:FindLuaLibInFiles(files,lib)
 	for _,f in pairs(files) do
-		if CWStr:Contains(f,'.lua') and CWStr:Contains(f,lib) then
+		if IsStringContains(f,'.lua') and IsStringContains(f,lib) then
 			return f
 		end
 	end
