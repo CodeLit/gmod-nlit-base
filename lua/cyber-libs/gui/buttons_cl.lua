@@ -1,6 +1,21 @@
-local D = CW:UseLib('draw')
+--- Creates GUI Buttons
+-- @module Buttons
+-- @usage local Buttons = CW:Lib('buttons')
+local Buttons = {}
 
-function CWGUI:Button(text,clickFunc)
+local D = CW:Lib('draw')
+local CWC = CW:Lib('color')
+local Icons = CW:Lib('icons')
+
+
+--- Creates a button
+---@param text string Button text
+---@param clickFunc function OnClick function
+--- @usage Buttons:Create('Accept',function(btn)
+--      -- OnClick function
+--		btn:SetColor(CWC:Red())
+-- end)
+function Buttons:Create(text,clickFunc)
 	local b = TDLib('DButton')
 	b:SetText(l(text) or '')
 	b:SetFont('N_small')
@@ -22,30 +37,38 @@ function CWGUI:Button(text,clickFunc)
 			local iconSizeMul = 0.8
 			local iconSize = h*iconSizeMul
 			local iconMargin = h*(1-iconSizeMul)
-			D:Icon(CWGUI:IconPath(pnl.RightIcon), w-iconSize-iconMargin/2, iconMargin/2, iconSize, iconSize)
+			D:Icon(Icons:GetPath(pnl.RightIcon), w-iconSize-iconMargin/2, iconMargin/2, iconSize, iconSize)
 		end
 	end)
 
 	b.DoClick = clickFunc
-	
 	return b
 end
 
-function CWGUI:AcceptButton(text,clickFunc)
-	local b = CWGUI:Button(text or 'Подтвердить',clickFunc)
+--- Accept button green colored
+--- @see Create
+function Buttons:Accept(text,clickFunc)
+	local b = self:Create(text or 'Подтвердить',clickFunc)
 	b:SetTextColor(CWC:White())
 	b:Background(Color(0, 190, 0, 220))
 	return b
 end
 
-function CWGUI:DeclineButton(text,clickFunc)
-	local b = CWGUI:Button(text or 'Отменить',clickFunc)
+--- Decline button red colored
+--- @see Create
+function Buttons:Decline(text,clickFunc)
+	local b = self:Create(text or 'Отменить',clickFunc)
 	b:SetTextColor(CWC:White())
 	b:Background(Color(190, 0, 0, 220))
 	return b
 end
 
-function CWGUI:AddButtonToCMenu(title,icon,iconSize,func)
+---Adds button to C button menu
+---@param title string
+---@param icon string
+---@param iconSize number
+---@param func function
+function Buttons:AddToCMenu(title,icon,iconSize,func)
 	list.Set('DesktopWindows','NContext Button '..title,{
 		title = title,
 		icon = icon,
@@ -54,13 +77,14 @@ function CWGUI:AddButtonToCMenu(title,icon,iconSize,func)
 		onewindow = true,
 		init = function(ico,window)
 			window:SetIcon(icon)
-			CWGUI:AddFrameBehavior(window)
+			CW:Lib('frames'):AddFrameBehavior(window)
 			func(window)
 		end,
 	})
 end
 
-function CWGUI:HudSettingsButton()
+---Specific HUD Settings button
+function Buttons:HudSettings()
 	local button = vgui.Create('DImageButton')
 	button:SetSize(16, 16)
 	button:SetImage('icon16/wrench.png')
@@ -72,7 +96,7 @@ function CWGUI:HudSettingsButton()
 			return
 		end
 
-		local btnPanel = CWGUI:Panel()
+		local btnPanel = Buttons:Panel()
 		btnPanel:SetSize(200, 200)
 		local mixer = btnPanel:Add('DColorMixer')
 		mixer:SetPalette(false)
@@ -132,3 +156,5 @@ function CWGUI:HudSettingsButton()
 
 	return button
 end
+
+return Buttons

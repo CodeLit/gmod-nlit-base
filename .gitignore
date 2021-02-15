@@ -1,3 +1,9 @@
+# Editors cofig
 *.code-workspace
+
+# Packaged files
 *.gma
-documentation
+
+# Documentation
+ldoc
+doc

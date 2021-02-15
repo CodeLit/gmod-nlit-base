@@ -1,6 +1,8 @@
--- [do not obfuscate]
+local Panels = {}
 
-function CWGUI:Panel(text, font)
+local CWC = CW:Lib('colors')
+
+function Panels:Create(text, font)
 	local p = vgui.Create('DPanel')
 	p.text = text
 
@@ -33,20 +35,20 @@ function CWGUI:Panel(text, font)
 	return p
 end
 
-function CWGUI:DockScroll()
+function Panels:DockScroll()
 	local scr = vgui.Create('DScrollPanel')
 	scr:Dock(FILL)
 	return scr
 end
 
 -- Даёт доступ к панели через кнопку C
-function CWGUI:AttachToC(pnl)
+function Panels:AttachToC(pnl)
 	pnl:SetParent(g_ContextMenu)
 	pnl:SetMouseInputEnabled(true)
 	pnl.attachedToCMenu = true
 end
 
-function CWGUI:BinderPanel(command)
+function Panels:BinderPanel(command)
 	local binder = vgui.Create('DBinder')
 	binder:SetSize( 200, 50 )
 	binder:SetPos( 25, 35 )
@@ -58,7 +60,7 @@ function CWGUI:BinderPanel(command)
 	return binder
 end
 
-function CWGUI:FacePanel(mdl)
+function Panels:FacePanel(mdl)
 	local pnl = vgui.Create('DModelPanel')
 	pnl:SetModel(mdl)
 	pnl:SetFOV(40)
@@ -88,7 +90,7 @@ function CWGUI:FacePanel(mdl)
 	return pnl
 end
 
-function CWGUI:CharacterPanel(mdl)
+function Panels:CharacterPanel(mdl)
 	local pnl = vgui.Create('DModelPanel')
 	pnl:SetModel(mdl)
 	pnl:SetFOV(40)
@@ -116,7 +118,7 @@ function CWGUI:CharacterPanel(mdl)
 	return pnl
 end
 
-function CWGUI:ItemPanel(mdl)
+function Panels:ItemPanel(mdl)
 	local pnl = vgui.Create('DModelPanel')
 	pnl:SetModel(mdl)
 	local ent = pnl.Entity
@@ -157,10 +159,12 @@ end
 
 vgui.Register('DMultiline', DMultiline, 'DTextEntry')
 
-function CWGUI:Multiline(text)
+function Panels:Multiline(text)
 	local m = vgui.Create('DMultiline')
 	m:SetText(text or '')
 	m:SetFont('N_small')
 
 	return m
 end
+
+return Panels

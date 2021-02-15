@@ -1,5 +1,3 @@
--- [do not obfuscate]
-
 local nguiRealFont = 'Open Sans' -- Use the font-name which is shown to you by your operating system Font Viewer, not the file name
 
 WhenGMLoaded('NBase Fonts',function()

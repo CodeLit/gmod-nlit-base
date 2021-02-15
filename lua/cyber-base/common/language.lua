@@ -1,4 +1,4 @@
-local CWStr = CW:UseLib('string')
+local CWStr = CW:Lib('string')
 
 CW.Lang = CW.Lang or {}
 

@@ -1,6 +1,14 @@
-local D = CW:UseLib('draw')
-
-local HTML = CW:UseLib('html')
+local D = CW:Lib('draw')
+local Buttons = CW:Lib('buttons')
+local Frames = CW:Lib('frames')
+local Icons = CW:Lib('icons')
+local Inputs = CW:Lib('inputs')
+local Panels = CW:Lib('panels')
+local CWStr = CW:Lib('strings')
+local CWC = CW:Lib('colors')
+local TblLsts = CW:Lib('table_lists')
+local HTML = CW:Lib('html')
+local Text = CW:Lib('text')
 
 local addons_short_name = 'CW'
 local addons_website = 'https://neolife.tk/ru' -- Английский нужно добавлять отдельно
@@ -8,10 +16,10 @@ local last_selected_category
 
 local fr
 
-CWGUI:AddButtonToCMenu(addons_short_name..' '..l('Addons'),CWGUI:IconPath('cyber/logo256.png'),50,function(invalidFrame)
+Buttons:AddToCMenu(addons_short_name..' '..l('Addons'),Icons:GetPath('cyber/logo256.png'),50,function(invalidFrame)
 
     local function add_save_btn(inp_pnl,addon_name)
-        local save = inp_pnl:Add(CWGUI:AcceptButton(l('Save changes')))
+        local save = inp_pnl:Add(Buttons:Accept(l('Save changes')))
         save:Dock(BOTTOM)
         save:SetTall(30)
         save.DoClick = function(pnl)
@@ -34,15 +42,15 @@ CWGUI:AddButtonToCMenu(addons_short_name..' '..l('Addons'),CWGUI:IconPath('cyber
 
     if IsValid(fr) then return end
 
-    fr = CWGUI:Frame(l("CyberWolf's Addons"))
-    fr:SetIcon(CWGUI:IconPath('cyber/wolf-logo.png'))
+    fr = Frames:Create(l("CyberWolf's Addons"))
+    fr:SetIcon(Icons:GetPath('cyber/wolf-logo.png'))
 
-    local leftP = fr:Add(CWGUI:Panel())
+    local leftP = fr:Add(Panels:Create())
     leftP:SetWide(fr:GetWide()/4.5)
     leftP:Dock(LEFT)
     leftP.NoOutline = true
 
-    local centerP = fr:Add(CWGUI:Panel())
+    local centerP = fr:Add(Panels:Create())
     centerP:Dock(FILL)
     centerP:DockPadding(10, 10, 10, 10)
     centerP.NoOutline = true
@@ -80,12 +88,12 @@ CWGUI:AddButtonToCMenu(addons_short_name..' '..l('Addons'),CWGUI:IconPath('cyber
 
                 if #addons == 0 then
                     local spaceBetween = 30
-                    local label = cpnl:Add(CWGUI:Label(l('You have no installed addons')..'!'))
+                    local label = cpnl:Add(Text:Create(l('You have no installed addons')..'!'))
                     label:SetFont('N_large')
                     label:SizeToContents()
                     label:SetPos(cpnl:GetWide()/2-label:GetWide()/2,cpnl:GetTall()/2-label:GetTall()/2-spaceBetween)
 
-                    local toAddons = cpnl:Add(CWGUI:AcceptButton('Get addons',function()
+                    local toAddons = cpnl:Add(Buttons:Accept('Get addons',function()
                         buttons[1].DoClick()
                     end))
                     toAddons:SetFont('N_large')
@@ -102,24 +110,24 @@ CWGUI:AddButtonToCMenu(addons_short_name..' '..l('Addons'),CWGUI:IconPath('cyber
                     addon = addon or addons[1]
                     local addonData = NCfg.svTable[addon]
 
-                    local mainP = IsValid(cpnl.mainP) and cpnl.mainP or cpnl:Add(CWGUI:Panel())
+                    local mainP = IsValid(cpnl.mainP) and cpnl.mainP or cpnl:Add(Panels:Create())
                     mainP.NoOutline = true
                     mainP:Clear()
                     mainP:Dock(FILL)
 
                     cpnl.mainP = mainP
 
-                    local lst = mainP:Add(CWGUI:InputFields(addonData))
+                    local lst = mainP:Add(Inputs:Fields(addonData))
                     cpnl.lst = lst
 
                     NCfg.selectedAddon = addon
                 end
 
-                local topLabel = cpnl:Add(CWGUI:Label(l('Select addon for setup')..':'))
+                local topLabel = cpnl:Add(Text:Create(l('Select addon for setup')..':'))
                 topLabel:Dock(TOP)
                 topLabel:SetColor(CWC:White())
 
-                local variant = cpnl:Add(CWGUI:Variant(addons, function(pnl,i,v)
+                local variant = cpnl:Add(TblLsts:Variant(addons, function(pnl,i,v)
                     SelectAddon(v)
                 end))
 
@@ -137,7 +145,7 @@ CWGUI:AddButtonToCMenu(addons_short_name..' '..l('Addons'),CWGUI:IconPath('cyber
             icon = 'web/040-settings-1.png',
             open = function(cpnl)
                 local svCfgData = NCfg.svTable[NCfg.Name]
-                cpnl.lst = cpnl:Add(CWGUI:InputFields(svCfgData))
+                cpnl.lst = cpnl:Add(Inputs:Fields(svCfgData))
                 add_save_btn(cpnl,NCfg.Name)
             end,
         },
@@ -168,7 +176,7 @@ CWGUI:AddButtonToCMenu(addons_short_name..' '..l('Addons'),CWGUI:IconPath('cyber
     }
 
     for i,v in pairs(leftCategories) do
-        local btn = leftP:Add(CWGUI:Button(v.name,function()
+        local btn = leftP:Add(Buttons:Create(v.name,function()
             if (v.access and !v.access()) or selectedCat == v.name then
                 return
             end

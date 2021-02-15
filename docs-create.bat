@@ -1,0 +1,1 @@
+lua ldoc/ldoc.lua ./lua

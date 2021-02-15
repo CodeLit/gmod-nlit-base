@@ -1,19 +1,13 @@
-CWGUI = CWGUI or {}
+local Menus = {}
 
-function CWGUI:Label(text)
-	local l = vgui.Create('DLabel')
-	l:SetText(text or '')
-	l:SetFont('N_small')
-
-	return l
-end
-
-function CWGUI:Menu()
+function Menus:Menu()
 	local menu = DermaMenu()
 	menu:SetPos(input.GetCursorPos())
 
 	timer.Simple(0, function()
-		CWGUI:UpdateMenuPos(menu)
+		if self then
+			self:UpdateMenuPos(menu)
+		end
 	end)
 
 	menu:MakePopup()
@@ -21,7 +15,7 @@ function CWGUI:Menu()
 	return menu
 end
 
-function CWGUI:UpdateMenuPos(menu)
+function Menus:UpdateMenuPos(menu)
 	local x, y = input.GetCursorPos()
 	local overScreen
 
@@ -39,3 +33,5 @@ function CWGUI:UpdateMenuPos(menu)
 		menu:SetPos(x, y)
 	end
 end
+
+return Menus

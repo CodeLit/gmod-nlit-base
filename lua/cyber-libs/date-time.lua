@@ -2,7 +2,7 @@
 -- @module DateTime
 local DateTime = {}
 
-local Str = CW:UseLib('string')
+local Str = CW:Lib('string')
 
 ---	Today
 -- @return today date in format YYYY-MM-DD

@@ -1,6 +1,6 @@
 NCfg.ConnectedAddons = NCfg.ConnectedAddons or {}
 
-local NDB = CW:UseLib('db')
+local NDB = CW:Lib('db')
 
 util.AddNetworkString(NCfg.NetStr)
 

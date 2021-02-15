@@ -59,7 +59,7 @@ end
 function CWEnts:MakePropDestructible(prop)
 	local eMins,eMaxs = prop:GetModelBounds()
 	local size = eMaxs-eMins
-	commonSize = (size.x + size.y + size.z) / 5
+	local commonSize = (size.x + size.y + size.z) / 5
 	commonSize = commonSize * commonSize
 	commonSize = commonSize - commonSize % 10
 	prop:SetHealth(commonSize)

@@ -17,3 +17,5 @@ Contains a base functions for future addons. Free to use, free to contribute
 - Gamemodes Compatibilities
 
 And more!
+
+### Documentation will comming soon!

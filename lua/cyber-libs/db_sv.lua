@@ -1,8 +1,10 @@
-local CWDB = {}
+--- Databases module
+-- @module CWDB
+CWDB = CWDB or {}
 
 local dbg_prefix = '[CWDB]'
 
--- ГЛАВНОЕ
+--- Query
 function CWDB:Q(query, qtype)
   local q
   if qtype == 1 then q = sql.QueryRow(query)
@@ -21,14 +23,17 @@ function CWDB:Q(query, qtype)
   return q
 end
 
+--- Query Row
 function CWDB:QRow(query)
   return CWDB:Q(query, 1)
 end
 
+--- QueryValue
 function CWDB:QValue(query)
   return CWDB:Q(query, 2)
 end
 
+--- Set table name for all queries in this file
 function CWDB:SetTableName(tblName)
   tblName = string.Trim(tblName)
 
@@ -44,7 +49,7 @@ function CWDB:SetTableName(tblName)
     return
   end
 
-  CWDB.curTable = tblName
+  self.curTable = tblName
 
   return true
 end
@@ -54,13 +59,13 @@ function CWDB:GetTableName()
 end
 
 function CWDB:TableExists()
-  return sql.TableExists(CWDB:GetTableName())
+  return sql.TableExists(self:GetTableName())
 end
 
 -- ИЗМЕНИТЬ ТАБЛИЦУ
 -- пример steamid TEXT NOT NULL,nick TEXT,lastjoin DATETIME,total_sum INTEGER,is_endless_priv BOOLEAN,reprimands INTEGER
 function CWDB:CreateTable(sqlStrColumns)
-  local name = CWDB:GetTableName()
+  local name = self:GetTableName()
   if not name then PrintError(dbg_prefix..' Creating table name is not set! ' .. NFiles:curPath()) return end
   return self:Q('CREATE TABLE IF NOT EXISTS ' .. name .. '(' .. string.Trim(sqlStrColumns) .. ')')
 end
@@ -78,21 +83,21 @@ function CWDB:CreateUidTable(sqlStrColumns)
 end
 
 function CWDB:RenameTable(newName)
-  local q = CWDB:Q('ALTER TABLE IF EXISTS ' .. CWDB:GetTableName() .. ' RENAME TO ' .. newName)
-  if q then CWDB:SetTableName(newName) end
+  local q = self:Q('ALTER TABLE IF EXISTS ' .. self:GetTableName() .. ' RENAME TO ' .. newName)
+  if q then self:SetTableName(newName) end
   return q
 end
 
 function CWDB:RemoveTable()
-  return CWDB:Q('DROP TABLE IF EXISTS ' .. CWDB:GetTableName())
+  return self:Q('DROP TABLE IF EXISTS ' .. self:GetTableName())
 end
 
 function CWDB:ClearTable()
-  return CWDB:Q('DELETE FROM ' .. CWDB:GetTableName())
+  return self:Q('DELETE FROM ' .. self:GetTableName())
 end
 
 function CWDB:AddColumn(sqlStrColumn)
-  return CWDB:Q('ALTER TABLE ' .. CWDB:GetTableName() .. ' ADD COLUMN ' .. sqlStrColumn)
+  return self:Q('ALTER TABLE ' .. self:GetTableName() .. ' ADD COLUMN ' .. sqlStrColumn)
 end
 
 -- function NDB:RemoveColumn(sqlStrColumn)
@@ -113,95 +118,95 @@ function CWDB:InsertAdditional(addStr,arrKV)
 		columns = (columns and columns..','..k or k)
 		values = (values and values..','..v or v)
 	end
-	return CWDB:Q('INSERT '..addStr..'INTO ' .. CWDB:GetTableName() .. '(' .. columns .. ') VALUES (' .. values .. ')') == nil
+	return self:Q('INSERT '..addStr..'INTO ' .. self:GetTableName() .. '(' .. columns .. ') VALUES (' .. values .. ')') == nil
 end
 
 function CWDB:Insert(arrKV)
-  return CWDB:InsertAdditional('',arrKV)
+  return self:InsertAdditional('',arrKV)
 end
 
 function CWDB:InsertGetId(arrKV)
-	return CWDB:Insert(arrKV) and CWDB:GetLastInsertedRow() or nil
+	return self:Insert(arrKV) and self:GetLastInsertedRow() or nil
 end
 
 function CWDB:InsertOrReplace(arrKV)
-  return CWDB:InsertAdditional('OR REPLACE ',arrKV)
+  return self:InsertAdditional('OR REPLACE ',arrKV)
 end
 
 function CWDB:InsertOrReplaceGetId(arrKV)
-	return CWDB:InsertOrReplace(arrKV) and CWDB:GetLastInsertedRow() or nil
+	return self:InsertOrReplace(arrKV) and self:GetLastInsertedRow() or nil
 end
 
 function CWDB:InsertOrIgnore(arrKV)
-	return CWDB:InsertAdditional('OR IGNORE ',arrKV)
+	return self:InsertAdditional('OR IGNORE ',arrKV)
 end
 
 function CWDB:InsertOrIgnoreGetId(arrKV)
-	return CWDB:InsertOrIgnore(arrKV) and CWDB:GetLastInsertedRow() or nil
+	return self:InsertOrIgnore(arrKV) and self:GetLastInsertedRow() or nil
 end
 
 function CWDB:GetLastInsertedRow()
-  return CWDB:QValue('SELECT last_insert_rowid()')
+  return self:QValue('SELECT last_insert_rowid()')
 end
 
 -- GET FROM TABLE
 function CWDB:GetWhere(sqlStr)
-  return CWDB:Q('SELECT * FROM ' .. CWDB:GetTableName() .. ' WHERE ' .. sqlStr)
+  return self:Q('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlStr)
 end
 
 function CWDB:GetIdWhere(sqlStr)
-  return CWDB:QValue('SELECT id FROM ' .. CWDB:GetTableName() .. ' WHERE ' .. sqlStr)
+  return self:QValue('SELECT id FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlStr)
 end
 
 function CWDB:GetRowWhere(sqlStr)
-  return CWDB:QRow('SELECT * FROM ' .. CWDB:GetTableName() .. ' WHERE ' .. sqlStr)
+  return self:QRow('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlStr)
 end
 
 function CWDB:GetValueWhere(column,sqlStr)
-  return CWDB:QValue('SELECT '..column..' FROM ' .. CWDB:GetTableName() .. ' WHERE ' .. sqlStr)
+  return self:QValue('SELECT '..column..' FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlStr)
 end
 
 function CWDB:GetDataWhere(sqlStr)
-  return CWDB:QRow('SELECT data FROM ' .. CWDB:GetTableName() .. ' WHERE ' .. sqlStr)
+  return self:QRow('SELECT data FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlStr)
 end
 
 function CWDB:ExistsWhere(sqlStr)
-  return CWDB:GetRowWhere(sqlStr) ~= nil
+  return self:GetRowWhere(sqlStr) ~= nil
 end
 
 function CWDB:Get(addParams)
   addParams = addParams or ''
   addParams = ' ' .. addParams
 
-  return CWDB:Q('SELECT * FROM ' .. CWDB:GetTableName() .. addParams)
+  return self:Q('SELECT * FROM ' .. self:GetTableName() .. addParams)
 end
 
 function CWDB:SelectFromAll(sqlStr)
-  return CWDB:Q('SELECT ' .. sqlStr .. ' FROM ' .. CWDB:GetTableName())
+  return self:Q('SELECT ' .. sqlStr .. ' FROM ' .. self:GetTableName())
 end
 
 function CWDB:GetTableCode()
-  return CWDB:Q("SELECT sql FROM sqlite_master WHERE tbl_name = '" .. CWDB:GetTableName() .. "' AND type = 'table'")[1].sql
+  return self:Q("SELECT sql FROM sqlite_master WHERE tbl_name = '" .. self:GetTableName() .. "' AND type = 'table'")[1].sql
 end
 
 -- SET IN TABLE
 -- пример ('reprimands = 3, money = 300','steamid = STEAM_0:1:333333')
 function CWDB:Set(sqlSetValues, sqlWhere)
-  return CWDB:Q('UPDATE ' .. CWDB:GetTableName() .. ' SET ' .. sqlSetValues .. ' WHERE ' .. sqlWhere)
+  return self:Q('UPDATE ' .. self:GetTableName() .. ' SET ' .. sqlSetValues .. ' WHERE ' .. sqlWhere)
 end
 
 -- DELETE FROM TABLE
 function CWDB:DeleteWhere(sqlStr)
-  return CWDB:Q('DELETE FROM ' .. CWDB:GetTableName() .. ' WHERE ' .. sqlStr) == nil
+  return self:Q('DELETE FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlStr) == nil
 end
 
 function CWDB:RemoveWhere(sqlStr)
-  return CWDB:DeleteWhere(sqlStr)
+  return self:DeleteWhere(sqlStr)
 end
 
 -- PRINT TABLE
 function CWDB:PrintTable()
-  local tbl = CWDB:Q('SELECT * FROM ' .. CWDB:GetTableName())
+  local tbl = self:Q('SELECT * FROM ' .. self:GetTableName())
 
   if tbl then
     PrintTable(tbl)
@@ -211,31 +216,31 @@ function CWDB:PrintTable()
 end
 
 function CWDB:PrintTableRow()
-  print(CWDB:QRow('SELECT * FROM ' .. CWDB:GetTableName()))
+  print(self:QRow('SELECT * FROM ' .. self:GetTableName()))
 end
 
 function CWDB:PrintTableCode()
-  print(CWDB:GetTableCode())
+  print(self:GetTableCode())
 end
 
 function CWDB:PrintTableColumns()
-  CWDB:PrintTableCode()
+  self:PrintTableCode()
 end
 
 function CWDB:PrintTableExists()
-  print(CWDB:TableExists())
+  print(self:TableExists())
 end
 
 function CWDB:PrintWhere(sqlWhere)
-  PrintTable(CWDB:Q('SELECT * FROM ' .. CWDB:GetTableName() .. ' WHERE ' .. sqlWhere))
+  PrintTable(self:Q('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlWhere))
 end
 
 function CWDB:PrintRowWhere(sqlWhere)
-  print(CWDB:QRow('SELECT * FROM ' .. CWDB:GetTableName() .. ' WHERE ' .. sqlWhere))
+  print(self:QRow('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlWhere))
 end
 
 function CWDB:PrintAllTables()
-  local tables = CWDB:Q("SELECT name FROM sqlite_master WHERE type ='table' AND name NOT LIKE 'sqlite_%'")
+  local tables = self:Q("SELECT name FROM sqlite_master WHERE type ='table' AND name NOT LIKE 'sqlite_%'")
 
   if tables and #tables > 0 then
     for _, v in pairs(tables) do

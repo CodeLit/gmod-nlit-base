@@ -1,7 +1,10 @@
--- [do not obfuscate]
+local Inputs = {}
 
-function CWGUI:BoolInput(title,defaultValue)
-	local pnl = self:Panel()
+local CWC = CW:Lib('colors')
+local Panels = CW:Lib('panels')
+
+function Inputs:Bool(title,defaultValue)
+	local pnl = Panels:Create()
 	pnl:Dock(FILL)
 	pnl:SetBackgroundColor(CWC:Theme())
 
@@ -20,18 +23,18 @@ function CWGUI:BoolInput(title,defaultValue)
 	return pnl
 end
 
-function CWGUI:InputPanel(title, acceptFunc, typeOfInput, inputParent, inputValue)
+function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 
 	title = l(title)
 
-	local mainP = self:Panel()
+	local mainP = Panels:Create()
 
 	if IsValid(inputParent) then
 		mainP:SetSize(inputParent:GetWide(), 25)
 	end
 	
 	if typeOfInput != 'bool' then
-		local p1 = mainP:Add(self:Panel())
+		local p1 = mainP:Add(Panels:Create())
 		p1:SetBackgroundColor(CWC:Theme())
 		p1:Dock(TOP)
 		p1:DockPadding(2, 2, 2, 2)
@@ -45,7 +48,7 @@ function CWGUI:InputPanel(title, acceptFunc, typeOfInput, inputParent, inputValu
 		mainP.titlePanel = desc
 	end
 
-	local p2 = mainP:Add(self:Panel())
+	local p2 = mainP:Add(Panels:Create())
 	p2:SetPaintBackground(false)
 	p2:Dock(FILL)
 	mainP.subPanel = p2
@@ -58,14 +61,14 @@ function CWGUI:InputPanel(title, acceptFunc, typeOfInput, inputParent, inputValu
 			return editable.tbl or {}
 		end
 	elseif typeOfInput == 'bool' then
-		editable = p2:Add(self:BoolInput(title,inputValue))
+		editable = p2:Add(self:Bool(title,inputValue))
 		editable:DockPadding(10,0,0,0)
 		mainP.titlePanel = editable.box
 		function mainP:GetInputValue()
 			return editable.box:GetChecked() and 1 or 0
 		end
 	elseif typeOfInput == 'num' then
-		editable = p2:Add(CWGUI:NumPanel(_,acceptFunc))
+		editable = p2:Add(Panels:NumPanel(_,acceptFunc))
 		
 		function mainP:GetInputValue()
 			return tonumber(editable:GetValue())
@@ -74,7 +77,7 @@ function CWGUI:InputPanel(title, acceptFunc, typeOfInput, inputParent, inputValu
 			editable:SetValue(inputValue)
 		end
 	else
-		editable = p2:Add(self:EditPanel('Введите текст...', function(val)
+		editable = p2:Add(Panels:EditPanel('Введите текст...', function(val)
 			if typeOfInput == 'allowed' and not CWStr:OnlyContainsAllowed(val) then
 				LocalPlayer():Notify('Введены недопустимые символы!')
 				return
@@ -108,7 +111,7 @@ function CWGUI:InputPanel(title, acceptFunc, typeOfInput, inputParent, inputValu
 	return mainP
 end
 
-function CWGUI:ResizeInput(inp)
+function Inputs:Resize(inp)
 	local titleP = inp.titlePanel
 	local editP = inp.editPanel
 	local w,h = 200,20
@@ -122,12 +125,12 @@ function CWGUI:ResizeInput(inp)
 	inp:SetSize(w+30,(editP.typeOfInput == 'table' and 250 or 30) + h)
 end
 
-function CWGUI:InputFields(tblFields, acceptFunc)
+function Inputs:Fields(tblFields, acceptFunc)
 
 	local cats = {}
 
-	local mainPanel = CWGUI:DockScroll()
-	local tile = mainPanel:Add(CWGUI:Tile())
+	local mainPanel = Panels:DockScroll()
+	local tile = mainPanel:Add(CW:Lib('table_lists'):Tile())
 	tile:Dock(TOP)
 
 	mainPanel.inputs = {}
@@ -142,7 +145,7 @@ function CWGUI:InputFields(tblFields, acceptFunc)
 			cat:SetLabel(l(cat_name))
 			cat:Dock(TOP)
 			cat:DockMargin(0, 5, 0, 10)
-			local tile = CWGUI:Tile()
+			local tile = Buttons:Tile()
 			tile:Dock(FILL)
 			cat:SetContents(tile)
 			cats[cat_name] = tile
@@ -153,8 +156,8 @@ function CWGUI:InputFields(tblFields, acceptFunc)
 	-- Распихиваем инпуты по панелькам
 	for option,data in pairs(tblFields) do
 		local inpP = GetInputPanel(data.category)
-		local inp = inpP:Add(CWGUI:InputPanel(option, _, data.inputType,_,data.value))
-		CWGUI:ResizeInput(inp)
+		local inp = inpP:Add(self:Create(option, _, data.inputType,_,data.value))
+		self:Resize(inp)
 		if data.inputType == 'num' then
 			if data.min then
 				inp.editPanel:SetMin(data.min)
@@ -169,3 +172,5 @@ function CWGUI:InputFields(tblFields, acceptFunc)
 
 	return mainPanel
 end
+
+return Inputs

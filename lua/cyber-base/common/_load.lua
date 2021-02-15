@@ -1,4 +1,11 @@
--- Позволяет запускать код на старте, а еще перезапускать его при сохранении
+--- Global module. Allows run code on start, and reload it on save
+-- / Позволяет запускать код на старте, перезапускать его при сохранении
+-- @module LoadCode
+
+---Load code after entities was initialized. Global function.
+---@param hookName string unique name for future removal
+---@param loadTime number [optional]
+---@param doCode function
 function DefinetlyLoad(hookName,loadTime,doCode)
 
 	if isfunction(loadTime) then
@@ -16,11 +23,15 @@ function DefinetlyLoad(hookName,loadTime,doCode)
 
 end
 
-function WhenGMLoaded(hookName,loadingTime,doCode)
+---Load code after gamemode was initialized. Global function.
+---@param hookName string
+---@param loadTime number [optional]
+---@param doCode function
+function WhenGMLoaded(hookName,loadTime,doCode)
 
-	if !isfunction(doCode) then
-		doCode = loadingTime
-		loadingTime = 0
+	if isfunction(loadTime) then
+		doCode = loadTime
+		loadTime = 0
 	end
 
 	local function DoIfGM()
@@ -30,7 +41,7 @@ function WhenGMLoaded(hookName,loadingTime,doCode)
 	end
 
 	local function Run()
-		timer.Simple(loadingTime, DoIfGM)
+		timer.Simple(loadTime, DoIfGM)
 	end
 
 	DoIfGM()

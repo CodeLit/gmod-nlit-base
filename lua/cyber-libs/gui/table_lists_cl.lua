@@ -1,6 +1,11 @@
--- [do not obfuscate]
+local TableLists = {}
 
-function CWGUI:Variant(tblVariants, action)
+local Buttons = CW:Lib('buttons')
+local Frames = CW:Lib('frames')
+local CWStr = CW:Lib('strings')
+local Inputs = CW:Lib('inputs')
+
+function TableLists:Variant(tblVariants, action)
 	local CBox = vgui.Create('DComboBox')
 	CBox:SetSize(100, 20)
 	tblVariants = tblVariants or {}
@@ -30,13 +35,13 @@ function CWGUI:Variant(tblVariants, action)
 	return CBox
 end
 
-function CWGUI:VariantsFrame(title, tblVariants, action)
-	local fr = CWGUI:Frame(title)
+function TableLists:VariantsFrame(title, tblVariants, action)
+	local fr = Frames:Frame(title)
 	fr:SetSize(500, 85)
 	fr:Center()
-	local var = fr:Add(CWGUI:Variant(tblVariants))
+	local var = fr:Add(self:Variant(tblVariants))
 	var:Dock(FILL)
-	local btn = fr:Add(CWGUI:AcceptButton())
+	local btn = fr:Add(Buttons:Accept())
 	btn:Dock(BOTTOM)
 
 	btn.DoClick = function()
@@ -58,7 +63,7 @@ function CWGUI:VariantsFrame(title, tblVariants, action)
 	return fr
 end
 
-function CWGUI:ListVariant(tblVariants)
+function TableLists:ListVariant(tblVariants)
 
 	local list = vgui.Create('DListView')
 	list:SetSize(300, 600)
@@ -82,7 +87,7 @@ function CWGUI:ListVariant(tblVariants)
 	return list
 end
 
-function CWGUI:EditableTable(tblData)
+function TableLists:EditableTable(tblData)
 	local pnl = self:Panel()
 	pnl:SetSize(300,500)
 	if isstring(tblData) then tblData = CWStr:FromJson(tblData) or {} end
@@ -90,7 +95,7 @@ function CWGUI:EditableTable(tblData)
 
 	local variant = pnl:Add(self:ListVariant(tblData))
 	variant:Dock(FILL)
-	pnl.remBtn = pnl:Add(self:DeclineButton(l('Remove')))
+	pnl.remBtn = pnl:Add(self:Decline(l('Remove')))
 	pnl.remBtn:Dock(BOTTOM)
 	pnl.remBtn.DoClick = function()
 		local line,pnlLine = variant:GetSelectedLine()
@@ -99,17 +104,17 @@ function CWGUI:EditableTable(tblData)
 			table.RemoveByValue(pnl.tbl, pnlLine:GetColumnText(1))
 		end
 	end
-	pnl.addBtn = pnl:Add(self:AcceptButton(l('Add')))
+	pnl.addBtn = pnl:Add(self:Accept(l('Add')))
 	pnl.addBtn:Dock(BOTTOM)
 	pnl.addBtn.DoClick = function()
-		CWGUI:InputFrame(l('Insert new value'), function(v)
+		Inputs:InputFrame(l('Insert new value'), function(v)
 			table.insert(pnl.tbl,v)
 			variant:AddLine(v)
 		end)
 	end
 	variant.DoDoubleClick = function(variantPnl,index,line)
 		local oldText = line:GetColumnText(1)
-		local inFr = CWGUI:InputFrame(l('Insert new value'), function(v)
+		local inFr = Inputs:InputFrame(l('Insert new value'), function(v)
 			table.RemoveByValue(pnl.tbl, oldText)
 			table.insert(pnl.tbl,v)
 			variant:RemoveLine(index)
@@ -121,13 +126,13 @@ function CWGUI:EditableTable(tblData)
 	return pnl
 end
 
-function CWGUI:ListVariantsFrame(title, tblVariants, action)
-	local fr = CWGUI:Frame(title)
+function TableLists:ListVariantsFrame(title, tblVariants, action)
+	local fr = Frames:Frame(title)
 	fr:SetSize(500, 500)
 	fr:Center()
-	local var = fr:Add(CWGUI:ListVariant(tblVariants))
+	local var = fr:Add(self:ListVariant(tblVariants))
 	var:Dock(FILL)
-	local btn = fr:Add(CWGUI:AcceptButton())
+	local btn = fr:Add(Buttons:Accept())
 	btn:Dock(BOTTOM)
 
 	btn.DoClick = function()
@@ -153,14 +158,16 @@ function CWGUI:ListVariantsFrame(title, tblVariants, action)
 	return fr
 end
 
-function CWGUI:List()
+function TableLists:List()
 	local list = vgui.Create('DListLayout')
 
 	return list
 end
 
-function CWGUI:Tile()
+function TableLists:Tile()
 	local list = vgui.Create('DTileLayout')
 
 	return list
 end
+
+return TableLists

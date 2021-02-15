@@ -1,12 +1,14 @@
 local HTML = {}
 
+local Text = CW:Lib('text')
+
 function HTML:MakeInPanel(panel)
   local html = vgui.Create('DHTML', panel)
   html:Dock(FILL)
   html:SetAllowLua(true)
   html:InvalidateLayout(true)
 
-  local loading = html:Add(CWGUI:Label(l('Загрузка...')))
+  local loading = html:Add(Text:Create(l('Загрузка...')))
   loading:SetFont('N_s')
   loading:SizeToContents()
   loading:SetPos(html:GetWide()/2,html:GetTall()/2)

@@ -1,6 +1,6 @@
 --- The module that contains colors.
 -- @module Colors
--- @usage local colors = CW:UseLib('colors')
+-- @usage local colors = CW:Lib('colors')
 -- colors:White()
 -- colors:Red(<trasparency from 0 to 255>)
 -- colors:Yellow(100)

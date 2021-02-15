@@ -4,8 +4,6 @@ end
 
 local pathToLibs = 'cyber-libs'
 
-CW:AddAllInFolder(pathToLibs,true)
-
 local finders = {}
 
 function finders:FindLuaLibInFiles(files,lib)
@@ -32,7 +30,7 @@ function finders:FindLibPathInFolder(path,lib)
 	return finders:LookupForLib(folders,path,lib)
 end
 
-function CW:UseLib(libName)
+function CW:Lib(libName)
 
 	local found = finders:FindLibPathInFolder(pathToLibs,libName)
 
@@ -45,3 +43,5 @@ function CW:UseLib(libName)
 
 	return include(found)
 end
+
+CW:AddAllInFolder(pathToLibs,true)

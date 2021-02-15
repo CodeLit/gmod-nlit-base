@@ -1,25 +1,38 @@
--- [do not obfuscate]
+
+--- Creates GUI Frames
+-- @module Frames
+-- @usage local Frames = CW:Lib('frames')
+local Frames = {}
+
+local Buttons = CW:Lib('buttons')
+local CWC = CW:Lib('colors')
 
 local ScrW,ScrH = ScrW,ScrH
 
-function CWGUI:Frame(title)
-	local fr = CWGUI:UnfocusedFrame(title)
+---Returns a newly created frame
+---@param title string
+---@return frame
+---@usage Frames:Frame('MyLovelyFrame')
+function Frames:Create(title)
+	local fr = self:UnfocusedFrame(title)
 	fr:MakePopup()
-
 	return fr
 end
 
-function CWGUI:AddFrameBehavior(fr,title)
+---Adds frame behavior to frame (standartizes a frame)
+---@param fr framePanel
+---@param title string
+function Frames:AddFrameBehavior(fr,title)
 	fr:SetDraggable(true)
 	fr:SetSizable(false)
 	fr:SetTitle(title or '')
 	fr:SetBackgroundBlur(true)
 	fr:SetPaintShadow(true)
-	CWGUI:ResizeFrame(fr)
+	self:ResizeFrame(fr)
 	fr.btnMinim:SetVisible(false)
 	fr.btnMaxim:SetVisible(false)
 	fr.btnClose:SetVisible(false)
-	local close = fr:Add(CWGUI:DeclineButton('X',function()
+	local close = fr:Add(Buttons:Decline('X',function()
 		fr:Close()
 	end))
 	close:SetSize(35, 25)
@@ -35,26 +48,38 @@ function CWGUI:AddFrameBehavior(fr,title)
 	end
 end
 
-function CWGUI:ResizeFrame(fr)
+---Resizes a frame
+---@param fr frame
+function Frames:ResizeFrame(fr)
 	fr:SetSize(ScrW()*0.7, ScrH()*0.8)
     fr:Center()
 end
 
-function CWGUI:UnfocusedFrame(title)
+---Creates an unfocused frame
+---@param title string
+---@return frame
+---@see Create
+function Frames:UnfocusedFrame(title)
 	local fr = vgui.Create('DFrame')
 
-	CWGUI:AddFrameBehavior(fr,title)
+	self:AddFrameBehavior(fr,title)
 
 	return fr
 end
 
-function CWGUI:InputFrame(title, acceptFunc, typeOfInput)
-	local fr = CWGUI:Frame()
+---Creates a frame with inputs
+---@param title string
+---@param acceptFunc function
+---@param typeOfInput string
+---@return frame
+---@see Inputs:Create
+function Frames:InputFrame(title, acceptFunc, typeOfInput)
+	local fr = self:Create()
 	fr:SetIcon('icon16/pencil.png')
 	fr:SetSize(ScrW() / 4, 85)
 	fr:Center()
 
-	local inp = fr:Add(CWGUI:InputPanel(title, acceptFunc, typeOfInput,fr))
+	local inp = fr:Add(Buttons:InputPanel(title, acceptFunc, typeOfInput,fr))
 	inp:Dock(FILL)
 	fr.mainPanel = inp
 
@@ -62,7 +87,7 @@ function CWGUI:InputFrame(title, acceptFunc, typeOfInput)
 		inp.editPanel:RequestFocus()
 	end)
 
-	local c = inp.subPanel:Add(CWGUI:AcceptButton())
+	local c = inp.subPanel:Add(Buttons:Accept())
 	c:Dock(RIGHT)
 	c:SetWide(fr:GetWide() / 4)
 
@@ -76,22 +101,24 @@ function CWGUI:InputFrame(title, acceptFunc, typeOfInput)
 
 end
 
-function CWGUI:BinderFrame(title,command)
-	local fr = CWGUI:Frame(title)
+---Creates a binder frame
+function Frames:BinderFrame(title,command)
+	local fr = self:Create(title)
 	fr:SetSize(250,100)
 	fr:Center()
 	local color = CWC:ThemeInside()
 	color.a = 255
 	fr.NBackgroundColor = color
 
-	local binder = fr:Add(CWGUI:BinderPanel(command))
+	local binder = fr:Add(Buttons:BinderPanel(command))
 
 	return fr,binder
 end
 
--- окно для редактирования каких-либо правил (для зоны, для админки и т.п.)
-function CWGUI:RulesFrame(title, checkBoxes, acceptFunc)
-	local fr = CWGUI:Frame()
+--- Specific type of frame named rules editor
+---/ окно для редактирования каких-либо правил (для зоны, для админки и т.п.)
+function Frames:RulesFrame(title, checkBoxes, acceptFunc)
+	local fr = self:Create()
 	fr:SetIcon('icon16/pencil.png')
 	fr:SetSize(400, 400)
 	fr:SetTitle(title)
@@ -122,7 +149,7 @@ function CWGUI:RulesFrame(title, checkBoxes, acceptFunc)
 	local p1 = vgui.Create('DPanel', fr)
 	p1:SetPaintBackground(false)
 	p1:Dock(BOTTOM)
-	local c = p1:Add(CWGUI:AcceptButton())
+	local c = p1:Add(Buttons:Accept())
 	c:Dock(RIGHT)
 	c:SetWide(150)
 
@@ -146,8 +173,14 @@ function CWGUI:RulesFrame(title, checkBoxes, acceptFunc)
 	return fr
 end
 
-function CWGUI:AcceptDialogue(text, textYes, textNo, acceptFunc)
-	local fr = CWGUI:Frame()
+---Accept Dialogue frame
+---@param text string
+---@param textYes string
+---@param textNo string
+---@param acceptFunc function
+---@return frame
+function Frames:AcceptDialogue(text, textYes, textNo, acceptFunc)
+	local fr = self:Create()
 	fr:SetIcon('icon16/help.png')
 	fr:SetWide(530)
 	local txt = vgui.Create('DMultiline', fr)
@@ -168,7 +201,7 @@ function CWGUI:AcceptDialogue(text, textYes, textNo, acceptFunc)
 	local p2 = vgui.Create('DPanel', fr)
 	p2:SetPaintBackground(false)
 	p2:Dock(BOTTOM)
-	local d = p2:Add(CWGUI:DeclineButton(textNo))
+	local d = p2:Add(Buttons:Decline(textNo))
 	d:Dock(LEFT)
 	d:SetWide(fr:GetWide() / 4)
 
@@ -176,7 +209,7 @@ function CWGUI:AcceptDialogue(text, textYes, textNo, acceptFunc)
 		fr:Close()
 	end
 
-	local c = p2:Add(CWGUI:AcceptButton(textYes))
+	local c = p2:Add(Buttons:Accept(textYes))
 	c:Dock(RIGHT)
 	c:SetWide(fr:GetWide() / 4)
 
@@ -194,19 +227,30 @@ function CWGUI:AcceptDialogue(text, textYes, textNo, acceptFunc)
 	return fr
 end
 
-function CWGUI:ListFrame(title)
-	local fr = CWGUI:Frame(title)
+---Frame with list
+---@param title any
+---@return table
+function Frames:ListFrame(title)
+	local fr = self:Create(title)
 	local scroll = fr:Add('DScrollPanel')
 	scroll:Dock(FILL)
-	fr.list = scroll:Add(CWGUI:List())
+	fr.list = scroll:Add(CW:Lib('table_lists'):List())
 	fr.list:Dock(TOP)
 
 	return fr
 end
 
-function CWGUI:ManyFieldsFrame(text, tblFields, acceptFunc)
-	local fr = CWGUI:Frame(text)
-	local tile = fr:Add(CWGUI:InputFields(tblFields, acceptFunc))
+---Frame with many fields
+---@param text any
+---@param tblFields any
+---@param acceptFunc any
+---@return string|table
+---@return any
+function Frames:ManyFields(text, tblFields, acceptFunc)
+	local fr = self:Create(text)
+	local tile = fr:Add(CW:Lib('inputs'):Fields(tblFields, acceptFunc))
 
 	return fr,tile.inputs
 end
+
+return Frames
