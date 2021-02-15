@@ -65,6 +65,10 @@ function Strings:HasRussianSymbols(text)
 	return false
 end
 
+--- Is str contains lowercase symbols
+---@param text string
+---@return boolean
+---@return table found Table
 function Strings:HaveLower(text)
 	local found, foundTable = false, {}
 
@@ -78,6 +82,10 @@ function Strings:HaveLower(text)
 	return found, foundTable
 end
 
+--- Is str contains lowercase symbols
+---@param text string
+---@return boolean
+---@return table found Table
 function Strings:HaveUpper(text)
 	local found, foundTable = false, {}
 
@@ -92,7 +100,7 @@ function Strings:HaveUpper(text)
 end
 
 --- Возвращает красивые падежные окончания
--- например, GetNumEnding(11,'минут','минута','минуты')
+--- @usage GetNumEnding(11,'минут','минута','минуты')
 function Strings:GetNumEnding(num, ifZero, ifOne, ifTwo)
 	if not isnumber(num) then return end
 	local lastNumDecimalsLeft = num % 100
@@ -103,6 +111,9 @@ function Strings:GetNumEnding(num, ifZero, ifOne, ifTwo)
 	if table.HasValue({2, 3, 4}, lastNumUnits) then return ifTwo end
 end
 
+---Generate Random String
+---@param numOfChairs number
+---@return string
 function Strings:RandomString(numOfChairs)
 	math.randomseed(os.time())
 	local s = ''
@@ -114,19 +125,22 @@ function Strings:RandomString(numOfChairs)
 	return s
 end
 
+---Formats a language to 2 chars lang
+---@param lang string
+---@return string formatted lang
 function Strings:FormatToTwoCharsLang(lang)
 	if #lang > 2 then lang = string.sub(lang,1,2) end
 	return lang
 end
 
---- Is string Contains text 
+--- Is string Contains text
 -- @param str string
 -- @param text text
 function Strings:Contains(str,text)
 	return tobool(string.find(str, text))
 end
 
---- Is string only Contains letters 
+--- Is string only Contains letters
 -- @param text string
 -- @return bool
 function Strings:OnlyContainsLetters(text)
@@ -250,10 +264,16 @@ function Strings:CapitalizeFirst(text)
 	return text
 end
 
+---Removes punctuation marks
+---@param text string
+---@return formatted text
 function Strings:RemovePunctuationMarks(text) -- пробел оставляет
 	return string.gsub(text,'%p','')
 end
 
+---Removes rus symbols
+---@param text string
+---@return formatted text
 function Strings:RemoveRussianSymbols(text)
 	for k, v in pairs(Strings.UpperLowerKV) do
 		text = string.Replace(text,k,'')
@@ -264,24 +284,42 @@ end
 
 -- string.StripExtension(f) -- пригодится для убирания расширения файла
 
+---Gets file name from string
+---@param str string
+---@return formatted text
 function Strings:GetFileName(str)
 	return str:match("^.+/(.+)%.")
 end
 
+---Gets file name and extention from string
+---@param str string
+---@return formatted text
 function Strings:GetFileNameExt(str)
 	return str:match("^.+/(.+)$")
 end
 
+---Gets file extention from string
+---@param str string
+---@return formatted text
 function Strings:GetFileExt(str)
 	return str:match("%.(.+)$")
 end
 
+---Gets file path from string
+---@param str string
+---@return formatted text
 function Strings:GetFilePath(str)
 	return str:match("^(.+)/") .. '/'
 end
 
+---Array to json
+---@param arr table
+---@return string text
 function Strings:ToJson(arr) return util.TableToJSON(arr) end
 
+---Array from json
+---@param str string
+---@return table text
 function Strings:FromJson(str) return util.JSONToTable(str) end
 
 local sqlWords = {
@@ -289,6 +327,9 @@ local sqlWords = {
 	'table', 'exists', 'where', 'alter'
 }
 
+---Removes SQL from string
+---@param str string
+---@return string formatted
 function Strings:RemoveSQL(str)
 	for _, bad in pairs(sqlWords) do
 		str = string.Replace(str, bad .. ' ', '')
@@ -296,13 +337,14 @@ function Strings:RemoveSQL(str)
 		str = string.Replace(str, ' ' .. bad, '')
 		str = string.Replace(str, ';', '')
 	end
-
 	return str
 end
 
+---Is String Has SQL code
+---@param str string
+---@return boolean
 function Strings:HasSQL(str)
 	local strLow = string.lower(str)
-
 	for _, bad in pairs(sqlWords) do
 		if tobool(string.find(strLow, ' ' .. bad)) or tobool(string.find(strLow, bad .. ' ')) or tobool(string.find(strLow, ' ' .. bad .. ' ')) or tobool(string.find(strLow, ';')) then return true end
 	end

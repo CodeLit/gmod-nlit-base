@@ -4,6 +4,7 @@ local Buttons = CW:Lib('buttons')
 local Frames = CW:Lib('frames')
 local CWStr = CW:Lib('strings')
 local Inputs = CW:Lib('inputs')
+local l = CW:Lib('translator')
 
 function TableLists:Variant(tblVariants, action)
 	local CBox = vgui.Create('DComboBox')

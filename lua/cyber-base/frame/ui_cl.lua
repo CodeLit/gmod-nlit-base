@@ -9,6 +9,7 @@ local CWC = CW:Lib('colors')
 local TblLsts = CW:Lib('table_lists')
 local HTML = CW:Lib('html')
 local Text = CW:Lib('text')
+local l = CW:Lib('translator')
 
 local addons_short_name = 'CW'
 local addons_website = 'https://neolife.tk/ru' -- Английский нужно добавлять отдельно

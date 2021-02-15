@@ -6,7 +6,7 @@ local Buttons = {}
 local D = CW:Lib('draw')
 local CWC = CW:Lib('color')
 local Icons = CW:Lib('icons')
-
+local l = CW:Lib('translator')
 
 --- Creates a button
 ---@param text string Button text

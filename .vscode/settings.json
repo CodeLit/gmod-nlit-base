@@ -37,7 +37,17 @@
         "BOTTOM",
         "SortedPairs",
         "KEY_ENTER",
-        "utf8"
+        "utf8",
+        "FindMetaTable",
+        "file",
+        "surface",
+        "PrintTable",
+        "MsgC",
+        "istable",
+        "http",
+        "ix",
+        "player",
+        "sql"
     ],
     "Lua.diagnostics.disable": [
         "undefined-doc-name",

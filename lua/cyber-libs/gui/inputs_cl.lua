@@ -1,27 +1,11 @@
+--- Creates GUI Inputs
+--- @module Inputs
+--- @usage local Inputs = CW:Lib('inputs')
 local Inputs = {}
 
 local CWC = CW:Lib('colors')
 local Panels = CW:Lib('panels')
-
-function Inputs:Bool(title,defaultValue)
-	local pnl = Panels:Create()
-	pnl:Dock(FILL)
-	pnl:SetBackgroundColor(CWC:Theme())
-
-	local box = pnl:Add('DCheckBoxLabel')
-	box:SetPos(10,15)
-	box.font = 'N_small'
-	box:SetFont(box.font)
-	box:SetText(title)
-	box:SetTextColor(CWC:ThemeText())
-	box:SetValue(tobool(defaultValue))
-	box:SizeToContents()
-	function box:GetFont()
-		return box.font
-	end
-	pnl.box = box
-	return pnl
-end
+local l = CW:Lib('translator')
 
 function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 
@@ -32,7 +16,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 	if IsValid(inputParent) then
 		mainP:SetSize(inputParent:GetWide(), 25)
 	end
-	
+
 	if typeOfInput != 'bool' then
 		local p1 = mainP:Add(Panels:Create())
 		p1:SetBackgroundColor(CWC:Theme())
@@ -69,7 +53,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 		end
 	elseif typeOfInput == 'num' then
 		editable = p2:Add(Panels:NumPanel(_,acceptFunc))
-		
+
 		function mainP:GetInputValue()
 			return tonumber(editable:GetValue())
 		end
@@ -109,6 +93,26 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 	mainP.editPanel.typeOfInput = typeOfInput
 
 	return mainP
+end
+
+function Inputs:Bool(title,defaultValue)
+	local pnl = Panels:Create()
+	pnl:Dock(FILL)
+	pnl:SetBackgroundColor(CWC:Theme())
+
+	local box = pnl:Add('DCheckBoxLabel')
+	box:SetPos(10,15)
+	box.font = 'N_small'
+	box:SetFont(box.font)
+	box:SetText(title)
+	box:SetTextColor(CWC:ThemeText())
+	box:SetValue(tobool(defaultValue))
+	box:SizeToContents()
+	function box:GetFont()
+		return box.font
+	end
+	pnl.box = box
+	return pnl
 end
 
 function Inputs:Resize(inp)

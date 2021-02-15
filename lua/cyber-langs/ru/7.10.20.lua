@@ -1,4 +1,4 @@
-CW.Lang:AddTranslation('ru',{
+CWLang:AddTranslation('ru',{
     ['Addons subscription'] = 'Подписка на аддоны',
     ['Upgrade my Gmod'] = 'Улучшить свой Gmod',
     ['More addons'] = 'Больше аддонов',
@@ -10,4 +10,5 @@ CW.Lang:AddTranslation('ru',{
     Addons = 'Aддоны',
     ["CyberWolf's Addons"] = "Аддоны CyberWolf'a",
     ['For server owners'] = 'Создателям серверов',
+    Error = 'Ошибка',
 })

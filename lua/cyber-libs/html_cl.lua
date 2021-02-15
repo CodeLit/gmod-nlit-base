@@ -1,6 +1,7 @@
 local HTML = {}
 
 local Text = CW:Lib('text')
+local l = CW:Lib('translator')
 
 function HTML:MakeInPanel(panel)
   local html = vgui.Create('DHTML', panel)

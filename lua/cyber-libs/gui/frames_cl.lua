@@ -1,7 +1,7 @@
 
---- Creates GUI Frames
--- @module Frames
--- @usage local Frames = CW:Lib('frames')
+---Creates GUI Frames
+---@module Frames
+---@usage local Frames = CW:Lib('frames')
 local Frames = {}
 
 local Buttons = CW:Lib('buttons')
@@ -16,6 +16,7 @@ local ScrW,ScrH = ScrW,ScrH
 function Frames:Create(title)
 	local fr = self:UnfocusedFrame(title)
 	fr:MakePopup()
+	
 	return fr
 end
 
@@ -55,15 +56,21 @@ function Frames:ResizeFrame(fr)
     fr:Center()
 end
 
+CW.OpenedFrames = CW.OpenedFrames or {}
+
 ---Creates an unfocused frame
 ---@param title string
 ---@return frame
 ---@see Create
 function Frames:UnfocusedFrame(title)
 	local fr = vgui.Create('DFrame')
-
+	table.insert(CW.OpenedFrames,fr)
+	for index, value in ipairs(CW.OpenedFrames) do
+		if !IsValid(value) then
+			table.remove(CW.OpenedFrames, index)
+		end
+	end
 	self:AddFrameBehavior(fr,title)
-
 	return fr
 end
 

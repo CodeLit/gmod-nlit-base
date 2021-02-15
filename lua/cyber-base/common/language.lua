@@ -1,50 +1,34 @@
-local CWStr = CW:Lib('string')
 
-CW.Lang = CW.Lang or {}
 
-CW.Lang.List = {}
+--- Global singleton class CWLang
+---@module CWLang
+CWLang = CWLang or {}
 
-function CW.Lang:AddTranslation(lang,tbl)
-   CW.Lang.List[lang] = CW.Lang.List[lang] or {}
+local Lang = CW:Lib('lang')
+
+CWLang.List = CWLang.List or {}
+
+---Adds translation to language. Can be used anywhere.
+---@param lang string 2-char lang
+---@param tbl table translations from english (key-value)
+---@usage NLang:AddTranslation('ru',{
+---     ['Save items'] = 'Сохранить предметы',
+---     ['Add items'] = 'Добавить предметы'
+--- })
+---@see Translator
+function CWLang:AddTranslation(lang,tbl)
+   self.List[lang] = self.List[lang] or {}
    for k,v in pairs(tbl) do
-       CW.Lang.List[lang][k] = v
+       self.List[lang][k] = v
    end
 end
 
-CW:AddAllInFolder('cyber_langs')
-
-function CW.Lang:FormatLang(lang)
-    return CWStr:FormatToTwoCharsLang(lang)
-end
-
-if CLIENT then
-    function CW.Lang:GetLocalLang()
-        return CW.Lang:FormatLang(GetConVar('n_lang'):GetString())
-    end
-end
+CW:AddAllInFolder('cyber-langs')
 
 local PLY = FindMetaTable('Player')
 
+---Gets player 2-char lang code
+---@return string code
 function PLY:GetLang()
-    return CW.Lang:FormatLang(self:GetInfo('n_lang'))
-end
-
--- переводчик
-function l(text,langCode)
-    
-    if CLIENT then
-        langCode = CW.Lang:GetLocalLang()
-    end
-    
-    local langData = CW.Lang.List[langCode]
-
-    if langData and langData[text] then
-        return langData[text]
-    end
-
-    if CW.Lang.Translate then -- перенаправляем на внешний переводчик, если не находит слово
-        return CW.Lang:Translate(text,langCode)
-    end
-
-    return text
+    return Lang:FormatLang(self:GetInfo('cw_lang'))
 end

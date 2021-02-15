@@ -6,7 +6,7 @@ end)
 
 -- ix.config.Get("font"), ix.config.Get("genericFont")
 
--- TODO: Перевести все шрифты на ix шрифты, изза хуевой поддержки киррилицы в gmod.
+-- TODO: Перевести все шрифты на ix шрифты, изза хреновой поддержки киррилицы в gmod.
 
 local function CreateFonts(font,tbl)
 	surface.CreateFont(font,tbl)
