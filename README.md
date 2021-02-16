@@ -1,6 +1,6 @@
-# CyberWolf Base
+# CyberWolf's Base Framework
 
-Contains a base functions for future addons. Free to use, free to contribute
+Contains a base functions for future garry's mod addons. Free to use, free to contribute
 
 ## Contains
 
