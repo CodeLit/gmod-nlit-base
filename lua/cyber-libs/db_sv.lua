@@ -1,5 +1,5 @@
---- Databases module
--- @module DB
+---Databases module. Server only.
+---@module DB
 local DB = {}
 
 local dbg_prefix = '[CWDB]'

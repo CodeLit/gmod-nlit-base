@@ -7,6 +7,14 @@ local CWC = CW:Lib('colors')
 local Panels = CW:Lib('panels')
 local l = CW:Lib('translator')
 
+
+---Creates an input panel
+---@param title string
+---@param acceptFunc function
+---@param typeOfInput string options: [bool/table/num/text]
+---@param inputParent panel or frame
+---@param inputValue any default value
+---@return input panel
 function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 
 	title = l(title)
@@ -129,7 +137,16 @@ function Inputs:Resize(inp)
 	inp:SetSize(w+30,(editP.typeOfInput == 'table' and 250 or 30) + h)
 end
 
+---Creates many inputs panel
+---@param tblFields table keyvalues name => data
+---@param acceptFunc function
+---@usage Inputs:Fields({age={inputType='num',min=0,max=100,category='personal',value=50}}, function()
+---	
+---end)
+---@return panel
 function Inputs:Fields(tblFields, acceptFunc)
+
+	-- TODO: Сделать работоспособной acceptFunc
 
 	local cats = {}
 

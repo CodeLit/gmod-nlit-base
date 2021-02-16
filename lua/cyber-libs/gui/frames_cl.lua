@@ -14,7 +14,7 @@ local ScrW,ScrH = ScrW,ScrH
 ---@return frame
 ---@usage Frames:Frame('MyLovelyFrame')
 function Frames:Create(title)
-	local fr = self:UnfocusedFrame(title)
+	local fr = self:Unfocused(title)
 	fr:MakePopup()
 	
 	return fr
@@ -23,13 +23,13 @@ end
 ---Adds frame behavior to frame (standartizes a frame)
 ---@param fr framePanel
 ---@param title string
-function Frames:AddFrameBehavior(fr,title)
+function Frames:AddBehavior(fr,title)
 	fr:SetDraggable(true)
 	fr:SetSizable(false)
 	fr:SetTitle(title or '')
 	fr:SetBackgroundBlur(true)
 	fr:SetPaintShadow(true)
-	self:ResizeFrame(fr)
+	self:Resize(fr)
 	fr.btnMinim:SetVisible(false)
 	fr.btnMaxim:SetVisible(false)
 	fr.btnClose:SetVisible(false)
@@ -51,7 +51,7 @@ end
 
 ---Resizes a frame
 ---@param fr frame
-function Frames:ResizeFrame(fr)
+function Frames:Resize(fr)
 	fr:SetSize(ScrW()*0.7, ScrH()*0.8)
     fr:Center()
 end
@@ -62,7 +62,7 @@ CW.OpenedFrames = CW.OpenedFrames or {}
 ---@param title string
 ---@return frame
 ---@see Create
-function Frames:UnfocusedFrame(title)
+function Frames:Unfocused(title)
 	local fr = vgui.Create('DFrame')
 	table.insert(CW.OpenedFrames,fr)
 	for index, value in ipairs(CW.OpenedFrames) do
@@ -70,7 +70,7 @@ function Frames:UnfocusedFrame(title)
 			table.remove(CW.OpenedFrames, index)
 		end
 	end
-	self:AddFrameBehavior(fr,title)
+	self:AddBehavior(fr,title)
 	return fr
 end
 
@@ -79,8 +79,8 @@ end
 ---@param acceptFunc function
 ---@param typeOfInput string
 ---@return frame
----@see Inputs:Create
-function Frames:InputFrame(title, acceptFunc, typeOfInput)
+---@see Inputs:Create()
+function Frames:Input(title, acceptFunc, typeOfInput)
 	local fr = self:Create()
 	fr:SetIcon('icon16/pencil.png')
 	fr:SetSize(ScrW() / 4, 85)
@@ -109,7 +109,7 @@ function Frames:InputFrame(title, acceptFunc, typeOfInput)
 end
 
 ---Creates a binder frame
-function Frames:BinderFrame(title,command)
+function Frames:Binder(title,command)
 	local fr = self:Create(title)
 	fr:SetSize(250,100)
 	fr:Center()
@@ -124,7 +124,7 @@ end
 
 --- Specific type of frame named rules editor
 ---/ окно для редактирования каких-либо правил (для зоны, для админки и т.п.)
-function Frames:RulesFrame(title, checkBoxes, acceptFunc)
+function Frames:Rules(title, checkBoxes, acceptFunc)
 	local fr = self:Create()
 	fr:SetIcon('icon16/pencil.png')
 	fr:SetSize(400, 400)
@@ -237,7 +237,7 @@ end
 ---Frame with list
 ---@param title any
 ---@return table
-function Frames:ListFrame(title)
+function Frames:List(title)
 	local fr = self:Create(title)
 	local scroll = fr:Add('DScrollPanel')
 	scroll:Dock(FILL)

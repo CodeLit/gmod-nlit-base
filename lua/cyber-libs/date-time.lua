@@ -1,4 +1,4 @@
---- The module for working with dates
+--- The module for working with dates. Shared module.
 -- @module DateTime
 local DateTime = {}
 

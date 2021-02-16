@@ -11,7 +11,7 @@ CWLang.List = CWLang.List or {}
 ---Adds translation to language. Can be used anywhere.
 ---@param lang string 2-char lang
 ---@param tbl table translations from english (key-value)
----@usage NLang:AddTranslation('ru',{
+---@usage CWLang:AddTranslation('ru',{
 ---     ['Save items'] = 'Сохранить предметы',
 ---     ['Add items'] = 'Добавить предметы'
 --- })

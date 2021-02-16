@@ -47,7 +47,11 @@
         "http",
         "ix",
         "player",
-        "sql"
+        "sql",
+        "TEXT_ALIGN_LEFT",
+        "TEXT_ALIGN_CENTER",
+        "Material",
+        "IsColor"
     ],
     "Lua.diagnostics.disable": [
         "undefined-doc-name",

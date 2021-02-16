@@ -1,5 +1,5 @@
----The basic function for finding CW libs
----@module CWLibs
+---The basic functions of libfiner for finding CW libs
+---@module Libs
 local LibFinder = {}
 
 local function IsStringContains(str,text)
