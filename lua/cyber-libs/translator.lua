@@ -3,7 +3,7 @@
 ---@usage local l = CW:Lib('translator')
 --- local text = l('my long story text','ru') -- will translate this text to russian
 --- -- translations must be added to folder cyber-langs using CWLang:AddTranslation() function.
----@see CWLang:AddTranslation
+---@see Language:AddTranslation
 
 local Lang = CW:Lib('lang')
 

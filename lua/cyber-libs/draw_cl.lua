@@ -1,6 +1,6 @@
 ---Draw module. Clientside only. Works only with 2D rendering hooks.
+---See wiki.facepunch.com/gmod/2d_Rendering_Hooks
 ---@module Draw
----@see https://wiki.facepunch.com/gmod/2d_Rendering_Hooks
 local Draw = {}
 local draw,surface,render,Material,math = draw,surface,render,Material,math
 local TEXT_ALIGN_LEFT,TEXT_ALIGN_CENTER = TEXT_ALIGN_LEFT,TEXT_ALIGN_CENTER

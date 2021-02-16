@@ -53,7 +53,8 @@
         "Material",
         "IsColor",
         "render",
-        "isfunction"
+        "isfunction",
+        "isstring"
     ],
     "Lua.diagnostics.disable": [
         "undefined-doc-name",

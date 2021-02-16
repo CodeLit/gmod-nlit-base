@@ -4,7 +4,10 @@ local DB = {}
 
 local dbg_prefix = '[CWDB]'
 
---- Query
+--- Run Query
+---@param query string
+---@param qtype any [optional] 1 - gets row, 2 - gets value
+---@return result
 function DB:Q(query, qtype)
   local q
   if qtype == 1 then q = sql.QueryRow(query)
@@ -23,12 +26,14 @@ function DB:Q(query, qtype)
   return q
 end
 
---- Query Row
+--- Gets query Row
+--- @see Q
 function DB:QRow(query)
   return self:Q(query, 1)
 end
 
---- QueryValue
+--- Gets query Value
+--- @see Q
 function DB:QValue(query)
   return self:Q(query, 2)
 end

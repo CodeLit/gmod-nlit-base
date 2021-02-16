@@ -1,1 +1,0 @@
-lua documentation/ldoc/ldoc.lua -p "CW Framework" -t "CyberWolf's Framework" -d "documentation/web" ./lua

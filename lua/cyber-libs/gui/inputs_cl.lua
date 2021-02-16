@@ -2,11 +2,9 @@
 --- @module Inputs
 --- @usage local Inputs = CW:Lib('inputs')
 local Inputs = {}
-
 local CWC = CW:Lib('colors')
 local Panels = CW:Lib('panels')
 local l = CW:Lib('translator')
-
 
 ---Creates an input panel
 ---@param title string
