@@ -18,4 +18,4 @@ Contains a base functions for future addons. Free to use, free to contribute
 
 And more!
 
-### Documentation will comming soon!
+[Documentation link](codelit.github.io/gmod-cw-base/)
