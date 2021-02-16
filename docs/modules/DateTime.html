@@ -43,7 +43,7 @@
   <li><a href="../modules/LoadCode.html">LoadCode</a></li>
   <li><a href="../modules/Debug.html">Debug</a></li>
   <li><a href="../modules/Colors.html">Colors</a></li>
-  <li><a href="../modules/DateTime.html">DateTime</a></li>
+  <li><strong>DateTime</strong></li>
   <li><a href="../modules/DB.html">DB</a></li>
   <li><a href="../modules/Draw.html">Draw</a></li>
   <li><a href="../modules/Buttons.html">Buttons</a></li>
@@ -51,7 +51,7 @@
   <li><a href="../modules/Frames.html">Frames</a></li>
   <li><a href="../modules/Inputs.html">Inputs</a></li>
   <li><a href="../modules/Requests.html">Requests</a></li>
-  <li><strong>Language</strong></li>
+  <li><a href="../modules/Language.html">Language</a></li>
   <li><a href="../modules/Strings.html">Strings</a></li>
   <li><a href="../modules/Translator.html">Translator</a></li>
   <li><a href="../modules/Vectors.html">Vectors</a></li>
@@ -61,24 +61,36 @@
 
 <div id="content">
 
-<h1>Module <code>Language</code></h1>
-<p>Global singleton class for working with languages</p>
-<p></p>
+<h1>Module <code>DateTime</code></h1>
+<p>The module for working with dates.</p>
+<p> Shared module.</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#AddTranslation">AddTranslation (lang, tbl)</a></td>
-	<td class="summary">Adds translation to language.</td>
+	<td class="name" nowrap><a href="#TodayDate">TodayDate ()</a></td>
+	<td class="summary">Today</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Format">Format (lang)</a></td>
-	<td class="summary">Formats language to 2-chars code</td>
+	<td class="name" nowrap><a href="#NowStamp">NowStamp ()</a></td>
+	<td class="summary">Now Stamp</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#GetLocalLang">GetLocalLang ()</a></td>
-	<td class="summary">Returns local player language.</td>
+	<td class="name" nowrap><a href="#GetDateFromStamp">GetDateFromStamp (timestamp)</a></td>
+	<td class="summary">Convertor Stamp to Date</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetStampFromDate">GetStampFromDate (datestring)</a></td>
+	<td class="summary">Convertor Date to Stamp</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetDateTimeFromStamp">GetDateTimeFromStamp (timestamp)</a></td>
+	<td class="summary">Convertor Stamp to DateTime</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetStampFromDateTime">GetStampFromDateTime (datetimestring)</a></td>
+	<td class="summary">Convertor DateTime to Stamp</td>
 	</tr>
 </table>
 
@@ -90,58 +102,18 @@
 
     <dl class="function">
     <dt>
-    <a name = "AddTranslation"></a>
-    <strong>AddTranslation (lang, tbl)</strong>
+    <a name = "TodayDate"></a>
+    <strong>TodayDate ()</strong>
     </dt>
     <dd>
-    Adds translation to language.  Can be used anywhere.
+    Today
 
 
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">lang</span>
-         string 2-char lang
-        </li>
-        <li><span class="parameter">tbl</span>
-         table translations from english (key-value)
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/Translator.html#">Translator</a>
-    </ul>
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">CWLang:AddTranslation(<span class="string">'ru'</span>,{
-    [<span class="string">'Save items'</span>] = <span class="string">'Сохранить предметы'</span>,
-    [<span class="string">'Add items'</span>] = <span class="string">'Добавить предметы'</span>
-})</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "Format"></a>
-    <strong>Format (lang)</strong>
-    </dt>
-    <dd>
-    Formats language to 2-chars code
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">lang</span>
-         string
-        </li>
-    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string formatted lang
+        today date in format YYYY-MM-DD
     </ol>
 
 
@@ -149,19 +121,99 @@
 
 </dd>
     <dt>
-    <a name = "GetLocalLang"></a>
-    <strong>GetLocalLang ()</strong>
+    <a name = "NowStamp"></a>
+    <strong>NowStamp ()</strong>
     </dt>
     <dd>
-    Returns local player language.  Client function.
+    Now Stamp
 
 
 
     <h3>Returns:</h3>
     <ol>
 
-        string
+        current timestamp
     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetDateFromStamp"></a>
+    <strong>GetDateFromStamp (timestamp)</strong>
+    </dt>
+    <dd>
+    Convertor Stamp to Date
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">timestamp</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetStampFromDate"></a>
+    <strong>GetStampFromDate (datestring)</strong>
+    </dt>
+    <dd>
+    Convertor Date to Stamp
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">datestring</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetDateTimeFromStamp"></a>
+    <strong>GetDateTimeFromStamp (timestamp)</strong>
+    </dt>
+    <dd>
+    Convertor Stamp to DateTime
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">timestamp</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetStampFromDateTime"></a>
+    <strong>GetStampFromDateTime (datetimestring)</strong>
+    </dt>
+    <dd>
+    Convertor DateTime to Stamp
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">datetimestring</span>
+
+        </li>
+    </ul>
+
 
 
 
@@ -174,7 +226,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-02-16 14:13:36 </i>
+<i style="float:right;">Last updated 2021-02-16 14:14:46 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

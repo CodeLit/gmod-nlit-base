@@ -43,14 +43,14 @@
   <li><a href="../modules/LoadCode.html">LoadCode</a></li>
   <li><a href="../modules/Debug.html">Debug</a></li>
   <li><a href="../modules/Colors.html">Colors</a></li>
-  <li><strong>DateTime</strong></li>
+  <li><a href="../modules/DateTime.html">DateTime</a></li>
   <li><a href="../modules/DB.html">DB</a></li>
   <li><a href="../modules/Draw.html">Draw</a></li>
   <li><a href="../modules/Buttons.html">Buttons</a></li>
   <li><a href="../modules/Editable.html">Editable</a></li>
   <li><a href="../modules/Frames.html">Frames</a></li>
   <li><a href="../modules/Inputs.html">Inputs</a></li>
-  <li><a href="../modules/Requests.html">Requests</a></li>
+  <li><strong>Requests</strong></li>
   <li><a href="../modules/Language.html">Language</a></li>
   <li><a href="../modules/Strings.html">Strings</a></li>
   <li><a href="../modules/Translator.html">Translator</a></li>
@@ -61,36 +61,28 @@
 
 <div id="content">
 
-<h1>Module <code>DateTime</code></h1>
-<p>The module for working with dates.</p>
-<p> Shared module.</p>
+<h1>Module <code>Requests</code></h1>
+<p>Jobs with HTTP Requests module</p>
+<p></p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#TodayDate">TodayDate ()</a></td>
-	<td class="summary">Today</td>
+	<td class="name" nowrap><a href="#Get">Get (url, params, onSuccess, onFail, headers)</a></td>
+	<td class="summary">Can send GET Request</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NowStamp">NowStamp ()</a></td>
-	<td class="summary">Now Stamp</td>
+	<td class="name" nowrap><a href="#Post">Post (url, params, onSuccess, onFail, headers)</a></td>
+	<td class="summary">Can send POST Request</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#GetDateFromStamp">GetDateFromStamp (timestamp)</a></td>
-	<td class="summary">Convertor Stamp to Date</td>
+	<td class="name" nowrap><a href="#UrlEncode">UrlEncode (str)</a></td>
+	<td class="summary">Encodes a string, preparing it to send using url data</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#GetStampFromDate">GetStampFromDate (datestring)</a></td>
-	<td class="summary">Convertor Date to Stamp</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#GetDateTimeFromStamp">GetDateTimeFromStamp (timestamp)</a></td>
-	<td class="summary">Convertor Stamp to DateTime</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#GetStampFromDateTime">GetStampFromDateTime (datetimestring)</a></td>
-	<td class="summary">Convertor DateTime to Stamp</td>
+	<td class="name" nowrap><a href="#UrlDecode">UrlDecode (str)</a></td>
+	<td class="summary">Decodes an url string</td>
 	</tr>
 </table>
 
@@ -102,18 +94,88 @@
 
     <dl class="function">
     <dt>
-    <a name = "TodayDate"></a>
-    <strong>TodayDate ()</strong>
+    <a name = "Get"></a>
+    <strong>Get (url, params, onSuccess, onFail, headers)</strong>
     </dt>
     <dd>
-    Today
+    Can send GET Request
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         string
+        </li>
+        <li><span class="parameter">params</span>
+         table keyvalues
+        </li>
+        <li><span class="parameter">onSuccess</span>
+         function
+        </li>
+        <li><span class="parameter">onFail</span>
+         function
+        </li>
+        <li><span class="parameter">headers</span>
+         table
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Post"></a>
+    <strong>Post (url, params, onSuccess, onFail, headers)</strong>
+    </dt>
+    <dd>
+    Can send POST Request
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         string
+        </li>
+        <li><span class="parameter">params</span>
+         table keyvalues
+        </li>
+        <li><span class="parameter">onSuccess</span>
+         function
+        </li>
+        <li><span class="parameter">onFail</span>
+         function
+        </li>
+        <li><span class="parameter">headers</span>
+         table
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "UrlEncode"></a>
+    <strong>UrlEncode (str)</strong>
+    </dt>
+    <dd>
+    Encodes a string, preparing it to send using url data
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        today date in format YYYY-MM-DD
+        string Formatted string
     </ol>
 
 
@@ -121,99 +183,25 @@
 
 </dd>
     <dt>
-    <a name = "NowStamp"></a>
-    <strong>NowStamp ()</strong>
+    <a name = "UrlDecode"></a>
+    <strong>UrlDecode (str)</strong>
     </dt>
     <dd>
-    Now Stamp
+    Decodes an url string
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        current timestamp
+        string Unformatted string
     </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "GetDateFromStamp"></a>
-    <strong>GetDateFromStamp (timestamp)</strong>
-    </dt>
-    <dd>
-    Convertor Stamp to Date
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">timestamp</span>
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "GetStampFromDate"></a>
-    <strong>GetStampFromDate (datestring)</strong>
-    </dt>
-    <dd>
-    Convertor Date to Stamp
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">datestring</span>
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "GetDateTimeFromStamp"></a>
-    <strong>GetDateTimeFromStamp (timestamp)</strong>
-    </dt>
-    <dd>
-    Convertor Stamp to DateTime
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">timestamp</span>
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "GetStampFromDateTime"></a>
-    <strong>GetStampFromDateTime (datetimestring)</strong>
-    </dt>
-    <dd>
-    Convertor DateTime to Stamp
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">datetimestring</span>
-
-        </li>
-    </ul>
-
 
 
 
@@ -226,7 +214,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-02-16 14:13:36 </i>
+<i style="float:right;">Last updated 2021-02-16 14:14:46 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

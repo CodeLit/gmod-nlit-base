@@ -50,8 +50,8 @@
   <li><a href="../modules/Editable.html">Editable</a></li>
   <li><a href="../modules/Frames.html">Frames</a></li>
   <li><a href="../modules/Inputs.html">Inputs</a></li>
-  <li><strong>Requests</strong></li>
-  <li><a href="../modules/Language.html">Language</a></li>
+  <li><a href="../modules/Requests.html">Requests</a></li>
+  <li><strong>Language</strong></li>
   <li><a href="../modules/Strings.html">Strings</a></li>
   <li><a href="../modules/Translator.html">Translator</a></li>
   <li><a href="../modules/Vectors.html">Vectors</a></li>
@@ -61,28 +61,24 @@
 
 <div id="content">
 
-<h1>Module <code>Requests</code></h1>
-<p>Jobs with HTTP Requests module</p>
+<h1>Module <code>Language</code></h1>
+<p>Global singleton class for working with languages</p>
 <p></p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Get">Get (url, params, onSuccess, onFail, headers)</a></td>
-	<td class="summary">Can send GET Request</td>
+	<td class="name" nowrap><a href="#AddTranslation">AddTranslation (lang, tbl)</a></td>
+	<td class="summary">Adds translation to language.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Post">Post (url, params, onSuccess, onFail, headers)</a></td>
-	<td class="summary">Can send POST Request</td>
+	<td class="name" nowrap><a href="#Format">Format (lang)</a></td>
+	<td class="summary">Formats language to 2-chars code</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#UrlEncode">UrlEncode (str)</a></td>
-	<td class="summary">Encodes a string, preparing it to send using url data</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#UrlDecode">UrlDecode (str)</a></td>
-	<td class="summary">Decodes an url string</td>
+	<td class="name" nowrap><a href="#GetLocalLang">GetLocalLang ()</a></td>
+	<td class="summary">Returns local player language.</td>
 	</tr>
 </table>
 
@@ -94,80 +90,50 @@
 
     <dl class="function">
     <dt>
-    <a name = "Get"></a>
-    <strong>Get (url, params, onSuccess, onFail, headers)</strong>
+    <a name = "AddTranslation"></a>
+    <strong>AddTranslation (lang, tbl)</strong>
     </dt>
     <dd>
-    Can send GET Request
+    Adds translation to language.  Can be used anywhere.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">url</span>
-         string
+        <li><span class="parameter">lang</span>
+         string 2-char lang
         </li>
-        <li><span class="parameter">params</span>
-         table keyvalues
-        </li>
-        <li><span class="parameter">onSuccess</span>
-         function
-        </li>
-        <li><span class="parameter">onFail</span>
-         function
-        </li>
-        <li><span class="parameter">headers</span>
-         table
+        <li><span class="parameter">tbl</span>
+         table translations from english (key-value)
         </li>
     </ul>
 
 
 
-
-
-</dd>
-    <dt>
-    <a name = "Post"></a>
-    <strong>Post (url, params, onSuccess, onFail, headers)</strong>
-    </dt>
-    <dd>
-    Can send POST Request
-
-
-    <h3>Parameters:</h3>
+    <h3>See also:</h3>
     <ul>
-        <li><span class="parameter">url</span>
-         string
-        </li>
-        <li><span class="parameter">params</span>
-         table keyvalues
-        </li>
-        <li><span class="parameter">onSuccess</span>
-         function
-        </li>
-        <li><span class="parameter">onFail</span>
-         function
-        </li>
-        <li><span class="parameter">headers</span>
-         table
-        </li>
+         <a href="../modules/Translator.html#">Translator</a>
     </ul>
 
-
-
-
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">CWLang:AddTranslation(<span class="string">'ru'</span>,{
+    [<span class="string">'Save items'</span>] = <span class="string">'Сохранить предметы'</span>,
+    [<span class="string">'Add items'</span>] = <span class="string">'Добавить предметы'</span>
+})</pre>
+    </ul>
 
 </dd>
     <dt>
-    <a name = "UrlEncode"></a>
-    <strong>UrlEncode (str)</strong>
+    <a name = "Format"></a>
+    <strong>Format (lang)</strong>
     </dt>
     <dd>
-    Encodes a string, preparing it to send using url data
+    Formats language to 2-chars code
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">str</span>
+        <li><span class="parameter">lang</span>
          string
         </li>
     </ul>
@@ -175,7 +141,7 @@
     <h3>Returns:</h3>
     <ol>
 
-        string Formatted string
+        string formatted lang
     </ol>
 
 
@@ -183,24 +149,18 @@
 
 </dd>
     <dt>
-    <a name = "UrlDecode"></a>
-    <strong>UrlDecode (str)</strong>
+    <a name = "GetLocalLang"></a>
+    <strong>GetLocalLang ()</strong>
     </dt>
     <dd>
-    Decodes an url string
+    Returns local player language.  Client function.
 
 
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">str</span>
-         string
-        </li>
-    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string Unformatted string
+        string
     </ol>
 
 
@@ -214,7 +174,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-02-16 14:13:36 </i>
+<i style="float:right;">Last updated 2021-02-16 14:14:46 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
