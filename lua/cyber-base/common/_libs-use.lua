@@ -1,4 +1,4 @@
----The basic functions of libfiner for finding CW libs
+---The libfiner will find CW libs for you. Global shared module.
 ---@module Libs
 local LibFinder = {}
 
@@ -11,6 +11,10 @@ local pathToLibs = 'cyber-libs'
 ---Use CW lib. Basic fucntion.
 ---@param libName string
 ---@return table lib
+---@usage local colors = CW:Lib('colors')
+--- Button:SetBackgroundColor(colors:White())
+--- local Strings = CW:Lib('strings')
+--- ...
 function CW:Lib(libName)
 
 	local found = LibFinder:FindLibPathInFolder(pathToLibs,libName)

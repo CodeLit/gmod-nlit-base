@@ -25,12 +25,12 @@ end
 
 --- Query Row
 function DB:QRow(query)
-  return DB:Q(query, 1)
+  return self:Q(query, 1)
 end
 
 --- QueryValue
 function DB:QValue(query)
-  return DB:Q(query, 2)
+  return self:Q(query, 2)
 end
 
 --- Set table name for all queries in this file

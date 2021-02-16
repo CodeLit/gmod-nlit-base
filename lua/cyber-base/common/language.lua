@@ -1,27 +1,7 @@
-
-
---- Global singleton class CWLang
----@module CWLang
 CWLang = CWLang or {}
-
-local Lang = CW:Lib('lang')
-
 CWLang.List = CWLang.List or {}
 
----Adds translation to language. Can be used anywhere.
----@param lang string 2-char lang
----@param tbl table translations from english (key-value)
----@usage CWLang:AddTranslation('ru',{
----     ['Save items'] = 'Сохранить предметы',
----     ['Add items'] = 'Добавить предметы'
---- })
----@see Translator
-function CWLang:AddTranslation(lang,tbl)
-   self.List[lang] = self.List[lang] or {}
-   for k,v in pairs(tbl) do
-       self.List[lang][k] = v
-   end
-end
+local Lang = CW:Lib('lang')
 
 CW:AddAllInFolder('cyber-langs')
 

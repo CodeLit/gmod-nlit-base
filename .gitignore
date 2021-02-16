@@ -5,5 +5,4 @@
 *.gma
 
 # Documentation
-ldoc
-doc
+documentation

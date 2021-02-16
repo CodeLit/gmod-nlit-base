@@ -11,6 +11,9 @@ local DebugSV = false
 ---@param folderpath string
 ---@param bDontinclude boolean Dont include files in folders
 ---@usage CW:AddAllInFolder('my-folder-in-lua-directory')
+---
+--- -- true for add to client scripts, but not execute the code
+--- CW:AddAllInFolder('my-code/subfolder',true)
 function CW:AddAllInFolder(folderpath,bDontinclude)
 	local files, directories = file.Find(folderpath..'/*','LUA')
 	for _,filename in pairs(files) do
