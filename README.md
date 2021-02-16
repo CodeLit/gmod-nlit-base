@@ -18,6 +18,8 @@ Contains a base functions for future addons. Free to use, free to contribute
 
 And more!
 
-[Documentation link](http://codelit.github.io/gmod-cw-base/)
+## Links
 
-[Workshop link](https://steamcommunity.com/sharedfiles/filedetails/?id=2394292123)
+[Documentation](http://codelit.github.io/gmod-cw-base/)
+
+[Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=2394292123)
