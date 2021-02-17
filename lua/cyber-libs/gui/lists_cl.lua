@@ -3,6 +3,7 @@
 local Lists = {}
 local Buttons = CW:Lib('buttons')
 local Frames = CW:Lib('frames')
+local Panels = CW:Lib('panels')
 local CWStr = CW:Lib('strings')
 local Inputs = CW:Lib('inputs')
 local l = CW:Lib('translator')
@@ -91,14 +92,14 @@ function Lists:ListVariant(tblVariants)
 end
 
 function Lists:EditableTable(tblData)
-	local pnl = self:Panel()
+	local pnl = Panels:Create()
 	pnl:SetSize(300,500)
 	if isstring(tblData) then tblData = CWStr:FromJson(tblData) or {} end
 	pnl.tbl = tblData or {}
 
 	local variant = pnl:Add(self:ListVariant(tblData))
 	variant:Dock(FILL)
-	pnl.remBtn = pnl:Add(self:Decline(l('Remove')))
+	pnl.remBtn = pnl:Add(Buttons:Decline(l('Remove')))
 	pnl.remBtn:Dock(BOTTOM)
 	pnl.remBtn.DoClick = function()
 		local line,pnlLine = variant:GetSelectedLine()
@@ -107,7 +108,7 @@ function Lists:EditableTable(tblData)
 			table.RemoveByValue(pnl.tbl, pnlLine:GetColumnText(1))
 		end
 	end
-	pnl.addBtn = pnl:Add(self:Accept(l('Add')))
+	pnl.addBtn = pnl:Add(Buttons:Accept(l('Add')))
 	pnl.addBtn:Dock(BOTTOM)
 	pnl.addBtn.DoClick = function()
 		Inputs:InputFrame(l('Insert new value'), function(v)

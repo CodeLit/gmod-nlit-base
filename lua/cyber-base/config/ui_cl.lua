@@ -23,12 +23,10 @@ Buttons:AddToCMenu(addons_short_name..' '..l('Addons'),Icons:GetPath('cyber/logo
         save:Dock(BOTTOM)
         save:SetTall(30)
         save.DoClick = function(pnl)
-
             local inputsData = {}
             for _,inp in pairs(inp_pnl.lst.inputs) do
                 inputsData[inp.option] = inp:GetInputValue()
             end
-
             local pkt = GNet.Packet(NCfg.NetStr)
             pkt:WriteUInt(1,GNet.CalculateRequiredBits(100))
             pkt:WriteString(addon_name)

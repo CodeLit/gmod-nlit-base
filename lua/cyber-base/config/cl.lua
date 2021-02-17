@@ -1,5 +1,7 @@
 NCfg.svTable = NCfg.svTable or {}
 
+local CWStr = CW:Lib('string')
+
 function NCfg:Get(addon,key)
     local tbl = self.svTable[addon]
     if !tbl then
@@ -18,15 +20,12 @@ function NCfg:Get(addon,key)
 end
 
 GNet.OnPacketReceive(NCfg.NetStr, function(pkt)
-	local ply = LocalPlayer()
     local netType = pkt:ReadUInt(GNet.CalculateRequiredBits(100))
     if netType == 1 then
         local addonName = pkt:ReadString()
-        NCfg.svTable = NCfg.svTable or {}
         NCfg.svTable[addonName] = NCfg.svTable[addonName] or {}
         local data = CWStr:FromJson(pkt:ReadString())
-
-        for k,v in pairs(data) do
+        for k,v in pairs(data or {}) do
             NCfg.svTable[addonName][k] = v
         end
     end

@@ -1,6 +1,7 @@
 NCfg.ConnectedAddons = NCfg.ConnectedAddons or {}
 
 local DB = CW:Lib('db')
+local CWStr = CW:Lib('strings')
 
 util.AddNetworkString(NCfg.NetStr)
 
@@ -21,18 +22,16 @@ end
 
 function NCfg:SendAddon(addonName,ply)
     if !self:IsAddonConnected(addonName) then return end
-    local data = DB:GetDataWhere({addon=addonName}).data
-
+    local data = DB:GetDataWhere({addon=addonName})
     -- Убираем для клиента лишние конфиги из базы данных
     data = CWStr:FromJson(data)
-    for k,_ in pairs(data) do
+    for k,_ in pairs(data or {}) do
         local addonTbl = NCfg.ConnectedAddons[addonName]
         if addonTbl and !addonTbl[k] then
             data[k] = nil
         end
     end
     data = CWStr:ToJson(data)
-
     local pkt = GNet.Packet(self.NetStr)
     pkt:WriteUInt(1,GNet.CalculateRequiredBits(100))
     pkt:WriteString(addonName)
@@ -41,8 +40,9 @@ function NCfg:SendAddon(addonName,ply)
 end
 
 function NCfg:Set(addonName,key,value,inputType,inpData)
-    local oldData = DB:GetDataWhere({addon=addonName}).data
-    if oldData=='NULL' then oldData = {} else oldData = CWStr:FromJson(oldData) end
+    local oldData = DB:GetDataWhere({addon=addonName})
+    if oldData=='NULL' then oldData = {}
+    else oldData = CWStr:FromJson(oldData) end
     oldData[key] = oldData[key] or {}
     oldData[key].default = value
     inpData = inpData or {}
@@ -98,7 +98,7 @@ GNet.OnPacketReceive(NCfg.NetStr, function(pkt)
     end
 end)
 
-hook.Add('PlayerInitialSpawn', 'NE Cfg Start Send', function(ply)
+hook.Add('PlayerInitialSpawn', 'CWCfg Start Sending', function(ply)
     for _,v in pairs(DB:Get()) do
         NCfg:SendAddon(v.addon,ply)
     end

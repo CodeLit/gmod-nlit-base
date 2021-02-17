@@ -4,6 +4,7 @@
 local Inputs = {}
 local CWC = CW:Lib('colors')
 local Panels = CW:Lib('panels')
+local Editable = CW:Lib('editable')
 local l = CW:Lib('translator')
 
 ---Creates an input panel
@@ -39,7 +40,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 	mainP.subPanel = p2
 	local editable
 	if typeOfInput == 'table' then
-		editable = p2:Add(self:EditableTable(inputValue))
+		editable = p2:Add(CW:Lib('lists'):EditableTable(inputValue))
 		function mainP:GetInputValue()
 			return editable.tbl or {}
 		end
@@ -51,7 +52,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 			return editable.box:GetChecked() and 1 or 0
 		end
 	elseif typeOfInput == 'num' then
-		editable = p2:Add(Panels:NumPanel(_,acceptFunc))
+		editable = p2:Add(Editable:NumPanel(_,acceptFunc))
 
 		function mainP:GetInputValue()
 			return tonumber(editable:GetValue())
@@ -60,7 +61,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 			editable:SetValue(inputValue)
 		end
 	else
-		editable = p2:Add(Panels:EditPanel('Введите текст...', function(val)
+		editable = p2:Add(Editable:EditPanel('Введите текст...', function(val)
 			if typeOfInput == 'allowed' and not CWStr:OnlyContainsAllowed(val) then
 				LocalPlayer():Notify('Введены недопустимые символы!')
 				return

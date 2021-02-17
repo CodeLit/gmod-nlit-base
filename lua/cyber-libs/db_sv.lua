@@ -5,7 +5,7 @@ local DB = {}
 local dbg_prefix = '[CWDB]'
 
 local function IQ(str) -- in quotes
-  str = string.Replace(str, '"', '')
+  -- заменяем одинарные, ибо двойные использует json
   str = string.Replace(str, "'", '')
   return str and ("'" .. str .. "'") or str
 end
@@ -14,26 +14,26 @@ end
 ---@param tbl table non-associative
 ---@return generated string
 function DB:GenStr(tbl)
-  local string
+  local s
 	for _,v in pairs(tbl) do
     v = IQ(string.Trim(v))
-		string = (string and string..','..v or v)
+		s = (s and s..','..v or v)
 	end
-  return string
+  return s or ''
 end
 
 ---Generates SQL keyvalues string from table. Input must be in associative array.
 ---@param tbl table associative
 ---@return generated string
 function DB:GenKVStr(tbl)
-  local string
+  local str
 	for k,v in pairs(tbl) do
-    k = IQ(string.Trim(k))
+    k = string.Trim(k)
     v = IQ(string.Trim(v))
-    local s = k..'='..'v'
-		string = (string and string..','..s or s)
+    local s = k..'='..v
+		str = (str and str..','..s or s)
 	end
-  return string
+  return str or ''
 end
 
 ---Run Query
@@ -154,6 +154,7 @@ function DB:InsertAdditional(addStr,arrKV)
 	end
   columns = self:GenStr(columns)
   values = self:GenStr(values)
+
 	return self:Q('INSERT '..addStr..'INTO ' .. self:GetTableName() .. '(' .. columns .. ') VALUES (' .. values .. ')') == nil
 end
 
@@ -238,7 +239,7 @@ end
 ---@param kv table
 ---@return table data
 function DB:GetDataWhere(kv)
-  return self:QRow('SELECT data FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenKVStr(kv))
+  return self:QRow('SELECT data FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenKVStr(kv)).data
 end
 
 ---Is data row exists
