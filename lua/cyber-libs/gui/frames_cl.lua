@@ -6,6 +6,7 @@ local Frames = {}
 
 local Buttons = CW:Lib('buttons')
 local CWC = CW:Lib('colors')
+local Inputs = CW:Lib('inputs')
 
 local ScrW,ScrH = ScrW,ScrH
 
@@ -85,7 +86,7 @@ function Frames:Input(title, acceptFunc, typeOfInput)
 	fr:SetSize(ScrW() / 4, 85)
 	fr:Center()
 
-	local inp = fr:Add(Buttons:InputPanel(title, acceptFunc, typeOfInput,fr))
+	local inp = fr:Add(Inputs:Create(title, acceptFunc, typeOfInput,fr))
 	inp:Dock(FILL)
 	fr.mainPanel = inp
 

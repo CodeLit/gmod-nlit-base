@@ -12,6 +12,7 @@ local l = CW:Lib('translator')
 ---@param tblVariants table
 ---@param action function
 ---@return panel
+---@see ListVariant
 function Lists:Variant(tblVariants, action)
 	local CBox = vgui.Create('DComboBox')
 	CBox:SetSize(100, 20)
@@ -69,7 +70,10 @@ function Lists:VariantsFrame(title, tblVariants, action)
 	return fr
 end
 
-
+---Variant selector
+---@param tblVariants table
+---@return panel
+---@see Variant
 function Lists:ListVariant(tblVariants)
 	local list = vgui.Create('DListView')
 	list:SetSize(300, 600)
@@ -91,12 +95,14 @@ function Lists:ListVariant(tblVariants)
 	return list
 end
 
+---Editable Table
+---@param tblData table
+---@return panel
 function Lists:EditableTable(tblData)
 	local pnl = Panels:Create()
 	pnl:SetSize(300,500)
 	if isstring(tblData) then tblData = CWStr:FromJson(tblData) or {} end
 	pnl.tbl = tblData or {}
-
 	local variant = pnl:Add(self:ListVariant(tblData))
 	variant:Dock(FILL)
 	pnl.remBtn = pnl:Add(Buttons:Decline(l('Remove')))
@@ -111,14 +117,14 @@ function Lists:EditableTable(tblData)
 	pnl.addBtn = pnl:Add(Buttons:Accept(l('Add')))
 	pnl.addBtn:Dock(BOTTOM)
 	pnl.addBtn.DoClick = function()
-		Inputs:InputFrame(l('Insert new value'), function(v)
+		Frames:Input(l('Insert new value'), function(v)
 			table.insert(pnl.tbl,v)
 			variant:AddLine(v)
 		end)
 	end
 	variant.DoDoubleClick = function(variantPnl,index,line)
 		local oldText = line:GetColumnText(1)
-		local inFr = Inputs:InputFrame(l('Insert new value'), function(v)
+		local inFr = Frames:Input(l('Insert new value'), function(v)
 			table.RemoveByValue(pnl.tbl, oldText)
 			table.insert(pnl.tbl,v)
 			variant:RemoveLine(index)
@@ -126,10 +132,16 @@ function Lists:EditableTable(tblData)
 		end)
 		inFr.mainPanel.editPanel:SetValue(oldText)
 	end
-
 	return pnl
 end
 
+---List variants frame
+---@param title string
+---@param tblVariants table
+---@param action function
+---@return panel
+---@see Variant
+---@see ListVariant
 function Lists:ListVariantsFrame(title, tblVariants, action)
 	local fr = Frames:Frame(title)
 	fr:SetSize(500, 500)
@@ -159,14 +171,18 @@ function Lists:ListVariantsFrame(title, tblVariants, action)
 	return fr
 end
 
+---Returns new DListLayout
+---@return panel
+---@see Tile
 function Lists:List()
-	local list = vgui.Create('DListLayout')
-	return list
+	return vgui.Create('DListLayout')
 end
 
+---Returns new DTileLayout
+---@return panel
+---@see List
 function Lists:Tile()
-	local list = vgui.Create('DTileLayout')
-	return list
+	return vgui.Create('DTileLayout')
 end
 
 return Lists
