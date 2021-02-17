@@ -1,4 +1,6 @@
-CWLang:AddTranslation('ru',{
+local lang = CW:Lib('language')
+
+lang:AddTranslation('ru',{
     ['Hello there'] = 'Приветствую',
     Welcome = 'Добро пожаловать',
     ['The changes was saved'] = 'Изменения сохранены',

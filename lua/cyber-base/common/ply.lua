@@ -1,6 +1,7 @@
 local PLY = FindMetaTable('Player')
 
 local CWStr = CW:Lib('string')
+local Lang = CW:Lib('language')
 
 function PLY:StID()
 	if not IsValid(self) then return end
@@ -68,6 +69,12 @@ function PLY:GetClaimedZone()
 			return v
 		end
 	end
+end
+
+---Gets player 2-char lang code
+---@return string code
+function PLY:GetLang()
+    return Lang:FormatLang(self:GetInfo('cw_lang'))
 end
 
 -- np(N:GetOwner():IsShootsFromCarWindow())

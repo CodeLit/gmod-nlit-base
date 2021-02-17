@@ -14,15 +14,11 @@ local l = CW:Lib('translator')
 ---@param inputValue any default value
 ---@return input panel
 function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
-
 	title = l(title)
-
 	local mainP = Panels:Create()
-
 	if IsValid(inputParent) then
 		mainP:SetSize(inputParent:GetWide(), 25)
 	end
-
 	if typeOfInput != 'bool' then
 		local p1 = mainP:Add(Panels:Create())
 		p1:SetBackgroundColor(CWC:Theme())
@@ -37,14 +33,11 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 		desc:SetColor(CWC:ThemeText())
 		mainP.titlePanel = desc
 	end
-
 	local p2 = mainP:Add(Panels:Create())
 	p2:SetPaintBackground(false)
 	p2:Dock(FILL)
 	mainP.subPanel = p2
-
 	local editable
-
 	if typeOfInput == 'table' then
 		editable = p2:Add(self:EditableTable(inputValue))
 		function mainP:GetInputValue()
@@ -81,31 +74,27 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
 				acceptFunc(val)
 			end
 		end))
-
 		if isstring(inputValue) then
 			editable:SetValue(inputValue)
 		end
-
 		function mainP:GetInputValue()
 			return editable:GetValue()
 		end
-
 	end
-
 	editable:Dock(FILL)
-
 	mainP.editPanel = editable
-
 	mainP.editPanel.typeOfInput = typeOfInput
-
 	return mainP
 end
 
+---Boolean input field
+---@param title string
+---@param defaultValue string
+---@return panel
 function Inputs:Bool(title,defaultValue)
 	local pnl = Panels:Create()
 	pnl:Dock(FILL)
 	pnl:SetBackgroundColor(CWC:Theme())
-
 	local box = pnl:Add('DCheckBoxLabel')
 	box:SetPos(10,15)
 	box.font = 'N_small'
@@ -121,6 +110,8 @@ function Inputs:Bool(title,defaultValue)
 	return pnl
 end
 
+---Resizes input by text
+---@param inp panel
 function Inputs:Resize(inp)
 	local titleP = inp.titlePanel
 	local editP = inp.editPanel
@@ -143,17 +134,12 @@ end
 ---end)
 ---@return panel
 function Inputs:Fields(tblFields, acceptFunc)
-
 	-- TODO: Сделать работоспособной acceptFunc
-
 	local cats = {}
-
 	local mainPanel = Panels:DockScroll()
-	local tile = mainPanel:Add(CW:Lib('table_lists'):Tile())
+	local tile = mainPanel:Add(CW:Lib('lists'):Tile())
 	tile:Dock(TOP)
-
 	mainPanel.inputs = {}
-
 	local function GetInputPanel(cat_name)
 		if !cat_name then
 			return tile
@@ -171,7 +157,6 @@ function Inputs:Fields(tblFields, acceptFunc)
 			return tile
 		end
 	end
-
 	-- Распихиваем инпуты по панелькам
 	for option,data in pairs(tblFields) do
 		local inpP = GetInputPanel(data.category)
@@ -188,7 +173,6 @@ function Inputs:Fields(tblFields, acceptFunc)
 		inp.option = option
 		mainPanel.inputs[option] = inp
 	end
-
 	return mainPanel
 end
 

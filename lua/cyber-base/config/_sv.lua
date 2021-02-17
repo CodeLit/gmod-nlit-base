@@ -1,19 +1,19 @@
 NCfg.ConnectedAddons = NCfg.ConnectedAddons or {}
 
-local NDB = CW:Lib('db')
+local DB = CW:Lib('db')
 
 util.AddNetworkString(NCfg.NetStr)
 
-NDB:SetTableName('ENLConfig')
+DB:SetTableName('ENLConfig')
 
-NDB:CreateDataTable('addon')
+DB:CreateDataTable('addon')
 
 function NCfg:IsAddonConnected(addonName)
     return tobool(NCfg.ConnectedAddons[addonName])
 end
 
 function NCfg:AddAddon(addonName)
-    NDB:InsertOrIgnore({addon=IQ(addonName)})
+    DB:InsertOrIgnore({addon=addonName})
     if !self:IsAddonConnected(addonName) then
         NCfg.ConnectedAddons[addonName] = {}
     end
@@ -21,7 +21,7 @@ end
 
 function NCfg:SendAddon(addonName,ply)
     if !self:IsAddonConnected(addonName) then return end
-    local data = NDB:GetDataWhere('addon='..IQ(addonName)).data
+    local data = DB:GetDataWhere({addon=addonName}).data
 
     -- Убираем для клиента лишние конфиги из базы данных
     data = CWStr:FromJson(data)
@@ -41,7 +41,7 @@ function NCfg:SendAddon(addonName,ply)
 end
 
 function NCfg:Set(addonName,key,value,inputType,inpData)
-    local oldData = NDB:GetDataWhere('addon='..IQ(addonName)).data
+    local oldData = DB:GetDataWhere({addon=addonName}).data
     if oldData=='NULL' then oldData = {} else oldData = CWStr:FromJson(oldData) end
     oldData[key] = oldData[key] or {}
     oldData[key].default = value
@@ -56,16 +56,16 @@ function NCfg:Set(addonName,key,value,inputType,inpData)
         oldData[key][k] = v
     end
     oldData[key].inputType = oldData[key].inputType or inputType
-    NDB:InsertOrReplace({
-        addon=IQ(addonName),
-        data=IQ(CWStr:ToJson(oldData))
+    DB:InsertOrReplace({
+        addon=addonName,
+        data=CWStr:ToJson(oldData)
     })
     NCfg.ConnectedAddons[addonName][key] = oldData[key]
     NCfg:SendAddon(addonName)
 end
 
 function NCfg:Get(addonName,key)
-    local oldData = CWStr:FromJson(NDB:GetDataWhere('addon='..IQ(addonName)).data)
+    local oldData = CWStr:FromJson(DB:GetDataWhere({addon=addonName}))
     local val = oldData[key].value
     if oldData[key].inputType == 'bool' then
         return tobool(val)
@@ -74,16 +74,16 @@ function NCfg:Get(addonName,key)
 end
 
 function NCfg:Remove(addonName,key)
-    local oldData = CWStr:FromJson(NDB:GetDataWhere('addon='..IQ(addonName)))
+    local oldData = CWStr:FromJson(DB:GetDataWhere({addon=addonName}))
     oldData[key] = nil
-    NDB:InsertOrReplace({
-        addon=IQ(addonName),
+    DB:InsertOrReplace({
+        addon=addonName,
         data=CWStr:ToJson(oldData)
     })
 end
 
 function NCfg:RemoveAddon(addonName)
-    NDB:DeleteWhere('addon='..IQ(addonName))
+    DB:DeleteWhere({addon=addonName})
 end
 
 GNet.OnPacketReceive(NCfg.NetStr, function(pkt)
@@ -99,7 +99,7 @@ GNet.OnPacketReceive(NCfg.NetStr, function(pkt)
 end)
 
 hook.Add('PlayerInitialSpawn', 'NE Cfg Start Send', function(ply)
-    for _,v in pairs(NDB:Get()) do
+    for _,v in pairs(DB:Get()) do
         NCfg:SendAddon(v.addon,ply)
     end
 end)

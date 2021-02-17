@@ -16,7 +16,6 @@ local ScrW,ScrH = ScrW,ScrH
 function Frames:Create(title)
 	local fr = self:Unfocused(title)
 	fr:MakePopup()
-	
 	return fr
 end
 
@@ -241,7 +240,7 @@ function Frames:List(title)
 	local fr = self:Create(title)
 	local scroll = fr:Add('DScrollPanel')
 	scroll:Dock(FILL)
-	fr.list = scroll:Add(CW:Lib('table_lists'):List())
+	fr.list = scroll:Add(CW:Lib('lists'):List())
 	fr.list:Dock(TOP)
 
 	return fr

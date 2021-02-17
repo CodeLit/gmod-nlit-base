@@ -47,10 +47,10 @@
   <li><a href="../modules/DB.html">DB</a></li>
   <li><a href="../modules/Draw.html">Draw</a></li>
   <li><a href="../modules/Buttons.html">Buttons</a></li>
-  <li><strong>Editable</strong></li>
+  <li><a href="../modules/Editable.html">Editable</a></li>
   <li><a href="../modules/Frames.html">Frames</a></li>
   <li><a href="../modules/Inputs.html">Inputs</a></li>
-  <li><a href="../modules/Lists.html">Lists</a></li>
+  <li><strong>Lists</strong></li>
   <li><a href="../modules/Requests.html">Requests</a></li>
   <li><a href="../modules/Language.html">Language</a></li>
   <li><a href="../modules/Strings.html">Strings</a></li>
@@ -62,29 +62,20 @@
 
 <div id="content">
 
-<h1>Module <code>Editable</code></h1>
-<p>Creates GUI Editable panels</p>
+<h1>Module <code>Lists</code></h1>
+<p>Lists is GUI module for list panels</p>
 <p></p>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">local Editable = CW:Lib(&apos;editable&apos;)
-</pre>
-    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#EditPanel">EditPanel (text, acceptFunc)</a></td>
-	<td class="summary">Creates editable panel</td>
+	<td class="name" nowrap><a href="#Variant">Variant (tblVariants, action)</a></td>
+	<td class="summary">Variant selector</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NumPanel">NumPanel (text, acceptFunc)</a></td>
-	<td class="summary">Creates editable number panel</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#NumSlider">NumSlider (text, min, max, decimal)</a></td>
-	<td class="summary">Creates editable slider panel</td>
+	<td class="name" nowrap><a href="#VariantsFrame">VariantsFrame (title, tblVariants, action)</a></td>
+	<td class="summary">Variant selector frame</td>
 	</tr>
 </table>
 
@@ -96,85 +87,61 @@
 
     <dl class="function">
     <dt>
-    <a name = "EditPanel"></a>
-    <strong>EditPanel (text, acceptFunc)</strong>
+    <a name = "Variant"></a>
+    <strong>Variant (tblVariants, action)</strong>
     </dt>
     <dd>
-    Creates editable panel
+    Variant selector
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">text</span>
-         string Placeholder text
+        <li><span class="parameter">tblVariants</span>
+         table
         </li>
-        <li><span class="parameter">acceptFunc</span>
-         function OnEnterPressed function
+        <li><span class="parameter">action</span>
+         function
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        panel
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "NumPanel"></a>
-    <strong>NumPanel (text, acceptFunc)</strong>
+    <a name = "VariantsFrame"></a>
+    <strong>VariantsFrame (title, tblVariants, action)</strong>
     </dt>
     <dd>
-    Creates editable number panel
+    Variant selector frame
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">text</span>
-
+        <li><span class="parameter">title</span>
+         string
         </li>
-        <li><span class="parameter">acceptFunc</span>
-
+        <li><span class="parameter">tblVariants</span>
+         table
         </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/Editable.html#EditPanel">EditPanel</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "NumSlider"></a>
-    <strong>NumSlider (text, min, max, decimal)</strong>
-    </dt>
-    <dd>
-    Creates editable slider panel
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">text</span>
-
-        </li>
-        <li><span class="parameter">min</span>
-
-        </li>
-        <li><span class="parameter">max</span>
-
-        </li>
-        <li><span class="parameter">decimal</span>
-
+        <li><span class="parameter">action</span>
+         function
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        panel
+    </ol>
 
 
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/Editable.html#EditPanel">EditPanel</a>
-    </ul>
 
 
 </dd>

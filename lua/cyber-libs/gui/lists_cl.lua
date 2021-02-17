@@ -1,16 +1,20 @@
-local TableLists = {}
-
+--- Lists is GUI module for list panels
+---@module Lists
+local Lists = {}
 local Buttons = CW:Lib('buttons')
 local Frames = CW:Lib('frames')
 local CWStr = CW:Lib('strings')
 local Inputs = CW:Lib('inputs')
 local l = CW:Lib('translator')
 
-function TableLists:Variant(tblVariants, action)
+---Variant selector
+---@param tblVariants table
+---@param action function
+---@return panel
+function Lists:Variant(tblVariants, action)
 	local CBox = vgui.Create('DComboBox')
 	CBox:SetSize(100, 20)
 	tblVariants = tblVariants or {}
-
 	if #tblVariants > 0 then
 		CBox:SetValue(tblVariants[math.random(1, #tblVariants)] or '')
 
@@ -22,21 +26,24 @@ function TableLists:Variant(tblVariants, action)
 		local _, randKey = table.Random(tblVariants)
 		CBox:SetValue(randKey)
 
-		for k, v in SortedPairs(tblVariants) do
+		for k, _ in SortedPairs(tblVariants) do
 			CBox:AddChoice(k)
 		end
 	end
-
 	if action then
 		CBox.OnSelect = function(pnl, index, value)
 			action(pnl, index, value)
 		end
 	end
-
 	return CBox
 end
 
-function TableLists:VariantsFrame(title, tblVariants, action)
+---Variant selector frame
+---@param title string
+---@param tblVariants table
+---@param action function
+---@return panel
+function Lists:VariantsFrame(title, tblVariants, action)
 	local fr = Frames:Frame(title)
 	fr:SetSize(500, 85)
 	fr:Center()
@@ -44,7 +51,6 @@ function TableLists:VariantsFrame(title, tblVariants, action)
 	var:Dock(FILL)
 	local btn = fr:Add(Buttons:Accept())
 	btn:Dock(BOTTOM)
-
 	btn.DoClick = function()
 		if var.outKeyValues then
 			action(var.outKeyValues[var:GetValue()])
@@ -54,25 +60,21 @@ function TableLists:VariantsFrame(title, tblVariants, action)
 
 		fr:Close()
 	end
-
 	fr.OnKeyCodePressed = function(pnl, key)
 		if key == KEY_ENTER then
 			btn.DoClick()
 		end
 	end
-
 	return fr
 end
 
-function TableLists:ListVariant(tblVariants)
 
+function Lists:ListVariant(tblVariants)
 	local list = vgui.Create('DListView')
 	list:SetSize(300, 600)
 	list:SetMultiSelect(false)
 	list:AddColumn(l('Sort'))
-
 	tblVariants = tblVariants or {}
-
 	if #tblVariants > 0 then
 		for _, v in pairs(tblVariants) do
 			list:AddLine(v)
@@ -88,7 +90,7 @@ function TableLists:ListVariant(tblVariants)
 	return list
 end
 
-function TableLists:EditableTable(tblData)
+function Lists:EditableTable(tblData)
 	local pnl = self:Panel()
 	pnl:SetSize(300,500)
 	if isstring(tblData) then tblData = CWStr:FromJson(tblData) or {} end
@@ -127,7 +129,7 @@ function TableLists:EditableTable(tblData)
 	return pnl
 end
 
-function TableLists:ListVariantsFrame(title, tblVariants, action)
+function Lists:ListVariantsFrame(title, tblVariants, action)
 	local fr = Frames:Frame(title)
 	fr:SetSize(500, 500)
 	fr:Center()
@@ -135,7 +137,6 @@ function TableLists:ListVariantsFrame(title, tblVariants, action)
 	var:Dock(FILL)
 	local btn = fr:Add(Buttons:Accept())
 	btn:Dock(BOTTOM)
-
 	btn.DoClick = function()
 		local selected = var:GetSelected()[1]
 		if not selected then return end
@@ -149,26 +150,22 @@ function TableLists:ListVariantsFrame(title, tblVariants, action)
 
 		fr:Close()
 	end
-
 	fr.OnKeyCodePressed = function(pnl, key)
 		if key == KEY_ENTER then
 			btn.DoClick()
 		end
 	end
-
 	return fr
 end
 
-function TableLists:List()
+function Lists:List()
 	local list = vgui.Create('DListLayout')
-
 	return list
 end
 
-function TableLists:Tile()
+function Lists:Tile()
 	local list = vgui.Create('DTileLayout')
-
 	return list
 end
 
-return TableLists
+return Lists

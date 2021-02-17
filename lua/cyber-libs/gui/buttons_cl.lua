@@ -77,7 +77,7 @@ function Buttons:AddToCMenu(title,icon,iconSize,func)
 		onewindow = true,
 		init = function(ico,window)
 			window:SetIcon(icon)
-			CW:Lib('frames'):AddFrameBehavior(window)
+			CW:Lib('frames'):AddBehavior(window)
 			func(window)
 		end,
 	})

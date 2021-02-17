@@ -1,3 +1,5 @@
+NCfg.svTable = NCfg.svTable or {}
+
 function NCfg:Get(addon,key)
     local tbl = self.svTable[addon]
     if !tbl then
