@@ -5,6 +5,7 @@ local Editable = {}
 
 local CWC = CW:Lib('colors')
 local l = CW:Lib('translator')
+local CWStr = CW:Lib('strings')
 
 local function PrepareTextArea(pnl)
     pnl:ReadyTextbox()
