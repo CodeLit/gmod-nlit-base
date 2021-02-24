@@ -13,7 +13,7 @@ local ScrW,ScrH = ScrW,ScrH
 ---Returns a newly created frame
 ---@param title string
 ---@return frame
----@usage Frames:Frame('MyLovelyFrame')
+---@usage Frames:Create('MyLovelyFrame')
 function Frames:Create(title)
 	local fr = self:Unfocused(title)
 	fr:MakePopup()
