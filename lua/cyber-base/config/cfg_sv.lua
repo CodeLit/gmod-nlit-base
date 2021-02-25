@@ -1,5 +1,6 @@
-NCfg:AddAddon(NCfg.Name)
-NCfg:Set(NCfg.Name,'Light theme',true,'bool')
+CWCfg:AddAddon(CWCfg.Name)
+CWCfg:Set(CWCfg.Name,'Light theme',true,'bool')
+-- NCfg:Set(NCfg.Name,'Admins access to con',true,'bool')
 
 -- NCfg:AddAddon('Тест')
 -- NCfg:Set('Тест','Число 1','100','num')

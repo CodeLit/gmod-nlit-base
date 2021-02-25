@@ -27,7 +27,7 @@ Buttons:AddToCMenu(addons_short_name..' '..l('Addons'),Icons:GetPath('cyber/logo
             for _,inp in pairs(inp_pnl.lst.inputs) do
                 inputsData[inp.option] = inp:GetInputValue()
             end
-            local pkt = GNet.Packet(NCfg.NetStr)
+            local pkt = GNet.Packet(CWCfg.NetStr)
             pkt:WriteUInt(1,GNet.CalculateRequiredBits(100))
             pkt:WriteString(addon_name)
             pkt:WriteString(CWStr:ToJson(inputsData))
@@ -69,7 +69,7 @@ Buttons:AddToCMenu(addons_short_name..' '..l('Addons'),Icons:GetPath('cyber/logo
             name = l('Addons settings'),
             icon = 'web/038-controls.png',
             access = function()
-                if !NCfg.CheckAccess(LocalPlayer()) then
+                if !CWCfg.CheckAccess(LocalPlayer()) then
                     LocalPlayer():Notify(l('You have no access rights to addons configuration')..'!')
                     return false
                 end
@@ -79,8 +79,8 @@ Buttons:AddToCMenu(addons_short_name..' '..l('Addons'),Icons:GetPath('cyber/logo
 
                 local addons = {}
 
-                for k,_ in pairs(NCfg.svTable or {}) do
-                    if k == NCfg.Name then continue end
+                for k,_ in pairs(CWCfg.svTable or {}) do
+                    if k == CWCfg.Name then continue end
                     table.insert(addons, k)
                 end
 
@@ -106,7 +106,7 @@ Buttons:AddToCMenu(addons_short_name..' '..l('Addons'),Icons:GetPath('cyber/logo
 
                 local function SelectAddon(addon)
                     addon = addon or addons[1]
-                    local addonData = NCfg.svTable[addon]
+                    local addonData = CWCfg.svTable[addon]
 
                     local mainP = IsValid(cpnl.mainP) and cpnl.mainP or cpnl:Add(Panels:Create())
                     mainP.NoOutline = true
@@ -118,7 +118,7 @@ Buttons:AddToCMenu(addons_short_name..' '..l('Addons'),Icons:GetPath('cyber/logo
                     local lst = mainP:Add(Inputs:Fields(addonData))
                     cpnl.lst = lst
 
-                    NCfg.selectedAddon = addon
+                    CWCfg.selectedAddon = addon
                 end
 
                 local topLabel = cpnl:Add(Text:Create(l('Select addon for setup')..':'))
@@ -131,20 +131,20 @@ Buttons:AddToCMenu(addons_short_name..' '..l('Addons'),Icons:GetPath('cyber/logo
 
                 variant:Dock(TOP)
                 variant:DockMargin(0, 0, 0, 10)
-                variant:SetValue(NCfg.selectedAddon or addons[1])
+                variant:SetValue(CWCfg.selectedAddon or addons[1])
 
-                SelectAddon(NCfg.selectedAddon)
+                SelectAddon(CWCfg.selectedAddon)
 
-                add_save_btn(cpnl,NCfg.selectedAddon)
+                add_save_btn(cpnl,CWCfg.selectedAddon)
             end,
         },
         {
             name = l('Server settings'),
             icon = 'web/040-settings-1.png',
             open = function(cpnl)
-                local svCfgData = NCfg.svTable[NCfg.Name]
+                local svCfgData = CWCfg.svTable[CWCfg.Name]
                 cpnl.lst = cpnl:Add(Inputs:Fields(svCfgData))
-                add_save_btn(cpnl,NCfg.Name)
+                add_save_btn(cpnl,CWCfg.Name)
             end,
         },
         {

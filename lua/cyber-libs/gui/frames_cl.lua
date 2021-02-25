@@ -79,7 +79,7 @@ end
 ---@param acceptFunc function
 ---@param typeOfInput string
 ---@return frame
----@see Inputs:Create()
+---@see Inputs:Create
 function Frames:Input(title, acceptFunc, typeOfInput)
 	local fr = self:Create()
 	fr:SetIcon('icon16/pencil.png')

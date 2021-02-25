@@ -1,8 +1,8 @@
-NCfg.svTable = NCfg.svTable or {}
+CWCfg.svTable = CWCfg.svTable or {}
 
 local CWStr = CW:Lib('string')
 
-function NCfg:Get(addon,key)
+function CWCfg:Get(addon,key)
     local tbl = self.svTable[addon]
     if !tbl then
         PrintError('Нет такого аддона ['..addon..']')
@@ -19,14 +19,14 @@ function NCfg:Get(addon,key)
     return val
 end
 
-GNet.OnPacketReceive(NCfg.NetStr, function(pkt)
+GNet.OnPacketReceive(CWCfg.NetStr, function(pkt)
     local netType = pkt:ReadUInt(GNet.CalculateRequiredBits(100))
     if netType == 1 then
         local addonName = pkt:ReadString()
-        NCfg.svTable[addonName] = NCfg.svTable[addonName] or {}
+        CWCfg.svTable[addonName] = CWCfg.svTable[addonName] or {}
         local data = CWStr:FromJson(pkt:ReadString())
         for k,v in pairs(data or {}) do
-            NCfg.svTable[addonName][k] = v
+            CWCfg.svTable[addonName][k] = v
         end
     end
 end)

@@ -63,7 +63,7 @@ end
 ---Is currently used LightTheme.
 ---@return boolean
 function Colors:IsLightTheme(bReverse)
-	local bool = tobool(NCfg:Get(NCfg.Name,'Light theme'))
+	local bool = tobool(CWCfg:Get(CWCfg.Name,'Light theme'))
 	return bReverse and !bool or bool
 end
 

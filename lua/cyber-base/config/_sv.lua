@@ -1,32 +1,44 @@
-NCfg.ConnectedAddons = NCfg.ConnectedAddons or {}
+---Addons Configurator global module
+---@module CWCfg
+---@usage CWCfg:AddAddon('My Addon')
+---CWCfg:Set('My Addon','Print Hello',true,'bool',{category='Basic'})
+CWCfg.ConnectedAddons = CWCfg.ConnectedAddons or {}
 
 local DB = CW:Lib('db')
 local CWStr = CW:Lib('strings')
 
-util.AddNetworkString(NCfg.NetStr)
+util.AddNetworkString(CWCfg.NetStr)
 
-DB:SetTableName('ENLConfig')
+DB:SetTableName('CWConfig')
 
 DB:CreateDataTable('addon')
 
-function NCfg:IsAddonConnected(addonName)
-    return tobool(NCfg.ConnectedAddons[addonName])
+---Is addon connected. Shared function
+---@param addonName string
+---@return bool
+function CWCfg:IsAddonConnected(addonName)
+    return tobool(self.ConnectedAddons[addonName])
 end
 
-function NCfg:AddAddon(addonName)
+---Adds addon to configurator. Server function
+---@param addonName string
+function CWCfg:AddAddon(addonName)
     DB:InsertOrIgnore({addon=addonName})
     if !self:IsAddonConnected(addonName) then
-        NCfg.ConnectedAddons[addonName] = {}
+        self.ConnectedAddons[addonName] = {}
     end
 end
 
-function NCfg:SendAddon(addonName,ply)
+---Sends addon data to the client. Server function
+---@param addonName string
+---@param ply player client
+function CWCfg:SendAddon(addonName,ply)
     if !self:IsAddonConnected(addonName) then return end
     local data = DB:GetDataWhere({addon=addonName})
     -- Убираем для клиента лишние конфиги из базы данных
     data = CWStr:FromJson(data)
     for k,_ in pairs(data or {}) do
-        local addonTbl = NCfg.ConnectedAddons[addonName]
+        local addonTbl = self.ConnectedAddons[addonName]
         if addonTbl and !addonTbl[k] then
             data[k] = nil
         end
@@ -39,7 +51,17 @@ function NCfg:SendAddon(addonName,ply)
     pkt:Send(ply)
 end
 
-function NCfg:Set(addonName,key,value,inputType,inpData)
+---Adds configurable input field to addon, according to Inputs:Fields function.
+---Server function.
+---Addon must be once added to configurer with AddAddon function.
+---@param addonName string name of the addon
+---@param key string configurable option name
+---@param value string default value
+---@param inputType string type of input, see Inputs:Create
+---@param inpData table additional data, like {category='Custom Category'}
+---@see AddAddon
+---@see Inputs:Fields
+function CWCfg:Set(addonName,key,value,inputType,inpData)
     local oldData = DB:GetDataWhere({addon=addonName})
     if oldData=='NULL' then oldData = {}
     else oldData = CWStr:FromJson(oldData) end
@@ -60,11 +82,14 @@ function NCfg:Set(addonName,key,value,inputType,inpData)
         addon=addonName,
         data=CWStr:ToJson(oldData)
     })
-    NCfg.ConnectedAddons[addonName][key] = oldData[key]
-    NCfg:SendAddon(addonName)
+    self.ConnectedAddons[addonName][key] = oldData[key]
+    self:SendAddon(addonName)
 end
 
-function NCfg:Get(addonName,key)
+---Returns data of the addon's field. Shared function
+---@param addonName string
+---@param key string filed name
+function CWCfg:Get(addonName,key)
     local oldData = CWStr:FromJson(DB:GetDataWhere({addon=addonName}))
     local val = oldData[key].value
     if oldData[key].inputType == 'bool' then
@@ -73,7 +98,10 @@ function NCfg:Get(addonName,key)
     return val
 end
 
-function NCfg:Remove(addonName,key)
+---Removes field of the addon from database. Server function
+---@param addonName string
+---@param key string filed name
+function CWCfg:Remove(addonName,key)
     local oldData = CWStr:FromJson(DB:GetDataWhere({addon=addonName}))
     oldData[key] = nil
     DB:InsertOrReplace({
@@ -82,24 +110,26 @@ function NCfg:Remove(addonName,key)
     })
 end
 
-function NCfg:RemoveAddon(addonName)
+---Removes addon from database. Server function
+---@param addonName string
+function CWCfg:RemoveAddon(addonName)
     DB:DeleteWhere({addon=addonName})
 end
 
-GNet.OnPacketReceive(NCfg.NetStr, function(pkt)
+GNet.OnPacketReceive(CWCfg.NetStr, function(pkt)
     local netCmd = pkt:ReadUInt(GNet.CalculateRequiredBits(100))
-    if netCmd == 1 and NCfg.CheckAccess(pkt.ply) then -- set cfg data
+    if netCmd == 1 and CWCfg.CheckAccess(pkt.ply) then -- set cfg data
         local selectedAddon = pkt:ReadString()
         local data = pkt:ReadString()
         data = CWStr:FromJson(data)
         for key,value in pairs(data) do
-            NCfg:Set(selectedAddon,key,value,_,{force=true})
+            CWCfg:Set(selectedAddon,key,value,_,{force=true})
         end
     end
 end)
 
 hook.Add('PlayerInitialSpawn', 'CWCfg Start Sending', function(ply)
     for _,v in pairs(DB:Get()) do
-        NCfg:SendAddon(v.addon,ply)
+        CWCfg:SendAddon(v.addon,ply)
     end
 end)
