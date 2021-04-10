@@ -5,4 +5,4 @@ CWCfg.CheckAccess = function(ply) -- Who can access to config?
     return ply:IsSuperAdmin()
 end
 
-CWCfg.NetStr = 'NCfg'
+CWCfg.NetStr = 'CWCfg'
