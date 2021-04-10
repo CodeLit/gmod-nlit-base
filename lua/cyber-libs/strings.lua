@@ -3,7 +3,9 @@
 local Strings =  {}
 
 --- Puts text In Quotes for SQL code
+-- Changing single quotes, prehaps double quoutes using by json
 -- Закрывает текст в кавычки для SQL
+-- Заменяем одинарные кавычки, ибо двойные использует json
 -- @param str the string
 -- @return string with quotes
 function Strings:IQ(str)

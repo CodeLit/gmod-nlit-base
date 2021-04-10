@@ -1,22 +1,17 @@
 ---Databases module. Server only.
 ---@module DB
 local DB = {}
+local NStr = CW:Lib('string')
 
 local dbg_prefix = '[CWDB]'
 
-local function IQ(str) -- in quotes
-  -- заменяем одинарные, ибо двойные использует json
-  str = string.Replace(str, "'", '')
-  return str and ("'" .. str .. "'") or str
-end
-
---- Generates SQL string from table. Input must be in counted non-associative array.
+-- Generates SQL string from table. Input must be in counted non-associative array.
 ---@param tbl table non-associative
 ---@return generated string
 function DB:GenStr(tbl)
   local s
 	for _,v in pairs(tbl) do
-    v = IQ(string.Trim(v))
+    v = NStr:IQ(string.Trim(v))
 		s = (s and s..','..v or v)
 	end
   return s or ''
@@ -29,7 +24,7 @@ function DB:GenKVStr(tbl)
   local str
 	for k,v in pairs(tbl) do
     k = string.Trim(k)
-    v = IQ(string.Trim(v))
+    v = NStr:IQ(string.Trim(v))
     local s = k..'='..v
 		str = (str and str..','..s or s)
 	end
