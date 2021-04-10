@@ -5,7 +5,7 @@ local NStr = CW:Lib('string')
 
 local dbg_prefix = '[CWDB]'
 
--- Generates SQL string from table. Input must be in counted non-associative array.
+---Generates SQL string from table. Input must be in counted non-associative array.
 ---@param tbl table non-associative
 ---@return generated string
 function DB:GenStr(tbl)
