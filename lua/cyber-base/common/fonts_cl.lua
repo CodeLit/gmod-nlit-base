@@ -1,5 +1,4 @@
 local WhenGMLoaded = WhenGMLoaded
-local ix = ix
 local surface = surface
 local ScrW = ScrW
 local ScrH = ScrH

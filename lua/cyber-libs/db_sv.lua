@@ -73,6 +73,7 @@ function DB:Q(query, qtype)
         end
 
         PrintError(errText)
+        ErrorNoHaltWithStack()
     end
 
     return q
@@ -302,7 +303,7 @@ function DB:GetTableCode()
 end
 
 -- SET IN TABLE
--- пример ('reprimands = 3, money = 300','steamid = STEAM_0:1:333333')
+-- при��ер ('reprimands = 3, money = 300','steamid = STEAM_0:1:333333')
 function DB:Set(sqlSetValues, sqlWhere)
     return self:Q('UPDATE ' .. self:GetTableName() .. ' SET ' .. sqlSetValues .. ' WHERE ' .. sqlWhere)
 end
