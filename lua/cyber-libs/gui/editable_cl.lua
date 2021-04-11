@@ -1,8 +1,12 @@
+local TDLib = TDLib
+local tonumber = tonumber
+local vgui = vgui
+local surface = surface
+local draw = draw
 --- Creates GUI Editable panels
 -- @module Editable
 -- @usage local Editable = CW:Lib('editable')
 local Editable = {}
-
 local CWC = CW:Lib('colors')
 local l = CW:Lib('translator')
 local CWStr = CW:Lib('strings')
@@ -17,7 +21,7 @@ end
 ---@param acceptFunc function OnEnterPressed function
 function Editable:EditPanel(text, acceptFunc)
     local e = TDLib('DTextEntry')
-    e:SetPlaceholderText(text or l('Введите текст')..'...')
+    e:SetPlaceholderText(text or l('Введите текст') .. '...')
     e:SetPlaceholderColor(CWC:ThemeText())
     PrepareTextArea(e)
 
@@ -32,7 +36,7 @@ end
 ---@see EditPanel
 function Editable:NumPanel(text, acceptFunc)
     local e = TDLib('DNumberWang')
-    e:SetPlaceholderText(text or l('Введите число')..'...')
+    e:SetPlaceholderText(text or l('Введите число') .. '...')
     e:SetPlaceholderColor(CWC:ThemeText())
     e:SetText('')
     PrepareTextArea(e)

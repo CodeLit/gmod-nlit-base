@@ -1,8 +1,17 @@
+local TDLib = TDLib
+local Color = Color
+local list = list
+local vgui = vgui
+local IsValid = IsValid
+local GetConVar = GetConVar
+local math = math
+local hook = hook
+local table = table
+local RunConsoleCommand = RunConsoleCommand
 --- Creates GUI Buttons
 -- @module Buttons
 -- @usage local Buttons = CW:Lib('buttons')
 local Buttons = {}
-
 local D = CW:Lib('draw')
 local CWC = CW:Lib('color')
 local Icons = CW:Lib('icons')
@@ -15,52 +24,55 @@ local l = CW:Lib('translator')
 --      -- OnClick function
 --		btn:SetColor(CWC:Red())
 -- end)
-function Buttons:Create(text,clickFunc)
-	local b = TDLib('DButton')
-	b:SetText(l(text) or '')
-	b:SetFont('N_small')
-	b:SetColor(CWC:ThemeText())
-	b:ClearPaint()
-	b:Background(CWC:Theme())
-	b:CircleHover(CWC:White(CWC:IsLightTheme() and 30 or 20),7,130)
-	b:Gradient(CWC:ThemeInside(true),TOP)
-	local bh = CWC:ThemeText()
-	bh.a = 90
-	b:BarHover(bh)
+function Buttons:Create(text, clickFunc)
+    local b = TDLib('DButton')
+    b:SetText(l(text) or '')
+    b:SetFont('N_small')
+    b:SetColor(CWC:ThemeText())
+    b:ClearPaint()
+    b:Background(CWC:Theme())
+    b:CircleHover(CWC:White(CWC:IsLightTheme() and 30 or 20), 7, 130)
+    b:Gradient(CWC:ThemeInside(true), TOP)
+    local bh = CWC:ThemeText()
+    bh.a = 90
+    b:BarHover(bh)
 
-	function b:SetBackgroundColor(color)
-		b:Background(color)
-	end
+    function b:SetBackgroundColor(color)
+        b:Background(color)
+    end
 
-	b:On('Paint', function(pnl,w,h)
-		if pnl.RightIcon then
-			local iconSizeMul = 0.8
-			local iconSize = h*iconSizeMul
-			local iconMargin = h*(1-iconSizeMul)
-			D:Icon(Icons:GetPath(pnl.RightIcon), w-iconSize-iconMargin/2, iconMargin/2, iconSize, iconSize)
-		end
-	end)
+    b:On('Paint', function(pnl, w, h)
+        if pnl.RightIcon then
+            local iconSizeMul = 0.8
+            local iconSize = h * iconSizeMul
+            local iconMargin = h * (1 - iconSizeMul)
+            D:Icon(Icons:GetPath(pnl.RightIcon), w - iconSize - iconMargin / 2, iconMargin / 2, iconSize, iconSize)
+        end
+    end)
 
-	b.DoClick = clickFunc
-	return b
+    b.DoClick = clickFunc
+
+    return b
 end
 
 --- Accept button green colored
 --- @see Create
-function Buttons:Accept(text,clickFunc)
-	local b = self:Create(text or 'Подтвердить',clickFunc)
-	b:SetTextColor(CWC:White())
-	b:Background(Color(0, 190, 0, 220))
-	return b
+function Buttons:Accept(text, clickFunc)
+    local b = self:Create(text or 'Подтвердить', clickFunc)
+    b:SetTextColor(CWC:White())
+    b:Background(Color(0, 190, 0, 220))
+
+    return b
 end
 
 --- Decline button red colored
 --- @see Create
-function Buttons:Decline(text,clickFunc)
-	local b = self:Create(text or 'Отменить',clickFunc)
-	b:SetTextColor(CWC:White())
-	b:Background(Color(190, 0, 0, 220))
-	return b
+function Buttons:Decline(text, clickFunc)
+    local b = self:Create(text or 'Отменить', clickFunc)
+    b:SetTextColor(CWC:White())
+    b:Background(Color(190, 0, 0, 220))
+
+    return b
 end
 
 ---Adds button to C button menu
@@ -68,93 +80,97 @@ end
 ---@param icon string
 ---@param iconSize number
 ---@param func function
-function Buttons:AddToCMenu(title,icon,iconSize,func)
-	list.Set('DesktopWindows','NContext Button '..title,{
-		title = title,
-		icon = icon,
-		width = iconSize,
-		height = iconSize,
-		onewindow = true,
-		init = function(ico,window)
-			window:SetIcon(icon)
-			CW:Lib('frames'):AddBehavior(window)
-			func(window)
-		end,
-	})
+function Buttons:AddToCMenu(title, icon, iconSize, func)
+    list.Set('DesktopWindows', 'NContext Button ' .. title, {
+        title = title,
+        icon = icon,
+        width = iconSize,
+        height = iconSize,
+        onewindow = true,
+        init = function(ico, window)
+            window:SetIcon(icon)
+            CW:Lib('frames'):AddBehavior(window)
+            func(window)
+        end,
+    })
 end
 
 ---Specific HUD Settings button
 function Buttons:HudSettings()
-	local button = vgui.Create('DImageButton')
-	button:SetSize(16, 16)
-	button:SetImage('icon16/wrench.png')
-	button.elements = button.elements or {} -- чтобы можно было удалить с помощью цикла
+    local button = vgui.Create('DImageButton')
+    button:SetSize(16, 16)
+    button:SetImage('icon16/wrench.png')
+    button.elements = button.elements or {} -- чтобы можно было удалить с помощью цикла
 
-	button.DoClick = function(pnl)
-		if IsValid(button.panel) then
-			button.panel:Remove()
-			return
-		end
+    button.DoClick = function(pnl)
+        if IsValid(button.panel) then
+            button.panel:Remove()
 
-		local btnPanel = Buttons:Panel()
-		btnPanel:SetSize(200, 200)
-		local mixer = btnPanel:Add('DColorMixer')
-		mixer:SetPalette(false)
-		mixer:SetWangs(false)
-		mixer:SetConVarA('nhudbg_a')
-		mixer:SetConVarR('nhudbg_r')
-		mixer:SetConVarG('nhudbg_g')
-		mixer:SetConVarB('nhudbg_b')
-		mixer:Dock(FILL)
-		local sizer = btnPanel:Add('DNumSlider')
-		sizer.Scratch:Hide()
-		sizer.TextArea:Hide()
-		sizer:SetText(l('Шрифт'))
-		sizer:Dock(TOP)
-		sizer:SetConVar('nhud_size')
-		sizer:SetMin(30)
-		sizer:SetMax(60)
-		sizer:SetDecimals(0)
-		sizer:DockPadding(7, 0, 0, 0)
-		sizer:SetValue(GetConVar('nhud_size'):GetInt())
+            return
+        end
 
-		sizer.OnValueChanged = function(pnl, val)
-			val = math.Round(val)
+        local btnPanel = Buttons:Panel()
+        btnPanel:SetSize(200, 200)
+        local mixer = btnPanel:Add('DColorMixer')
+        mixer:SetPalette(false)
+        mixer:SetWangs(false)
+        mixer:SetConVarA('nhudbg_a')
+        mixer:SetConVarR('nhudbg_r')
+        mixer:SetConVarG('nhudbg_g')
+        mixer:SetConVarB('nhudbg_b')
+        mixer:Dock(FILL)
+        local sizer = btnPanel:Add('DNumSlider')
+        sizer.Scratch:Hide()
+        sizer.TextArea:Hide()
+        sizer:SetText(l('Шрифт'))
+        sizer:Dock(TOP)
+        sizer:SetConVar('nhud_size')
+        sizer:SetMin(30)
+        sizer:SetMax(60)
+        sizer:SetDecimals(0)
+        sizer:DockPadding(7, 0, 0, 0)
+        sizer:SetValue(GetConVar('nhud_size'):GetInt())
 
-			if sizer.oldVal ~= val then
-				sizer.oldVal = val
+        sizer.OnValueChanged = function(pnl, val)
+            val = math.Round(val)
 
-				hook.Add('PlayerButtonUp', 'NHUD Sizer', function(ply, key)
-					if not table.HasValue({MOUSE_LEFT, MOUSE_RIGHT}, key) then return end
-					NHUD:FontsUpdate()
-					hook.Remove('PlayerButtonUp', 'NHUD Sizer')
-				end)
-			end
+            if sizer.oldVal ~= val then
+                sizer.oldVal = val
 
-			RunConsoleCommand('nhudbg_helix_color', 0)
-			btnPanel:UpdatePos()
-		end
+                hook.Add('PlayerButtonUp', 'NHUD Sizer', function(ply, key)
+                    if not table.HasValue({MOUSE_LEFT, MOUSE_RIGHT}, key) then
+                        return
+                    end
 
-		button.panel = btnPanel
+                    NHUD:FontsUpdate()
+                    hook.Remove('PlayerButtonUp', 'NHUD Sizer')
+                end)
+            end
 
-		function btnPanel:UpdatePos()
-			local posX, posY = button:GetPos()
+            RunConsoleCommand('nhudbg_helix_color', 0)
+            btnPanel:UpdatePos()
+        end
 
-			if pnl.attachedToCMenu then
-				posY = posY - btnPanel:GetTall() - 3
-			end
+        button.panel = btnPanel
 
-			btnPanel:SetPos(posX, posY)
-		end
+        function btnPanel:UpdatePos()
+            local posX, posY = button:GetPos()
 
-		btnPanel:UpdatePos()
+            if pnl.attachedToCMenu then
+                posY = posY - btnPanel:GetTall() - 3
+            end
 
-		if pnl.attachedToCMenu and IsValid(button.panel) then
-			button.panel:SetParent(g_ContextMenu)
-		end
-	end
+            btnPanel:SetPos(posX, posY)
+        end
 
-	return button
+        btnPanel:UpdatePos()
+
+        if pnl.attachedToCMenu and IsValid(button.panel) then
+            button.panel:SetParent(g_ContextMenu)
+        end
+    end
+
+    return button
 end
 
 return Buttons

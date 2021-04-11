@@ -1,36 +1,59 @@
-function MultipleSort(t,...) -- MultipleSort(table,'job','salary^') -- ^ обозначает, что сортируем по возрастанию
-	local args = {...}
-	table.sort(t, function (a,b)
+local table = table
+local tobool = tobool
+local string = string
+local type = type
+local SortedPairs = SortedPairs
 
-		local function isHigher(i)
-			local arg = args[i]
-			if arg == nil then return end
-			local bAscend = tobool(string.sub(arg,#arg) == '^')
-			if bAscend then arg = string.sub(arg,1,#arg-1) end -- обрезаем символ
-			if a[arg] == nil then return bAscend -- кинуть безиндексовые значения в начало таблицы
-			elseif b[arg] == nil then return !bAscend end
-			if type(a[arg]) != type(b[arg]) then return end
-			if a[arg] > b[arg] then return !bAscend
-			elseif a[arg] < b[arg] then return bAscend
-			else return isHigher(i + 1) end
-		end
+-- MultipleSort(table,'job','salary^') -- ^ обозначает, что сортируем по возрастанию
+function MultipleSort(t, ...)
+    local args = {...}
 
-		return isHigher(1)
-	end)
+    table.sort(t, function(a, b)
+        local function isHigher(i)
+            local arg = args[i]
+            if arg == nil then return end
+            local bAscend = tobool(string.sub(arg, #arg) == '^')
+
+            -- обрезаем символ
+            if bAscend then
+                arg = string.sub(arg, 1, #arg - 1)
+            end
+
+            -- кинуть безиндексовые значения в начало таблицы
+            if a[arg] == nil then
+                return bAscend
+            elseif b[arg] == nil then
+                return not bAscend
+            end
+
+            if type(a[arg]) ~= type(b[arg]) then return end
+
+            if a[arg] > b[arg] then
+                return not bAscend
+            elseif a[arg] < b[arg] then
+                return bAscend
+            else
+                return isHigher(i + 1)
+            end
+        end
+
+        return isHigher(1)
+    end)
 end
 
 function RemoveDuplicateValues(tbl)
-	local hash = {}
-	local result = {}
-	for k,v in SortedPairs(tbl) do
-	   if (not hash[v]) then
-	     result[k] = v
-	     hash[v] = true
-	   end
-	end
-	return result
-end
+    local hash = {}
+    local result = {}
 
+    for k, v in SortedPairs(tbl) do
+        if (not hash[v]) then
+            result[k] = v
+            hash[v] = true
+        end
+    end
+
+    return result
+end
 --
 -- local tbl = {
 -- 	{pay=900,cat='gg'},

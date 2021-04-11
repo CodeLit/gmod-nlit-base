@@ -1,74 +1,79 @@
+local FindMetaTable = FindMetaTable
+local IsValid = IsValid
+local tobool = tobool
+local hook = hook
+local timer = timer
+local pairs = pairs
 local PLY = FindMetaTable('Player')
-
 local CWStr = CW:Lib('string')
 local Lang = CW:Lib('language')
 
 function PLY:StID()
-	if not IsValid(self) then return end
-	return CWStr:ToSID(self:SteamID())
+    if not IsValid(self) then return end
+
+    return CWStr:ToSID(self:SteamID())
 end
 
 function PLY:CID()
-	if not IsValid(self) then return end
-	local char = self:GetCharacter()
-	if !char then return end
-	return char:GetID()
+    if not IsValid(self) then return end
+    local char = self:GetCharacter()
+    if not char then return end
+
+    return char:GetID()
 end
 
 function PLY:IsModerator()
-	return self:GetRights('Модератор')
+    return self:GetRights('Модератор')
 end
 
 function PLY:IsDeveloper()
-	return self:GetRights('Разработчик')
+    return self:GetRights('Разработчик')
 end
 
 function PLY:IsVehicleDriver()
-	if !self:InVehicle() then return false end
-	local veh = self:GetVehicle()
-	if !IsValid(veh) then return false end
-	return !veh.VC_ExtraSeat
+    if not self:InVehicle() then return false end
+    local veh = self:GetVehicle()
+    if not IsValid(veh) then return false end
+
+    return not veh.VC_ExtraSeat
 end
 
 function PLY:IsShootsFromCarWindow()
-	return tobool(self:InVehicle() and !self:IsVehicleDriver() and self:GetNWBool('ShootsFromCarWindow'))
+    return tobool(self:InVehicle() and not self:IsVehicleDriver() and self:GetNWBool('ShootsFromCarWindow'))
 end
 
-hook.Add('KeyPress','VC Compatible Shoot From Window',function(ply,key)
-	if key == IN_JUMP then
-		timer.Simple(.15,function()
-			if !IsValid(ply) then return end
-			ply:SetNWBool('ShootsFromCarWindow',ply.VC_EnteredDriveByMode)
-		end)
-	end
+hook.Add('KeyPress', 'VC Compatible Shoot From Window', function(ply, key)
+    if key == IN_JUMP then
+        timer.Simple(.15, function()
+            if not IsValid(ply) then return end
+            ply:SetNWBool('ShootsFromCarWindow', ply.VC_EnteredDriveByMode)
+        end)
+    end
 end)
 
 function PLY:GetOrderPrice()
-	return self:GetInfoNum('nl_order_price',5000)
+    return self:GetInfoNum('nl_order_price', 5000)
 end
 
-
 function PLY:NUse(ent)
--- 	return NAbils.Killer:OpenRequestMenu()
-	-- if IsValid(ent) then
-	-- 	if ent:IsPlayer() then
-	-- 		if ent:IsKiller() then
-	-- 			if ent:HasOrder() then
-	-- 				LocalPlayer():Notify('Этот гражданин уже имеет заказ!')
-	-- 			else
-	-- 				return NAbils.Killer:OpenRequestMenu()
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end
+    -- 	return NAbils.Killer:OpenRequestMenu()
+    -- if IsValid(ent) then
+    -- 	if ent:IsPlayer() then
+    -- 		if ent:IsKiller() then
+    -- 			if ent:HasOrder() then
+    -- 				LocalPlayer():Notify('Этот гражданин уже имеет заказ!')
+    -- 			else
+    -- 				return NAbils.Killer:OpenRequestMenu()
+    -- 			end
+    -- 		end
+    -- 	end
+    -- end
 end
 
 function PLY:GetClaimedZone()
-	for _,v in pairs(RPZones:getList()) do
-		if v:getOwnerCID() == self:CID() then
-			return v
-		end
-	end
+    for _, v in pairs(RPZones:getList()) do
+        if v:getOwnerCID() == self:CID() then return v end
+    end
 end
 
 ---Gets player 2-char lang code
@@ -76,9 +81,7 @@ end
 function PLY:GetLang()
     return Lang:Format(self:GetInfo('cw_lang'))
 end
-
 -- np(N:GetOwner():IsShootsFromCarWindow())
-
 -- -- ИСКАТЬ В ХУКАХ НУЖНЫЙ ВЫЗОВ ХУКА
 --
 -- OriginalCall = OriginalCall or hook.Call
