@@ -15,6 +15,7 @@ local CWC = CW:Lib('colors')
 local Panels = CW:Lib('panels')
 local Editable = CW:Lib('editable')
 local l = CW:Lib('translator')
+local Lists = CW:Lib('lists')
 
 ---Creates an input panel
 ---@param title string
@@ -166,7 +167,7 @@ function Inputs:Fields(tblFields, acceptFunc)
     -- TODO: Сделать работоспособной acceptFunc
     local cats = {}
     local mainPanel = Panels:DockScroll()
-    local tile = mainPanel:Add(CW:Lib('lists'):Tile())
+    local tile = mainPanel:Add(Lists:Tile())
     tile:Dock(TOP)
     mainPanel.inputs = {}
 
@@ -180,7 +181,7 @@ function Inputs:Fields(tblFields, acceptFunc)
             cat:SetLabel(l(cat_name))
             cat:Dock(TOP)
             cat:DockMargin(0, 5, 0, 10)
-            local tile = Buttons:Tile()
+            local tile = Lists:Tile()
             tile:Dock(FILL)
             cat:SetContents(tile)
             cats[cat_name] = tile

@@ -4,8 +4,12 @@ local string = string
 local type = type
 local SortedPairs = SortedPairs
 
--- MultipleSort(table,'job','salary^') -- ^ обозначает, что сортируем по возрастанию
-function MultipleSort(t, ...)
+local Tables = {}
+
+
+---@usage Tables:MultipleSort(table,'job','salary^') -- ^ обозначает, что сортируем по возрастанию. ^ means ascending sort
+---@return Sorted Table
+function Tables:MultipleSort(t, ...)
     local args = {...}
 
     table.sort(t, function(a, b)
@@ -41,7 +45,9 @@ function MultipleSort(t, ...)
     end)
 end
 
-function RemoveDuplicateValues(tbl)
+---Removes Duplicate Values from table
+---@return table
+function Tables:RemoveDuplicateValues(tbl)
     local hash = {}
     local result = {}
 
@@ -70,3 +76,5 @@ end
 -- MultipleSort(tbl,'cat^','pay')
 --
 -- np(tbl)
+
+return Tables

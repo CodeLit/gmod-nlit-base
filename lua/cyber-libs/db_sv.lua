@@ -12,18 +12,17 @@ local print = print
 local DB = {}
 local NStr = CW:Lib('string')
 local dbg_prefix = '[CWDB]'
+local CWUtf8 = CW:Lib('utf8')
 
 ---Generates SQL string from table. Input must be in counted non-associative array.
 ---@param tbl table non-associative
 ---@return generated string
 function DB:GenStr(tbl)
     local s
-
     for _, v in pairs(tbl) do
         v = NStr:IQ(string.Trim(v))
         s = (s and s .. ',' .. v or v)
     end
-
     return s or ''
 end
 
@@ -33,17 +32,68 @@ end
 function DB:GenKVStr(tbl)
     if isstring(tbl) then
         PrintError(tbl .. ' is string!')
-
+        ErrorNoHaltWithStack()
         return tbl
     end
-
     local str
-
     for k, v in pairs(tbl) do
         k = string.Trim(k)
         v = NStr:IQ(string.Trim(v))
         local s = k .. '=' .. v
         str = (str and str .. ',' .. s or s)
+    end
+    return str or ''
+end
+
+---Generates SQL smart string from common string.
+---Example: "hello = world" => "`hello`='world'"
+---Example 2: "hello >= world" => "`hello`>='world'"
+---Example 3: "привет == world" => "`привет`=='world'"
+---@param str String
+---@return str Smart SQL String
+function DB:GenSmartStr(str)
+    -- Explode by words
+    local arr = {}
+    for word in CWUtf8.gmatch(str,'[%wА-я%s:_-]+') do
+        word = string.Trim(word)
+        table.insert(arr,word)
+    end
+    arr[1] = '`'..arr[1]..'`'
+    arr[2] = "'"..arr[2].."'"
+    -- Symbol between to middle of array
+    local connector = CWUtf8.match(str,'[^%wА-я%s:_-]')
+    table.insert(arr,2,connector)
+    local output = ''
+    for _, v in pairs(arr) do
+        output = output..v
+    end
+    return output
+end
+
+
+---Generates SQL smart string from table or string
+---Example 1: {'el1=el2','el3 >= el4'} => "'el1'='el2' AND 'el3'>='el4'"
+---Example 2: {el1='el2',el3 ='el4'} => "'el1'='el2' AND 'el3'='el4'"
+---Example 3: "el1 = el2 OR el3<=el4" => "'el1'='el2' OR 'el3'<='el4'"
+---@param tbl table associative
+---@return generated Smart SQL string
+---@see GenSmartStr
+function DB:GenSmartStrFromArr(tbl)
+    local str
+
+    if isstring(tbl) then
+        str = self:GenSmartStr(tbl)
+    elseif tbl[1] then
+        for _, v in pairs(tbl) do
+            v = self:GenSmartStr(v)
+            str = (str and str .. ' AND ' .. v or v)
+        end
+    else
+        for k, v in pairs(tbl) do
+            local s = k .. '=' .. v
+            s = self:GenSmartStr(s)
+            str = (str and str .. ' AND ' .. s or s)
+        end
     end
 
     return str or ''
@@ -65,12 +115,7 @@ function DB:Q(query, qtype)
     end
 
     if q == false then
-        local info = debug.getinfo(2, 'S')
-        local errText = dbg_prefix .. ' ' .. sql.LastError()
-
-        if info then
-            errText = errText .. ' [' .. info.source:sub(2) .. ' line ' .. info.linedefined .. ']'
-        end
+        local errText = dbg_prefix .. ' in query: ['.. query .. '], ' .. sql.LastError()
 
         PrintError(errText)
         ErrorNoHaltWithStack()
@@ -248,21 +293,21 @@ end
 ---@param kv table
 ---@return table data
 function DB:GetWhere(kv)
-    return self:Q('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenKVStr(kv))
+    return self:Q('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenSmartStrFromArr(kv))
 end
 
 ---GETs id
 ---@param kv table
 ---@return table data
 function DB:GetIdWhere(kv)
-    return self:QValue('SELECT id FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenKVStr(kv))
+    return self:QValue('SELECT id FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenSmartStrFromArr(kv))
 end
 
 ---GETs row
 ---@param kv table
 ---@return table data
 function DB:GetRowWhere(kv)
-    return self:QRow('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenKVStr(kv))
+    return self:QRow('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenSmartStrFromArr(kv))
 end
 
 ---GETs value of column
@@ -270,14 +315,14 @@ end
 ---@param kv table
 ---@return table data
 function DB:GetValueWhere(column, kv)
-    return self:QValue('SELECT ' .. column .. ' FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenKVStr(kv))
+    return self:QValue('SELECT ' .. column .. ' FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenSmartStrFromArr(kv))
 end
 
 ---GETs value of column data
 ---@param kv table
 ---@return table data
-function DB:GetDataWhere(kv)
-    return self:QRow('SELECT data FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenKVStr(kv)).data
+function DB:GetDataWhere(whereSqlStr)
+    return self:QRow('SELECT data FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenSmartStrFromArr(whereSqlStr)).data
 end
 
 ---Is data row exists
@@ -303,14 +348,14 @@ function DB:GetTableCode()
 end
 
 -- SET IN TABLE
--- при��ер ('reprimands = 3, money = 300','steamid = STEAM_0:1:333333')
+-- пример ('reprimands = 3, money = 300','steamid = STEAM_0:1:333333')
 function DB:Set(sqlSetValues, sqlWhere)
-    return self:Q('UPDATE ' .. self:GetTableName() .. ' SET ' .. sqlSetValues .. ' WHERE ' .. sqlWhere)
+    return self:Q('UPDATE ' .. self:GetTableName() .. ' SET ' .. sqlSetValues .. ' WHERE ' .. self:GenSmartStrFromArr(sqlWhere))
 end
 
 -- DELETE FROM TABLE
-function DB:DeleteWhere(sqlStr)
-    return self:Q('DELETE FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlStr) == nil
+function DB:DeleteWhere(sqlWhere)
+    return self:Q('DELETE FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenSmartStrFromArr(sqlWhere)) == nil
 end
 
 function DB:RemoveWhere(sqlStr)
@@ -345,11 +390,11 @@ function DB:PrintTableExists()
 end
 
 function DB:PrintWhere(sqlWhere)
-    PrintTable(self:Q('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlWhere))
+    PrintTable(self:Q('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenSmartStrFromArr(sqlWhere)))
 end
 
 function DB:PrintRowWhere(sqlWhere)
-    print(self:QRow('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. sqlWhere))
+    print(self:QRow('SELECT * FROM ' .. self:GetTableName() .. ' WHERE ' .. self:GenSmartStrFromArr(sqlWhere)))
 end
 
 function DB:PrintAllTables()

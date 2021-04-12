@@ -11,6 +11,8 @@ local util = util
 -- @module Strings
 local Strings = {}
 
+local CWUtf8 = CW:Lib('utf8')
+
 --- Puts text In Quotes for SQL code
 -- Changing single quotes, prehaps double quoutes using by json
 -- Закрывает текст в кавычки для SQL
@@ -71,7 +73,7 @@ end
 
 --- Is str contains russian symbols
 function Strings:HasRussianSymbols(text)
-    for k, v in pairs(Strings.UpperLowerKV) do
+    for k, v in pairs(utf8_uc_lc) do
         if string.find(text, k) or string.find(text, v) then return true end
     end
 
@@ -85,7 +87,7 @@ end
 function Strings:HaveLower(text)
     local found, foundTable = false, {}
 
-    for k, v in pairs(Strings.UpperLowerKV) do
+    for k, v in pairs(utf8_uc_lc) do
         if string.find(text, v) then
             found = true
             table.insert(foundTable, v)
@@ -102,7 +104,7 @@ end
 function Strings:HaveUpper(text)
     local found, foundTable = false, {}
 
-    for k, v in pairs(Strings.UpperLowerKV) do
+    for k, v in pairs(utf8_uc_lc) do
         if string.find(text, k) then
             found = true
             table.insert(foundTable, k)
@@ -228,32 +230,14 @@ end
 -- @param text string
 -- @return new string
 function Strings:Lower(text)
-    text = string.lower(text)
-    local haveUpper, foundTbl = Strings:HaveUpper(text)
-
-    if haveUpper then
-        for _, upperLetter in pairs(foundTbl) do
-            text = string.Replace(text, upperLetter, Strings.UpperLowerKV[upperLetter])
-        end
-    end
-
-    return text
+    return CWUtf8.utf8lower(text)
 end
 
 --- Makes string letters uppercase
 -- @param text string
 -- @return new string
 function Strings:Upper(text)
-    text = string.upper(text)
-    local haveLower, foundTbl = Strings:HaveLower(text)
-
-    if haveLower then
-        for _, lowerLetter in pairs(foundTbl) do
-            text = string.Replace(text, lowerLetter, Strings.LowerUpperKV[lowerLetter])
-        end
-    end
-
-    return text
+    return CWUtf8.utf8upper(text)
 end
 
 --- Makes string letters capitalized
@@ -263,7 +247,7 @@ function Strings:Capitalize(text)
     text = ' ' .. Strings:Lower(text)
 
     -- Заменяем все русские первые буквы после пробела на заглавные
-    for k, v in pairs(Strings.LowerUpperKV) do
+    for k, v in pairs(utf8_lc_uc) do
         text = string.Replace(text, ' ' .. k, ' ' .. v)
     end
 
@@ -301,7 +285,7 @@ end
 ---@param text string
 ---@return formatted text
 function Strings:RemoveRussianSymbols(text)
-    for k, v in pairs(Strings.UpperLowerKV) do
+    for k, v in pairs(utf8_uc_lc) do
         text = string.Replace(text, k, '')
         text = string.Replace(text, v, '')
     end
@@ -377,49 +361,6 @@ function Strings:HasSQL(str)
     for _, bad in pairs(sqlWords) do
         if tobool(string.find(strLow, ' ' .. bad)) or tobool(string.find(strLow, bad .. ' ')) or tobool(string.find(strLow, ' ' .. bad .. ' ')) or tobool(string.find(strLow, ';')) then return true end
     end
-end
-
-Strings.UpperLowerKV = {
-    ['А'] = 'а',
-    ['Б'] = 'б',
-    ['В'] = 'в',
-    ['Г'] = 'г',
-    ['Д'] = 'д',
-    ['Е'] = 'е',
-    ['Ё'] = 'ё',
-    ['Ж'] = 'ж',
-    ['З'] = 'з',
-    ['И'] = 'и',
-    ['Й'] = 'й',
-    ['К'] = 'к',
-    ['Л'] = 'л',
-    ['М'] = 'м',
-    ['Н'] = 'н',
-    ['О'] = 'о',
-    ['П'] = 'п',
-    ['Р'] = 'р',
-    ['С'] = 'с',
-    ['Т'] = 'т',
-    ['У'] = 'у',
-    ['Ф'] = 'ф',
-    ['Х'] = 'х',
-    ['Ц'] = 'ц',
-    ['Ч'] = 'ч',
-    ['Ш'] = 'ш',
-    ['Щ'] = 'щ',
-    ['Ъ'] = 'ъ',
-    ['Ы'] = 'ы',
-    ['Ь'] = 'ь',
-    ['Э'] = 'э',
-    ['Ю'] = 'ю',
-    ['Я'] = 'я'
-}
-
-Strings.LowerUpperKV = {}
-
--- Создаём такую же таблицу, только наоборот
-for k, v in pairs(Strings.UpperLowerKV) do
-    Strings.LowerUpperKV[v] = k
 end
 
 return Strings
