@@ -5,9 +5,8 @@ local surface = surface
 local draw = draw
 --- Creates GUI Editable panels
 -- @module Editable
--- @usage local Editable = CW:Lib('editable')
+-- @usage local Editable = CWGUI.Editable
 local Editable = {}
-local CWC = CW:Lib('colors')
 local l = CW:Lib('translator')
 local CWStr = CW:Lib('strings')
 

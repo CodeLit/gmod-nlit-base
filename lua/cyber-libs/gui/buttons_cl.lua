@@ -8,14 +8,15 @@ local math = math
 local hook = hook
 local table = table
 local RunConsoleCommand = RunConsoleCommand
---- Creates GUI Buttons
--- @module Buttons
--- @usage local Buttons = CW:Lib('buttons')
-local Buttons = {}
+
 local D = CW:Lib('draw')
-local CWC = CW:Lib('color')
 local Icons = CW:Lib('icons')
 local l = CW:Lib('translator')
+
+--- Creates GUI Buttons
+-- @module Buttons
+-- @usage local Buttons = CWGUI.Buttons
+local Buttons = {}
 
 --- Creates a button
 ---@param text string Button text
@@ -89,7 +90,7 @@ function Buttons:AddToCMenu(title, icon, iconSize, func)
         onewindow = true,
         init = function(ico, window)
             window:SetIcon(icon)
-            CW:Lib('frames'):AddBehavior(window)
+            CWGUI.Frames:AddBehavior(window)
             func(window)
         end,
     })

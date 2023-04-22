@@ -1,7 +1,7 @@
 local Icons = {}
 
 local D = CW:Lib('draw')
-local Panels = CW:Lib('panels')
+local Panels = CWGUI.Panels
 
 ---Returns a panel with icon
 ---@param icon string

@@ -17,7 +17,7 @@ local pathToLibs = 'cyber-libs'
 ---Use CW lib. Basic fucntion.
 ---@param libName string
 ---@return table lib
----@usage local colors = CW:Lib('colors')
+---@usage local colors = CWGUI.Colors
 --- Button:SetBackgroundColor(colors:White())
 --- local Strings = CW:Lib('strings')
 --- ...
@@ -56,3 +56,4 @@ function LibFinder:FindLibPathInFolder(path, lib)
 end
 
 CW:AddAllInFolder(pathToLibs, true)
+

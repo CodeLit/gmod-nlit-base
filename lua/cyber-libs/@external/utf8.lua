@@ -1043,7 +1043,7 @@ utf8.gmatch  = utf8gmatch
 utf8.gsub    = utf8gsub  
 utf8.dump    = dump  
 utf8.format = format 
-utf8.lower = lower      
+utf8.lower = lower
 utf8.upper = upper      
 utf8.rep     = rep
 return utf8

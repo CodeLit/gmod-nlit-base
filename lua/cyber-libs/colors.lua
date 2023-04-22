@@ -4,7 +4,7 @@ local CurTime = CurTime
 local tobool = tobool
 --- The module that contains colors. Client only.
 -- @module Colors
--- @usage local colors = CW:Lib('colors')
+-- @usage local colors = CWGUI.Colors
 -- colors:White()
 -- colors:Red(<trasparency from 0 to 255>)
 -- colors:Yellow(100)

@@ -7,11 +7,11 @@ local isstring = isstring
 --- Lists is GUI module for list panels
 ---@module Lists
 local Lists = {}
-local Buttons = CW:Lib('buttons')
-local Frames = CW:Lib('frames')
-local Panels = CW:Lib('panels')
+local Buttons = CWGUI.Buttons
+local Frames = CWGUI.Frames
+local Panels = CWGUI.Panels
+local Inputs = CWGUI.Inputs
 local CWStr = CW:Lib('strings')
-local Inputs = CW:Lib('inputs')
 local l = CW:Lib('translator')
 
 ---Variant selector

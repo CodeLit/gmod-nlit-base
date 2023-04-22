@@ -9,13 +9,12 @@ local surface = surface
 local pairs = pairs
 --- Creates GUI Inputs
 --- @module Inputs
---- @usage local Inputs = CW:Lib('inputs')
+--- @usage local Inputs = CWGUI.Inputs
 local Inputs = {}
-local CWC = CW:Lib('colors')
-local Panels = CW:Lib('panels')
-local Editable = CW:Lib('editable')
+local Panels = CWGUI.Panels
+local Editable = CWGUI.Editable
 local l = CW:Lib('translator')
-local Lists = CW:Lib('lists')
+local Lists = CWGUI.Lists
 
 ---Creates an input panel
 ---@param title string
@@ -53,7 +52,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
     local editable
 
     if typeOfInput == 'table' then
-        editable = p2:Add(CW:Lib('lists'):EditableTable(inputValue))
+        editable = p2:Add(CWGUI.Lists:EditableTable(inputValue))
 
         function mainP:GetInputValue()
             return editable.tbl or {}

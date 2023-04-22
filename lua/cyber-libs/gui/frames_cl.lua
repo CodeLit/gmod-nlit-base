@@ -6,13 +6,14 @@ local IsValid = IsValid
 local timer = timer
 local pairs = pairs
 local LocalPlayer = LocalPlayer
+
+
 ---Creates GUI Frames
 ---@module Frames
----@usage local Frames = CW:Lib('frames')
+---@usage local Frames = CWGUI.Frames
 local Frames = {}
-local Buttons = CW:Lib('buttons')
-local CWC = CW:Lib('colors')
-local Inputs = CW:Lib('inputs')
+local Buttons = CWGUI.Buttons
+local Inputs = CWGUI.Inputs
 local ScrW, ScrH = ScrW, ScrH
 
 ---Returns a newly created frame
@@ -254,7 +255,7 @@ function Frames:List(title)
     local fr = self:Create(title)
     local scroll = fr:Add('DScrollPanel')
     scroll:Dock(FILL)
-    fr.list = scroll:Add(CW:Lib('lists'):List())
+    fr.list = scroll:Add(CWGUI.Lists:List())
     fr.list:Dock(TOP)
 
     return fr
@@ -268,7 +269,7 @@ end
 ---@return any
 function Frames:ManyFields(text, tblFields, acceptFunc)
     local fr = self:Create(text)
-    local tile = fr:Add(CW:Lib('inputs'):Fields(tblFields, acceptFunc))
+    local tile = fr:Add(CWGUI.Inputs:Fields(tblFields, acceptFunc))
 
     return fr, tile.inputs
 end

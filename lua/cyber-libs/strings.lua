@@ -230,14 +230,14 @@ end
 -- @param text string
 -- @return new string
 function Strings:Lower(text)
-    return CWUtf8.utf8lower(text)
+    return CWUtf8.lower(text)
 end
 
 --- Makes string letters uppercase
 -- @param text string
 -- @return new string
 function Strings:Upper(text)
-    return CWUtf8.utf8upper(text)
+    return CWUtf8.upper(text)
 end
 
 --- Makes string letters capitalized

@@ -16,7 +16,6 @@ local Vector = Vector
 local Draw = {}
 local draw, surface, render, Material, math = draw, surface, render, Material, math
 local TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER = TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER
-local CWC = CW:Lib('colors')
 
 ---Draws text
 ---@param text string

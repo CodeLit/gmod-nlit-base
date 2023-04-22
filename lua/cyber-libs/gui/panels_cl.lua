@@ -11,7 +11,6 @@ local IsValid = IsValid
 local string = string
 local timer = timer
 local Panels = {}
-local CWC = CW:Lib('colors')
 
 function Panels:Create(text, font)
     local p = vgui.Create('DPanel')
