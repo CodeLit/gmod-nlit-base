@@ -1,4 +1,4 @@
-# CyberWolf's Base Framework
+# Nlit's Base Framework
 
 Contains a base functions for future garry's mod addons. Free to use, free to contribute
 
