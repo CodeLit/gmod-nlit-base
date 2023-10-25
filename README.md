@@ -20,6 +20,6 @@ And more!
 
 ## Links
 
-[Documentation](http://codelit.github.io/gmod-cw-base/)
+[Documentation](http://codelit.github.io/gmod-nlit-base/)
 
 [Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=2394292123)
