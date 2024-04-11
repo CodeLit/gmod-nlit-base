@@ -10,6 +10,7 @@ local PrintError = PrintError
 local include = include
 local pairs = pairs
 local file = file
+local nlit = nlit
 
 local LibFinder = {}
 
@@ -27,8 +28,8 @@ local pathToLibs = 'nlit-libs'
 -- Button:SetBackgroundColor(colors:White())
 -- local Strings = libs:Lib('strings')
 -- ...
-function Lib(libName)
-    local found = LibFinder:FindLibPathInFolder(pathToLibs, string.lower(libName))
+function Lib(self, libName)
+    local found = FindLibPathInFolder(self, pathToLibs, string.lower(libName))
 
     if not found then
         PrintError('[Nlit\'s Framework] Library [' .. libName .. '] is not found!')
@@ -39,20 +40,20 @@ function Lib(libName)
     return include(found)
 end
 
-function FindLuaLibInFiles(files, lib)
+function FindLuaLibInFiles(self, files, lib)
     for _, f in pairs(files) do
         if IsStringContains(f, '.lua') and IsStringContains(f, lib) then return f end
     end
 end
 
-function LookupForLib(folders, path, lib)
+function LookupForLib(self, folders, path, lib)
     for _, folder in pairs(folders) do
         local found = self:FindLibPathInFolder(path .. '/' .. folder, lib)
         if found then return found end
     end
 end
 
-function FindLibPathInFolder(path, lib)
+function FindLibPathInFolder(self, path, lib)
     local files, folders = file.Find(path .. '/*', 'LUA')
     local found = self:FindLuaLibInFiles(files, lib)
     if found then return path .. '/' .. found end
@@ -60,5 +61,5 @@ function FindLibPathInFolder(path, lib)
     return self:LookupForLib(folders, path, lib)
 end
 
-AddAllInFolder(pathToLibs, true)
+nlit.AddAllInFolder(pathToLibs, true)
 

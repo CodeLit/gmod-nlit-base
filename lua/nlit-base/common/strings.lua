@@ -1,3 +1,9 @@
+--- The module for working with strings
+-- @module nlitStrings
+-- @usage local strings = nlitStrings
+-- @see nlit
+module('nlitStrings', package.seeall)
+
 local string = string
 local utf8 = utf8
 local table = table
@@ -7,11 +13,11 @@ local math = math
 local os = os
 local tobool = tobool
 local util = util
---- The module for working with strings
--- @module Strings
+
 local Strings = {}
 
-local CWUtf8 = CW:Lib('utf8')
+local CWUtf8 = nlitLibs:Lib('utf8')
+
 
 --- Puts text In Quotes for SQL code
 -- Changing single quotes, prehaps double quoutes using by json
@@ -19,13 +25,13 @@ local CWUtf8 = CW:Lib('utf8')
 -- Заменяем одинарные кавычки, ибо двойные использует json
 -- @param str the string
 -- @return string with quotes
-function Strings:IQ(str)
+function IQ(self, str)
     return str and ("'" .. str .. "'") or str
 end
 
 --- Takes substring from string using pattern
 -- / Берёт из строки подстроку с помощью паттерна
-function Strings:Get(str, pattern)
+function Get(self, str, pattern)
     for v in string.gmatch(str, pattern) do
         return v
     end
@@ -36,7 +42,7 @@ end
 --- Takes length of the string
 -- / Взять длину строки
 -- @param str Input string
-function Strings:Len(str)
+function Len(self, str)
     return utf8.len(str)
 end
 
@@ -47,7 +53,7 @@ end
 -- print(string.find('ssssПриветики !!!','[а-Я%d]+'))
 --- Steamid to Short ID
 -- @param sid long SteamID
-function Strings:ToSID(sid)
+function ToSID(self, sid)
     sid = string.Replace(sid, 'STEAM_', '')
     sid = string.Replace(sid, ':', '')
 
@@ -56,7 +62,7 @@ end
 
 --- Short ID to Steamid
 -- @param sid short SteamID
-function Strings:FromSID(sid)
+function FromSID(self, sid)
     local arr = string.ToTable(sid)
     table.insert(arr, 2, ':')
     table.insert(arr, 4, ':')
@@ -72,7 +78,7 @@ function Strings:FromSID(sid)
 end
 
 --- Is str contains russian symbols
-function Strings:HasRussianSymbols(text)
+function HasRussianSymbols(self, text)
     for k, v in pairs(utf8_uc_lc) do
         if string.find(text, k) or string.find(text, v) then return true end
     end
@@ -84,7 +90,7 @@ end
 ---@param text string
 ---@return boolean
 ---@return table found Table
-function Strings:HaveLower(text)
+function HaveLower(self, text)
     local found, foundTable = false, {}
 
     for k, v in pairs(utf8_uc_lc) do
@@ -101,7 +107,7 @@ end
 ---@param text string
 ---@return boolean
 ---@return table found Table
-function Strings:HaveUpper(text)
+function HaveUpper(self, text)
     local found, foundTable = false, {}
 
     for k, v in pairs(utf8_uc_lc) do
@@ -116,7 +122,7 @@ end
 
 --- Возвращает красивые падежные окончания
 --- @usage GetNumEnding(11,'минут','минута','минуты')
-function Strings:GetNumEnding(num, ifZero, ifOne, ifTwo)
+function GetNumEnding(self, num, ifZero, ifOne, ifTwo)
     if not isnumber(num) then return end
     local lastNumDecimalsLeft = num % 100
     if lastNumDecimalsLeft >= 11 and lastNumDecimalsLeft <= 19 then return ifZero end
@@ -138,7 +144,7 @@ end
 ---Generate Random String
 ---@param numOfChairs number
 ---@return string
-function Strings:RandomString(numOfChairs)
+function RandomString(self, numOfChairs)
     math.randomseed(os.time())
     local s = ''
 
@@ -152,7 +158,7 @@ end
 ---Formats a language to 2 chars lang
 ---@param lang string
 ---@return string formatted lang
-function Strings:FormatToTwoCharsLang(lang)
+function FormatToTwoCharsLang(self, lang)
     if #lang > 2 then
         lang = string.sub(lang, 1, 2)
     end
@@ -163,14 +169,14 @@ end
 --- Is string Contains text
 -- @param str string
 -- @param text text
-function Strings:Contains(str, text)
+function Contains(self, str, text)
     return tobool(string.find(str, text))
 end
 
 --- Is string only Contains letters
 -- @param text string
 -- @return bool
-function Strings:OnlyContainsLetters(text)
+function OnlyContainsLetters(self, text)
     for w in string.gmatch(text, "[%p%s%c%d]") do
         return false
     end
@@ -181,7 +187,7 @@ end
 --- Is string only Contains letters and numbers
 -- @param text string
 -- @return bool
-function Strings:OnlyContainsLettersAndNumbers(text)
+function OnlyContainsLettersAndNumbers(self, text)
     for w in string.gmatch(text, "[%p%s%c]") do
         return false
     end
@@ -192,7 +198,7 @@ end
 --- Is string only Contains allowed symbols
 -- @param text string
 -- @return bool
-function Strings:OnlyContainsAllowed(text)
+function OnlyContainsAllowed(self, text)
     for _, v in pairs({'_', '-', ' '}) do
         text = string.Replace(text, v, '')
     end
@@ -207,7 +213,7 @@ end
 --- Is string only Contains numbers
 -- @param text string
 -- @return bool
-function Strings:OnlyContainsNumbers(text)
+function OnlyContainsNumbers(self, text)
     local dotsNum = 0
 
     for _, v in pairs(string.ToTable(text)) do
@@ -229,38 +235,56 @@ end
 --- Makes string letters lowercase
 -- @param text string
 -- @return new string
-function Strings:Lower(text)
+function Lower(self, text)
     return CWUtf8.lower(text)
 end
 
 --- Makes string letters uppercase
 -- @param text string
 -- @return new string
-function Strings:Upper(text)
+function Upper(self, text)
     return CWUtf8.upper(text)
 end
 
 --- Makes string letters capitalized
+-- TODO: Fix
 -- @param text string
 -- @return new string
-function Strings:Capitalize(text)
-    text = ' ' .. Strings:Lower(text)
+-- function Capitalize(self, text)
 
-    -- Заменяем все русские первые буквы после пробела на заглавные
-    for k, v in pairs(utf8_lc_uc) do
-        text = string.Replace(text, ' ' .. k, ' ' .. v)
-    end
+--     if HasRussianSymbols(self, text) then
 
-    local output = text:gsub("(%l)(%w*)", function(a, b) return string.upper(a) .. b end) -- Меняем все то же самое, только в инглише
-    output = string.sub(output, 2) -- Обрезаем пробел вначале, добавленный нами
+--         -- Lowering the whole text
+--         text = ' ' .. CWUtf8.lower(text)
 
-    return output
-end
+--         -- We're changing all russian first letters after space to uppercase
+--         -- / Заменяем все русские первые буквы после пробела на заглавные
+--         for k, v in pairs(utf8_lc_uc) do
+--             text = string.Replace(text, ' ' .. k, ' ' .. v)
+--         end
+--     else
+--         -- Lowering the whole text
+--         text = ' ' .. string.lower(text)
+--     end
+
+--     np(text)
+
+--     -- We're changing all english first letters to uppercase / Меняем все то же самое, только в инглише
+--     local output = text:gsub("(%l)(%w*)", function(a, b) return string.upper(a) .. b end)
+
+--     -- Removing first space, added by gsub / Обрезаем пробел вначале, добавленный нами
+--     output = string.sub(output, 2)
+
+--     return output
+-- end
+
+-- np(Capitalize(self, 'hello world'))
+-- np(Capitalize(self,'привет мир'))
 
 --- Makes string first letter capitalized
 -- @param text string
 -- @return new string
-function Strings:CapitalizeFirst(text)
+function CapitalizeFirst(self, text)
     text = '?@#$' .. text
 
     -- Заменяем первую русскую букву на заглавную
@@ -277,14 +301,14 @@ end
 ---@param text string
 ---@return formatted text
 -- пробел оставляет
-function Strings:RemovePunctuationMarks(text)
+function RemovePunctuationMarks(self, text)
     return string.gsub(text, '%p', '')
 end
 
 ---Removes rus symbols
 ---@param text string
 ---@return formatted text
-function Strings:RemoveRussianSymbols(text)
+function RemoveRussianSymbols(self, text)
     for k, v in pairs(utf8_uc_lc) do
         text = string.Replace(text, k, '')
         text = string.Replace(text, v, '')
@@ -297,42 +321,42 @@ end
 ---Gets file name from string
 ---@param str string
 ---@return formatted text
-function Strings:GetFileName(str)
+function GetFileName(self, str)
     return str:match("^.+/(.+)%.")
 end
 
 ---Gets file name and extention from string
 ---@param str string
 ---@return formatted text
-function Strings:GetFileNameExt(str)
+function GetFileNameExt(self, str)
     return str:match("^.+/(.+)$")
 end
 
 ---Gets file extention from string
 ---@param str string
 ---@return formatted text
-function Strings:GetFileExt(str)
+function GetFileExt(self, str)
     return str:match("%.(.+)$")
 end
 
 ---Gets file path from string
 ---@param str string
 ---@return formatted text
-function Strings:GetFilePath(str)
+function GetFilePath(self, str)
     return str:match("^(.+)/") .. '/'
 end
 
 ---Array to json
 ---@param arr table
 ---@return string text
-function Strings:ToJson(arr)
+function ToJson(self, arr)
     return util.TableToJSON(arr)
 end
 
 ---Array from json
 ---@param str string
 ---@return table text
-function Strings:FromJson(str)
+function FromJson(self, str)
     return util.JSONToTable(str)
 end
 
@@ -341,7 +365,7 @@ local sqlWords = {'delete', 'drop', 'create', 'update', 'set', 'insert', 'select
 ---Removes SQL from string
 ---@param str string
 ---@return string formatted
-function Strings:RemoveSQL(str)
+function RemoveSQL(self, str)
     for _, bad in pairs(sqlWords) do
         str = string.Replace(str, bad .. ' ', '')
         str = string.Replace(str, ' ' .. bad .. ' ', '')
@@ -355,12 +379,10 @@ end
 ---Is String Has SQL code
 ---@param str string
 ---@return boolean
-function Strings:HasSQL(str)
+function HasSQL(self, str)
     local strLow = string.lower(str)
 
     for _, bad in pairs(sqlWords) do
         if tobool(string.find(strLow, ' ' .. bad)) or tobool(string.find(strLow, bad .. ' ')) or tobool(string.find(strLow, ' ' .. bad .. ' ')) or tobool(string.find(strLow, ';')) then return true end
     end
 end
-
-return Strings

@@ -3,11 +3,11 @@ local GetConVar = GetConVar
 local cam = cam
 local LocalPlayer = LocalPlayer
 local Angle = Angle
-local D = CW:Lib('draw')
-local Colors = CWGUI.Colors
+local D = nlitLibs:Lib('draw')
+local c = nlitColors
 local lineSize = 50
 local addLinesNum = 5 / 2
-local Clr = Colors:Yellow()
+local Clr = c:Yellow()
 
 hook.Add('PostDrawOpaqueRenderables', 'CW Debug Helper', function()
     if not GetConVar('developer'):GetBool() then return end

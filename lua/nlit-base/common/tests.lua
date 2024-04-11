@@ -7,7 +7,7 @@ local testString = '[TEST FAILED]: '
 
 --- Asserts that two values are equal
 function assertIsEqual(a, b)
-    assert(a == b, testString.. ' Expected ' .. tostring(a) .. ' but got ' .. tostring(b))
+    assert(a == b, testString.. ' Expected ' .. tostring(b) .. ' but got ' .. tostring(a))
 end
 
 --- Asserts that the condition is false

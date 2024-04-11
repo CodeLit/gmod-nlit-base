@@ -1,1 +1,1 @@
-nlit:AddAllInFolder('nlit-langs')
+nlit.AddAllInFolder('nlit-langs')
