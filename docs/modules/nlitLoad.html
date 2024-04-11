@@ -39,9 +39,9 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
-  <li><strong>nlit</strong></li>
+  <li><a href="../modules/nlit.html">nlit</a></li>
   <li><a href="../modules/nlitLibs.html">nlitLibs</a></li>
-  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
+  <li><strong>nlitLoad</strong></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
   <li><a href="../modules/nlitLang.html">nlitLang</a></li>
@@ -55,17 +55,26 @@
 
 <div id="content">
 
-<h1>Module <code>nlit</code></h1>
-<p>Main global module of Nlit&rsquo;s addons</p>
-<p>
-</p>
+<h1>Module <code>nlitLoad</code></h1>
+<p>Global shared module.</p>
+<p> Allows run code on start, and reload it on save</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local load = nlitLoad
+ load:EnsureLoad(&apos;MyHook&apos;,0,function() print(&apos;Hello&apos;) end)
+</pre>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#AddAllInFolder">AddAllInFolder (folderpath, bDontinclude)</a></td>
-	<td class="summary">AutoExecuter and files adder.</td>
+	<td class="name" nowrap><a href="#EnsureLoad">EnsureLoad (hookName, loadTime, doCode)</a></td>
+	<td class="summary">Load code after entities was initialized.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#WhenGMLoaded">WhenGMLoaded (hookName, loadTime, doCode)</a></td>
+	<td class="summary">Load code after gamemode was initialized.</td>
 	</tr>
 </table>
 
@@ -77,32 +86,56 @@
 
     <dl class="function">
     <dt>
-    <a name = "AddAllInFolder"></a>
-    <strong>AddAllInFolder (folderpath, bDontinclude)</strong>
+    <a name = "EnsureLoad"></a>
+    <strong>EnsureLoad (hookName, loadTime, doCode)</strong>
     </dt>
     <dd>
-    AutoExecuter and files adder.  Adds folder files on server or client, depends of file extention. Example: file_cl.lua will be added to client, and file_sv.lua will be added to server, file.lua will be added to both. file_dis.lua will disable adding.
+    Load code after entities was initialized.  Global function.
+ Former deprecated name is DefinetlyLoad
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">folderpath</span>
-         string
+        <li><span class="parameter">hookName</span>
+         string unique name for future removal
         </li>
-        <li><span class="parameter">bDontinclude</span>
-         boolean Dont include files in folders
+        <li><span class="parameter">loadTime</span>
+         number [optional] &ndash; delay for loading code
+        </li>
+        <li><span class="parameter">doCode</span>
+         function
         </li>
     </ul>
 
 
 
 
-    <h3>Usage:</h3>
+
+</dd>
+    <dt>
+    <a name = "WhenGMLoaded"></a>
+    <strong>WhenGMLoaded (hookName, loadTime, doCode)</strong>
+    </dt>
+    <dd>
+    Load code after gamemode was initialized.  Global function.
+
+
+    <h3>Parameters:</h3>
     <ul>
-        <pre class="example">nlit:<span class="function-name">AddAllInFolder</span>(<span class="string">'my-folder-in-lua-directory'</span>)
-<span class="comment">-- true for add to client scripts, but not execute the code
-</span>nlit:<span class="function-name">AddAllInFolder</span>(<span class="string">'my-code/subfolder'</span>,<span class="keyword">true</span>)</pre>
+        <li><span class="parameter">hookName</span>
+         string unique name for future removal
+        </li>
+        <li><span class="parameter">loadTime</span>
+         number [optional] &ndash; delay for loading code
+        </li>
+        <li><span class="parameter">doCode</span>
+         function
+        </li>
     </ul>
+
+
+
+
 
 </dd>
 </dl>
