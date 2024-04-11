@@ -22,107 +22,107 @@ function Light(a)
 end
 
 --- Black
-function Colors:Black(a)
+function Black(a)
     return Color(0, 0, 0, a)
 end
 
 --- Dark
-function Colors:Dark(a)
+function Dark(a)
     return self:Black(a)
 end
 
 --- Grey
 -- @param a transparency
 -- @param n amount of grey
-function Colors:Grey(a, n)
+function Grey(a, n)
     return n and Color(n, n, n, a) or Color(100, 100, 100, a)
 end
 
 --- Red
-function Colors:Red(a)
+function Red(a)
     return Color(255, 0, 0, a)
 end
 
 --- DarkRed
-function Colors:DarkRed(a)
+function DarkRed(a)
     return Color(80, 0, 0, a)
 end
 
 --- Green
-function Colors:Green(a)
+function Green(a)
     return Color(0, 255, 0, a)
 end
 
 --- DarkGreen
-function Colors:DarkGreen(a)
+function DarkGreen(a)
     return Color(0, 80, 0, a)
 end
 
 --- DarkBlue
-function Colors:DarkBlue(a)
+function DarkBlue(a)
     return Color(0, 0, 255, a)
 end
 
 --- Yellow
-function Colors:Yellow(a)
+function Yellow(a)
     return Color(255, 255, 0, a)
 end
 
 --- DarkYellow
-function Colors:DarkYellow(a)
+function DarkYellow(a)
     return Color(100, 100, 0, a)
 end
 
 --- Orange
-function Colors:Orange(a)
+function Orange(a)
     return Color(255, 128, 0, a)
 end
 
 --- Pink
-function Colors:Pink(a)
+function Pink(a)
     return Color(255, 0, 255, a)
 end
 
 --- Blue
-function Colors:Blue(a)
+function Blue(a)
     return Color(0, 255, 255, a)
 end
 
 --- Tint
-function Colors:Tint(tint, a)
+function Tint(tint, a)
     return Color(tint, tint, tint, a)
 end
 
 --- Police color. Depends of current time.
-function Colors:Police(a)
+function Police(a)
     local sin = (math.sin(CurTime() * 7) + 1) / 2 * 255
 
     return Color(255 - sin, 0, sin, a)
 end
 
 --- LightTheme color
-function Colors:LightTheme()
+function LightTheme()
     return Color(73, 20, 138, 240)
 end
 
 --- DarkTheme color
-function Colors:DarkTheme()
+function DarkTheme()
     return self:Tint(50, 240)
 end
 
 --- LightThemeText color
-function Colors:LightThemeText()
+function LightThemeText()
     return self:White(230)
 end
 
 --- DarkThemeText color
-function Colors:DarkThemeText()
+function DarkThemeText()
     return self:White(230)
 end
 
 ---Is currently used LightTheme.
 ---@return boolean
-function Colors:IsLightTheme(bReverse)
+function IsLightTheme(bReverse)
     local bool = tobool(CWCfg:Get(CWCfg.Name, 'Light theme'))
 
     return bReverse and not bool or bool
@@ -134,7 +134,7 @@ end
 -- end
 -- HUD.Color = nil
 --- Theme color
-function Colors:Theme(bReverse)
+function Theme(bReverse)
     local lt = self:IsLightTheme(bReverse)
 
     if NHUD and NHUD.Color then
@@ -149,7 +149,7 @@ function Colors:Theme(bReverse)
 end
 
 --- ThemeInside color
-function Colors:ThemeInside(bReverse)
+function ThemeInside(bReverse)
     local c = self:Theme()
     local addCol = 7
     addCol = self:IsLightTheme() and addCol or (addCol * -1)
@@ -158,6 +158,6 @@ function Colors:ThemeInside(bReverse)
 end
 
 --- ThemeText color
-function Colors:ThemeText(bReverse)
+function ThemeText(bReverse)
     return self:IsLightTheme(bReverse) and self:LightThemeText() or self:DarkThemeText()
 end
