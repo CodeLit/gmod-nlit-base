@@ -4,9 +4,11 @@ local pairs = pairs
 local string = string
 local include = include
 local print = print
----Main global module of cyberwolf's addons
----@module CW
-CW = {}
+
+---Main global module of Nlit's addons
+---@module nlit
+module('nlit', package.seeall)
+
 AddCSLuaFile()
 local DebugCL = false
 local DebugSV = false
@@ -14,11 +16,11 @@ local DebugSV = false
 ---AutoExecuter and files adder. Adds folder files on server or client, depends of file extention. Example: file_cl.lua will be added to client, and file_sv.lua will be added to server, file.lua will be added to both. file_dis.lua will disable adding.
 ---@param folderpath string
 ---@param bDontinclude boolean Dont include files in folders
----@usage CW:AddAllInFolder('my-folder-in-lua-directory')
+---@usage nlit:AddAllInFolder('my-folder-in-lua-directory')
 ---
 --- -- true for add to client scripts, but not execute the code
---- CW:AddAllInFolder('my-code/subfolder',true)
-function CW:AddAllInFolder(folderpath, bDontinclude)
+--- nlit:AddAllInFolder('my-code/subfolder',true)
+function AddAllInFolder(folderpath, bDontinclude)
     local files, directories = file.Find(folderpath .. '/*', 'LUA')
 
     for _, filename in pairs(files) do
@@ -65,4 +67,4 @@ function CW:AddAllInFolder(folderpath, bDontinclude)
     end
 end
 
-CW:AddAllInFolder('cyber-base')
+AddAllInFolder('cyber-base')

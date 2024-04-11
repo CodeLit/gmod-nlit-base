@@ -1,8 +1,2 @@
-# Editors cofig
-*.code-workspace
-
-# Packaged files
 *.gma
-
-# External
 ldoc
