@@ -1,22 +1,23 @@
+--- @module nlitColors
+-- The module that contains colors. Client only.
+-- @usage local c = nlitColors
+-- c:White()
+-- c:Red(<trasparency from 0 to 255>)
+-- c:Yellow(100)
+module('nlitColors', package.seeall)
+
 local Color = Color
 local math = math
 local CurTime = CurTime
 local tobool = tobool
---- The module that contains colors. Client only.
--- @module Colors
--- @usage local colors = CWGUI.Colors
--- colors:White()
--- colors:Red(<trasparency from 0 to 255>)
--- colors:Yellow(100)
-local Colors = {}
 
 --- White
-function Colors:White(a)
+function White(a)
     return Color(255, 255, 255, a)
 end
 
 --- Light
-function Colors:Light(a)
+function Light(a)
     return self:White(a)
 end
 
@@ -160,5 +161,3 @@ end
 function Colors:ThemeText(bReverse)
     return self:IsLightTheme(bReverse) and self:LightThemeText() or self:DarkThemeText()
 end
-
-return Colors
