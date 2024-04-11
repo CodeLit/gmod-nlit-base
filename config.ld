@@ -1,10 +1,10 @@
 project = "Nlit's Base"
 title = "Nlit's Base Framework documentation"
-description = "This is base contains a lot of useful functions for easy development of UI, working with database, and other things that programmers is usually do"
+description = "this framework contains a lot of useful functions for easy development of UI, working with database, and other things that programmers is usually do"
 format = "discount"
 backtick_references = false
 file = "lua"
-dir = "ldoc"
+dir = "docs"
 readme = "README.md"
 style = "!new"
 kind_names = {

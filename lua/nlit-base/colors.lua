@@ -1,5 +1,5 @@
---- @module nlitColors
--- The module that contains colors. Client only.
+--- The module that contains colors. Client only.
+-- @module nlitColors
 -- @usage local c = nlitColors
 -- c:White()
 -- c:Red(<trasparency from 0 to 255>)
@@ -12,23 +12,27 @@ local CurTime = CurTime
 local tobool = tobool
 
 --- White
+-- @param a transparency
 function White(a)
     return Color(255, 255, 255, a)
 end
 
 --- Light
+-- @param a transparency
 function Light(a)
-    return self:White(a)
+    return White(a)
 end
 
 --- Black
+-- @param a transparency
 function Black(a)
     return Color(0, 0, 0, a)
 end
 
 --- Dark
+-- @param a transparency
 function Dark(a)
-    return self:Black(a)
+    return Black(a)
 end
 
 --- Grey
@@ -39,61 +43,74 @@ function Grey(a, n)
 end
 
 --- Red
+-- @param a transparency
 function Red(a)
     return Color(255, 0, 0, a)
 end
 
 --- DarkRed
+-- @param a transparency
 function DarkRed(a)
     return Color(80, 0, 0, a)
 end
 
 --- Green
+-- @param a transparency
 function Green(a)
     return Color(0, 255, 0, a)
 end
 
 --- DarkGreen
+-- @param a transparency
 function DarkGreen(a)
     return Color(0, 80, 0, a)
 end
 
 --- DarkBlue
+-- @param a transparency
 function DarkBlue(a)
     return Color(0, 0, 255, a)
 end
 
 --- Yellow
+-- @param a transparency
 function Yellow(a)
     return Color(255, 255, 0, a)
 end
 
 --- DarkYellow
+-- @param a transparency
 function DarkYellow(a)
     return Color(100, 100, 0, a)
 end
 
 --- Orange
+-- @param a transparency
 function Orange(a)
     return Color(255, 128, 0, a)
 end
 
 --- Pink
+-- @param a transparency
 function Pink(a)
     return Color(255, 0, 255, a)
 end
 
 --- Blue
+-- @param a transparency
 function Blue(a)
     return Color(0, 255, 255, a)
 end
 
 --- Tint
+-- @param a transparency
+-- @param tint color
 function Tint(tint, a)
     return Color(tint, tint, tint, a)
 end
 
 --- Police color. Depends of current time.
+-- @param a transparency
 function Police(a)
     local sin = (math.sin(CurTime() * 7) + 1) / 2 * 255
 
@@ -107,17 +124,17 @@ end
 
 --- DarkTheme color
 function DarkTheme()
-    return self:Tint(50, 240)
+    return Tint(50, 240)
 end
 
 --- LightThemeText color
 function LightThemeText()
-    return self:White(230)
+    return White(230)
 end
 
 --- DarkThemeText color
 function DarkThemeText()
-    return self:White(230)
+    return White(230)
 end
 
 ---Is currently used LightTheme.
@@ -133,9 +150,11 @@ end
 -- 	return Color(255, 255, 0, 100)
 -- end
 -- HUD.Color = nil
+
 --- Theme color
+-- @param bReverse dynamic flag - true if you want to reverse theme 
 function Theme(bReverse)
-    local lt = self:IsLightTheme(bReverse)
+    local lt = IsLightTheme(bReverse)
 
     if NHUD and NHUD.Color then
         local hudc = NHUD:Color()
@@ -145,19 +164,21 @@ function Theme(bReverse)
         return hudc
     end
 
-    return lt and self:LightTheme() or self:DarkTheme()
+    return lt and LightTheme() or DarkTheme()
 end
 
 --- ThemeInside color
+-- @param bReverse dynamic flag - true if you want to reverse theme
 function ThemeInside(bReverse)
-    local c = self:Theme()
+    local c = Theme()
     local addCol = 7
-    addCol = self:IsLightTheme() and addCol or (addCol * -1)
+    addCol = IsLightTheme() and addCol or (addCol * -1)
 
     return Color(c.r - addCol, c.g - addCol, c.b - addCol, c.a)
 end
 
 --- ThemeText color
+-- @param bReverse dynamic flag - true if you want to reverse theme
 function ThemeText(bReverse)
-    return self:IsLightTheme(bReverse) and self:LightThemeText() or self:DarkThemeText()
+    return IsLightTheme(bReverse) and LightThemeText() or DarkThemeText()
 end
