@@ -1,6 +1,8 @@
 # Nlit's Base Framework
 
-Contains a base functions for future garry's mod addons. Free to use, free to contribute
+Contains a base functionality for Garry's mod game addons.
+
+Free to use, free to contribute!
 
 ## Contains
 
@@ -16,10 +18,13 @@ Contains a base functions for future garry's mod addons. Free to use, free to co
 - Table functions
 - Gamemodes Compatibilities
 
-And more!
+And more! 
 
 ## Links
 
 [Documentation](http://codelit.github.io/gmod-nlit-base/)
 
 [Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=2394292123)
+
+## Additional information
+This framework is works great with [Helix](https://gethelix.co/)

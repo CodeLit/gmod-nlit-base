@@ -1,10 +1,12 @@
+local load = nlitLoad
+
 local WhenGMLoaded = WhenGMLoaded
 local surface = surface
 local ScrW = ScrW
 local ScrH = ScrH
 local nguiRealFont = 'Open Sans' -- Use the font-name which is shown to you by your operating system Font Viewer, not the file name
 
-WhenGMLoaded('NBase Fonts', function()
+load.WhenGMLoaded('NBase Fonts', function()
     nguiRealFont = ix and ix.config.Get('genericFont') or nguiRealFont
 end)
 

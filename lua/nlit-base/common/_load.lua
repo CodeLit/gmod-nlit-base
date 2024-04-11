@@ -1,15 +1,19 @@
+--- Global shared module. Allows run code on start, and reload it on save
+-- @module nlitLoad
+-- @usage local load = nlitLoad
+-- load:EnsureLoad('MyHook',0,function() print('Hello') end)
+module('nlitLoad', package.seeall)
+
 local isfunction = isfunction
 local timer = timer
 local hook = hook
 
---- Global shared module. Allows run code on start, and reload it on save
--- / Позволяет запускать код на старте, перезапускать его при сохранении
--- @module LoadCode
----Load code after entities was initialized. Global function.
----@param hookName string unique name for future removal
----@param loadTime number [optional] - delay for loading code
----@param doCode function
-function DefinetlyLoad(hookName, loadTime, doCode)
+--- Load code after entities was initialized. Global function.
+-- Former deprecated name is DefinetlyLoad
+-- @param hookName string unique name for future removal
+-- @param loadTime number [optional] - delay for loading code
+-- @param doCode function
+function EnsureLoad(hookName, loadTime, doCode)
     if isfunction(loadTime) then
         doCode = loadTime
         loadTime = 0
@@ -23,10 +27,10 @@ function DefinetlyLoad(hookName, loadTime, doCode)
     hook.Add('InitPostEntity', hookName, Run)
 end
 
----Load code after gamemode was initialized. Global function.
----@param hookName string unique name for future removal
----@param loadTime number [optional] - delay for loading code
----@param doCode function
+--- Load code after gamemode was initialized. Global function.
+-- @param hookName string unique name for future removal
+-- @param loadTime number [optional] - delay for loading code
+-- @param doCode function
 function WhenGMLoaded(hookName, loadTime, doCode)
     if isfunction(loadTime) then
         doCode = loadTime
@@ -54,6 +58,6 @@ function WhenGMLoaded(hookName, loadTime, doCode)
             end
         end)
     else
-        hook.Add('PostGamemodeLoaded', hookName, Run) -- НЕ РАБОТАЕТ НА КЛИЕНТЕ
+        hook.Add('PostGamemodeLoaded', hookName, Run) -- DOESN'T WORK ON THE CLIENT
     end
 end
