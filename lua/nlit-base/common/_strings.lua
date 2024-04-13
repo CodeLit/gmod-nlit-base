@@ -12,8 +12,7 @@ local math = math
 local os = os
 local tobool = tobool
 local util = util
-local Strings = {}
-local CWUtf8 = nlitLib:Lib('utf8')
+local nlitUtf8 = nlitLib:Lib('utf8')
 --- Puts text In Quotes for SQL code
 -- Changing single quotes, prehaps double quoutes using by json
 -- Закрывает текст в кавычки для SQL
@@ -21,7 +20,7 @@ local CWUtf8 = nlitLib:Lib('utf8')
 -- @param str the string
 -- @return string with quotes
 function IQ(self, str)
-    return str and ("'" .. str .. "'") or str
+    return str and ('\'' .. str .. '\'') or str
 end
 
 --- Takes substring from string using pattern
@@ -42,7 +41,7 @@ end
 
 -- TO DO: НАПИСАТЬ ФУНКЦИЮ, ИСПОЛЬЗОВАВ СТАРЫЙ МАТ ФИЛЬТР
 -- function NStr:Find(str)
--- 	return str:match("^.+/(.+)%.")
+-- 	return str:match('^.+/(.+)%.')
 -- end
 -- print(string.find('ssssПриветики !!!','[а-Я%d]+'))
 --- Steamid to Short ID
@@ -149,7 +148,7 @@ end
 -- @param text string
 -- @return bool
 function OnlyContainsLetters(self, text)
-    for w in string.gmatch(text, "[%p%s%c%d]") do
+    for w in string.gmatch(text, '[%p%s%c%d]') do
         return false
     end
     return true
@@ -159,7 +158,7 @@ end
 -- @param text string
 -- @return bool
 function OnlyContainsLettersAndNumbers(self, text)
-    for w in string.gmatch(text, "[%p%s%c]") do
+    for w in string.gmatch(text, '[%p%s%c]') do
         return false
     end
     return true
@@ -173,7 +172,7 @@ function OnlyContainsAllowed(self, text)
         text = string.Replace(text, v, '')
     end
 
-    for w in string.gmatch(text, "[%p%s%c]") do
+    for w in string.gmatch(text, '[%p%s%c]') do
         return false
     end
     return true
@@ -190,7 +189,7 @@ function OnlyContainsNumbers(self, text)
 
     if dotsNum > 1 then return false end
     text = string.Replace(text, '.', '')
-    for w in string.gmatch(text, "[%D]") do
+    for w in string.gmatch(text, '[%D]') do
         return false
     end
     return true
@@ -200,14 +199,14 @@ end
 -- @param text string
 -- @return new string
 function Lower(self, text)
-    return CWUtf8.lower(text)
+    return nlitUtf8.lower(text)
 end
 
 --- Makes string letters uppercase
 -- @param text string
 -- @return new string
 function Upper(self, text)
-    return CWUtf8.upper(text)
+    return nlitUtf8.upper(text)
 end
 
 --- Makes string letters capitalized
@@ -217,7 +216,7 @@ end
 -- function Capitalize(self, text)
 --     if HasRussianSymbols(self, text) then
 --         -- Lowering the whole text
---         text = ' ' .. CWUtf8.lower(text)
+--         text = ' ' .. nlitUtf8.lower(text)
 --         -- We're changing all russian first letters after space to uppercase
 --         -- / Заменяем все русские первые буквы после пробела на заглавные
 --         for k, v in pairs(utf8_lc_uc) do
@@ -229,7 +228,7 @@ end
 --     end
 --     np(text)
 --     -- We're changing all english first letters to uppercase / Меняем все то же самое, только в инглише
---     local output = text:gsub("(%l)(%w*)", function(a, b) return string.upper(a) .. b end)
+--     local output = text:gsub('(%l)(%w*)', function(a, b) return string.upper(a) .. b end)
 --     -- Removing first space, added by gsub / Обрезаем пробел вначале, добавленный нами
 --     output = string.sub(output, 2)
 --     return output
@@ -242,7 +241,7 @@ end
 function CapitalizeFirst(self, text)
     text = '?@#$' .. text
     -- Заменяем первую русскую букву на заглавную
-    for k, v in pairs(Strings.LowerUpperKV) do
+    for k, v in pairs(self.LowerUpperKV) do
         text = string.Replace(text, '?@#$' .. k, '?@#$' .. v)
     end
 
@@ -274,28 +273,28 @@ end
 ---@param str string
 ---@return formatted text
 function GetFileName(self, str)
-    return str:match("^.+/(.+)%.")
+    return str:match('^.+/(.+)%.')
 end
 
 ---Gets file name and extention from string
 ---@param str string
 ---@return formatted text
 function GetFileNameExt(self, str)
-    return str:match("^.+/(.+)$")
+    return str:match('^.+/(.+)$')
 end
 
 ---Gets file extention from string
 ---@param str string
 ---@return formatted text
 function GetFileExt(self, str)
-    return str:match("%.(.+)$")
+    return str:match('%.(.+)$')
 end
 
 ---Gets file path from string
 ---@param str string
 ---@return formatted text
 function GetFilePath(self, str)
-    return str:match("^(.+)/") .. '/'
+    return str:match('^(.+)/') .. '/'
 end
 
 ---Array to json

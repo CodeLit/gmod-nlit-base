@@ -53,4 +53,4 @@ local function Translator(self, text, langCode)
     return text
 end
 
-nlit.AddAllInFolder('nlit-langs')
+nlit:AddAllInFolder('nlit-langs')

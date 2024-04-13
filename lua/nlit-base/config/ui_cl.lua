@@ -18,7 +18,7 @@ local addons_short_name = 'nlit'
 local addons_website = 'https://neolife.tk/ru' -- Английский нужно добавлять отдельно
 local last_selected_category
 local fr
-Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber/logo256.png'), 50, function(invalidFrame)
+Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('nlit/logo256.png'), 50, function(invalidFrame)
     local function add_save_btn(inp_pnl, addon_name)
         local save = inp_pnl:Add(Buttons:Accept(l('Save changes')))
         save:Dock(BOTTOM)
@@ -40,8 +40,8 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
 
     invalidFrame:Close()
     if IsValid(fr) then return end
-    fr = Frames:Create(l("CyberWolf's Addons"))
-    fr:SetIcon(Icons:GetPath('cyber/wolf-logo.png'))
+    fr = Frames:Create(l("Nlit's Addons"))
+    fr:SetIcon(Icons:GetPath('nlit/wolf-logo.png'))
     local leftP = fr:Add(Panels:Create())
     leftP:SetWide(fr:GetWide() / 4.5)
     leftP:Dock(LEFT)

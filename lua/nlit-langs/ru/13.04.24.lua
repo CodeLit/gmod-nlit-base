@@ -23,7 +23,7 @@ lang:AddTranslation('ru', {
     ['Select addon for setup'] = 'Выберите аддон для настройки',
     ['Get addons'] = 'Получить аддоны',
     Addons = 'Aддоны',
-    ["CyberWolf's Addons"] = "Аддоны CyberWolf'a",
+    ["Nlit's Addons"] = "Аддоны Nlit'a",
     ['For server owners'] = 'Создателям серверов',
     Error = 'Ошибка',
 })

@@ -5,16 +5,10 @@
 module('nlitLib', package.seeall)
 local tobool = tobool
 local string = string
-local PrintError = PrintError
 local include = include
 local pairs = pairs
 local file = file
 local nlit = nlit
-local LibFinder = {}
-local function IsStringContains(str, text)
-    return tobool(string.find(str, text))
-end
-
 local pathToLibs = 'nlit-libs'
 --- Using of Nlit lib. Basic fucntion.
 -- @param libName string
@@ -27,15 +21,19 @@ local pathToLibs = 'nlit-libs'
 function Lib(self, libName)
     local found = FindLibPathInFolder(self, pathToLibs, string.lower(libName))
     if not found then
-        PrintError('[Nlit\'s Framework] Library [' .. libName .. '] is not found!')
+        print('[Nlit\'s Framework][ERROR] Library [' .. libName .. '] is not found!')
         return
     end
     return include(found)
 end
 
+local function StringContains(str, text)
+    return tobool(string.find(str, text))
+end
+
 function FindLuaLibInFiles(self, files, lib)
     for _, f in pairs(files) do
-        if IsStringContains(f, '.lua') and IsStringContains(f, lib) then return f end
+        if StringContains(f, '.lua') and StringContains(f, lib) then return f end
     end
 end
 
@@ -53,4 +51,4 @@ function FindLibPathInFolder(self, path, lib)
     return self:LookupForLib(folders, path, lib)
 end
 
-nlit.AddAllInFolder(pathToLibs, true)
+nlit:AddAllInFolder(pathToLibs, true)

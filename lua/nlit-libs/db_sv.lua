@@ -12,7 +12,7 @@ local print = print
 local DB = {}
 local NStr = nlitString
 local dbg_prefix = '[CWDB]'
-local CWUtf8 = nlitLib:Lib('utf8')
+local nlitUtf8 = nlitLib:Lib('utf8')
 ---Generates SQL string from table. Input must be in counted non-associative array.
 ---@param tbl table non-associative
 ---@return generated string
@@ -54,7 +54,7 @@ end
 function DB:GenSmartStr(str)
     -- Explode by words
     local arr = {}
-    for word in CWUtf8.gmatch(str, '[%wА-я%s:_-]+') do
+    for word in nlitUtf8.gmatch(str, '[%wА-я%s:_-]+') do
         word = string.Trim(word)
         table.insert(arr, word)
     end
@@ -62,7 +62,7 @@ function DB:GenSmartStr(str)
     arr[1] = '`' .. arr[1] .. '`'
     arr[2] = "'" .. arr[2] .. "'"
     -- Symbol between to middle of array
-    local connector = CWUtf8.match(str, '[^%wА-я%s:_-]')
+    local connector = nlitUtf8.match(str, '[^%wА-я%s:_-]')
     table.insert(arr, 2, connector)
     local output = ''
     for _, v in pairs(arr) do

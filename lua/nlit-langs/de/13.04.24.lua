@@ -23,7 +23,7 @@ lang:AddTranslation('de', {
     ['Select addon for setup'] = 'Addon zur Einrichtung auswählen',
     ['Get addons'] = 'Addons erhalten',
     Addons = 'Addons',
-    ["CyberWolf's Addons"] = "CyberWolf's Addons",
+    ["Nlit's Addons"] = "Nlit's Addons",
     ['For server owners'] = 'Für Serverbesitzer',
     Error = 'Fehler',
 })
