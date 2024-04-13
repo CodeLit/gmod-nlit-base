@@ -2,15 +2,15 @@ local pairs = pairs
 local GNet = GNet
 local LocalPlayer = LocalPlayer
 local IsValid = IsValid
-local CWCfg = CWCfg
+local nlitCfg = nlitCfg
 local table = table
-local Buttons = CWGUI.Buttons
-local Frames = CWGUI.Frames
-local Icons = CWGUI.Icons
-local Inputs = CWGUI.Inputs
-local Panels = CWGUI.Panels
-local TblLsts = CWGUI.Lists
-local Text = CWGUI.Text
+local Buttons = NGUI.Buttons
+local Frames = NGUI.Frames
+local Icons = NGUI.Icons
+local Inputs = NGUI.Inputs
+local Panels = NGUI.Panels
+local TblLsts = NGUI.Lists
+local Text = NGUI.Text
 local CWStr = nlitString
 local HTML = CW:Lib('html')
 local l = nlitLang
@@ -29,7 +29,7 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
                 inputsData[inp.option] = inp:GetInputValue()
             end
 
-            local pkt = GNet.Packet(CWCfg.NetStr)
+            local pkt = GNet.Packet(nlitCfg.NetStr)
             pkt:WriteUInt(1, GNet.CalculateRequiredBits(100))
             pkt:WriteString(addon_name)
             pkt:WriteString(CWStr:ToJson(inputsData))
@@ -65,7 +65,7 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
             name = l('Addons settings'),
             icon = 'web/038-controls.png',
             access = function()
-                if not CWCfg.CheckAccess(LocalPlayer()) then
+                if not nlitCfg.CheckAccess(LocalPlayer()) then
                     LocalPlayer():Notify(l('You have no access rights to addons configuration') .. '!')
                     return false
                 end
@@ -73,8 +73,8 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
             end,
             open = function(cpnl)
                 local addons = {}
-                for k, _ in pairs(CWCfg.svTable or {}) do
-                    if k == CWCfg.Name then continue end
+                for k, _ in pairs(nlitCfg.svTable or {}) do
+                    if k == nlitCfg.Name then continue end
                     table.insert(addons, k)
                 end
 
@@ -95,7 +95,7 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
 
                 local function SelectAddon(addon)
                     addon = addon or addons[1]
-                    local addonData = CWCfg.svTable[addon]
+                    local addonData = nlitCfg.svTable[addon]
                     local mainP = IsValid(cpnl.mainP) and cpnl.mainP or cpnl:Add(Panels:Create())
                     mainP.NoOutline = true
                     mainP:Clear()
@@ -103,7 +103,7 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
                     cpnl.mainP = mainP
                     local lst = mainP:Add(Inputs:Fields(addonData))
                     cpnl.lst = lst
-                    CWCfg.selectedAddon = addon
+                    nlitCfg.selectedAddon = addon
                 end
 
                 local topLabel = cpnl:Add(Text:Create(l('Select addon for setup') .. ':'))
@@ -112,18 +112,18 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
                 local variant = cpnl:Add(TblLsts:Variant(addons, function(pnl, i, v) SelectAddon(v) end))
                 variant:Dock(TOP)
                 variant:DockMargin(0, 0, 0, 10)
-                variant:SetValue(CWCfg.selectedAddon or addons[1])
-                SelectAddon(CWCfg.selectedAddon)
-                add_save_btn(cpnl, CWCfg.selectedAddon)
+                variant:SetValue(nlitCfg.selectedAddon or addons[1])
+                SelectAddon(nlitCfg.selectedAddon)
+                add_save_btn(cpnl, nlitCfg.selectedAddon)
             end,
         },
         {
             name = l('Server settings'),
             icon = 'web/040-settings-1.png',
             open = function(cpnl)
-                local svCfgData = CWCfg.svTable[CWCfg.Name]
+                local svCfgData = nlitCfg.svTable[nlitCfg.Name]
                 cpnl.lst = cpnl:Add(Inputs:Fields(svCfgData))
-                add_save_btn(cpnl, CWCfg.Name)
+                add_save_btn(cpnl, nlitCfg.Name)
             end,
         },
         {

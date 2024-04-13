@@ -2,28 +2,28 @@ local util = util
 local tobool = tobool
 local pairs = pairs
 local GNet = GNet
-local CWCfg = CWCfg
+local nlitCfg = nlitCfg
 local hook = hook
 ---Addons Configurator global module
----@module CWCfg
----@usage CWCfg:AddAddon('My Addon')
----CWCfg:Set('My Addon','Print Hello',true,'bool',{category='Basic'})
-CWCfg.ConnectedAddons = CWCfg.ConnectedAddons or {}
+---@module nlitCfg
+---@usage nlitCfg:AddAddon('My Addon')
+---nlitCfg:Set('My Addon','Print Hello',true,'bool',{category='Basic'})
+nlitCfg.ConnectedAddons = nlitCfg.ConnectedAddons or {}
 local DB = CW:Lib('db')
 local CWStr = nlitString
-util.AddNetworkString(CWCfg.NetStr)
+util.AddNetworkString(nlitCfg.NetStr)
 DB:SetTableName('CWConfig')
 DB:CreateDataTable('addon')
 ---Is addon connected. Shared function
 ---@param addonName string
 ---@return bool
-function CWCfg:IsAddonConnected(addonName)
+function nlitCfg:IsAddonConnected(addonName)
     return tobool(self.ConnectedAddons[addonName])
 end
 
 ---Adds addon to configurator. Server function
 ---@param addonName string
-function CWCfg:AddAddon(addonName)
+function nlitCfg:AddAddon(addonName)
     DB:InsertOrIgnore({
         addon = addonName
     })
@@ -34,7 +34,7 @@ end
 ---Sends addon data to the client. Server function
 ---@param addonName string
 ---@param ply player client
-function CWCfg:SendAddon(addonName, ply)
+function nlitCfg:SendAddon(addonName, ply)
     if not self:IsAddonConnected(addonName) then return end
     local data = DB:GetDataWhere({
         addon = addonName
@@ -65,7 +65,7 @@ end
 ---@param inpData table additional data, like {category='Custom Category'}
 ---@see AddAddon
 ---@see Inputs:Fields
-function CWCfg:Set(addonName, key, value, inputType, inpData)
+function nlitCfg:Set(addonName, key, value, inputType, inpData)
     local oldData = DB:GetDataWhere({
         addon = addonName
     })
@@ -103,7 +103,7 @@ end
 ---Returns data of the addon's field. Shared function
 ---@param addonName string
 ---@param key string filed name
-function CWCfg:Get(addonName, key)
+function nlitCfg:Get(addonName, key)
     local oldData = CWStr:FromJson(DB:GetDataWhere({
         addon = addonName
     }))
@@ -116,7 +116,7 @@ end
 ---Removes field of the addon from database. Server function
 ---@param addonName string
 ---@param key string filed name
-function CWCfg:Remove(addonName, key)
+function nlitCfg:Remove(addonName, key)
     local oldData = CWStr:FromJson(DB:GetDataWhere({
         addon = addonName
     }))
@@ -130,29 +130,29 @@ end
 
 ---Removes addon from database. Server function
 ---@param addonName string
-function CWCfg:RemoveAddon(addonName)
+function nlitCfg:RemoveAddon(addonName)
     DB:DeleteWhere({
         addon = addonName
     })
 end
 
-GNet.OnPacketReceive(CWCfg.NetStr, function(pkt)
+GNet.OnPacketReceive(nlitCfg.NetStr, function(pkt)
     local netCmd = pkt:ReadUInt(GNet.CalculateRequiredBits(100))
     -- set cfg data
-    if netCmd == 1 and CWCfg.CheckAccess(pkt.ply) then
+    if netCmd == 1 and nlitCfg.CheckAccess(pkt.ply) then
         local selectedAddon = pkt:ReadString()
         local data = pkt:ReadString()
         data = CWStr:FromJson(data)
         for key, value in pairs(data) do
-            CWCfg:Set(selectedAddon, key, value, _, {
+            nlitCfg:Set(selectedAddon, key, value, _, {
                 force = true
             })
         end
     end
 end)
 
-hook.Add('PlayerInitialSpawn', 'CWCfg Start Sending', function(ply)
+hook.Add('PlayerInitialSpawn', 'nlitCfg Start Sending', function(ply)
     for _, v in pairs(DB:Get()) do
-        CWCfg:SendAddon(v.addon, ply)
+        nlitCfg:SendAddon(v.addon, ply)
     end
 end)

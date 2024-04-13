@@ -6,16 +6,13 @@ local IsValid = IsValid
 local timer = timer
 local pairs = pairs
 local LocalPlayer = LocalPlayer
-
-
 ---Creates GUI Frames
 ---@module Frames
----@usage local Frames = CWGUI.Frames
+---@usage local Frames = NGUI.Frames
 local Frames = {}
-local Buttons = CWGUI.Buttons
-local Inputs = CWGUI.Inputs
+local Buttons = NGUI.Buttons
+local Inputs = NGUI.Inputs
 local ScrW, ScrH = ScrW, ScrH
-
 ---Returns a newly created frame
 ---@param title string
 ---@return frame
@@ -23,7 +20,6 @@ local ScrW, ScrH = ScrW, ScrH
 function Frames:Create(title)
     local fr = self:Unfocused(title)
     fr:MakePopup()
-
     return fr
 end
 
@@ -40,21 +36,12 @@ function Frames:AddBehavior(fr, title)
     fr.btnMinim:SetVisible(false)
     fr.btnMaxim:SetVisible(false)
     fr.btnClose:SetVisible(false)
-
-    local close = fr:Add(Buttons:Decline('X', function()
-        fr:Close()
-    end))
-
+    local close = fr:Add(Buttons:Decline('X', function() fr:Close() end))
     close:SetSize(35, 25)
     close:SetPos(fr:GetWide() - close:GetWide(), 0)
     close:SetFont('N')
-
-    fr.lblTitle.UpdateColours = function(label)
-        label:SetTextStyleColor(CWC:ThemeText())
-    end
-
+    fr.lblTitle.UpdateColours = function(label) label:SetTextStyleColor(CWC:ThemeText()) end
     fr.lblTitle:SetFont('N')
-
     fr.Paint = function(pnl)
         -- Draw the menu background color.
         draw.RoundedBox(6, 0, 0, pnl:GetWide(), pnl:GetTall(), fr.NBackgroundColor or CWC:ThemeInside())
@@ -69,7 +56,6 @@ function Frames:Resize(fr)
 end
 
 CW.OpenedFrames = CW.OpenedFrames or {}
-
 ---Creates an unfocused frame
 ---@param title string
 ---@return frame
@@ -77,15 +63,11 @@ CW.OpenedFrames = CW.OpenedFrames or {}
 function Frames:Unfocused(title)
     local fr = vgui.Create('DFrame')
     table.insert(CW.OpenedFrames, fr)
-
     for index, value in ipairs(CW.OpenedFrames) do
-        if not IsValid(value) then
-            table.remove(CW.OpenedFrames, index)
-        end
+        if not IsValid(value) then table.remove(CW.OpenedFrames, index) end
     end
 
     self:AddBehavior(fr, title)
-
     return fr
 end
 
@@ -103,23 +85,14 @@ function Frames:Input(title, acceptFunc, typeOfInput)
     local inp = fr:Add(Inputs:Create(title, acceptFunc, typeOfInput, fr))
     inp:Dock(FILL)
     fr.mainPanel = inp
-
-    timer.Simple(0, function()
-        inp.editPanel:RequestFocus()
-    end)
-
+    timer.Simple(0, function() inp.editPanel:RequestFocus() end)
     local c = inp.subPanel:Add(Buttons:Accept())
     c:Dock(RIGHT)
     c:SetWide(fr:GetWide() / 4)
-
-    c.DoClick = function()
-        inp.editPanel.OnEnter()
-    end
-
+    c.DoClick = function() inp.editPanel.OnEnter() end
     for _, v in pairs(inp.subPanel:GetChildren()) do
         v:DockMargin(2, 0, 2, 0)
     end
-
     return fr
 end
 
@@ -132,7 +105,6 @@ function Frames:Binder(title, command)
     color.a = 255
     fr.NBackgroundColor = color
     local binder = fr:Add(Buttons:BinderPanel(command))
-
     return fr, binder
 end
 
@@ -147,7 +119,6 @@ function Frames:Rules(title, checkBoxes, acceptFunc)
     local scroll = fr:Add('DScrollPanel')
     scroll:Dock(FILL)
     local chArray = {}
-
     for k, v in pairs(checkBoxes) do
         local p = scroll:Add('DPanel')
         p:SetPaintBackground(true)
@@ -173,14 +144,10 @@ function Frames:Rules(title, checkBoxes, acceptFunc)
     local c = p1:Add(Buttons:Accept())
     c:Dock(RIGHT)
     c:SetWide(150)
-
     c.DoClick = function()
         local checkedStr = ''
-
         for _, v in pairs(chArray) do
-            if v:GetChecked() then
-                checkedStr = checkedStr .. v.rule
-            end
+            if v:GetChecked() then checkedStr = checkedStr .. v.rule end
         end
 
         fr:Close()
@@ -190,7 +157,6 @@ function Frames:Rules(title, checkBoxes, acceptFunc)
     for _, v in pairs(p1:GetChildren()) do
         v:DockMargin(2, 0, 2, 0)
     end
-
     return fr
 end
 
@@ -211,7 +177,6 @@ function Frames:AcceptDialogue(text, textYes, textNo, acceptFunc)
     txt:Dock(FILL)
     txt:SetTextColor(CWC:ThemeText())
     txt:SetFont('N_small')
-
     if LocalPlayer():GetLang() == 'ru' then
         fr:SetTall(#text / 1.5)
     else
@@ -225,15 +190,10 @@ function Frames:AcceptDialogue(text, textYes, textNo, acceptFunc)
     local d = p2:Add(Buttons:Decline(textNo))
     d:Dock(LEFT)
     d:SetWide(fr:GetWide() / 4)
-
-    d.DoClick = function()
-        fr:Close()
-    end
-
+    d.DoClick = function() fr:Close() end
     local c = p2:Add(Buttons:Accept(textYes))
     c:Dock(RIGHT)
     c:SetWide(fr:GetWide() / 4)
-
     c.DoClick = function()
         fr:Close()
         acceptFunc()
@@ -244,7 +204,6 @@ function Frames:AcceptDialogue(text, textYes, textNo, acceptFunc)
     end
 
     fr:SetTall(fr:GetTall() + 50)
-
     return fr
 end
 
@@ -255,9 +214,8 @@ function Frames:List(title)
     local fr = self:Create(title)
     local scroll = fr:Add('DScrollPanel')
     scroll:Dock(FILL)
-    fr.list = scroll:Add(CWGUI.Lists:List())
+    fr.list = scroll:Add(NGUI.Lists:List())
     fr.list:Dock(TOP)
-
     return fr
 end
 
@@ -269,9 +227,7 @@ end
 ---@return any
 function Frames:ManyFields(text, tblFields, acceptFunc)
     local fr = self:Create(text)
-    local tile = fr:Add(CWGUI.Inputs:Fields(tblFields, acceptFunc))
-
+    local tile = fr:Add(NGUI.Inputs:Fields(tblFields, acceptFunc))
     return fr, tile.inputs
 end
-
 return Frames

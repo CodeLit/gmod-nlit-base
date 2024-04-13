@@ -13,7 +13,7 @@ local Icons = CW:Lib('icons')
 local l = nlitLang
 --- Creates GUI Buttons
 -- @module Buttons
--- @usage local Buttons = CWGUI.Buttons
+-- @usage local Buttons = NGUI.Buttons
 local Buttons = {}
 --- Creates a button
 ---@param text string Button text
@@ -83,7 +83,7 @@ function Buttons:AddToCMenu(title, icon, iconSize, func)
         onewindow = true,
         init = function(ico, window)
             window:SetIcon(icon)
-            CWGUI.Frames:AddBehavior(window)
+            NGUI.Frames:AddBehavior(window)
             func(window)
         end,
     })

@@ -75,7 +75,7 @@ end
 ---Gets player 2-char lang code
 ---@return string code
 function PLY:GetLang()
-    return Lang:Format(self:GetInfo('cw_lang'))
+    return Lang:Format(self:GetInfo('nlit_lang'))
 end
 -- np(N:GetOwner():IsShootsFromCarWindow())
 -- -- ИСКАТЬ В ХУКАХ НУЖНЫЙ ВЫЗОВ ХУКА

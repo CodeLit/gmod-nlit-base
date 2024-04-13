@@ -35,7 +35,7 @@ if CLIENT then
     --- Returns local player language. Client function.
     -- @return string
     function GetLocalLang()
-        return self:Format(GetConVar('cw_lang'):GetString())
+        return self:Format(GetConVar('nlit_lang'):GetString())
     end
 end
 

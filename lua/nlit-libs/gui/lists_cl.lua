@@ -7,10 +7,10 @@ local isstring = isstring
 --- Lists is GUI module for list panels
 ---@module Lists
 local Lists = {}
-local Buttons = CWGUI.Buttons
-local Frames = CWGUI.Frames
-local Panels = CWGUI.Panels
-local Inputs = CWGUI.Inputs
+local Buttons = NGUI.Buttons
+local Frames = NGUI.Frames
+local Panels = NGUI.Panels
+local Inputs = NGUI.Inputs
 local CWStr = nlitString
 local l = nlitLang
 ---Variant selector

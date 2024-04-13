@@ -5,7 +5,7 @@ local surface = surface
 local draw = draw
 --- Creates GUI Editable panels
 -- @module Editable
--- @usage local Editable = CWGUI.Editable
+-- @usage local Editable = NGUI.Editable
 local Editable = {}
 local l = nlitLang
 local CWStr = nlitString

@@ -9,12 +9,12 @@ local surface = surface
 local pairs = pairs
 --- Creates GUI Inputs
 --- @module Inputs
---- @usage local Inputs = CWGUI.Inputs
+--- @usage local Inputs = NGUI.Inputs
 local Inputs = {}
-local Panels = CWGUI.Panels
-local Editable = CWGUI.Editable
+local Panels = NGUI.Panels
+local Editable = NGUI.Editable
 local l = nlitLang
-local Lists = CWGUI.Lists
+local Lists = NGUI.Lists
 ---Creates an input panel
 ---@param title string
 ---@param acceptFunc function
@@ -46,7 +46,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
     mainP.subPanel = p2
     local editable
     if typeOfInput == 'table' then
-        editable = p2:Add(CWGUI.Lists:EditableTable(inputValue))
+        editable = p2:Add(NGUI.Lists:EditableTable(inputValue))
         function mainP:GetInputValue()
             return editable.tbl or {}
         end
