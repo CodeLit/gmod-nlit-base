@@ -1,8 +1,8 @@
 --- Translates text
 -- @module nlitLang
--- @usage local l = nlitLang.Translator
+-- @usage local l = nlitLang.l
 -- local text = l('my long story text','ru') -- will translate this text to russian
--- -- translations must be added to folder nlit-langs using CWLang:AddTranslation() function.
+-- -- translations must be added to folder nlit-langs using nlitLang:AddTranslation() function.
 -- @see nlitLang:AddTranslation
 module('nlitLang', package.seeall)
 local pairs = pairs
@@ -43,12 +43,13 @@ end
 -- @param text string
 -- @param langCode string
 -- @return string Translated text
-local function Translator(self, text, langCode)
-    if CLIENT then langCode = nlitLang:GetLocalLang() end
-    local langData = CWLang.List[langCode]
+function l(text, langCode)
+    if CLIENT then langCode = langCode or nlitLang:GetLocalLang() end
+    if not langCode then return text end
+    local langData = nlitLang.List[langCode]
     if langData and langData[text] then return langData[text] end
-    if CWLang.Translate then -- Will redirect to external translator if not found a word
-        return CWLang:Translate(text, langCode)
+    if nlitLang.Translate then -- Will redirect to external translator if not found a word
+        return nlitLang:Translate(text, langCode)
     end
     return text
 end

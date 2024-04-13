@@ -55,16 +55,16 @@ function Resize(self, fr)
     fr:Center()
 end
 
-nlit.OpenedFrames = nlit.OpenedFrames or {}
+nlitFrames.OpenedFrames = nlitFrames.OpenedFrames or {}
 --- Creates an unfocused frame
 -- @param title string
 -- @return frame
 -- @see Create
 function Unfocused(self, title)
     local fr = vgui.Create('DFrame')
-    table.insert(nlit.OpenedFrames, fr)
-    for index, value in ipairs(nlit.OpenedFrames) do
-        if not IsValid(value) then table.remove(nlit.OpenedFrames, index) end
+    table.insert(self.OpenedFrames, fr)
+    for index, value in ipairs(self.OpenedFrames) do
+        if not IsValid(value) then table.remove(self.OpenedFrames, index) end
     end
 
     self:AddBehavior(fr, title)
@@ -229,3 +229,9 @@ function ManyFields(self, text, tblFields, acceptFunc)
     local tile = fr:Add(nlitInputs:Fields(tblFields, acceptFunc))
     return fr, tile.inputs
 end
+
+concommand.Add('nlit_clear_frames', function()
+    for _, frame in pairs(nlitFrames.OpenedFrames or {}) do
+        if IsValid(frame) then frame:Close() end
+    end
+end)

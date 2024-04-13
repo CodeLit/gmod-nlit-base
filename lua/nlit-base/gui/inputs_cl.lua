@@ -13,7 +13,7 @@ local pairs = pairs
 local Inputs = {}
 local Panels = nlitPanels
 local Editable = NGUI.Editable
-local l = nlitLang
+local l = nlitLang.l
 local Lists = nlitLists
 ---Creates an input panel
 ---@param title string

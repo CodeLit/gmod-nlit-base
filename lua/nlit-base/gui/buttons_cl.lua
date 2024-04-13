@@ -14,7 +14,7 @@ local table = table
 local RunConsoleCommand = RunConsoleCommand
 local D = nlitLib:Lib('draw')
 local Icons = nlitLib:Lib('icons')
-local l = nlitLang
+local l = nlitLang.l
 --- Creates a button
 ---@param text string Button text
 ---@param clickFunc function OnClick function

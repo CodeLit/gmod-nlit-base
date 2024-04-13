@@ -12,7 +12,7 @@ local Frames = nlitFrames
 local Panels = nlitPanels
 local Inputs = nlitInputs
 local strings = nlitString
-local l = nlitLang
+local l = nlitLang.l
 ---Variant selector
 ---@param tblVariants table
 ---@param action function

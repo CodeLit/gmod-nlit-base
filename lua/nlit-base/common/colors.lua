@@ -19,7 +19,7 @@ end
 --- Light
 -- @param a transparency
 function Light(self, a)
-    return White(a)
+    return White(self, a)
 end
 
 --- Black
@@ -31,7 +31,7 @@ end
 --- Dark
 -- @param a transparency
 function Dark(self, a)
-    return Black(a)
+    return Black(self, a)
 end
 
 --- Grey
@@ -122,17 +122,17 @@ end
 
 --- DarkTheme color
 function DarkTheme(self)
-    return Tint(50, 240)
+    return Tint(self, 50, 240)
 end
 
 --- LightThemeText color
 function LightThemeText(self)
-    return White(230)
+    return White(self, 230)
 end
 
 --- DarkThemeText color
 function DarkThemeText(self)
-    return White(230)
+    return White(self, 230)
 end
 
 ---Is currently used LightTheme.
@@ -157,7 +157,7 @@ function Theme(self, bReverse)
         -- return lt and Color(hudc.r*mul, hudc.g*mul, hudc.b*mul, hudc.a) or hudc
         return hudc
     end
-    return lt and LightTheme() or DarkTheme()
+    return lt and LightTheme(self) or DarkTheme(self)
 end
 
 --- ThemeInside color
@@ -165,7 +165,7 @@ end
 function ThemeInside(self, bReverse)
     local c = Theme()
     local addCol = 7
-    addCol = IsLightTheme() and addCol or (addCol * -1)
+    addCol = IsLightTheme(self) and addCol or (addCol * -1)
     return Color(c.r - addCol, c.g - addCol, c.b - addCol, c.a)
 end
 

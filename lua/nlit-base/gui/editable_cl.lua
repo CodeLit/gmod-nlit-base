@@ -7,7 +7,7 @@ local tonumber = tonumber
 local vgui = vgui
 local surface = surface
 local draw = draw
-local l = nlitLang
+local l = nlitLang.l
 local strings = nlitString
 local function PrepareTextArea(self, pnl)
     pnl:ReadyTextbox()
