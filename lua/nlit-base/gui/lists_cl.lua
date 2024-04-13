@@ -7,11 +7,11 @@ local isstring = isstring
 --- Lists is GUI module for list panels
 ---@module Lists
 local Lists = {}
-local Buttons = NGUI.Buttons
+local Buttons = nlitButtons
 local Frames = NGUI.Frames
 local Panels = NGUI.Panels
 local Inputs = NGUI.Inputs
-local CWStr = nlitString
+local strings = nlitString
 local l = nlitLang
 ---Variant selector
 ---@param tblVariants table
@@ -96,7 +96,7 @@ end
 function Lists:EditableTable(tblData)
     local pnl = Panels:Create()
     pnl:SetSize(300, 500)
-    if isstring(tblData) then tblData = CWStr:FromJson(tblData) or {} end
+    if isstring(tblData) then tblData = strings:FromJson(tblData) or {} end
     pnl.tbl = tblData or {}
     local variant = pnl:Add(self:ListVariant(tblData))
     variant:Dock(FILL)

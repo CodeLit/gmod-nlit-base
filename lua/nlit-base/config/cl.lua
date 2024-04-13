@@ -3,7 +3,7 @@ local tobool = tobool
 local GNet = GNet
 local pairs = pairs
 nlitCfg.svTable = nlitCfg.svTable or {}
-local CWStr = nlitString
+local strings = nlitString
 function nlitCfg:Get(addon, key)
     local tbl = self.svTable[addon]
     if not tbl then
@@ -26,7 +26,7 @@ GNet.OnPacketReceive(nlitCfg.NetStr, function(pkt)
     if netType == 1 then
         local addonName = pkt:ReadString()
         nlitCfg.svTable[addonName] = nlitCfg.svTable[addonName] or {}
-        local data = CWStr:FromJson(pkt:ReadString())
+        local data = strings:FromJson(pkt:ReadString())
         for k, v in pairs(data or {}) do
             nlitCfg.svTable[addonName][k] = v
         end

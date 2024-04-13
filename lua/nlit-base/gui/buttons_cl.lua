@@ -1,3 +1,7 @@
+--- Creates GUI Buttons
+-- @module nlitButtons
+-- @usage local Buttons = nlitButtons
+module('nlitButtons', package.seeall)
 local TDLib = TDLib
 local Color = Color
 local list = list
@@ -11,18 +15,14 @@ local RunConsoleCommand = RunConsoleCommand
 local D = nlitLib:Lib('draw')
 local Icons = nlitLib:Lib('icons')
 local l = nlitLang
---- Creates GUI Buttons
--- @module Buttons
--- @usage local Buttons = NGUI.Buttons
-local Buttons = {}
 --- Creates a button
 ---@param text string Button text
 ---@param clickFunc function OnClick function
---- @usage Buttons:Create('Accept',function(btn)
+--- @usage Create('Accept',function(btn)
 --      -- OnClick function
 --		btn:SetColor(NC:Red())
 -- end)
-function Buttons:Create(text, clickFunc)
+function Create(self, text, clickFunc)
     local b = TDLib('DButton')
     b:SetText(l(text) or '')
     b:SetFont('N_small')
@@ -53,7 +53,7 @@ end
 
 --- Accept button green colored
 --- @see Create
-function Buttons:Accept(text, clickFunc)
+function Accept(self, text, clickFunc)
     local b = self:Create(text or 'Подтвердить', clickFunc)
     b:SetTextColor(NC:White())
     b:Background(Color(0, 190, 0, 220))
@@ -62,7 +62,7 @@ end
 
 --- Decline button red colored
 --- @see Create
-function Buttons:Decline(text, clickFunc)
+function Decline(self, text, clickFunc)
     local b = self:Create(text or 'Отменить', clickFunc)
     b:SetTextColor(NC:White())
     b:Background(Color(190, 0, 0, 220))
@@ -74,7 +74,7 @@ end
 ---@param icon string
 ---@param iconSize number
 ---@param func function
-function Buttons:AddToCMenu(title, icon, iconSize, func)
+function AddToCMenu(self, title, icon, iconSize, func)
     list.Set('DesktopWindows', 'NContext Button ' .. title, {
         title = title,
         icon = icon,
@@ -90,7 +90,7 @@ function Buttons:AddToCMenu(title, icon, iconSize, func)
 end
 
 ---Specific HUD Settings button
-function Buttons:HudSettings()
+function HudSettings(self)
     local button = vgui.Create('DImageButton')
     button:SetSize(16, 16)
     button:SetImage('icon16/wrench.png')
@@ -101,7 +101,7 @@ function Buttons:HudSettings()
             return
         end
 
-        local btnPanel = Buttons:Panel()
+        local btnPanel = Panel()
         btnPanel:SetSize(200, 200)
         local mixer = btnPanel:Add('DColorMixer')
         mixer:SetPalette(false)
@@ -149,4 +149,3 @@ function Buttons:HudSettings()
     end
     return button
 end
-return Buttons

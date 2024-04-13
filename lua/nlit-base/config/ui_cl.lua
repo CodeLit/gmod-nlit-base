@@ -4,14 +4,14 @@ local LocalPlayer = LocalPlayer
 local IsValid = IsValid
 local nlitCfg = nlitCfg
 local table = table
-local Buttons = NGUI.Buttons
+local Buttons = nlitButtons
 local Frames = NGUI.Frames
 local Icons = NGUI.Icons
 local Inputs = NGUI.Inputs
 local Panels = NGUI.Panels
 local TblLsts = NGUI.Lists
 local Text = NGUI.Text
-local CWStr = nlitString
+local strings = nlitString
 local HTML = nlitLib:Lib('html')
 local l = nlitLang
 local addons_short_name = 'nlit'
@@ -32,7 +32,7 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
             local pkt = GNet.Packet(nlitCfg.NetStr)
             pkt:WriteUInt(1, GNet.CalculateRequiredBits(100))
             pkt:WriteString(addon_name)
-            pkt:WriteString(CWStr:ToJson(inputsData))
+            pkt:WriteString(strings:ToJson(inputsData))
             pkt:Send()
             LocalPlayer():Notify(l('The changes was saved') .. '.')
         end

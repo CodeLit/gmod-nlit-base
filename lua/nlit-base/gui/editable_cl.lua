@@ -1,15 +1,15 @@
+--- Creates GUI Editable panels
+-- @module Editable
+-- @usage local Editable = nlitEditable
+module('nlitEditable', package.seeall)
 local TDLib = TDLib
 local tonumber = tonumber
 local vgui = vgui
 local surface = surface
 local draw = draw
---- Creates GUI Editable panels
--- @module Editable
--- @usage local Editable = NGUI.Editable
-local Editable = {}
 local l = nlitLang
-local CWStr = nlitString
-local function PrepareTextArea(pnl)
+local strings = nlitString
+local function PrepareTextArea(self, pnl)
     pnl:ReadyTextbox()
     pnl:SetTextColor(NC:ThemeText())
 end
@@ -17,7 +17,7 @@ end
 ---Creates editable panel
 ---@param text string Placeholder text
 ---@param acceptFunc function OnEnterPressed function
-function Editable:EditPanel(text, acceptFunc)
+function Editable:EditPanel(self, text, acceptFunc)
     local e = TDLib('DTextEntry')
     e:SetPlaceholderText(text or l('Введите текст') .. '...')
     e:SetPlaceholderColor(NC:ThemeText())
@@ -28,7 +28,7 @@ end
 
 ---Creates editable number panel
 ---@see EditPanel
-function Editable:NumPanel(text, acceptFunc)
+function Editable:NumPanel(self, text, acceptFunc)
     local e = TDLib('DNumberWang')
     e:SetPlaceholderText(text or l('Введите число') .. '...')
     e:SetPlaceholderColor(NC:ThemeText())
@@ -37,13 +37,13 @@ function Editable:NumPanel(text, acceptFunc)
     local limit = 9999999999
     e:SetMinMax(limit * -1, limit)
     e.OnEnter = function() acceptFunc(tonumber(e:GetValue())) end
-    e.AllowInput = function(pnl, input) return not CWStr:OnlyContainsNumbers(input) end
+    e.AllowInput = function(pnl, input) return not strings:OnlyContainsNumbers(input) end
     return e
 end
 
 ---Creates editable slider panel
 ---@see EditPanel
-function Editable:NumSlider(text, min, max, decimal)
+function Editable:NumSlider(self, text, min, max, decimal)
     local numslider = vgui.Create("DNumSlider")
     numslider:SetSize(100, 100)
     numslider:SetPos(10, 10)
@@ -59,4 +59,3 @@ function Editable:NumSlider(text, min, max, decimal)
     numslider.PerformLayout = function(self) self:SizeToContents() end
     return numslider
 end
-return Editable

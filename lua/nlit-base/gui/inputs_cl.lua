@@ -66,7 +66,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
         if inputValue then editable:SetValue(inputValue) end
     else
         editable = p2:Add(Editable:EditPanel('Введите текст...', function(val)
-            if typeOfInput == 'allowed' and not CWStr:OnlyContainsAllowed(val) then
+            if typeOfInput == 'allowed' and not strings:OnlyContainsAllowed(val) then
                 LocalPlayer():Notify('Введены недопустимые символы!')
                 return
             end

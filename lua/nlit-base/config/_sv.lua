@@ -10,7 +10,7 @@ local hook = hook
 ---nlitCfg:Set('My Addon','Print Hello',true,'bool',{category='Basic'})
 nlitCfg.ConnectedAddons = nlitCfg.ConnectedAddons or {}
 local DB = nlitLib:Lib('db')
-local CWStr = nlitString
+local strings = nlitString
 util.AddNetworkString(nlitCfg.NetStr)
 DB:SetTableName('CWConfig')
 DB:CreateDataTable('addon')
@@ -41,13 +41,13 @@ function nlitCfg:SendAddon(addonName, ply)
     })
 
     -- Убираем для клиента лишние конфиги из базы данных
-    data = CWStr:FromJson(data)
+    data = strings:FromJson(data)
     for k, _ in pairs(data or {}) do
         local addonTbl = self.ConnectedAddons[addonName]
         if addonTbl and not addonTbl[k] then data[k] = nil end
     end
 
-    data = CWStr:ToJson(data)
+    data = strings:ToJson(data)
     local pkt = GNet.Packet(self.NetStr)
     pkt:WriteUInt(1, GNet.CalculateRequiredBits(100))
     pkt:WriteString(addonName)
@@ -73,7 +73,7 @@ function nlitCfg:Set(addonName, key, value, inputType, inpData)
     if oldData == 'NULL' then
         oldData = {}
     else
-        oldData = CWStr:FromJson(oldData)
+        oldData = strings:FromJson(oldData)
     end
 
     oldData[key] = oldData[key] or {}
@@ -93,7 +93,7 @@ function nlitCfg:Set(addonName, key, value, inputType, inpData)
     oldData[key].inputType = oldData[key].inputType or inputType
     DB:InsertOrReplace({
         addon = addonName,
-        data = CWStr:ToJson(oldData)
+        data = strings:ToJson(oldData)
     })
 
     self.ConnectedAddons[addonName][key] = oldData[key]
@@ -104,7 +104,7 @@ end
 ---@param addonName string
 ---@param key string filed name
 function nlitCfg:Get(addonName, key)
-    local oldData = CWStr:FromJson(DB:GetDataWhere({
+    local oldData = strings:FromJson(DB:GetDataWhere({
         addon = addonName
     }))
 
@@ -117,14 +117,14 @@ end
 ---@param addonName string
 ---@param key string filed name
 function nlitCfg:Remove(addonName, key)
-    local oldData = CWStr:FromJson(DB:GetDataWhere({
+    local oldData = strings:FromJson(DB:GetDataWhere({
         addon = addonName
     }))
 
     oldData[key] = nil
     DB:InsertOrReplace({
         addon = addonName,
-        data = CWStr:ToJson(oldData)
+        data = strings:ToJson(oldData)
     })
 end
 
@@ -142,7 +142,7 @@ GNet.OnPacketReceive(nlitCfg.NetStr, function(pkt)
     if netCmd == 1 and nlitCfg.CheckAccess(pkt.ply) then
         local selectedAddon = pkt:ReadString()
         local data = pkt:ReadString()
-        data = CWStr:FromJson(data)
+        data = strings:FromJson(data)
         for key, value in pairs(data) do
             nlitCfg:Set(selectedAddon, key, value, _, {
                 force = true
