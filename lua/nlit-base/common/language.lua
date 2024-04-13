@@ -2,7 +2,7 @@
 -- @module nlitLang
 -- @usage local l = nlitLang.Translator
 -- local text = l('my long story text','ru') -- will translate this text to russian
--- -- translations must be added to folder cyber-langs using CWLang:AddTranslation() function.
+-- -- translations must be added to folder nlit-langs using CWLang:AddTranslation() function.
 -- @see nlitLang:AddTranslation
 module('nlitLang', package.seeall)
 local pairs = pairs
