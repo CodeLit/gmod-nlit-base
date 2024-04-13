@@ -1,6 +1,5 @@
-local lang = CW:Lib('language')
-
-lang:AddTranslation('ru',{
+local lang = nlitLang
+lang:AddTranslation('ru', {
     ['Addons subscription'] = 'Подписка на аддоны',
     ['Upgrade my Gmod'] = 'Улучшить свой Gmod',
     ['More addons'] = 'Больше аддонов',

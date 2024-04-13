@@ -11,23 +11,20 @@ local Inputs = CWGUI.Inputs
 local Panels = CWGUI.Panels
 local TblLsts = CWGUI.Lists
 local Text = CWGUI.Text
-local CWStr = CW:Lib('strings')
+local CWStr = nlitString
 local HTML = CW:Lib('html')
-local l = CW:Lib('translator')
+local l = nlitLang
 local addons_short_name = 'CW'
 local addons_website = 'https://neolife.tk/ru' -- Английский нужно добавлять отдельно
 local last_selected_category
 local fr
-
 Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber/logo256.png'), 50, function(invalidFrame)
     local function add_save_btn(inp_pnl, addon_name)
         local save = inp_pnl:Add(Buttons:Accept(l('Save changes')))
         save:Dock(BOTTOM)
         save:SetTall(30)
-
         save.DoClick = function(pnl)
             local inputsData = {}
-
             for _, inp in pairs(inp_pnl.lst.inputs) do
                 inputsData[inp.option] = inp:GetInputValue()
             end
@@ -55,7 +52,6 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
     centerP.NoOutline = true
     local selectedCat
     local buttons = {}
-
     local leftCategories = {
         {
             name = l('More addons'),
@@ -71,15 +67,12 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
             access = function()
                 if not CWCfg.CheckAccess(LocalPlayer()) then
                     LocalPlayer():Notify(l('You have no access rights to addons configuration') .. '!')
-
                     return false
                 end
-
                 return true
             end,
             open = function(cpnl)
                 local addons = {}
-
                 for k, _ in pairs(CWCfg.svTable or {}) do
                     if k == CWCfg.Name then continue end
                     table.insert(addons, k)
@@ -91,17 +84,12 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
                     label:SetFont('N_large')
                     label:SizeToContents()
                     label:SetPos(cpnl:GetWide() / 2 - label:GetWide() / 2, cpnl:GetTall() / 2 - label:GetTall() / 2 - spaceBetween)
-
-                    local toAddons = cpnl:Add(Buttons:Accept('Get addons', function()
-                        buttons[1].DoClick()
-                    end))
-
+                    local toAddons = cpnl:Add(Buttons:Accept('Get addons', function() buttons[1].DoClick() end))
                     toAddons:SetFont('N_large')
                     toAddons:SizeToContents()
                     toAddons:SetWide(toAddons:GetWide() + 25)
                     toAddons:SetTall(toAddons:GetTall() + 15)
                     toAddons:SetPos(cpnl:GetWide() / 2 - toAddons:GetWide() / 2, cpnl:GetTall() / 2 - toAddons:GetTall() / 2 + spaceBetween)
-
                     return
                 end
 
@@ -121,11 +109,7 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
                 local topLabel = cpnl:Add(Text:Create(l('Select addon for setup') .. ':'))
                 topLabel:Dock(TOP)
                 topLabel:SetColor(CWC:White())
-
-                local variant = cpnl:Add(TblLsts:Variant(addons, function(pnl, i, v)
-                    SelectAddon(v)
-                end))
-
+                local variant = cpnl:Add(TblLsts:Variant(addons, function(pnl, i, v) SelectAddon(v) end))
                 variant:Dock(TOP)
                 variant:DockMargin(0, 0, 0, 10)
                 variant:SetValue(CWCfg.selectedAddon or addons[1])
@@ -180,11 +164,7 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
         btn:Dock(TOP)
         btn:SetTall(50)
         btn:SetFont('N')
-
-        if v.icon then
-            btn.RightIcon = v.icon
-        end
-
+        if v.icon then btn.RightIcon = v.icon end
         table.insert(buttons, btn)
     end
 

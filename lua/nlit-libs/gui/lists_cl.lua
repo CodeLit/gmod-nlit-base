@@ -11,9 +11,8 @@ local Buttons = CWGUI.Buttons
 local Frames = CWGUI.Frames
 local Panels = CWGUI.Panels
 local Inputs = CWGUI.Inputs
-local CWStr = CW:Lib('strings')
-local l = CW:Lib('translator')
-
+local CWStr = nlitString
+local l = nlitLang
 ---Variant selector
 ---@param tblVariants table
 ---@param action function
@@ -23,10 +22,8 @@ function Lists:Variant(tblVariants, action)
     local CBox = vgui.Create('DComboBox')
     CBox:SetSize(100, 20)
     tblVariants = tblVariants or {}
-
     if #tblVariants > 0 then
         CBox:SetValue(tblVariants[math.random(1, #tblVariants)] or '')
-
         for _, v in SortedPairs(tblVariants) do
             CBox:AddChoice(v)
         end
@@ -34,18 +31,12 @@ function Lists:Variant(tblVariants, action)
         CBox.outKeyValues = tblVariants
         local _, randKey = table.Random(tblVariants)
         CBox:SetValue(randKey)
-
         for k, _ in SortedPairs(tblVariants) do
             CBox:AddChoice(k)
         end
     end
 
-    if action then
-        CBox.OnSelect = function(pnl, index, value)
-            action(pnl, index, value)
-        end
-    end
-
+    if action then CBox.OnSelect = function(pnl, index, value) action(pnl, index, value) end end
     return CBox
 end
 
@@ -62,7 +53,6 @@ function Lists:VariantsFrame(title, tblVariants, action)
     var:Dock(FILL)
     local btn = fr:Add(Buttons:Accept())
     btn:Dock(BOTTOM)
-
     btn.DoClick = function()
         if var.outKeyValues then
             action(var.outKeyValues[var:GetValue()])
@@ -73,12 +63,7 @@ function Lists:VariantsFrame(title, tblVariants, action)
         fr:Close()
     end
 
-    fr.OnKeyCodePressed = function(pnl, key)
-        if key == KEY_ENTER then
-            btn.DoClick()
-        end
-    end
-
+    fr.OnKeyCodePressed = function(pnl, key) if key == KEY_ENTER then btn.DoClick() end end
     return fr
 end
 
@@ -92,19 +77,16 @@ function Lists:ListVariant(tblVariants)
     list:SetMultiSelect(false)
     list:AddColumn(l('Sort'))
     tblVariants = tblVariants or {}
-
     if #tblVariants > 0 then
         for _, v in pairs(tblVariants) do
             list:AddLine(v)
         end
     elseif table.Count(tblVariants) > 0 then
         list.outKeyValues = tblVariants
-
         for k, _ in pairs(tblVariants) do
             list:AddLine(k)
         end
     end
-
     return list
 end
 
@@ -114,20 +96,14 @@ end
 function Lists:EditableTable(tblData)
     local pnl = Panels:Create()
     pnl:SetSize(300, 500)
-
-    if isstring(tblData) then
-        tblData = CWStr:FromJson(tblData) or {}
-    end
-
+    if isstring(tblData) then tblData = CWStr:FromJson(tblData) or {} end
     pnl.tbl = tblData or {}
     local variant = pnl:Add(self:ListVariant(tblData))
     variant:Dock(FILL)
     pnl.remBtn = pnl:Add(Buttons:Decline(l('Remove')))
     pnl.remBtn:Dock(BOTTOM)
-
     pnl.remBtn.DoClick = function()
         local line, pnlLine = variant:GetSelectedLine()
-
         if line then
             variant:RemoveLine(line)
             table.RemoveByValue(pnl.tbl, pnlLine:GetColumnText(1))
@@ -136,7 +112,6 @@ function Lists:EditableTable(tblData)
 
     pnl.addBtn = pnl:Add(Buttons:Accept(l('Add')))
     pnl.addBtn:Dock(BOTTOM)
-
     pnl.addBtn.DoClick = function()
         Frames:Input(l('Insert new value'), function(v)
             table.insert(pnl.tbl, v)
@@ -146,7 +121,6 @@ function Lists:EditableTable(tblData)
 
     variant.DoDoubleClick = function(variantPnl, index, line)
         local oldText = line:GetColumnText(1)
-
         local inFr = Frames:Input(l('Insert new value'), function(v)
             table.RemoveByValue(pnl.tbl, oldText)
             table.insert(pnl.tbl, v)
@@ -156,7 +130,6 @@ function Lists:EditableTable(tblData)
 
         inFr.mainPanel.editPanel:SetValue(oldText)
     end
-
     return pnl
 end
 
@@ -175,12 +148,10 @@ function Lists:ListVariantsFrame(title, tblVariants, action)
     var:Dock(FILL)
     local btn = fr:Add(Buttons:Accept())
     btn:Dock(BOTTOM)
-
     btn.DoClick = function()
         local selected = var:GetSelected()[1]
         if not selected then return end
         local value = selected:GetValue(1)
-
         if var.outKeyValues then
             action(selected and var.outKeyValues[value] or nil)
         else
@@ -190,12 +161,7 @@ function Lists:ListVariantsFrame(title, tblVariants, action)
         fr:Close()
     end
 
-    fr.OnKeyCodePressed = function(pnl, key)
-        if key == KEY_ENTER then
-            btn.DoClick()
-        end
-    end
-
+    fr.OnKeyCodePressed = function(pnl, key) if key == KEY_ENTER then btn.DoClick() end end
     return fr
 end
 
@@ -212,5 +178,4 @@ end
 function Lists:Tile()
     return vgui.Create('DTileLayout')
 end
-
 return Lists

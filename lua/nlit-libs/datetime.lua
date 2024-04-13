@@ -7,8 +7,7 @@ local isstring = isstring
 --- The module for working with dates. Shared module.
 -- @module DateTime
 local DateTime = {}
-local Str = CW:Lib('string')
-
+local Str = nlitString
 ---	Today
 -- @return today date in format YYYY-MM-DD
 function DateTime:TodayDate()
@@ -32,7 +31,6 @@ function DateTime:GetStampFromDate(datestring)
     tbl.day = tonumber(string.sub(datestring, 9, 10))
     tbl.month = tonumber(string.sub(datestring, 6, 7))
     tbl.year = tonumber(string.sub(datestring, 1, 4))
-
     return os.time(tbl), tbl
 end
 
@@ -50,16 +48,12 @@ function DateTime:GetStampFromDateTime(datetimestring)
     tbl.hour = tonumber(string.sub(datetimestring, 12, 13))
     tbl.min = tonumber(string.sub(datetimestring, 15, 16))
     tbl.sec = tonumber(string.sub(datetimestring, 18, 19))
-
     return os.time(tbl), tbl
 end
 
 -- добавление падежей - https://lampa.io/p/%D0%BF%D0%B0%D0%B4%D0%B5%D0%B6%D0%B8-0000000027fd5085d75498af493848d1
 function DateTime:GetNiceTranslatedTime(seconds, padezhCode)
-    if CLIENT and not table.HasValue({'ru', 'uk'}, GetConVar('gmod_language'):GetString()) then
-        return string.NiceTime(seconds)
-    end
-
+    if CLIENT and not table.HasValue({'ru', 'uk'}, GetConVar('gmod_language'):GetString()) then return string.NiceTime(seconds) end
     if seconds > 60 * 59 then
         seconds = seconds + 60 * 59
     elseif seconds > 59 then
@@ -68,7 +62,6 @@ function DateTime:GetNiceTranslatedTime(seconds, padezhCode)
 
     local fullTime = string.Explode(' ', string.NiceTime(seconds))
     local units, measure = tonumber(fullTime[1]), fullTime[2]
-
     if string.find(measure, 'hour') then
         measure = Str:GetNumEnding(units, 'часов', 'час', 'часа')
     elseif string.find(measure, 'day') then
@@ -98,8 +91,6 @@ function DateTime:GetNiceTranslatedTime(seconds, padezhCode)
             end
         end
     end
-
     return units .. ' ' .. (measure or '')
 end
-
 return DateTime

@@ -5,7 +5,7 @@ local hook = hook
 local timer = timer
 local pairs = pairs
 local PLY = FindMetaTable('Player')
-local strings = nlitStrings
+local strings = nlitString
 local Lang = nlitLang
 function PLY:StID()
     if not IsValid(self) then return end

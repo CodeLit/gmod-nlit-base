@@ -8,16 +8,13 @@ local math = math
 local hook = hook
 local table = table
 local RunConsoleCommand = RunConsoleCommand
-
 local D = CW:Lib('draw')
 local Icons = CW:Lib('icons')
-local l = CW:Lib('translator')
-
+local l = nlitLang
 --- Creates GUI Buttons
 -- @module Buttons
 -- @usage local Buttons = CWGUI.Buttons
 local Buttons = {}
-
 --- Creates a button
 ---@param text string Button text
 ---@param clickFunc function OnClick function
@@ -37,7 +34,6 @@ function Buttons:Create(text, clickFunc)
     local bh = CWC:ThemeText()
     bh.a = 90
     b:BarHover(bh)
-
     function b:SetBackgroundColor(color)
         b:Background(color)
     end
@@ -52,7 +48,6 @@ function Buttons:Create(text, clickFunc)
     end)
 
     b.DoClick = clickFunc
-
     return b
 end
 
@@ -62,7 +57,6 @@ function Buttons:Accept(text, clickFunc)
     local b = self:Create(text or 'Подтвердить', clickFunc)
     b:SetTextColor(CWC:White())
     b:Background(Color(0, 190, 0, 220))
-
     return b
 end
 
@@ -72,7 +66,6 @@ function Buttons:Decline(text, clickFunc)
     local b = self:Create(text or 'Отменить', clickFunc)
     b:SetTextColor(CWC:White())
     b:Background(Color(190, 0, 0, 220))
-
     return b
 end
 
@@ -102,11 +95,9 @@ function Buttons:HudSettings()
     button:SetSize(16, 16)
     button:SetImage('icon16/wrench.png')
     button.elements = button.elements or {} -- чтобы можно было удалить с помощью цикла
-
     button.DoClick = function(pnl)
         if IsValid(button.panel) then
             button.panel:Remove()
-
             return
         end
 
@@ -131,18 +122,12 @@ function Buttons:HudSettings()
         sizer:SetDecimals(0)
         sizer:DockPadding(7, 0, 0, 0)
         sizer:SetValue(GetConVar('nhud_size'):GetInt())
-
         sizer.OnValueChanged = function(pnl, val)
             val = math.Round(val)
-
             if sizer.oldVal ~= val then
                 sizer.oldVal = val
-
                 hook.Add('PlayerButtonUp', 'NHUD Sizer', function(ply, key)
-                    if not table.HasValue({MOUSE_LEFT, MOUSE_RIGHT}, key) then
-                        return
-                    end
-
+                    if not table.HasValue({MOUSE_LEFT, MOUSE_RIGHT}, key) then return end
                     NHUD:FontsUpdate()
                     hook.Remove('PlayerButtonUp', 'NHUD Sizer')
                 end)
@@ -153,25 +138,15 @@ function Buttons:HudSettings()
         end
 
         button.panel = btnPanel
-
         function btnPanel:UpdatePos()
             local posX, posY = button:GetPos()
-
-            if pnl.attachedToCMenu then
-                posY = posY - btnPanel:GetTall() - 3
-            end
-
+            if pnl.attachedToCMenu then posY = posY - btnPanel:GetTall() - 3 end
             btnPanel:SetPos(posX, posY)
         end
 
         btnPanel:UpdatePos()
-
-        if pnl.attachedToCMenu and IsValid(button.panel) then
-            button.panel:SetParent(g_ContextMenu)
-        end
+        if pnl.attachedToCMenu and IsValid(button.panel) then button.panel:SetParent(g_ContextMenu) end
     end
-
     return button
 end
-
 return Buttons

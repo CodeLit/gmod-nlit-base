@@ -1,8 +1,7 @@
 local vgui = vgui
 local HTML = {}
 local Text = CW:Lib('text')
-local l = CW:Lib('translator')
-
+local l = nlitLang
 function HTML:MakeInPanel(panel)
     local html = vgui.Create('DHTML', panel)
     html:Dock(FILL)
@@ -12,16 +11,10 @@ function HTML:MakeInPanel(panel)
     loading:SetFont('N_s')
     loading:SizeToContents()
     loading:SetPos(html:GetWide() / 2, html:GetTall() / 2)
-
-    html.Think = function()
-        loading:SetVisible(html:IsLoading())
-    end
-
+    html.Think = function() loading:SetVisible(html:IsLoading()) end
     local ctrls = vgui.Create('DHTMLControls', panel)
     ctrls:Dock(TOP)
     ctrls:SetHTML(html)
-
     return html
 end
-
 return HTML

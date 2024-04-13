@@ -7,7 +7,7 @@
 module('nlitLang', package.seeall)
 local pairs = pairs
 local GetConVar = GetConVar
-local strings = nlitStrings
+local strings = nlitString
 --- Adds translation to language. Can be used anywhere.
 -- @param lang string 2-char lang
 -- @param tbl table translations from english (key-value)

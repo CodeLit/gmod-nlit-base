@@ -10,11 +10,10 @@ local hook = hook
 ---CWCfg:Set('My Addon','Print Hello',true,'bool',{category='Basic'})
 CWCfg.ConnectedAddons = CWCfg.ConnectedAddons or {}
 local DB = CW:Lib('db')
-local CWStr = CW:Lib('strings')
+local CWStr = nlitString
 util.AddNetworkString(CWCfg.NetStr)
 DB:SetTableName('CWConfig')
 DB:CreateDataTable('addon')
-
 ---Is addon connected. Shared function
 ---@param addonName string
 ---@return bool
@@ -29,9 +28,7 @@ function CWCfg:AddAddon(addonName)
         addon = addonName
     })
 
-    if not self:IsAddonConnected(addonName) then
-        self.ConnectedAddons[addonName] = {}
-    end
+    if not self:IsAddonConnected(addonName) then self.ConnectedAddons[addonName] = {} end
 end
 
 ---Sends addon data to the client. Server function
@@ -39,20 +36,15 @@ end
 ---@param ply player client
 function CWCfg:SendAddon(addonName, ply)
     if not self:IsAddonConnected(addonName) then return end
-
     local data = DB:GetDataWhere({
         addon = addonName
     })
 
     -- Убираем для клиента лишние конфиги из базы данных
     data = CWStr:FromJson(data)
-
     for k, _ in pairs(data or {}) do
         local addonTbl = self.ConnectedAddons[addonName]
-
-        if addonTbl and not addonTbl[k] then
-            data[k] = nil
-        end
+        if addonTbl and not addonTbl[k] then data[k] = nil end
     end
 
     data = CWStr:ToJson(data)
@@ -87,7 +79,6 @@ function CWCfg:Set(addonName, key, value, inputType, inpData)
     oldData[key] = oldData[key] or {}
     oldData[key].default = value
     inpData = inpData or {}
-
     if inpData.force then
         inpData.force = nil
         oldData[key].value = value
@@ -100,7 +91,6 @@ function CWCfg:Set(addonName, key, value, inputType, inpData)
     end
 
     oldData[key].inputType = oldData[key].inputType or inputType
-
     DB:InsertOrReplace({
         addon = addonName,
         data = CWStr:ToJson(oldData)
@@ -120,7 +110,6 @@ function CWCfg:Get(addonName, key)
 
     local val = oldData[key].value
     if oldData[key].inputType == 'bool' then return tobool(val) end
-
     return val
 end
 
@@ -133,7 +122,6 @@ function CWCfg:Remove(addonName, key)
     }))
 
     oldData[key] = nil
-
     DB:InsertOrReplace({
         addon = addonName,
         data = CWStr:ToJson(oldData)
@@ -150,13 +138,11 @@ end
 
 GNet.OnPacketReceive(CWCfg.NetStr, function(pkt)
     local netCmd = pkt:ReadUInt(GNet.CalculateRequiredBits(100))
-
     -- set cfg data
     if netCmd == 1 and CWCfg.CheckAccess(pkt.ply) then
         local selectedAddon = pkt:ReadString()
         local data = pkt:ReadString()
         data = CWStr:FromJson(data)
-
         for key, value in pairs(data) do
             CWCfg:Set(selectedAddon, key, value, _, {
                 force = true

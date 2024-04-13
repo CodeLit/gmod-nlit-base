@@ -10,10 +10,9 @@ local print = print
 ---Databases module. Server only.
 ---@module DB
 local DB = {}
-local NStr = CW:Lib('string')
+local NStr = nlitString
 local dbg_prefix = '[CWDB]'
 local CWUtf8 = CW:Lib('utf8')
-
 ---Generates SQL string from table. Input must be in counted non-associative array.
 ---@param tbl table non-associative
 ---@return generated string
@@ -21,7 +20,7 @@ function DB:GenStr(tbl)
     local s
     for _, v in pairs(tbl) do
         v = NStr:IQ(string.Trim(v))
-        s = (s and s .. ',' .. v or v)
+        s = s and s .. ',' .. v or v
     end
     return s or ''
 end
@@ -35,12 +34,13 @@ function DB:GenKVStr(tbl)
         ErrorNoHaltWithStack()
         return tbl
     end
+
     local str
     for k, v in pairs(tbl) do
         k = string.Trim(k)
         v = NStr:IQ(string.Trim(v))
         local s = k .. '=' .. v
-        str = (str and str .. ',' .. s or s)
+        str = str and str .. ',' .. s or s
     end
     return str or ''
 end
@@ -54,22 +54,22 @@ end
 function DB:GenSmartStr(str)
     -- Explode by words
     local arr = {}
-    for word in CWUtf8.gmatch(str,'[%wА-я%s:_-]+') do
+    for word in CWUtf8.gmatch(str, '[%wА-я%s:_-]+') do
         word = string.Trim(word)
-        table.insert(arr,word)
+        table.insert(arr, word)
     end
-    arr[1] = '`'..arr[1]..'`'
-    arr[2] = "'"..arr[2].."'"
+
+    arr[1] = '`' .. arr[1] .. '`'
+    arr[2] = "'" .. arr[2] .. "'"
     -- Symbol between to middle of array
-    local connector = CWUtf8.match(str,'[^%wА-я%s:_-]')
-    table.insert(arr,2,connector)
+    local connector = CWUtf8.match(str, '[^%wА-я%s:_-]')
+    table.insert(arr, 2, connector)
     local output = ''
     for _, v in pairs(arr) do
-        output = output..v
+        output = output .. v
     end
     return output
 end
-
 
 ---Generates SQL smart string from table or string
 ---Example 1: {'el1=el2','el3 >= el4'} => "'el1'='el2' AND 'el3'>='el4'"
@@ -80,22 +80,20 @@ end
 ---@see GenSmartStr
 function DB:GenSmartStrFromArr(tbl)
     local str
-
     if isstring(tbl) then
         str = self:GenSmartStr(tbl)
     elseif tbl[1] then
         for _, v in pairs(tbl) do
             v = self:GenSmartStr(v)
-            str = (str and str .. ' AND ' .. v or v)
+            str = str and str .. ' AND ' .. v or v
         end
     else
         for k, v in pairs(tbl) do
             local s = k .. '=' .. v
             s = self:GenSmartStr(s)
-            str = (str and str .. ' AND ' .. s or s)
+            str = str and str .. ' AND ' .. s or s
         end
     end
-
     return str or ''
 end
 
@@ -105,7 +103,6 @@ end
 ---@return result
 function DB:Q(query, qtype)
     local q
-
     if qtype == 1 then
         q = sql.QueryRow(query)
     elseif qtype == 2 then
@@ -115,12 +112,10 @@ function DB:Q(query, qtype)
     end
 
     if q == false then
-        local errText = dbg_prefix .. ' in query: ['.. query .. '], ' .. sql.LastError()
-
+        local errText = dbg_prefix .. ' in query: [' .. query .. '], ' .. sql.LastError()
         PrintError(errText)
         ErrorNoHaltWithStack()
     end
-
     return q
 end
 
@@ -139,21 +134,17 @@ end
 --- Set table name for all queries in this file
 function DB:SetTableName(tblName)
     tblName = string.Trim(tblName)
-
     if not isstring(tblName) then
         PrintError(dbg_prefix .. ' Table name must be a string! ' .. NFiles:curPath())
-
         return
     end
 
     if string.find(tblName, ' ') then
         PrintError(dbg_prefix .. ' Name must not contain spaces! ' .. NFiles:curPath())
-
         return
     end
 
     self.curTable = tblName
-
     return true
 end
 
@@ -169,13 +160,10 @@ end
 -- пример steamid TEXT NOT NULL,nick TEXT,lastjoin DATETIME,total_sum INTEGER,is_endless_priv BOOLEAN,reprimands INTEGER
 function DB:CreateTable(sqlStrColumns)
     local name = self:GetTableName()
-
     if not name then
         PrintError(dbg_prefix .. ' Creating table name is not set! ' .. NFiles:curPath())
-
         return
     end
-
     return self:Q('CREATE TABLE IF NOT EXISTS ' .. name .. '(' .. string.Trim(sqlStrColumns) .. ')')
 end
 
@@ -193,11 +181,7 @@ end
 
 function DB:RenameTable(newName)
     local q = self:Q('ALTER TABLE IF EXISTS ' .. self:GetTableName() .. ' RENAME TO ' .. newName)
-
-    if q then
-        self:SetTableName(newName)
-    end
-
+    if q then self:SetTableName(newName) end
     return q
 end
 
@@ -229,7 +213,6 @@ end
 ---@return result
 function DB:InsertAdditional(addStr, arrKV)
     local columns, values = {}, {}
-
     for k, v in pairs(arrKV) do
         table.insert(columns, k)
         table.insert(values, v)
@@ -237,7 +220,6 @@ function DB:InsertAdditional(addStr, arrKV)
 
     columns = self:GenStr(columns)
     values = self:GenStr(values)
-
     return self:Q('INSERT ' .. addStr .. 'INTO ' .. self:GetTableName() .. '(' .. columns .. ') VALUES (' .. values .. ')') == nil
 end
 
@@ -335,7 +317,6 @@ end
 function DB:Get(addParams)
     addParams = addParams or ''
     addParams = ' ' .. addParams
-
     return self:Q('SELECT * FROM ' .. self:GetTableName() .. addParams)
 end
 
@@ -365,7 +346,6 @@ end
 -- PRINT TABLE
 function DB:PrintTable()
     local tbl = self:Q('SELECT * FROM ' .. self:GetTableName())
-
     if tbl then
         PrintTable(tbl)
     else
@@ -399,12 +379,10 @@ end
 
 function DB:PrintAllTables()
     local tables = self:Q("SELECT name FROM sqlite_master WHERE type ='table' AND name NOT LIKE 'sqlite_%'")
-
     if tables and #tables > 0 then
         for _, v in pairs(tables) do
             print(v.name)
         end
     end
 end
-
 return DB

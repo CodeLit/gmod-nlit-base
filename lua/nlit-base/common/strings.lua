@@ -1,8 +1,8 @@
 --- The module for working with strings
--- @module nlitStrings
--- @usage local strings = nlitStrings
+-- @module nlitString
+-- @usage local strings = nlitString
 -- @see nlit
-module('nlitStrings', package.seeall)
+module('nlitString', package.seeall)
 local string = string
 local utf8 = utf8
 local table = table
