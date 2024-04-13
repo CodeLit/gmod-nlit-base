@@ -28,7 +28,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
     if IsValid(inputParent) then mainP:SetSize(inputParent:GetWide(), 25) end
     if typeOfInput ~= 'bool' then
         local p1 = mainP:Add(Panels:Create())
-        p1:SetBackgroundColor(CWC:Theme())
+        p1:SetBackgroundColor(NC:Theme())
         p1:Dock(TOP)
         p1:DockPadding(2, 2, 2, 2)
         local desc = vgui.Create('DLabel', p1)
@@ -36,7 +36,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
         desc:SetText(title or '')
         desc:SetContentAlignment(5)
         desc:SetFont('N_small')
-        desc:SetColor(CWC:ThemeText())
+        desc:SetColor(NC:ThemeText())
         mainP.titlePanel = desc
     end
 
@@ -94,13 +94,13 @@ end
 function Inputs:Bool(title, defaultValue)
     local pnl = Panels:Create()
     pnl:Dock(FILL)
-    pnl:SetBackgroundColor(CWC:Theme())
+    pnl:SetBackgroundColor(NC:Theme())
     local box = pnl:Add('DCheckBoxLabel')
     box:SetPos(10, 15)
     box.font = 'N_small'
     box:SetFont(box.font)
     box:SetText(title)
-    box:SetTextColor(CWC:ThemeText())
+    box:SetTextColor(NC:ThemeText())
     box:SetValue(tobool(defaultValue))
     box:SizeToContents()
     function box:GetFont()

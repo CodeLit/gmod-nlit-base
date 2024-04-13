@@ -1,7 +1,6 @@
 local game = game
-
 if game.SinglePlayer() then
-    CW.Compat.SP = CW.Compat.SP or {}
-    CW.Compat.SP.NUseNet = 'NSinglePlayer NUse'
-    CW.Compat.SP.ToolsNet = 'NSinglePlayer Tools Fix'
+    nlit.Compat.SP = nlit.Compat.SP or {}
+    nlit.Compat.SP.NUseNet = 'NSinglePlayer NUse'
+    nlit.Compat.SP.ToolsNet = 'NSinglePlayer Tools Fix'
 end

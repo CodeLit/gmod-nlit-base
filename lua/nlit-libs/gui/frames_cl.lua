@@ -40,11 +40,11 @@ function Frames:AddBehavior(fr, title)
     close:SetSize(35, 25)
     close:SetPos(fr:GetWide() - close:GetWide(), 0)
     close:SetFont('N')
-    fr.lblTitle.UpdateColours = function(label) label:SetTextStyleColor(CWC:ThemeText()) end
+    fr.lblTitle.UpdateColours = function(label) label:SetTextStyleColor(NC:ThemeText()) end
     fr.lblTitle:SetFont('N')
     fr.Paint = function(pnl)
         -- Draw the menu background color.
-        draw.RoundedBox(6, 0, 0, pnl:GetWide(), pnl:GetTall(), fr.NBackgroundColor or CWC:ThemeInside())
+        draw.RoundedBox(6, 0, 0, pnl:GetWide(), pnl:GetTall(), fr.NBackgroundColor or NC:ThemeInside())
     end
 end
 
@@ -55,16 +55,16 @@ function Frames:Resize(fr)
     fr:Center()
 end
 
-CW.OpenedFrames = CW.OpenedFrames or {}
+nlit.OpenedFrames = nlit.OpenedFrames or {}
 ---Creates an unfocused frame
 ---@param title string
 ---@return frame
 ---@see Create
 function Frames:Unfocused(title)
     local fr = vgui.Create('DFrame')
-    table.insert(CW.OpenedFrames, fr)
-    for index, value in ipairs(CW.OpenedFrames) do
-        if not IsValid(value) then table.remove(CW.OpenedFrames, index) end
+    table.insert(nlit.OpenedFrames, fr)
+    for index, value in ipairs(nlit.OpenedFrames) do
+        if not IsValid(value) then table.remove(nlit.OpenedFrames, index) end
     end
 
     self:AddBehavior(fr, title)
@@ -101,7 +101,7 @@ function Frames:Binder(title, command)
     local fr = self:Create(title)
     fr:SetSize(250, 100)
     fr:Center()
-    local color = CWC:ThemeInside()
+    local color = NC:ThemeInside()
     color.a = 255
     fr.NBackgroundColor = color
     local binder = fr:Add(Buttons:BinderPanel(command))
@@ -122,7 +122,7 @@ function Frames:Rules(title, checkBoxes, acceptFunc)
     for k, v in pairs(checkBoxes) do
         local p = scroll:Add('DPanel')
         p:SetPaintBackground(true)
-        p:SetBackgroundColor(CWC:Grey(100))
+        p:SetBackgroundColor(NC:Grey(100))
         p:Dock(TOP)
         p:DockMargin(0, 2, 0, 2)
         local ch = p:Add('DCheckBoxLabel')
@@ -130,7 +130,7 @@ function Frames:Rules(title, checkBoxes, acceptFunc)
         ch:Dock(FILL)
         ch:SetText(v.name)
         ch:SetFont('N')
-        ch:SetTextColor(CWC:White())
+        ch:SetTextColor(NC:White())
         ch:DockMargin(5, 0, 0, 5)
         ch.Button:Dock(LEFT)
         ch.Button:DockMargin(0, 4, 0, 0)
@@ -175,7 +175,7 @@ function Frames:AcceptDialogue(text, textYes, textNo, acceptFunc)
     txt:SetContentAlignment(5)
     txt:DockPadding(2, 2, 2, 2)
     txt:Dock(FILL)
-    txt:SetTextColor(CWC:ThemeText())
+    txt:SetTextColor(NC:ThemeText())
     txt:SetFont('N_small')
     if LocalPlayer():GetLang() == 'ru' then
         fr:SetTall(#text / 1.5)

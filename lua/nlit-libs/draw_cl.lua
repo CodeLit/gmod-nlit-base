@@ -16,7 +16,6 @@ local Vector = Vector
 local Draw = {}
 local draw, surface, render, Material, math = draw, surface, render, Material, math
 local TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER = TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER
-
 ---Draws text
 ---@param text string
 ---@param font string
@@ -66,7 +65,6 @@ function Draw:OutlinedMultiLineText(text, font, x, y, color, align)
     surface.SetFont(font)
     local _, h = surface.GetTextSize(text)
     local const = h * 0.4
-
     for i, el in pairs(expStr) do
         self:OutlinedText(el, font, x, (y - #expStr / 2 * const + const / 2) + const * (i - 1), color, align)
     end
@@ -133,7 +131,7 @@ end
 ---@param outlineColor table
 function Draw:OutlinedRect(x, y, w, h, color, outlineColor)
     self:Rect(x, y, w, h, color)
-    surface.SetDrawColor(outlineColor or CWC:Black())
+    surface.SetDrawColor(outlineColor or NC:Black())
     surface.DrawOutlinedRect(x, y, w, h)
 end
 
@@ -146,7 +144,7 @@ end
 ---@param color table
 function Draw:ColorfulIcon(path, x, y, sizeX, sizeY, color)
     surface.SetMaterial(Material(path))
-    surface.SetDrawColor(color or CWC:White())
+    surface.SetDrawColor(color or NC:White())
     surface.DrawTexturedRect(x, y, sizeX, sizeY)
 end
 
@@ -158,7 +156,7 @@ end
 ---@param sizeY number
 ---@param trans number transition
 function Draw:Icon(path, x, y, sizeX, sizeY, trans)
-    self:ColorfulIcon(path, x, y, sizeX, sizeY, CWC:White(trans))
+    self:ColorfulIcon(path, x, y, sizeX, sizeY, NC:White(trans))
 end
 
 ---Draws simple linear gradient
@@ -184,7 +182,6 @@ function Draw:GradientBackground(panel, tblColors, bVertical)
         pnl:InvalidateParent(true)
         local parent = pnl:GetParent()
         local x, y = pnl:LocalToScreen(0, 0)
-
         while IsValid(parent:GetParent()) do
             if table.HasValue({'DTileLayout', 'DIconLayout'}, parent:GetTable().ThisClass) then
                 parent = parent:GetParent():GetParent() -- Потому что DTileLayout обычно в Scroll'e, а скрол обычно не имеет своей позиции
@@ -196,7 +193,6 @@ function Draw:GradientBackground(panel, tblColors, bVertical)
 
         local _, py = parent:LocalToScreen(0, 0)
         local _, ph = parent:GetSize()
-
         if y < py then
             local upy = py - y
             y = y + upy + 1
@@ -230,7 +226,6 @@ end
 ---@param bVertical boolean
 function Draw:DistributedLinearGradient(x, y, w, h, tblColors, bVertical)
     local stops = {}
-
     for i, v in SortedPairs(tblColors) do
         if not IsColor(v) then
             PrintError('Неправильный цвет ' .. tostring(v) .. ' для градиента!')
@@ -239,7 +234,6 @@ function Draw:DistributedLinearGradient(x, y, w, h, tblColors, bVertical)
 
         local parts = #tblColors - 1
         local onePartOfOne = 1 / parts
-
         table.insert(stops, {
             offset = (i - 1) * onePartOfOne,
             color = v
@@ -273,14 +267,12 @@ function Draw:LinearGradient(x, y, w, h, stops, bVertical)
     elseif #stops == 1 then
         surface.SetDrawColor(stops[1].color)
         surface.DrawRect(x, y, w, h)
-
         return
     end
 
     table.SortByMember(stops, 'offset', true)
     render.SetMaterial(Material('vgui/white'))
     mesh.Begin(MATERIAL_QUADS, #stops - 1)
-
     for i = 1, #stops - 1 do
         local offset1 = math.Clamp(stops[i].offset, 0, 1)
         local offset2 = math.Clamp(stops[i + 1].offset, 0, 1)
@@ -292,7 +284,6 @@ function Draw:LinearGradient(x, y, w, h, stops, bVertical)
         local r2, g2, b2, a2
         local r3, g3, b3, a3 = color2.r, color2.g, color2.b, color2.a
         local r4, g4, b4, a4
-
         if bVertical then
             r2, g2, b2, a2 = r3, g3, b3, a3
             r4, g4, b4, a4 = r1, g1, b1, a1
@@ -325,5 +316,4 @@ function Draw:LinearGradient(x, y, w, h, stops, bVertical)
 
     mesh.End()
 end
-
 return Draw

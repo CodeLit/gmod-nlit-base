@@ -16,7 +16,7 @@ local strings = nlitString
 --      ['Add items'] = 'Добавить предметы'
 --  })
 -- @see nlitLang
-function AddTranslation(lang, tbl)
+function AddTranslation(self, lang, tbl)
     self.List = self.List or {}
     self.List[lang] = self.List[lang] or {}
     for k, v in pairs(tbl) do
@@ -27,14 +27,14 @@ end
 --- Formats language to 2-chars code
 -- @param lang string
 -- @return string formatted lang
-function Format(lang)
+function Format(self, lang)
     return strings:FormatToTwoCharsLang(lang)
 end
 
 if CLIENT then
     --- Returns local player language. Client function.
     -- @return string
-    function GetLocalLang()
+    function GetLocalLang(self)
         return self:Format(GetConVar('nlit_lang'):GetString())
     end
 end
@@ -43,7 +43,7 @@ end
 -- @param text string
 -- @param langCode string
 -- @return string Translated text
-local function Translator(text, langCode)
+local function Translator(self, text, langCode)
     if CLIENT then langCode = nlitLang:GetLocalLang() end
     local langData = CWLang.List[langCode]
     if langData and langData[text] then return langData[text] end

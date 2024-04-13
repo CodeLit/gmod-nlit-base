@@ -1,5 +1,5 @@
 local Icons = {}
-local D = CW:Lib('draw')
+local D = nlitLib:Lib('draw')
 local Panels = NGUI.Panels
 ---Returns a panel with icon
 ---@param icon string

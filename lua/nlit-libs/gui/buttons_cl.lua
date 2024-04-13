@@ -8,8 +8,8 @@ local math = math
 local hook = hook
 local table = table
 local RunConsoleCommand = RunConsoleCommand
-local D = CW:Lib('draw')
-local Icons = CW:Lib('icons')
+local D = nlitLib:Lib('draw')
+local Icons = nlitLib:Lib('icons')
 local l = nlitLang
 --- Creates GUI Buttons
 -- @module Buttons
@@ -20,18 +20,18 @@ local Buttons = {}
 ---@param clickFunc function OnClick function
 --- @usage Buttons:Create('Accept',function(btn)
 --      -- OnClick function
---		btn:SetColor(CWC:Red())
+--		btn:SetColor(NC:Red())
 -- end)
 function Buttons:Create(text, clickFunc)
     local b = TDLib('DButton')
     b:SetText(l(text) or '')
     b:SetFont('N_small')
-    b:SetColor(CWC:ThemeText())
+    b:SetColor(NC:ThemeText())
     b:ClearPaint()
-    b:Background(CWC:Theme())
-    b:CircleHover(CWC:White(CWC:IsLightTheme() and 30 or 20), 7, 130)
-    b:Gradient(CWC:ThemeInside(true), TOP)
-    local bh = CWC:ThemeText()
+    b:Background(NC:Theme())
+    b:CircleHover(NC:White(NC:IsLightTheme() and 30 or 20), 7, 130)
+    b:Gradient(NC:ThemeInside(true), TOP)
+    local bh = NC:ThemeText()
     bh.a = 90
     b:BarHover(bh)
     function b:SetBackgroundColor(color)
@@ -55,7 +55,7 @@ end
 --- @see Create
 function Buttons:Accept(text, clickFunc)
     local b = self:Create(text or 'Подтвердить', clickFunc)
-    b:SetTextColor(CWC:White())
+    b:SetTextColor(NC:White())
     b:Background(Color(0, 190, 0, 220))
     return b
 end
@@ -64,7 +64,7 @@ end
 --- @see Create
 function Buttons:Decline(text, clickFunc)
     local b = self:Create(text or 'Отменить', clickFunc)
-    b:SetTextColor(CWC:White())
+    b:SetTextColor(NC:White())
     b:Background(Color(190, 0, 0, 220))
     return b
 end

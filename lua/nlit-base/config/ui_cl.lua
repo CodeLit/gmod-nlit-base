@@ -12,9 +12,9 @@ local Panels = NGUI.Panels
 local TblLsts = NGUI.Lists
 local Text = NGUI.Text
 local CWStr = nlitString
-local HTML = CW:Lib('html')
+local HTML = nlitLib:Lib('html')
 local l = nlitLang
-local addons_short_name = 'CW'
+local addons_short_name = 'nlit'
 local addons_website = 'https://neolife.tk/ru' -- Английский нужно добавлять отдельно
 local last_selected_category
 local fr
@@ -108,7 +108,7 @@ Buttons:AddToCMenu(addons_short_name .. ' ' .. l('Addons'), Icons:GetPath('cyber
 
                 local topLabel = cpnl:Add(Text:Create(l('Select addon for setup') .. ':'))
                 topLabel:Dock(TOP)
-                topLabel:SetColor(CWC:White())
+                topLabel:SetColor(NC:White())
                 local variant = cpnl:Add(TblLsts:Variant(addons, function(pnl, i, v) SelectAddon(v) end))
                 variant:Dock(TOP)
                 variant:DockMargin(0, 0, 0, 10)

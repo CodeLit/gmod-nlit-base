@@ -11,7 +11,7 @@ local l = nlitLang
 local CWStr = nlitString
 local function PrepareTextArea(pnl)
     pnl:ReadyTextbox()
-    pnl:SetTextColor(CWC:ThemeText())
+    pnl:SetTextColor(NC:ThemeText())
 end
 
 ---Creates editable panel
@@ -20,7 +20,7 @@ end
 function Editable:EditPanel(text, acceptFunc)
     local e = TDLib('DTextEntry')
     e:SetPlaceholderText(text or l('Введите текст') .. '...')
-    e:SetPlaceholderColor(CWC:ThemeText())
+    e:SetPlaceholderColor(NC:ThemeText())
     PrepareTextArea(e)
     e.OnEnter = function() acceptFunc(e:GetValue()) end
     return e
@@ -31,7 +31,7 @@ end
 function Editable:NumPanel(text, acceptFunc)
     local e = TDLib('DNumberWang')
     e:SetPlaceholderText(text or l('Введите число') .. '...')
-    e:SetPlaceholderColor(CWC:ThemeText())
+    e:SetPlaceholderColor(NC:ThemeText())
     e:SetText('')
     PrepareTextArea(e)
     local limit = 9999999999
@@ -51,9 +51,9 @@ function Editable:NumSlider(text, min, max, decimal)
     numslider:SetMax(max or 1)
     numslider:SetDecimals(decimal or 0)
     numslider.Paint = function(self, w, h)
-        surface.SetDrawColor(CWC:ThemeInside())
+        surface.SetDrawColor(NC:ThemeInside())
         numslider:DrawFilledRect()
-        draw.DrawText(l(text) or "", 'N', w / 2, 0, CWC:ThemeText(), 1)
+        draw.DrawText(l(text) or "", 'N', w / 2, 0, NC:ThemeText(), 1)
     end
 
     numslider.PerformLayout = function(self) self:SizeToContents() end

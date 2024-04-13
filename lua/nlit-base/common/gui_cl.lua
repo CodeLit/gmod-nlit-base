@@ -14,7 +14,7 @@ NGUI = NGUI or {
 }
 
 concommand.Add('cw_clear_frames', function()
-    for _, frame in pairs(CW.OpenedFrames or {}) do
+    for _, frame in pairs(nlit.OpenedFrames or {}) do
         if IsValid(frame) then frame:Close() end
     end
 end)

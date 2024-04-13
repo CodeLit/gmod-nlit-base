@@ -8,7 +8,7 @@ local c = nlitColors
 local lineSize = 50
 local addLinesNum = 5 / 2
 local Clr = c:Yellow()
-hook.Add('PostDrawOpaqueRenderables', 'CW Debug Helper', function()
+hook.Add('PostDrawOpaqueRenderables', 'nlit Debug Helper', function()
     if not GetConVar('developer'):GetBool() then return end
     cam.Start3D2D(LocalPlayer():GetEyeTrace().HitPos, Angle(0, 0, 0), 0.1)
     D:Line(-lineSize, -lineSize, lineSize, lineSize, Clr)

@@ -1,15 +1,8 @@
-local load = nlitLoad
-
-local WhenGMLoaded = WhenGMLoaded
 local surface = surface
 local ScrW = ScrW
 local ScrH = ScrH
 local nguiRealFont = 'Open Sans' -- Use the font-name which is shown to you by your operating system Font Viewer, not the file name
-
-load.WhenGMLoaded('NBase Fonts', function()
-    nguiRealFont = ix and ix.config.Get('genericFont') or nguiRealFont
-end)
-
+nlitLoad.WhenGMLoaded('NBase Fonts', function() nguiRealFont = ix and ix.config.Get('genericFont') or nguiRealFont end)
 -- ix.config.Get("font"), ix.config.Get("genericFont")
 -- TODO: Перевести все шрифты на ix шрифты, изза хреновой поддержки киррилицы в gmod.
 local function CreateFonts(font, tbl)
@@ -39,7 +32,6 @@ end
 -- 	outline = false,
 -- })
 local commonWeight = 1000
-
 surface.CreateFont('N_ent', {
     font = nguiRealFont,
     size = 23,
@@ -66,7 +58,6 @@ CreateFonts('N_smaller', {
 })
 
 local mul = (ScrW() < 700 or ScrH() < 700) and 0.6 or 1
-
 CreateFonts('N_medium', {
     font = nguiRealFont,
     size = 25 * mul,
