@@ -83,7 +83,7 @@ function AddToCMenu(self, title, icon, iconSize, func)
         onewindow = true,
         init = function(ico, window)
             window:SetIcon(icon)
-            NGUI.Frames:AddBehavior(window)
+            nlitFrames:AddBehavior(window)
             func(window)
         end,
     })

@@ -8,9 +8,9 @@ local isstring = isstring
 ---@module Lists
 local Lists = {}
 local Buttons = nlitButtons
-local Frames = NGUI.Frames
-local Panels = NGUI.Panels
-local Inputs = NGUI.Inputs
+local Frames = nlitFrames
+local Panels = nlitPanels
+local Inputs = nlitInputs
 local strings = nlitString
 local l = nlitLang
 ---Variant selector

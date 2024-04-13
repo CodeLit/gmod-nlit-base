@@ -1,10 +1,12 @@
-local Icons = {}
+--- @module nlitIcons
+-- @usage local Icons = nlitIcons
+module('nlitIcons', package.seeall)
 local D = nlitLib:Lib('draw')
-local Panels = NGUI.Panels
----Returns a panel with icon
----@param icon string
----@return panel
-function Icons:Create(icon)
+local Panels = nlitPanels
+--- Returns a panel with icon
+-- @param icon string
+-- @return panel
+function Create(self, icon)
 	local pnl = Panels:Panel()
 	pnl.Paint = function(p, w, h)
 		local x, y = p:GetPos()
@@ -13,8 +15,7 @@ function Icons:Create(icon)
 	return pnl
 end
 
----Adds path to icon. Includes materials/icons/
-function Icons:GetPath(icon)
+--- Adds path to icon. Includes materials/icons/
+function GetPath(self, icon)
 	return 'materials/icons/' .. icon
 end
-return Icons

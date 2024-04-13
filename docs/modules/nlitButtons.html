@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Nlit's Base Framework documentation</title>
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Nlit's Base</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/nlit.html">nlit</a></li>
+  <li><a href="../modules/nlitLib.html">nlitLib</a></li>
+  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
+  <li><a href="../modules/nlitColors.html">nlitColors</a></li>
+  <li><a href="../modules/nlitLang.html">nlitLang</a></li>
+  <li><a href="../modules/nlitString.html">nlitString</a></li>
+  <li><a href="../modules/nlitTest.html">nlitTest</a></li>
+  <li><strong>nlitButtons</strong></li>
+  <li><a href="../modules/Editable.html">Editable</a></li>
+  <li><a href="../modules/Frames.html">Frames</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>nlitButtons</code></h1>
+<p>Creates GUI Buttons</p>
+<p>
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Buttons = nlitButtons
+</pre>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Create">Create (text, clickFunc)</a></td>
+	<td class="summary">Creates a button</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Accept">Accept (self, text, clickFunc)</a></td>
+	<td class="summary">Accept button green colored</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Decline">Decline (self, text, clickFunc)</a></td>
+	<td class="summary">Decline button red colored</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddToCMenu">AddToCMenu (title, icon, iconSize, func)</a></td>
+	<td class="summary">Adds button to C button menu</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HudSettings">HudSettings (self)</a></td>
+	<td class="summary">Specific HUD Settings button</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Create"></a>
+    <strong>Create (text, clickFunc)</strong>
+    </dt>
+    <dd>
+    Creates a button
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string Button text
+        </li>
+        <li><span class="parameter">clickFunc</span>
+         function OnClick function
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="function-name">Create</span>(<span class="string">'Accept'</span>,<span class="keyword">function</span>(btn)
+     <span class="comment">-- OnClick function
+</span>	btn:<span class="function-name">SetColor</span>(NC:<span class="function-name">Red</span>())
+<span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Accept"></a>
+    <strong>Accept (self, text, clickFunc)</strong>
+    </dt>
+    <dd>
+    Accept button green colored
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+        <li><span class="parameter">text</span>
+
+
+        </li>
+        <li><span class="parameter">clickFunc</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/nlitButtons.html#Create">Create</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Decline"></a>
+    <strong>Decline (self, text, clickFunc)</strong>
+    </dt>
+    <dd>
+    Decline button red colored
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+        <li><span class="parameter">text</span>
+
+
+        </li>
+        <li><span class="parameter">clickFunc</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/nlitButtons.html#Create">Create</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "AddToCMenu"></a>
+    <strong>AddToCMenu (title, icon, iconSize, func)</strong>
+    </dt>
+    <dd>
+    Adds button to C button menu
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         string
+        </li>
+        <li><span class="parameter">icon</span>
+         string
+        </li>
+        <li><span class="parameter">iconSize</span>
+         number
+        </li>
+        <li><span class="parameter">func</span>
+         function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HudSettings"></a>
+    <strong>HudSettings (self)</strong>
+    </dt>
+    <dd>
+    Specific HUD Settings button
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2024-04-13 15:47:03 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

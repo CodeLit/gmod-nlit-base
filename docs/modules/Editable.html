@@ -45,9 +45,9 @@
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitLang.html">nlitLang</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
-  <li><strong>nlitTest</strong></li>
+  <li><a href="../modules/nlitTest.html">nlitTest</a></li>
   <li><a href="../modules/nlitButtons.html">nlitButtons</a></li>
-  <li><a href="../modules/Editable.html">Editable</a></li>
+  <li><strong>Editable</strong></li>
   <li><a href="../modules/Frames.html">Frames</a></li>
 </ul>
 <h2>Manual</h2>
@@ -59,29 +59,30 @@
 
 <div id="content">
 
-<h1>Module <code>nlitTest</code></h1>
-<p>Test module for writing a unit tests</p>
+<h1>Module <code>Editable</code></h1>
+<p>Creates GUI Editable panels</p>
 <p>
 </p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Editable = nlitEditable
+</pre>
+    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#assertIsEqual">assertIsEqual (self, a, b)</a></td>
-	<td class="summary">Asserts that two values are equal</td>
+	<td class="name" nowrap><a href="#EditPanel">EditPanel (text, acceptFunc)</a></td>
+	<td class="summary">Creates editable panel</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#assertIsFalse">assertIsFalse (self, condition)</a></td>
-	<td class="summary">Asserts that the condition is false</td>
+	<td class="name" nowrap><a href="#NumPanel">NumPanel (self, text, acceptFunc)</a></td>
+	<td class="summary">Creates editable number panel</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#assertIsTrue">assertIsTrue (self, condition)</a></td>
-	<td class="summary">Asserts that the condition is true</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#assertIsNil">assertIsNil (self, value)</a></td>
-	<td class="summary">Asserts that the value is nil</td>
+	<td class="name" nowrap><a href="#NumSlider">NumSlider (self, text, min, max, decimal)</a></td>
+	<td class="summary">Creates editable slider panel</td>
 	</tr>
 </table>
 
@@ -93,26 +94,20 @@
 
     <dl class="function">
     <dt>
-    <a name = "assertIsEqual"></a>
-    <strong>assertIsEqual (self, a, b)</strong>
+    <a name = "EditPanel"></a>
+    <strong>EditPanel (text, acceptFunc)</strong>
     </dt>
     <dd>
-    Asserts that two values are equal
+    Creates editable panel
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-
-
+        <li><span class="parameter">text</span>
+         string Placeholder text
         </li>
-        <li><span class="parameter">a</span>
-
-
-        </li>
-        <li><span class="parameter">b</span>
-
-
+        <li><span class="parameter">acceptFunc</span>
+         function OnEnterPressed function
         </li>
     </ul>
 
@@ -122,11 +117,11 @@
 
 </dd>
     <dt>
-    <a name = "assertIsFalse"></a>
-    <strong>assertIsFalse (self, condition)</strong>
+    <a name = "NumPanel"></a>
+    <strong>NumPanel (self, text, acceptFunc)</strong>
     </dt>
     <dd>
-    Asserts that the condition is false
+    Creates editable number panel
 
 
     <h3>Parameters:</h3>
@@ -135,7 +130,11 @@
 
 
         </li>
-        <li><span class="parameter">condition</span>
+        <li><span class="parameter">text</span>
+
+
+        </li>
+        <li><span class="parameter">acceptFunc</span>
 
 
         </li>
@@ -143,15 +142,19 @@
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/Editable.html#EditPanel">EditPanel</a>
+    </ul>
 
 
 </dd>
     <dt>
-    <a name = "assertIsTrue"></a>
-    <strong>assertIsTrue (self, condition)</strong>
+    <a name = "NumSlider"></a>
+    <strong>NumSlider (self, text, min, max, decimal)</strong>
     </dt>
     <dd>
-    Asserts that the condition is true
+    Creates editable slider panel
 
 
     <h3>Parameters:</h3>
@@ -160,7 +163,19 @@
 
 
         </li>
-        <li><span class="parameter">condition</span>
+        <li><span class="parameter">text</span>
+
+
+        </li>
+        <li><span class="parameter">min</span>
+
+
+        </li>
+        <li><span class="parameter">max</span>
+
+
+        </li>
+        <li><span class="parameter">decimal</span>
 
 
         </li>
@@ -168,31 +183,10 @@
 
 
 
-
-
-</dd>
-    <dt>
-    <a name = "assertIsNil"></a>
-    <strong>assertIsNil (self, value)</strong>
-    </dt>
-    <dd>
-    Asserts that the value is nil
-
-
-    <h3>Parameters:</h3>
+    <h3>See also:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-
-
-        </li>
-        <li><span class="parameter">value</span>
-
-
-        </li>
+         <a href="../modules/Editable.html#EditPanel">EditPanel</a>
     </ul>
-
-
-
 
 
 </dd>

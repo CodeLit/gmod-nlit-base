@@ -1,5 +1,5 @@
 --- Creates GUI Editable panels
--- @module Editable
+-- @module nlitEditable
 -- @usage local Editable = nlitEditable
 module('nlitEditable', package.seeall)
 local TDLib = TDLib

@@ -1,0 +1,938 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Nlit's Base Framework documentation</title>
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Nlit's Base</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/nlit.html">nlit</a></li>
+  <li><a href="../modules/nlitLib.html">nlitLib</a></li>
+  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
+  <li><a href="../modules/nlitColors.html">nlitColors</a></li>
+  <li><a href="../modules/nlitLang.html">nlitLang</a></li>
+  <li><strong>nlitString</strong></li>
+  <li><a href="../modules/nlitTest.html">nlitTest</a></li>
+  <li><a href="../modules/nlitButtons.html">nlitButtons</a></li>
+  <li><a href="../modules/Editable.html">Editable</a></li>
+  <li><a href="../modules/Frames.html">Frames</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>nlitString</code></h1>
+<p>The module for working with strings</p>
+<p>
+</p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/nlit.html#">nlit</a>
+    </ul>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local strings = nlitString
+</pre>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#IQ">IQ (str)</a></td>
+	<td class="summary">Puts text In Quotes for SQL code
+ Changing single quotes, prehaps double quoutes using by json
+ Закрывает текст в кавычки для SQL
+ Заменяем одинарные кавычки, ибо двойные использует json</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Get">Get (self, str, pattern)</a></td>
+	<td class="summary">Takes substring from string using pattern
+ / Берёт из строки подстроку с помощью паттерна</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Len">Len (str)</a></td>
+	<td class="summary">Takes length of the string
+ / Взять длину строки</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FromSID">FromSID (sid)</a></td>
+	<td class="summary">Short ID to Steamid</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HasRussianSymbols">HasRussianSymbols (self, text)</a></td>
+	<td class="summary">Is str contains russian symbols</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HaveLower">HaveLower (text)</a></td>
+	<td class="summary">Is str contains lowercase symbols</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HaveUpper">HaveUpper (text)</a></td>
+	<td class="summary">Is str contains lowercase symbols</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetNumEnding">GetNumEnding (self, num, ifZero, ifOne, ifTwo)</a></td>
+	<td class="summary">Возвращает красивые падежные окончания</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RandomString">RandomString (numOfChairs)</a></td>
+	<td class="summary">Generate Random String</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FormatToTwoCharsLang">FormatToTwoCharsLang (lang)</a></td>
+	<td class="summary">Formats a language to 2 chars lang</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Contains">Contains (str, text)</a></td>
+	<td class="summary">Is string Contains text</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#OnlyContainsLetters">OnlyContainsLetters (text)</a></td>
+	<td class="summary">Is string only Contains letters</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#OnlyContainsLettersAndNumbers">OnlyContainsLettersAndNumbers (text)</a></td>
+	<td class="summary">Is string only Contains letters and numbers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#OnlyContainsAllowed">OnlyContainsAllowed (text)</a></td>
+	<td class="summary">Is string only Contains allowed symbols</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#OnlyContainsNumbers">OnlyContainsNumbers (text)</a></td>
+	<td class="summary">Is string only Contains numbers</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Lower">Lower (text)</a></td>
+	<td class="summary">Makes string letters lowercase</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Upper">Upper (text)</a></td>
+	<td class="summary">Makes string letters uppercase</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CapitalizeFirst">CapitalizeFirst (text, text)</a></td>
+	<td class="summary">Makes string letters capitalized
+ TODO: Fix</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemovePunctuationMarks">RemovePunctuationMarks (text)</a></td>
+	<td class="summary">Removes punctuation marks</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemoveRussianSymbols">RemoveRussianSymbols (text)</a></td>
+	<td class="summary">Removes rus symbols</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetFileNameExt">GetFileNameExt (str)</a></td>
+	<td class="summary">Gets file name and extention from string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetFileExt">GetFileExt (str)</a></td>
+	<td class="summary">Gets file extention from string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetFilePath">GetFilePath (str)</a></td>
+	<td class="summary">Gets file path from string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ToJson">ToJson (arr)</a></td>
+	<td class="summary">Array to json</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FromJson">FromJson (str)</a></td>
+	<td class="summary">Array from json</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemoveSQL">RemoveSQL (str)</a></td>
+	<td class="summary">Removes SQL from string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HasSQL">HasSQL (str)</a></td>
+	<td class="summary">Is String Has SQL code</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "IQ"></a>
+    <strong>IQ (str)</strong>
+    </dt>
+    <dd>
+    Puts text In Quotes for SQL code
+ Changing single quotes, prehaps double quoutes using by json
+ Закрывает текст в кавычки для SQL
+ Заменяем одинарные кавычки, ибо двойные использует json
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         the string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string with quotes
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Get"></a>
+    <strong>Get (self, str, pattern)</strong>
+    </dt>
+    <dd>
+    Takes substring from string using pattern
+ / Берёт из строки подстроку с помощью паттерна
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+        <li><span class="parameter">str</span>
+
+
+        </li>
+        <li><span class="parameter">pattern</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Len"></a>
+    <strong>Len (str)</strong>
+    </dt>
+    <dd>
+    Takes length of the string
+ / Взять длину строки
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         Input string
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FromSID"></a>
+    <strong>FromSID (sid)</strong>
+    </dt>
+    <dd>
+    Short ID to Steamid
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">sid</span>
+         short SteamID
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HasRussianSymbols"></a>
+    <strong>HasRussianSymbols (self, text)</strong>
+    </dt>
+    <dd>
+    Is str contains russian symbols
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+        <li><span class="parameter">text</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HaveLower"></a>
+    <strong>HaveLower (text)</strong>
+    </dt>
+    <dd>
+    Is str contains lowercase symbols
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        boolean</li>
+        <li>
+        table found Table</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HaveUpper"></a>
+    <strong>HaveUpper (text)</strong>
+    </dt>
+    <dd>
+    Is str contains lowercase symbols
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        boolean</li>
+        <li>
+        table found Table</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetNumEnding"></a>
+    <strong>GetNumEnding (self, num, ifZero, ifOne, ifTwo)</strong>
+    </dt>
+    <dd>
+    Возвращает красивые падежные окончания
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+        <li><span class="parameter">num</span>
+
+
+        </li>
+        <li><span class="parameter">ifZero</span>
+
+
+        </li>
+        <li><span class="parameter">ifOne</span>
+
+
+        </li>
+        <li><span class="parameter">ifTwo</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="function-name">GetNumEnding</span>(<span class="number">11</span>,<span class="string">'минут'</span>,<span class="string">'минута'</span>,<span class="string">'минуты'</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "RandomString"></a>
+    <strong>RandomString (numOfChairs)</strong>
+    </dt>
+    <dd>
+    Generate Random String
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">numOfChairs</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FormatToTwoCharsLang"></a>
+    <strong>FormatToTwoCharsLang (lang)</strong>
+    </dt>
+    <dd>
+    Formats a language to 2 chars lang
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lang</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string formatted lang
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Contains"></a>
+    <strong>Contains (str, text)</strong>
+    </dt>
+    <dd>
+    Is string Contains text
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+        <li><span class="parameter">text</span>
+         text
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "OnlyContainsLetters"></a>
+    <strong>OnlyContainsLetters (text)</strong>
+    </dt>
+    <dd>
+    Is string only Contains letters
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        bool
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "OnlyContainsLettersAndNumbers"></a>
+    <strong>OnlyContainsLettersAndNumbers (text)</strong>
+    </dt>
+    <dd>
+    Is string only Contains letters and numbers
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        bool
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "OnlyContainsAllowed"></a>
+    <strong>OnlyContainsAllowed (text)</strong>
+    </dt>
+    <dd>
+    Is string only Contains allowed symbols
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        bool
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "OnlyContainsNumbers"></a>
+    <strong>OnlyContainsNumbers (text)</strong>
+    </dt>
+    <dd>
+    Is string only Contains numbers
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        bool
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Lower"></a>
+    <strong>Lower (text)</strong>
+    </dt>
+    <dd>
+    Makes string letters lowercase
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        new string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Upper"></a>
+    <strong>Upper (text)</strong>
+    </dt>
+    <dd>
+    Makes string letters uppercase
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        new string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CapitalizeFirst"></a>
+    <strong>CapitalizeFirst (text, text)</strong>
+    </dt>
+    <dd>
+    Makes string letters capitalized
+ TODO: Fix
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+         new string
+ function Capitalize(self, text)</p>
+
+<pre><code> if HasRussianSymbols(self, text) then
+     -- Lowering the whole text
+     text = ' ' .. CWUtf8.lower(text)
+     -- We're changing all russian first letters after space to uppercase
+     -- / Заменяем все русские первые буквы после пробела на заглавные
+     for k, v in pairs(utf8_lc_uc) do
+         text = string.Replace(text, ' ' .. k, ' ' .. v)
+     end
+ else
+     -- Lowering the whole text
+     text = ' ' .. string.lower(text)
+ end
+ np(text)
+ -- We're changing all english first letters to uppercase / Меняем все то же самое, только в инглише
+ local output = text:gsub("(%l)(%w*)", function(a, b) return string.upper(a) .. b end)
+ -- Removing first space, added by gsub / Обрезаем пробел вначале, добавленный нами
+ output = string.sub(output, 2)
+ return output
+</code></pre>
+
+<p> end
+ np(Capitalize(self, &lsquo;hello world&rsquo;))
+ np(Capitalize(self,&lsquo;привет мир&rsquo;))
+ Makes string first letter capitalized</li>
+        <li>
+        new string</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemovePunctuationMarks"></a>
+    <strong>RemovePunctuationMarks (text)</strong>
+    </dt>
+    <dd>
+    Removes punctuation marks
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        formatted text
+ пробел оставляет
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemoveRussianSymbols"></a>
+    <strong>RemoveRussianSymbols (text)</strong>
+    </dt>
+    <dd>
+    Removes rus symbols
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        formatted text
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetFileNameExt"></a>
+    <strong>GetFileNameExt (str)</strong>
+    </dt>
+    <dd>
+    Gets file name and extention from string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        formatted text
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetFileExt"></a>
+    <strong>GetFileExt (str)</strong>
+    </dt>
+    <dd>
+    Gets file extention from string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        formatted text
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetFilePath"></a>
+    <strong>GetFilePath (str)</strong>
+    </dt>
+    <dd>
+    Gets file path from string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        formatted text
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ToJson"></a>
+    <strong>ToJson (arr)</strong>
+    </dt>
+    <dd>
+    Array to json
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">arr</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string text
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FromJson"></a>
+    <strong>FromJson (str)</strong>
+    </dt>
+    <dd>
+    Array from json
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table text
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemoveSQL"></a>
+    <strong>RemoveSQL (str)</strong>
+    </dt>
+    <dd>
+    Removes SQL from string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string formatted
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HasSQL"></a>
+    <strong>HasSQL (str)</strong>
+    </dt>
+    <dd>
+    Is String Has SQL code
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2024-04-13 15:47:03 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,5 +1,5 @@
----Creates GUI Frames
--- @module Frames
+--- Creates GUI Frames
+-- @module nlitFrames
 -- @usage local Frames = nlitFrames
 module('nlitFrames', package.seeall)
 local draw = draw
@@ -11,22 +11,22 @@ local timer = timer
 local pairs = pairs
 local LocalPlayer = LocalPlayer
 local Buttons = nlitButtons
-local Inputs = NGUI.Inputs
+local Inputs = nlitInputs
 local ScrW, ScrH = ScrW, ScrH
----Returns a newly created frame
----@param title string
----@return frame
----@usage Frames:Create('MyLovelyFrame')
-function Frames:Create(self, title)
+--- Returns a newly created frame
+-- @param title string
+-- @return frame
+-- @usage Create('MyLovelyFrame')
+function Create(self, title)
     local fr = self:Unfocused(title)
     fr:MakePopup()
     return fr
 end
 
----Adds frame behavior to frame (standartizes a frame)
----@param fr framePanel
----@param title string
-function Frames:AddBehavior(self, fr, title)
+--- Adds frame behavior to frame (standartizes a frame)
+-- @param fr framePanel
+-- @param title string
+function AddBehavior(self, fr, title)
     fr:SetDraggable(true)
     fr:SetSizable(false)
     fr:SetTitle(title or '')
@@ -48,19 +48,19 @@ function Frames:AddBehavior(self, fr, title)
     end
 end
 
----Resizes a frame
----@param fr frame
-function Frames:Resize(self, fr)
+--- Resizes a frame
+-- @param fr frame
+function Resize(self, fr)
     fr:SetSize(ScrW() * 0.7, ScrH() * 0.8)
     fr:Center()
 end
 
 nlit.OpenedFrames = nlit.OpenedFrames or {}
----Creates an unfocused frame
----@param title string
----@return frame
----@see Create
-function Frames:Unfocused(self, title)
+--- Creates an unfocused frame
+-- @param title string
+-- @return frame
+-- @see Create
+function Unfocused(self, title)
     local fr = vgui.Create('DFrame')
     table.insert(nlit.OpenedFrames, fr)
     for index, value in ipairs(nlit.OpenedFrames) do
@@ -71,13 +71,13 @@ function Frames:Unfocused(self, title)
     return fr
 end
 
----Creates a frame with inputs
----@param title string
----@param acceptFunc function
----@param typeOfInput string
----@return frame
----@see Inputs:Create
-function Frames:Input(self, title, acceptFunc, typeOfInput)
+--- Creates a frame with inputs
+-- @param title string
+-- @param acceptFunc function
+-- @param typeOfInput string
+-- @return frame
+-- @see Inputs:Create
+function Input(self, title, acceptFunc, typeOfInput)
     local fr = self:Create()
     fr:SetIcon('icon16/pencil.png')
     fr:SetSize(ScrW() / 4, 85)
@@ -96,8 +96,8 @@ function Frames:Input(self, title, acceptFunc, typeOfInput)
     return fr
 end
 
----Creates a binder frame
-function Frames:Binder(self, title, command)
+--- Creates a binder frame
+function Binder(self, title, command)
     local fr = self:Create(title)
     fr:SetSize(250, 100)
     fr:Center()
@@ -108,9 +108,8 @@ function Frames:Binder(self, title, command)
     return fr, binder
 end
 
---- Specific type of frame named rules editor
----/ окно для редактирования каких-либо правил (для зоны, для админки и т.п.)
-function Frames:Rules(self, title, checkBoxes, acceptFunc)
+--- Specific type of frame named rules editor / окно для редактирования каких-либо правил (для зоны, для админки и т.п.)
+function Rules(self, title, checkBoxes, acceptFunc)
     local fr = self:Create()
     fr:SetIcon('icon16/pencil.png')
     fr:SetSize(400, 400)
@@ -160,13 +159,13 @@ function Frames:Rules(self, title, checkBoxes, acceptFunc)
     return fr
 end
 
----Accept Dialogue frame
----@param text string
----@param textYes string
----@param textNo string
----@param acceptFunc function
----@return frame
-function Frames:AcceptDialogue(self, text, textYes, textNo, acceptFunc)
+--- Accept Dialogue frame
+-- @param text string
+-- @param textYes string
+-- @param textNo string
+-- @param acceptFunc function
+-- @return frame
+function AcceptDialogue(self, text, textYes, textNo, acceptFunc)
     local fr = self:Create()
     fr:SetIcon('icon16/help.png')
     fr:SetWide(530)
@@ -207,26 +206,26 @@ function Frames:AcceptDialogue(self, text, textYes, textNo, acceptFunc)
     return fr
 end
 
----Frame with list
----@param title any
----@return table
-function Frames:List(self, title)
+--- Frame with list
+-- @param title any
+-- @return table
+function List(self, title)
     local fr = self:Create(title)
     local scroll = fr:Add('DScrollPanel')
     scroll:Dock(FILL)
-    fr.list = scroll:Add(NGUI.Lists:List())
+    fr.list = scroll:Add(nlitLists:List())
     fr.list:Dock(TOP)
     return fr
 end
 
----Frame with many fields
----@param text any
----@param tblFields any
----@param acceptFunc any
----@return string|table
----@return any
-function Frames:ManyFields(self, text, tblFields, acceptFunc)
+--- Frame with many fields
+-- @param text any
+-- @param tblFields any
+-- @param acceptFunc any
+-- @return string|table
+-- @return any
+function ManyFields(self, text, tblFields, acceptFunc)
     local fr = self:Create(text)
-    local tile = fr:Add(NGUI.Inputs:Fields(tblFields, acceptFunc))
+    local tile = fr:Add(nlitInputs:Fields(tblFields, acceptFunc))
     return fr, tile.inputs
 end
