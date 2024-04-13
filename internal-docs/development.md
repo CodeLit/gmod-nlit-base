@@ -1,0 +1,1 @@
+Install: https://github.com/FPtje/GLuaFixer/releases

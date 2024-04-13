@@ -1,9 +1,8 @@
 --- The libfiner is an importer module for nlit libraries. Global shared module.
--- @module nlitLibs
--- @usage local libs = nlitLibs
+-- @module nlitLib
+-- @usage local libs = nlitLib
 -- @see nlit
-module('nlitLibs', package.seeall)
-
+module('nlitLib', package.seeall)
 local tobool = tobool
 local string = string
 local PrintError = PrintError
@@ -11,32 +10,26 @@ local include = include
 local pairs = pairs
 local file = file
 local nlit = nlit
-
 local LibFinder = {}
-
 local function IsStringContains(str, text)
     return tobool(string.find(str, text))
 end
 
 local pathToLibs = 'nlit-libs'
-
 --- Using of Nlit lib. Basic fucntion.
 -- @param libName string
 -- @return table lib
--- @usage local libs = nlitLibs
+-- @usage local libs = nlitLib
 -- local colors = libs.Colors
 -- Button:SetBackgroundColor(colors:White())
 -- local Strings = libs:Lib('strings')
 -- ...
 function Lib(self, libName)
     local found = FindLibPathInFolder(self, pathToLibs, string.lower(libName))
-
     if not found then
         PrintError('[Nlit\'s Framework] Library [' .. libName .. '] is not found!')
-
         return
     end
-
     return include(found)
 end
 
@@ -57,9 +50,7 @@ function FindLibPathInFolder(self, path, lib)
     local files, folders = file.Find(path .. '/*', 'LUA')
     local found = self:FindLuaLibInFiles(files, lib)
     if found then return path .. '/' .. found end
-
     return self:LookupForLib(folders, path, lib)
 end
 
 nlit.AddAllInFolder(pathToLibs, true)
-

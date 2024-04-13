@@ -5,20 +5,17 @@ local hook = hook
 local timer = timer
 local pairs = pairs
 local PLY = FindMetaTable('Player')
-local CWStr = CW:Lib('string')
-local Lang = CW:Lib('language')
-
+local strings = nlitStrings
+local Lang = nlitLang
 function PLY:StID()
     if not IsValid(self) then return end
-
-    return CWStr:ToSID(self:SteamID())
+    return strings:ToSID(self:SteamID())
 end
 
 function PLY:CID()
     if not IsValid(self) then return end
     local char = self:GetCharacter()
     if not char then return end
-
     return char:GetID()
 end
 
@@ -34,7 +31,6 @@ function PLY:IsVehicleDriver()
     if not self:InVehicle() then return false end
     local veh = self:GetVehicle()
     if not IsValid(veh) then return false end
-
     return not veh.VC_ExtraSeat
 end
 

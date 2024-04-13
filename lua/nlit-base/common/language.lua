@@ -5,13 +5,9 @@
 -- -- translations must be added to folder cyber-langs using CWLang:AddTranslation() function.
 -- @see nlitLang:AddTranslation
 module('nlitLang', package.seeall)
-
 local pairs = pairs
 local GetConVar = GetConVar
-
-local Language = {}
 local strings = nlitStrings
-
 --- Adds translation to language. Can be used anywhere.
 -- @param lang string 2-char lang
 -- @param tbl table translations from english (key-value)
@@ -23,7 +19,6 @@ local strings = nlitStrings
 function AddTranslation(lang, tbl)
     self.List = self.List or {}
     self.List[lang] = self.List[lang] or {}
-
     for k, v in pairs(tbl) do
         self.List[lang][k] = v
     end
@@ -48,21 +43,14 @@ end
 -- @param text string
 -- @param langCode string
 -- @return string Translated text
-local function Translator(text,langCode)
-
-    if CLIENT then
-        langCode = nlitLang:GetLocalLang()
-    end
-
+local function Translator(text, langCode)
+    if CLIENT then langCode = nlitLang:GetLocalLang() end
     local langData = CWLang.List[langCode]
-
-    if langData and langData[text] then
-        return langData[text]
-    end
-
+    if langData and langData[text] then return langData[text] end
     if CWLang.Translate then -- Will redirect to external translator if not found a word
-        return CWLang:Translate(text,langCode)
+        return CWLang:Translate(text, langCode)
     end
-
     return text
 end
+
+nlit.AddAllInFolder('nlit-langs')
