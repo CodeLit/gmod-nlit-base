@@ -1,5 +1,6 @@
 --- Creates GUI Editable panels
--- @usage local Editable = nlitLib:Load('editable')
+-- @module GUIEditable
+-- @usage local Editable = NGUI.Editable
 local Editable = {}
 local TDLib = TDLib
 local tonumber = tonumber

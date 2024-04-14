@@ -1,5 +1,6 @@
---- Creates GUI Buttons
--- @usage local Buttons = nlitLib:Load('buttons')
+--- This module provides functions to create and manage GUI buttons.
+-- @module GUIButtons
+-- @usage local Buttons = NGUI.Buttons
 local Buttons = {}
 local TDLib = TDLib
 local Color = Color

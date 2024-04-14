@@ -1,6 +1,6 @@
---- Creates GUI Frames
--- This module provides functions to create and manage GUI frames.
--- @usage local Frames = require nlitLib:Load('frames')
+--- This module provides functions to create and manage GUI frames.
+-- @module GUIFrames
+-- @usage local Frames = NGUI.Frames
 local Frames = {}
 local draw = draw
 local vgui = vgui

@@ -1,5 +1,6 @@
 --- Panels is GUI module for panels
--- @usage local Panels = nlitLib:Load('panels')
+-- @module GUIPanels
+-- @usage local Panels = NGUI.Panels
 local Panels = {}
 local vgui = vgui
 local draw = draw

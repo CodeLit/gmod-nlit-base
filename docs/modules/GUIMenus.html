@@ -40,7 +40,7 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/nlit.html">nlit</a></li>
-  <li><strong>nlitLib</strong></li>
+  <li><a href="../modules/nlitLib.html">nlitLib</a></li>
   <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
@@ -52,7 +52,7 @@
   <li><a href="../modules/GUIIcons.html">GUIIcons</a></li>
   <li><a href="../modules/GUIInputs.html">GUIInputs</a></li>
   <li><a href="../modules/GUILists.html">GUILists</a></li>
-  <li><a href="../modules/GUIMenus.html">GUIMenus</a></li>
+  <li><strong>GUIMenus</strong></li>
   <li><a href="../modules/GUIPanels.html">GUIPanels</a></li>
   <li><a href="../modules/GUIText.html">GUIText</a></li>
   <li><a href="../modules/Lang.html">Lang</a></li>
@@ -67,16 +67,13 @@
 
 <div id="content">
 
-<h1>Module <code>nlitLib</code></h1>
-<p>The libfiner is an importer module for nlit libraries.</p>
-<p> Global shared module.</p>
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/nlit.html#">nlit</a>
-    </ul>
+<h1>Module <code>GUIMenus</code></h1>
+<p>Menus is GUI module for menu panels</p>
+<p>
+</p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local libs = nlitLib
+        <pre class="example">local Menus = NGUI.Menus
 </pre>
     </ul>
 
@@ -84,8 +81,12 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Load">Load (libName)</a></td>
-	<td class="summary">Using of Nlit lib.</td>
+	<td class="name" nowrap><a href="#Menus:Menu">Menus:Menu ()</a></td>
+	<td class="summary">Creates a new menu panel at the cursor position</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Menus:UpdateMenuPos">Menus:UpdateMenuPos (menu)</a></td>
+	<td class="summary">Updates the position of a menu to ensure it doesn&rsquo;t go off the screen</td>
 	</tr>
 </table>
 
@@ -97,36 +98,42 @@
 
     <dl class="function">
     <dt>
-    <a name = "Load"></a>
-    <strong>Load (libName)</strong>
+    <a name = "Menus:Menu"></a>
+    <strong>Menus:Menu ()</strong>
     </dt>
     <dd>
-    Using of Nlit lib.  Basic fucntion.
+    Creates a new menu panel at the cursor position
 
 
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">libName</span>
-         string
-        </li>
-    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        table lib
+        menu Newly created DermaMenu panel
     </ol>
 
 
 
-    <h3>Usage:</h3>
+
+</dd>
+    <dt>
+    <a name = "Menus:UpdateMenuPos"></a>
+    <strong>Menus:UpdateMenuPos (menu)</strong>
+    </dt>
+    <dd>
+    Updates the position of a menu to ensure it doesn&rsquo;t go off the screen
+
+
+    <h3>Parameters:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> libs = nlitLib
-<span class="keyword">local</span> colors = libs.Colors
-Button:<span class="function-name">SetBackgroundColor</span>(colors:<span class="function-name">White</span>())
-<span class="keyword">local</span> Strings = libs:<span class="function-name">Lib</span>(<span class="string">'strings'</span>)
-...</pre>
+        <li><span class="parameter">menu</span>
+         The menu whose position should be adjusted
+        </li>
     </ul>
+
+
+
+
 
 </dd>
 </dl>

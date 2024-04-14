@@ -1,5 +1,6 @@
 --- Menus is GUI module for menu panels
--- @usage local Menus = nlitLib:Load('menus')
+-- @module GUIMenus
+-- @usage local Menus = NGUI.Menus
 local Menus = {}
 local DermaMenu = DermaMenu
 local input = input

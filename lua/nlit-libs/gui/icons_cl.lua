@@ -1,5 +1,6 @@
---- This module provides functions to create and manage icons within GUI panels.
--- @usage local Icons = nlitLib:Load('icons')
+--- This module provides functions to create and manage icons within GUI panels. 
+-- @module GUIIcons
+-- @usage local Icons = NGUI.Icons
 local Icons = {}
 local D = nlitLib:Load('draw')
 local Panels = nlitLib:Load('panels')

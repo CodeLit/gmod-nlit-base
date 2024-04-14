@@ -1,4 +1,5 @@
 --- Translates text
+-- @module Translator
 -- @usage local Translator = nlitLib:Load('translator')
 -- -- Translations must be added to folder nlit-langs using Translator:AddTranslation() function.
 -- @see Translator:AddTranslation
@@ -34,21 +35,6 @@ if CLIENT then
     function Translator:GetLocalLang()
         return self:Format(GetConVar('nlit_lang'):GetString())
     end
-end
-
---- Translates text
--- @param text string Text to translate
--- @param langCode string Optional language code, defaults to local player's language
--- @return string Translated text
-function Translator:l(text, langCode)
-    if CLIENT then langCode = langCode or self:GetLocalLang() end
-    if not langCode then return text end
-    local langData = nlitLangList[langCode]
-    if langData and langData[text] then return langData[text] end
-    if self.Translate then -- Will redirect to external translator if not found a word
-        return self:Translate(text, langCode)
-    end
-    return text
 end
 --- @export
 return Translator

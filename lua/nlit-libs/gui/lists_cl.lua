@@ -1,5 +1,6 @@
 --- Lists is GUI module for list panels
--- @usage local Lists = nlitLib:Load('lists')
+-- @module GUILists
+-- @usage local Lists = NGUI.Lists
 local Lists = {}
 local vgui = vgui
 local math = math

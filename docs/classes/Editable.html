@@ -33,10 +33,14 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
+<li><a href="#Methods">Methods</a></li>
 </ul>
 
 
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>Editable</strong></li>
+</ul>
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/nlit.html">nlit</a></li>
@@ -49,16 +53,12 @@
   <li><a href="../modules/Buttons.html">Buttons</a></li>
   <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.icons_cl.html">nlit-libs.gui.icons_cl</a></li>
-  <li><strong>nlit-libs.gui.inputs_cl</strong></li>
+  <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.lists_cl.html">nlit-libs.gui.lists_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.menus_cl.html">nlit-libs.gui.menus_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.panels_cl.html">nlit-libs.gui.panels_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.text_cl.html">nlit-libs.gui.text_cl</a></li>
   <li><a href="../modules/nlit-libs.translator.html">nlit-libs.translator</a></li>
-</ul>
-<h2>Classes</h2>
-<ul class="nowrap">
-  <li><a href="../classes/Editable.html">Editable</a></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -69,31 +69,30 @@
 
 <div id="content">
 
-<h1>Module <code>nlit-libs.gui.inputs_cl</code></h1>
-<p>Creates GUI Inputs
- This module provides functions to create various input panels within a GUI.</p>
+<h1>Class <code>Editable</code></h1>
+<p>Creates GUI Editable panels</p>
 <p>
 </p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local Inputs = NGUI.Inputs
+        <pre class="example">local Editable = NGUI.Editable
 </pre>
     </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
+<h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Inputs:Bool">Inputs:Bool (title, defaultValue)</a></td>
-	<td class="summary">Boolean input field creator</td>
+	<td class="name" nowrap><a href="#editable:EditPanel">editable:EditPanel (text, acceptFunc)</a></td>
+	<td class="summary">Creates editable panel</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Inputs:Resize">Inputs:Resize (inp)</a></td>
-	<td class="summary">Resizes input panel based on text length and type of input</td>
+	<td class="name" nowrap><a href="#editable:NumPanel">editable:NumPanel (text, acceptFunc)</a></td>
+	<td class="summary">Creates editable number panel</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Inputs:Fields">Inputs:Fields (tblFields, acceptFunc)</a></td>
-	<td class="summary">Creates a panel with many inputs grouped by categories</td>
+	<td class="name" nowrap><a href="#editable:NumSlider">editable:NumSlider (text, min, max, decimal)</a></td>
+	<td class="summary">Creates editable slider panel</td>
 	</tr>
 </table>
 
@@ -101,82 +100,95 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
 
     <dl class="function">
     <dt>
-    <a name = "Inputs:Bool"></a>
-    <strong>Inputs:Bool (title, defaultValue)</strong>
+    <a name = "editable:EditPanel"></a>
+    <strong>editable:EditPanel (text, acceptFunc)</strong>
     </dt>
     <dd>
-    Boolean input field creator
+    Creates editable panel
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">title</span>
-         string The label for the checkbox
-        </li>
-        <li><span class="parameter">defaultValue</span>
-         boolean Default state of the checkbox (checked or not)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        panel Returns a panel containing a checkbox
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Inputs:Resize"></a>
-    <strong>Inputs:Resize (inp)</strong>
-    </dt>
-    <dd>
-    Resizes input panel based on text length and type of input
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">inp</span>
-         panel The input panel to resize
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Inputs:Fields"></a>
-    <strong>Inputs:Fields (tblFields, acceptFunc)</strong>
-    </dt>
-    <dd>
-    Creates a panel with many inputs grouped by categories
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">tblFields</span>
-         table Key-values of input definitions
+        <li><span class="parameter">text</span>
+         string Placeholder text
         </li>
         <li><span class="parameter">acceptFunc</span>
-         function Callback function for when inputs are accepted
+         function OnEnterPressed function
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        panel Panel containing categorized inputs
-    </ol>
 
 
+
+
+</dd>
+    <dt>
+    <a name = "editable:NumPanel"></a>
+    <strong>editable:NumPanel (text, acceptFunc)</strong>
+    </dt>
+    <dd>
+    Creates editable number panel
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+
+
+        </li>
+        <li><span class="parameter">acceptFunc</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Editable.html#editable:EditPanel">EditPanel</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "editable:NumSlider"></a>
+    <strong>editable:NumSlider (text, min, max, decimal)</strong>
+    </dt>
+    <dd>
+    Creates editable slider panel
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+
+
+        </li>
+        <li><span class="parameter">min</span>
+
+
+        </li>
+        <li><span class="parameter">max</span>
+
+
+        </li>
+        <li><span class="parameter">decimal</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Editable.html#editable:EditPanel">EditPanel</a>
+    </ul>
 
 
 </dd>

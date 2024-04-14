@@ -40,7 +40,7 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/nlit.html">nlit</a></li>
-  <li><strong>nlitLib</strong></li>
+  <li><a href="../modules/nlitLib.html">nlitLib</a></li>
   <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
@@ -49,7 +49,7 @@
   <li><a href="../modules/GUIButtons.html">GUIButtons</a></li>
   <li><a href="../modules/GUIEditable.html">GUIEditable</a></li>
   <li><a href="../modules/GUIFrames.html">GUIFrames</a></li>
-  <li><a href="../modules/GUIIcons.html">GUIIcons</a></li>
+  <li><strong>GUIIcons</strong></li>
   <li><a href="../modules/GUIInputs.html">GUIInputs</a></li>
   <li><a href="../modules/GUILists.html">GUILists</a></li>
   <li><a href="../modules/GUIMenus.html">GUIMenus</a></li>
@@ -67,16 +67,13 @@
 
 <div id="content">
 
-<h1>Module <code>nlitLib</code></h1>
-<p>The libfiner is an importer module for nlit libraries.</p>
-<p> Global shared module.</p>
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/nlit.html#">nlit</a>
-    </ul>
+<h1>Module <code>GUIIcons</code></h1>
+<p>This module provides functions to create and manage icons within GUI panels.</p>
+<p>
+</p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local libs = nlitLib
+        <pre class="example">local Icons = NGUI.Icons
 </pre>
     </ul>
 
@@ -84,8 +81,12 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Load">Load (libName)</a></td>
-	<td class="summary">Using of Nlit lib.</td>
+	<td class="name" nowrap><a href="#Icons:Create">Icons:Create (icon)</a></td>
+	<td class="summary">Returns a panel with an icon displayed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Icons:GetPath">Icons:GetPath (icon)</a></td>
+	<td class="summary">Constructs the full path to an icon file.</td>
 	</tr>
 </table>
 
@@ -97,36 +98,54 @@
 
     <dl class="function">
     <dt>
-    <a name = "Load"></a>
-    <strong>Load (libName)</strong>
+    <a name = "Icons:Create"></a>
+    <strong>Icons:Create (icon)</strong>
     </dt>
     <dd>
-    Using of Nlit lib.  Basic fucntion.
+    Returns a panel with an icon displayed.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">libName</span>
-         string
+        <li><span class="parameter">icon</span>
+         string The filename of the icon to display.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        table lib
+        panel The panel with the icon painted on it.
     </ol>
 
 
 
-    <h3>Usage:</h3>
+
+</dd>
+    <dt>
+    <a name = "Icons:GetPath"></a>
+    <strong>Icons:GetPath (icon)</strong>
+    </dt>
+    <dd>
+    Constructs the full path to an icon file.
+ This function assumes all icons are stored in the &lsquo;materials/icons/&rsquo; directory.
+
+
+    <h3>Parameters:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> libs = nlitLib
-<span class="keyword">local</span> colors = libs.Colors
-Button:<span class="function-name">SetBackgroundColor</span>(colors:<span class="function-name">White</span>())
-<span class="keyword">local</span> Strings = libs:<span class="function-name">Lib</span>(<span class="string">'strings'</span>)
-...</pre>
+        <li><span class="parameter">icon</span>
+         string The filename of the icon.
+        </li>
     </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string The full path to the icon.
+    </ol>
+
+
+
 
 </dd>
 </dl>

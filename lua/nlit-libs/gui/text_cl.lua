@@ -1,5 +1,6 @@
 --- Text is GUI module for text panels
--- @usage local Text = nlitLib:Load('text')
+-- @module GUIText
+-- @usage local Text = NGUI.Text
 local Text = {}
 local vgui = vgui
 --- Creates a text label

@@ -4,7 +4,9 @@
 -- c:White()
 -- c:Red(<trasparency from 0 to 255>)
 -- c:Yellow(100)
--- or as global variable: NC:Black()
+-- @usage -- As global variable NC
+-- NC:White()
+-- NC:Black()
 module('nlitColors', package.seeall)
 local Color = Color
 local math = math

@@ -1,6 +1,6 @@
---- Creates GUI Inputs
--- This module provides functions to create various input panels within a GUI.
--- @usage local Inputs = nlitLib:Load('inputs')
+--- This module provides functions to create various input panels within a GUI.
+-- @module GUIInputs
+-- @usage local Inputs = NGUI.Inputs
 local Inputs = {}
 local IsValid = IsValid
 local vgui = vgui
