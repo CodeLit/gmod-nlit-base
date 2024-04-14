@@ -1,5 +1,6 @@
 {
     "title": "CyberBase",
+    "version": "2.0.0",
     "description": "This is base contains a lot of usefull functions for easy development of UI, working with database, and other things that programmers is usally do",
     "type": "tool",
     "tags": [
@@ -8,6 +9,9 @@
     ],
     "ignore": [
         ".git/*",
+        "docs",
+        "internal-docs",
+        "Makefile",
         "README.md",
         "*.fig",
         "*.code-workspace"
