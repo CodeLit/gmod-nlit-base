@@ -47,7 +47,7 @@ function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
     mainP.subPanel = p2
     local editable
     if typeOfInput == 'table' then
-        editable = p2:Add(nlitLists:EditableTable(inputValue))
+        editable = p2:Add(NGUI.Lists:EditableTable(inputValue))
         function mainP:GetInputValue()
             return editable.tbl or {}
         end

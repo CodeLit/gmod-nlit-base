@@ -7,9 +7,6 @@ local SortedPairs = SortedPairs
 local table = table
 local pairs = pairs
 local isstring = isstring
-local Buttons = nlib:Load('buttons')
-local Frames = nlib:Load('frames')
-local Panels = nlitLib:Load('panels')
 local strings = nlitString
 local l = nlitLib:Load('lang')
 --- Variant selector
@@ -45,12 +42,12 @@ end
 -- @param action function
 -- @return panel
 function Lists:VariantsFrame(title, tblVariants, action)
-    local fr = Frames:Frame(title)
+    local fr = NGUI.Frames:Frame(title)
     fr:SetSize(500, 85)
     fr:Center()
     local var = fr:Add(self:Variant(tblVariants))
     var:Dock(FILL)
-    local btn = fr:Add(Buttons:Accept())
+    local btn = fr:Add(NGUI.Buttons:Accept())
     btn:Dock(BOTTOM)
     btn.DoClick = function()
         if var.outKeyValues then
@@ -93,13 +90,13 @@ end
 -- @param tblData table
 -- @return panel
 function Lists:EditableTable(tblData)
-    local pnl = Panels:Create()
+    local pnl = NGUI.Panels:Create()
     pnl:SetSize(300, 500)
     if isstring(tblData) then tblData = strings:FromJson(tblData) or {} end
     pnl.tbl = tblData or {}
     local variant = pnl:Add(self:ListVariant(tblData))
     variant:Dock(FILL)
-    pnl.remBtn = pnl:Add(Buttons:Decline(l('Remove')))
+    pnl.remBtn = pnl:Add(NGUI.Buttons:Decline(l('Remove')))
     pnl.remBtn:Dock(BOTTOM)
     pnl.remBtn.DoClick = function()
         local line, pnlLine = variant:GetSelectedLine()
@@ -109,10 +106,10 @@ function Lists:EditableTable(tblData)
         end
     end
 
-    pnl.addBtn = pnl:Add(Buttons:Accept(l('Add')))
+    pnl.addBtn = pnl:Add(NGUI.Buttons:Accept(l('Add')))
     pnl.addBtn:Dock(BOTTOM)
     pnl.addBtn.DoClick = function()
-        Frames:Input(l('Insert new value'), function(v)
+        NGUI.Frames:Input(l('Insert new value'), function(v)
             table.insert(pnl.tbl, v)
             variant:AddLine(v)
         end)
@@ -120,7 +117,7 @@ function Lists:EditableTable(tblData)
 
     variant.DoDoubleClick = function(variantPnl, index, line)
         local oldText = line:GetColumnText(1)
-        local inFr = Frames:Input(l('Insert new value'), function(v)
+        local inFr = NGUI.Frames:Input(l('Insert new value'), function(v)
             table.RemoveByValue(pnl.tbl, oldText)
             table.insert(pnl.tbl, v)
             variant:RemoveLine(index)
@@ -140,12 +137,12 @@ end
 -- @see Variant
 -- @see ListVariant
 function Lists:ListVariantsFrame(title, tblVariants, action)
-    local fr = Frames:Frame(title)
+    local fr = NGUI.Frames:Frame(title)
     fr:SetSize(500, 500)
     fr:Center()
     local var = fr:Add(self:ListVariant(tblVariants))
     var:Dock(FILL)
-    local btn = fr:Add(Buttons:Accept())
+    local btn = fr:Add(NGUI.Buttons:Accept())
     btn:Dock(BOTTOM)
     btn.DoClick = function()
         local selected = var:GetSelected()[1]
