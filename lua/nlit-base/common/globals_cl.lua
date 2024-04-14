@@ -1,10 +1,10 @@
 NGUI = NGUI or {
-    Buttons = nlitButtons,
-    Frames = nlitFrames,
-    Icons = nlitIcons,
-    Inputs = nlitInputs,
-    Lists = nlitLists,
-    Menus = nlitMenus,
-    Panels = nlitPanels,
-    Text = nlitText,
+    Buttons = nlitLib:Load('buttons'),
+    Frames = nlitLib:Load('frames'),
+    Icons = nlitLib:Load('icons'),
+    Inputs = nlitLib:Load('inputs'),
+    Lists = nlitLib:Load('lists'),
+    Menus = nlitLib:Load('menus'),
+    Panels = nlitLib:Load('panels'),
+    Text = nlitLib:Load('text'),
 }
