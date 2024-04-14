@@ -1,6 +1,6 @@
 local vgui = vgui
 local HTML = {}
-local Text = nlitLib:Lib('text')
+local Text = nlitLib:Load('text')
 local l = nlitLang.l
 function HTML:MakeInPanel(panel)
     local html = vgui.Create('DHTML', panel)

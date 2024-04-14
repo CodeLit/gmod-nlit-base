@@ -1,7 +1,7 @@
 --- @module nlitIcons
 -- @usage local Icons = nlitIcons
 module('nlitIcons', package.seeall)
-local D = nlitLib:Lib('draw')
+local D = nlitLib:Load('draw')
 local Panels = nlitPanels
 --- Returns a panel with icon
 -- @param icon string

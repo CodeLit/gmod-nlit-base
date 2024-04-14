@@ -9,7 +9,7 @@ local hook = hook
 ---@usage nlitCfg:AddAddon('My Addon')
 ---nlitCfg:Set('My Addon','Print Hello',true,'bool',{category='Basic'})
 nlitCfg.ConnectedAddons = nlitCfg.ConnectedAddons or {}
-local DB = nlitLib:Lib('db')
+local DB = nlitLib:Load('db')
 local strings = nlitString
 util.AddNetworkString(nlitCfg.NetStr)
 DB:SetTableName('CWConfig')

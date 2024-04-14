@@ -12,7 +12,7 @@ local math = math
 local os = os
 local tobool = tobool
 local util = util
-local nlitUtf8 = nlitLib:Lib('utf8')
+local nlitUtf8 = nlitLib:Load('utf8')
 --- Puts text In Quotes for SQL code
 -- Changing single quotes, prehaps double quoutes using by json
 -- Закрывает текст в кавычки для SQL

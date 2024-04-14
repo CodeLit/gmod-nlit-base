@@ -18,7 +18,7 @@ local pathToLibs = 'nlit-libs'
 -- Button:SetBackgroundColor(colors:White())
 -- local Strings = libs:Lib('strings')
 -- ...
-function Lib(self, libName)
+function Load(self, libName)
     local found = FindLibPathInFolder(self, pathToLibs, string.lower(libName))
     if not found then
         print('[Nlit\'s Framework][ERROR] Library [' .. libName .. '] is not found!')

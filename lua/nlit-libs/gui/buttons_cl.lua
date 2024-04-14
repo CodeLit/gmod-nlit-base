@@ -1,7 +1,7 @@
 --- Creates GUI Buttons
 -- @module nlitButtons
--- @usage local Buttons = nlitButtons
-module('nlitButtons', package.seeall)
+-- @usage local Buttons = nlitLib:Load('buttons')
+local Buttons = {}
 local TDLib = TDLib
 local Color = Color
 local list = list
@@ -12,7 +12,7 @@ local math = math
 local hook = hook
 local table = table
 local RunConsoleCommand = RunConsoleCommand
-local D = nlitLib:Lib('draw')
+local D = nlitLib:Load('draw')
 local Icons = nlitIcons
 local l = nlitLang.l
 --- Creates a button

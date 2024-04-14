@@ -12,7 +12,7 @@ local print = print
 local DB = {}
 local NStr = nlitString
 local dbg_prefix = '[CWDB]'
-local nlitUtf8 = nlitLib:Lib('utf8')
+local nlitUtf8 = nlitLib:Load('utf8')
 ---Generates SQL string from table. Input must be in counted non-associative array.
 ---@param tbl table non-associative
 ---@return generated string
