@@ -1,6 +1,5 @@
 --- Lists is GUI module for list panels
--- @module nlitLists
--- @usage local Lists = require 'nlitLists'
+-- @usage local Lists = nlitLib:Load('lists')
 local Lists = {}
 local vgui = vgui
 local math = math
@@ -178,4 +177,5 @@ end
 function Lists:Tile()
     return vgui.Create('DTileLayout')
 end
+--- @export
 return Lists

@@ -1,6 +1,6 @@
 --- Creates GUI Frames
 -- This module provides functions to create and manage GUI frames.
--- @usage local Frames = require 'nlitFrames'
+-- @usage local Frames = require nlitLib:Load('frames')
 local Frames = {}
 local draw = draw
 local vgui = vgui
@@ -238,4 +238,5 @@ concommand.Add('nlit_clear_frames', function()
         if IsValid(frame) then frame:Close() end
     end
 end)
+--- @export
 return Frames

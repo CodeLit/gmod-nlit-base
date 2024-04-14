@@ -1,6 +1,5 @@
 --- Text is GUI module for text panels
--- @module nlitText
--- @usage local Text = require 'nlitText'
+-- @usage local Text = nlitLib:Load('text')
 local Text = {}
 local vgui = vgui
 --- Creates a text label
@@ -12,4 +11,5 @@ function Text:Create(text)
     l:SetFont('N_small')
     return l
 end
+--- @export
 return Text

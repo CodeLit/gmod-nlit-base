@@ -1,5 +1,4 @@
 --- Creates GUI Buttons
--- @module nlitButtons
 -- @usage local Buttons = nlitLib:Load('buttons')
 local Buttons = {}
 local TDLib = TDLib
@@ -150,4 +149,5 @@ function Buttons:HudSettings()
     end
     return button
 end
+--- @export
 return Buttons

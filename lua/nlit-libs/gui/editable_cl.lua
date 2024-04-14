@@ -1,5 +1,5 @@
 --- Creates GUI Editable panels
--- @usage local Editable = require 'nlitEditable'
+-- @usage local Editable = nlitLib:Load('editable')
 local Editable = {}
 local TDLib = TDLib
 local tonumber = tonumber
@@ -59,4 +59,5 @@ function Editable:NumSlider(text, min, max, decimal)
     numslider.PerformLayout = function(el) el:SizeToContents() end
     return numslider
 end
+--- @export
 return Editable

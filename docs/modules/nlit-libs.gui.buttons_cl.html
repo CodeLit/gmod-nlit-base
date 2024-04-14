@@ -45,8 +45,8 @@
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
-  <li><a href="../modules/nlit-libs.gui.buttons_cl.html">nlit-libs.gui.buttons_cl</a></li>
-  <li><strong>nlit-libs.gui.editable_cl</strong></li>
+  <li><strong>nlit-libs.gui.buttons_cl</strong></li>
+  <li><a href="../modules/nlit-libs.gui.editable_cl.html">nlit-libs.gui.editable_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.icons_cl.html">nlit-libs.gui.icons_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
@@ -65,13 +65,13 @@
 
 <div id="content">
 
-<h1>Module <code>nlit-libs.gui.editable_cl</code></h1>
-<p>Creates GUI Editable panels</p>
+<h1>Module <code>nlit-libs.gui.buttons_cl</code></h1>
+<p>Creates GUI Buttons</p>
 <p>
 </p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local Editable = nlitLib:Load(&apos;editable&apos;)
+        <pre class="example">local Buttons = nlitLib:Load(&apos;buttons&apos;)
 </pre>
     </ul>
 
@@ -79,12 +79,20 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Editable:NumPanel">Editable:NumPanel (text, acceptFunc)</a></td>
-	<td class="summary">Creates editable number panel</td>
+	<td class="name" nowrap><a href="#Buttons:Accept">Buttons:Accept (text, clickFunc)</a></td>
+	<td class="summary">Accept button green colored</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Editable:NumSlider">Editable:NumSlider (text, min, max, decimal)</a></td>
-	<td class="summary">Creates editable slider panel</td>
+	<td class="name" nowrap><a href="#Buttons:Decline">Buttons:Decline (text, clickFunc)</a></td>
+	<td class="summary">Decline button red colored</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Buttons:AddToCMenu">Buttons:AddToCMenu (title, icon, iconSize, func)</a></td>
+	<td class="summary">Adds button to C button menu</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Buttons:HudSettings">Buttons:HudSettings ()</a></td>
+	<td class="summary">Specific HUD Settings button</td>
 	</tr>
 </table>
 
@@ -96,11 +104,11 @@
 
     <dl class="function">
     <dt>
-    <a name = "Editable:NumPanel"></a>
-    <strong>Editable:NumPanel (text, acceptFunc)</strong>
+    <a name = "Buttons:Accept"></a>
+    <strong>Buttons:Accept (text, clickFunc)</strong>
     </dt>
     <dd>
-    Creates editable number panel
+    Accept button green colored
 
 
     <h3>Parameters:</h3>
@@ -109,7 +117,7 @@
 
 
         </li>
-        <li><span class="parameter">acceptFunc</span>
+        <li><span class="parameter">clickFunc</span>
 
 
         </li>
@@ -124,11 +132,11 @@
 
 </dd>
     <dt>
-    <a name = "Editable:NumSlider"></a>
-    <strong>Editable:NumSlider (text, min, max, decimal)</strong>
+    <a name = "Buttons:Decline"></a>
+    <strong>Buttons:Decline (text, clickFunc)</strong>
     </dt>
     <dd>
-    Creates editable slider panel
+    Decline button red colored
 
 
     <h3>Parameters:</h3>
@@ -137,19 +145,57 @@
 
 
         </li>
-        <li><span class="parameter">min</span>
-
-
-        </li>
-        <li><span class="parameter">max</span>
-
-
-        </li>
-        <li><span class="parameter">decimal</span>
+        <li><span class="parameter">clickFunc</span>
 
 
         </li>
     </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Buttons:AddToCMenu"></a>
+    <strong>Buttons:AddToCMenu (title, icon, iconSize, func)</strong>
+    </dt>
+    <dd>
+    Adds button to C button menu
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         string
+        </li>
+        <li><span class="parameter">icon</span>
+         string
+        </li>
+        <li><span class="parameter">iconSize</span>
+         number
+        </li>
+        <li><span class="parameter">func</span>
+         function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Buttons:HudSettings"></a>
+    <strong>Buttons:HudSettings ()</strong>
+    </dt>
+    <dd>
+    Specific HUD Settings button
+
+
 
 
 

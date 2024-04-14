@@ -1,6 +1,5 @@
 --- Menus is GUI module for menu panels
--- @module nlitMenus
--- @usage local Menus = require 'nlitMenus'
+-- @usage local Menus = nlitLib:Load('menus')
 local Menus = {}
 local DermaMenu = DermaMenu
 local input = input
@@ -34,4 +33,5 @@ function Menus:UpdateMenuPos(menu)
 
     if overScreen then menu:SetPos(x, y) end
 end
+--- @export
 return Menus

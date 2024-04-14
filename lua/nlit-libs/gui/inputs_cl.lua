@@ -1,6 +1,6 @@
 --- Creates GUI Inputs
 -- This module provides functions to create various input panels within a GUI.
--- @usage local Inputs = require 'nlitInputs'
+-- @usage local Inputs = nlitLib:Load('inputs')
 local Inputs = {}
 local IsValid = IsValid
 local vgui = vgui
@@ -171,4 +171,5 @@ function Inputs:Fields(tblFields, acceptFunc)
     end
     return mainPanel
 end
+--- @export
 return Inputs

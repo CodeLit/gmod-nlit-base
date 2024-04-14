@@ -1,6 +1,5 @@
 --- Panels is GUI module for panels
--- @module nlitPanels
--- @usage local Panels = require 'nlitPanels'
+-- @usage local Panels = nlitLib:Load('panels')
 local Panels = {}
 local vgui = vgui
 local draw = draw
@@ -173,4 +172,5 @@ function Panels:Multiline(self, text)
     m:SetFont('N_small')
     return m
 end
+--- @export
 return Panels

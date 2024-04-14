@@ -1,6 +1,5 @@
---- @module nlitIcons
--- This module provides functions to create and manage icons within GUI panels.
--- @usage local Icons = require 'nlitIcons'
+--- This module provides functions to create and manage icons within GUI panels.
+-- @usage local Icons = nlitLib:Load('icons')
 local Icons = {}
 local D = nlitLib:Load('draw')
 local Panels = nlitPanels
@@ -23,4 +22,5 @@ end
 function Icons:GetPath(icon)
 	return 'materials/icons/' .. icon
 end
+--- @export
 return Icons
