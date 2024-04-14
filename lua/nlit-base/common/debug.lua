@@ -6,16 +6,23 @@ local MsgC = MsgC
 local type = type
 local PrintTable = PrintTable
 local printDumpPath = false
-local color = Color(255, 255, 0)
+local color = Color(0, 255, 38)
+local color2 = Color(255, 145, 0)
 --- np() is Debug function for printing. Vararg params
 -- vararg parameters, can be a strings or tables, or anything
 function np(...)
     if printDumpPath then print(debug.getinfo(2, 'S').source:sub(2)) end
+    local t = string.upper(type(...))
     if istable(...) then
-        MsgC(color, '[' .. type(...) .. '] -----------------------------------------\n')
-        PrintTable(...)
+        if table.IsEmpty(...) then
+            t = 'EMPTY TABLE'
+            MsgC(color2, '[' .. t .. ']\n')
+        else
+            MsgC(color2, '[' .. t .. ']', color, ' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n')
+            PrintTable(...)
+        end
     else
-        MsgC(color, '[' .. type(...) .. '] ')
+        MsgC(color, '[' .. t .. '] ')
         print(...)
     end
 end

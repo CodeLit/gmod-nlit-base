@@ -6,7 +6,7 @@ local timer = timer
 local pairs = pairs
 local PLY = FindMetaTable('Player')
 local strings = nlitString
-local Lang = nlitLang
+local Lang = nlitLib:Load('translator')
 function PLY:StID()
     if not IsValid(self) then return end
     return strings:ToSID(self:SteamID())

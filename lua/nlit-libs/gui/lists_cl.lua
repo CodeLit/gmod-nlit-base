@@ -11,7 +11,7 @@ local Buttons = nlitButtons
 local Frames = nlitFrames
 local Panels = nlitPanels
 local strings = nlitString
-local l = nlitLang.l
+local l = nlitLib:Load('lang')
 --- Variant selector
 -- @param tblVariants table
 -- @param action function

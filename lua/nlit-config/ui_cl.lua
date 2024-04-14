@@ -13,7 +13,7 @@ local TblLsts = nlitLists
 local Text = nlitText
 local strings = nlitString
 local HTML = nlitLib:Load('html')
-local l = nlitLang.l
+local l = nlitLib:Load('lang')
 local addons_short_name = 'nlit'
 local addons_website = 'https://neolife.tk/ru' -- Английский нужно добавлять отдельно
 local last_selected_category

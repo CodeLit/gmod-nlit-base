@@ -13,7 +13,7 @@ local surface = surface
 local pairs = pairs
 local Panels = nlitPanels
 local Editable = nlitEditable
-local l = nlitLang.l
+local l = nlitLib:Load('lang')
 local Lists = nlitLists
 local NC = NC -- Make sure NC is defined or imported if needed
 --- Creates an input panel

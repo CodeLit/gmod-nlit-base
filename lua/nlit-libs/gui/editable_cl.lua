@@ -6,7 +6,7 @@ local tonumber = tonumber
 local vgui = vgui
 local surface = surface
 local draw = draw
-local l = nlitLang.l
+local l = nlitLib:Load('lang')
 local strings = nlitString
 local NC = NC
 local function PrepareTextArea(pnl)

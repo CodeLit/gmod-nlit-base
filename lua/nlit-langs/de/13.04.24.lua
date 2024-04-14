@@ -1,5 +1,5 @@
-local lang = nlitLang
-lang:AddTranslation('de', {
+local translator = nlitLib:Load('translator')
+translator:AddTranslation('de', {
     ['Hello there'] = 'Hallo dort',
     Welcome = 'Willkommen',
     ['The changes was saved'] = 'Die Änderungen wurden gespeichert',
