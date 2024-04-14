@@ -10,8 +10,8 @@ local IsValid = IsValid
 local timer = timer
 local pairs = pairs
 local LocalPlayer = LocalPlayer
-local Buttons = nlitButtons
-local Inputs = nlitInputs
+local Buttons = nlitLib:Load('buttons')
+local Inputs = nlitLib:Load('inputs')
 local ScrW, ScrH = ScrW, ScrH
 local NC = NC
 --- Returns a newly created frame with the specified title.
@@ -227,7 +227,7 @@ end
 -- @return frame, inputs The frame and the collection of inputs.
 function Frames:ManyFields(text, tblFields, acceptFunc)
     local fr = self:Create(text)
-    local tile = fr:Add(nlitInputs:Fields(tblFields, acceptFunc))
+    local tile = fr:Add(Inputs:Fields(tblFields, acceptFunc))
     return fr, tile.inputs
 end
 

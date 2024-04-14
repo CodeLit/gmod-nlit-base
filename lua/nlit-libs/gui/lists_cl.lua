@@ -7,9 +7,9 @@ local SortedPairs = SortedPairs
 local table = table
 local pairs = pairs
 local isstring = isstring
-local Buttons = nlitButtons
-local Frames = nlitFrames
-local Panels = nlitPanels
+local Buttons = nlib:Load('buttons')
+local Frames = nlib:Load('frames')
+local Panels = nlitLib:Load('panels')
 local strings = nlitString
 local l = nlitLib:Load('lang')
 --- Variant selector

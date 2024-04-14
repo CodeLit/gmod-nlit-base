@@ -11,10 +11,10 @@ local isstring = isstring
 local tobool = tobool
 local surface = surface
 local pairs = pairs
-local Panels = nlitPanels
-local Editable = nlitEditable
+local Panels = nlitLib:Load('panels')
+local Editable = nlitLib:Load('editable')
 local l = nlitLib:Load('lang')
-local Lists = nlitLists
+local Lists = nlitLib:Load('lists')
 local NC = NC -- Make sure NC is defined or imported if needed
 --- Creates an input panel
 -- @param title string Title or label for the input

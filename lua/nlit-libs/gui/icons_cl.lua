@@ -2,7 +2,7 @@
 -- @usage local Icons = nlitLib:Load('icons')
 local Icons = {}
 local D = nlitLib:Load('draw')
-local Panels = nlitPanels
+local Panels = nlitLib:Load('panels')
 --- Returns a panel with an icon displayed.
 -- @param icon string The filename of the icon to display.
 -- @return panel The panel with the icon painted on it.
