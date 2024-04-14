@@ -1,7 +1,6 @@
 --- Creates GUI Editable panels
--- @module nlitEditable
--- @usage local Editable = nlitEditable
-module('nlitEditable', package.seeall)
+-- @usage local Editable = require 'nlitEditable'
+local Editable = {}
 local TDLib = TDLib
 local tonumber = tonumber
 local vgui = vgui
@@ -9,7 +8,8 @@ local surface = surface
 local draw = draw
 local l = nlitLang.l
 local strings = nlitString
-local function PrepareTextArea(self, pnl)
+local NC = NC
+local function PrepareTextArea(pnl)
     pnl:ReadyTextbox()
     pnl:SetTextColor(NC:ThemeText())
 end
@@ -17,7 +17,7 @@ end
 ---Creates editable panel
 ---@param text string Placeholder text
 ---@param acceptFunc function OnEnterPressed function
-function EditPanel(self, text, acceptFunc)
+function Editable:EditPanel(text, acceptFunc)
     local e = TDLib('DTextEntry')
     e:SetPlaceholderText(text or l('Введите текст') .. '...')
     e:SetPlaceholderColor(NC:ThemeText())
@@ -28,7 +28,7 @@ end
 
 ---Creates editable number panel
 ---@see EditPanel
-function NumPanel(self, text, acceptFunc)
+function Editable:NumPanel(text, acceptFunc)
     local e = TDLib('DNumberWang')
     e:SetPlaceholderText(text or l('Введите число') .. '...')
     e:SetPlaceholderColor(NC:ThemeText())
@@ -43,7 +43,7 @@ end
 
 ---Creates editable slider panel
 ---@see EditPanel
-function NumSlider(self, text, min, max, decimal)
+function Editable:NumSlider(text, min, max, decimal)
     local numslider = vgui.Create("DNumSlider")
     numslider:SetSize(100, 100)
     numslider:SetPos(10, 10)
@@ -59,3 +59,4 @@ function NumSlider(self, text, min, max, decimal)
     numslider.PerformLayout = function(el) el:SizeToContents() end
     return numslider
 end
+return Editable

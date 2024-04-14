@@ -1,12 +1,13 @@
 --- @module nlitIcons
--- @usage local Icons = nlitIcons
-module('nlitIcons', package.seeall)
+-- This module provides functions to create and manage icons within GUI panels.
+-- @usage local Icons = require 'nlitIcons'
+local Icons = {}
 local D = nlitLib:Load('draw')
 local Panels = nlitPanels
---- Returns a panel with icon
--- @param icon string
--- @return panel
-function Create(self, icon)
+--- Returns a panel with an icon displayed.
+-- @param icon string The filename of the icon to display.
+-- @return panel The panel with the icon painted on it.
+function Icons:Create(icon)
 	local pnl = Panels:Panel()
 	pnl.Paint = function(p, w, h)
 		local x, y = p:GetPos()
@@ -15,7 +16,11 @@ function Create(self, icon)
 	return pnl
 end
 
---- Adds path to icon. Includes materials/icons/
-function GetPath(self, icon)
+--- Constructs the full path to an icon file.
+-- This function assumes all icons are stored in the 'materials/icons/' directory.
+-- @param icon string The filename of the icon.
+-- @return string The full path to the icon.
+function Icons:GetPath(icon)
 	return 'materials/icons/' .. icon
 end
+return Icons

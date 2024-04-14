@@ -1,7 +1,7 @@
 --- Creates GUI Frames
--- @module nlitFrames
--- @usage local Frames = nlitFrames
-module('nlitFrames', package.seeall)
+-- This module provides functions to create and manage GUI frames.
+-- @usage local Frames = require 'nlitFrames'
+local Frames = {}
 local draw = draw
 local vgui = vgui
 local table = table
@@ -13,20 +13,20 @@ local LocalPlayer = LocalPlayer
 local Buttons = nlitButtons
 local Inputs = nlitInputs
 local ScrW, ScrH = ScrW, ScrH
---- Returns a newly created frame
--- @param title string
--- @return frame
--- @usage Create('MyLovelyFrame')
-function Create(self, title)
+local NC = NC
+--- Returns a newly created frame with the specified title.
+-- @param title string The title of the frame.
+-- @return frame Newly created frame.
+function Frames:Create(title)
     local fr = self:Unfocused(title)
     fr:MakePopup()
     return fr
 end
 
---- Adds frame behavior to frame (standartizes a frame)
--- @param fr framePanel
--- @param title string
-function AddBehavior(self, fr, title)
+--- Adds standard behaviors to a frame like draggable, no resize, and custom close button.
+-- @param fr framePanel The frame to which the behavior will be added.
+-- @param title string The title of the frame.
+function Frames:AddBehavior(fr, title)
     fr:SetDraggable(true)
     fr:SetSizable(false)
     fr:SetTitle(title or '')
@@ -42,25 +42,21 @@ function AddBehavior(self, fr, title)
     close:SetFont('N')
     fr.lblTitle.UpdateColours = function(label) label:SetTextStyleColor(NC:ThemeText()) end
     fr.lblTitle:SetFont('N')
-    fr.Paint = function(pnl)
-        -- Draw the menu background color.
-        draw.RoundedBox(6, 0, 0, pnl:GetWide(), pnl:GetTall(), fr.NBackgroundColor or NC:ThemeInside())
-    end
+    fr.Paint = function(pnl) draw.RoundedBox(6, 0, 0, pnl:GetWide(), pnl:GetTall(), fr.NBackgroundColor or NC:ThemeInside()) end
 end
 
---- Resizes a frame
--- @param fr frame
-function Resize(self, fr)
+--- Resizes the frame to a standard size based on screen dimensions.
+-- @param fr frame The frame to resize.
+function Frames:Resize(fr)
     fr:SetSize(ScrW() * 0.7, ScrH() * 0.8)
     fr:Center()
 end
 
-nlitFrames.OpenedFrames = nlitFrames.OpenedFrames or {}
---- Creates an unfocused frame
--- @param title string
--- @return frame
--- @see Create
-function Unfocused(self, title)
+Frames.OpenedFrames = Frames.OpenedFrames or {}
+--- Creates an unfocused frame, usually for background use.
+-- @param title string The title of the frame.
+-- @return frame The newly created unfocused frame.
+function Frames:Unfocused(title)
     local fr = vgui.Create('DFrame')
     table.insert(self.OpenedFrames, fr)
     for index, value in ipairs(self.OpenedFrames) do
@@ -71,13 +67,12 @@ function Unfocused(self, title)
     return fr
 end
 
---- Creates a frame with inputs
--- @param title string
--- @param acceptFunc function
--- @param typeOfInput string
--- @return frame
--- @see Inputs:Create
-function Input(self, title, acceptFunc, typeOfInput)
+--- Creates a frame dedicated to input fields.
+-- @param title string The title for the input field.
+-- @param acceptFunc function The function to call on input accept.
+-- @param typeOfInput string Specifies the type of input.
+-- @return frame The frame containing the input.
+function Frames:Input(title, acceptFunc, typeOfInput)
     local fr = self:Create()
     fr:SetIcon('icon16/pencil.png')
     fr:SetSize(ScrW() / 4, 85)
@@ -96,8 +91,11 @@ function Input(self, title, acceptFunc, typeOfInput)
     return fr
 end
 
---- Creates a binder frame
-function Binder(self, title, command)
+--- Creates a frame specifically for binding commands or actions.
+-- @param title string The title of the frame.
+-- @param command string The command to bind.
+-- @return frame, binder The frame and the binder panel.
+function Frames:Binder(title, command)
     local fr = self:Create(title)
     fr:SetSize(250, 100)
     fr:Center()
@@ -108,8 +106,12 @@ function Binder(self, title, command)
     return fr, binder
 end
 
---- Specific type of frame named rules editor / окно для редактирования каких-либо правил (для зоны, для админки и т.п.)
-function Rules(self, title, checkBoxes, acceptFunc)
+--- Creates a rules editor frame with checkboxes for various options.
+-- @param title string The title of the rules editor.
+-- @param checkBoxes table A table of checkboxes to include.
+-- @param acceptFunc function The function to call when changes are accepted.
+-- @return frame The rules editor frame.
+function Frames:Rules(title, checkBoxes, acceptFunc)
     local fr = self:Create()
     fr:SetIcon('icon16/pencil.png')
     fr:SetSize(400, 400)
@@ -159,13 +161,13 @@ function Rules(self, title, checkBoxes, acceptFunc)
     return fr
 end
 
---- Accept Dialogue frame
--- @param text string
--- @param textYes string
--- @param textNo string
--- @param acceptFunc function
--- @return frame
-function AcceptDialogue(self, text, textYes, textNo, acceptFunc)
+--- Creates a dialogue frame with accept and decline options.
+-- @param text string The text to display in the dialogue.
+-- @param textYes string The text for the accept button.
+-- @param textNo string The text for the decline button.
+-- @param acceptFunc function The function to execute on accept.
+-- @return frame The dialogue frame.
+function Frames:AcceptDialogue(text, textYes, textNo, acceptFunc)
     local fr = self:Create()
     fr:SetIcon('icon16/help.png')
     fr:SetWide(530)
@@ -206,10 +208,10 @@ function AcceptDialogue(self, text, textYes, textNo, acceptFunc)
     return fr
 end
 
---- Frame with list
--- @param title any
--- @return table
-function List(self, title)
+--- Creates a frame containing a list derived from a specified source.
+-- @param title any The title of the list frame.
+-- @return frame The frame containing the list.
+function Frames:List(title)
     local fr = self:Create(title)
     local scroll = fr:Add('DScrollPanel')
     scroll:Dock(FILL)
@@ -218,20 +220,22 @@ function List(self, title)
     return fr
 end
 
---- Frame with many fields
--- @param text any
--- @param tblFields any
--- @param acceptFunc any
--- @return string|table
--- @return any
-function ManyFields(self, text, tblFields, acceptFunc)
+--- Creates a frame with multiple input fields.
+-- @param text any The title or main text for the frame.
+-- @param tblFields any The table of fields for inputs.
+-- @param acceptFunc any The function to call when inputs are accepted.
+-- @return frame, inputs The frame and the collection of inputs.
+function Frames:ManyFields(text, tblFields, acceptFunc)
     local fr = self:Create(text)
     local tile = fr:Add(nlitInputs:Fields(tblFields, acceptFunc))
     return fr, tile.inputs
 end
 
+--- Clears all opened frames by closing them.
+-- This command is intended for debugging or resetting UI state.
 concommand.Add('nlit_clear_frames', function()
-    for _, frame in pairs(nlitFrames.OpenedFrames or {}) do
+    for _, frame in pairs(Frames.OpenedFrames or {}) do
         if IsValid(frame) then frame:Close() end
     end
 end)
+return Frames

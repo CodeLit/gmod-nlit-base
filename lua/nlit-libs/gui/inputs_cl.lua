@@ -1,7 +1,7 @@
 --- Creates GUI Inputs
---- @module nlitInputs
---- @usage local Inputs = nlitInputs
-module('nlitInputs', package.seeall)
+-- This module provides functions to create various input panels within a GUI.
+-- @usage local Inputs = require 'nlitInputs'
+local Inputs = {}
 local IsValid = IsValid
 local vgui = vgui
 local tonumber = tonumber
@@ -15,14 +15,15 @@ local Panels = nlitPanels
 local Editable = nlitEditable
 local l = nlitLang.l
 local Lists = nlitLists
----Creates an input panel
----@param title string
----@param acceptFunc function
----@param typeOfInput string options: [bool/table/num/text]
----@param inputParent panel or frame
----@param inputValue any default value
----@return input panel
-function Create(self, title, acceptFunc, typeOfInput, inputParent, inputValue)
+local NC = NC -- Make sure NC is defined or imported if needed
+--- Creates an input panel
+-- @param title string Title or label for the input
+-- @param acceptFunc function Function to call when input is accepted
+-- @param typeOfInput string Type of the input (bool/table/num/text)
+-- @param inputParent panel or frame Parent panel or frame to attach input panel
+-- @param inputValue any Default value for the input
+-- @return input panel Newly created input panel
+function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
     title = l(title)
     local mainP = Panels:Create()
     if IsValid(inputParent) then mainP:SetSize(inputParent:GetWide(), 25) end
@@ -87,11 +88,11 @@ function Create(self, title, acceptFunc, typeOfInput, inputParent, inputValue)
     return mainP
 end
 
----Boolean input field
----@param title string
----@param defaultValue string
----@return panel
-function Bool(self, title, defaultValue)
+--- Boolean input field creator
+-- @param title string The label for the checkbox
+-- @param defaultValue boolean Default state of the checkbox (checked or not)
+-- @return panel Returns a panel containing a checkbox
+function Inputs:Bool(title, defaultValue)
     local pnl = Panels:Create()
     pnl:Dock(FILL)
     pnl:SetBackgroundColor(NC:Theme())
@@ -111,9 +112,9 @@ function Bool(self, title, defaultValue)
     return pnl
 end
 
----Resizes input by text
----@param inp panel
-function Resize(self, inp)
+--- Resizes input panel based on text length and type of input
+-- @param inp panel The input panel to resize
+function Inputs:Resize(inp)
     local titleP = inp.titlePanel
     local editP = inp.editPanel
     local w, h = 200, 20
@@ -126,14 +127,11 @@ function Resize(self, inp)
     inp:SetSize(w + 30, (editP.typeOfInput == 'table' and 250 or 30) + h)
 end
 
----Creates many inputs panel
----@param tblFields table keyvalues name => data
----@param acceptFunc function
----@usage Fields({age={inputType='num',min=0,max=100,category='personal',value=50}}, function()
----	
----end)
----@return panel
-function Fields(self, tblFields, acceptFunc)
+--- Creates a panel with many inputs grouped by categories
+-- @param tblFields table Key-values of input definitions
+-- @param acceptFunc function Callback function for when inputs are accepted
+-- @return panel Panel containing categorized inputs
+function Inputs:Fields(tblFields, acceptFunc)
     -- TODO: Сделать работоспособной acceptFunc
     local cats = {}
     local mainPanel = Panels:DockScroll()
@@ -173,3 +171,4 @@ function Fields(self, tblFields, acceptFunc)
     end
     return mainPanel
 end
+return Inputs
