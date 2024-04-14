@@ -1,0 +1,705 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Nlit's Base Framework documentation</title>
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Nlit's Base</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/nlit.html">nlit</a></li>
+  <li><a href="../modules/nlitLib.html">nlitLib</a></li>
+  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
+  <li><a href="../modules/nlitString.html">nlitString</a></li>
+  <li><strong>nlitColors</strong></li>
+  <li><a href="../modules/nlitTest.html">nlitTest</a></li>
+  <li><a href="../modules/nlitCommands.html">nlitCommands</a></li>
+  <li><a href="../modules/GUIButtons.html">GUIButtons</a></li>
+  <li><a href="../modules/GUIEditable.html">GUIEditable</a></li>
+  <li><a href="../modules/GUIFrames.html">GUIFrames</a></li>
+  <li><a href="../modules/GUIIcons.html">GUIIcons</a></li>
+  <li><a href="../modules/GUIInputs.html">GUIInputs</a></li>
+  <li><a href="../modules/GUILists.html">GUILists</a></li>
+  <li><a href="../modules/GUIMenus.html">GUIMenus</a></li>
+  <li><a href="../modules/GUIPanels.html">GUIPanels</a></li>
+  <li><a href="../modules/GUIText.html">GUIText</a></li>
+  <li><a href="../modules/Lang.html">Lang</a></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>nlitColors</code></h1>
+<p>The module that contains colors.</p>
+<p> Client only.</p>
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">local c = nlitColors
+c:White()
+c:Red(&lt;trasparency from 0 to 255&gt;)
+c:Yellow(100)
+</pre></li>
+        <li><pre class="example">-- As global variable NC
+NC:White()
+NC:Black()
+</pre></li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#White">White (a)</a></td>
+	<td class="summary">White</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Light">Light (a)</a></td>
+	<td class="summary">Light</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Black">Black (a)</a></td>
+	<td class="summary">Black</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Dark">Dark (a)</a></td>
+	<td class="summary">Dark</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Grey">Grey (a, n)</a></td>
+	<td class="summary">Grey</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Red">Red (a)</a></td>
+	<td class="summary">Red</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DarkRed">DarkRed (a)</a></td>
+	<td class="summary">DarkRed</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Green">Green (a)</a></td>
+	<td class="summary">Green</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DarkGreen">DarkGreen (a)</a></td>
+	<td class="summary">DarkGreen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DarkBlue">DarkBlue (a)</a></td>
+	<td class="summary">DarkBlue</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Yellow">Yellow (a)</a></td>
+	<td class="summary">Yellow</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DarkYellow">DarkYellow (a)</a></td>
+	<td class="summary">DarkYellow</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Orange">Orange (a)</a></td>
+	<td class="summary">Orange</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Pink">Pink (a)</a></td>
+	<td class="summary">Pink</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Blue">Blue (a)</a></td>
+	<td class="summary">Blue</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Tint">Tint (a, tint)</a></td>
+	<td class="summary">Tint</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Police">Police (a)</a></td>
+	<td class="summary">Police color.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LightTheme">LightTheme (self)</a></td>
+	<td class="summary">LightTheme color</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DarkTheme">DarkTheme (self)</a></td>
+	<td class="summary">DarkTheme color</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LightThemeText">LightThemeText (self)</a></td>
+	<td class="summary">LightThemeText color</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DarkThemeText">DarkThemeText (self)</a></td>
+	<td class="summary">DarkThemeText color</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsLightTheme">IsLightTheme (self, bReverse)</a></td>
+	<td class="summary">Is currently used LightTheme.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ThemeInside">ThemeInside (bReverse)</a></td>
+	<td class="summary">ThemeInside color</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ThemeText">ThemeText (bReverse)</a></td>
+	<td class="summary">ThemeText color</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "White"></a>
+    <strong>White (a)</strong>
+    </dt>
+    <dd>
+    White
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Light"></a>
+    <strong>Light (a)</strong>
+    </dt>
+    <dd>
+    Light
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Black"></a>
+    <strong>Black (a)</strong>
+    </dt>
+    <dd>
+    Black
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Dark"></a>
+    <strong>Dark (a)</strong>
+    </dt>
+    <dd>
+    Dark
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Grey"></a>
+    <strong>Grey (a, n)</strong>
+    </dt>
+    <dd>
+    Grey
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+        <li><span class="parameter">n</span>
+         amount of grey
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Red"></a>
+    <strong>Red (a)</strong>
+    </dt>
+    <dd>
+    Red
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DarkRed"></a>
+    <strong>DarkRed (a)</strong>
+    </dt>
+    <dd>
+    DarkRed
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Green"></a>
+    <strong>Green (a)</strong>
+    </dt>
+    <dd>
+    Green
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DarkGreen"></a>
+    <strong>DarkGreen (a)</strong>
+    </dt>
+    <dd>
+    DarkGreen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DarkBlue"></a>
+    <strong>DarkBlue (a)</strong>
+    </dt>
+    <dd>
+    DarkBlue
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Yellow"></a>
+    <strong>Yellow (a)</strong>
+    </dt>
+    <dd>
+    Yellow
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DarkYellow"></a>
+    <strong>DarkYellow (a)</strong>
+    </dt>
+    <dd>
+    DarkYellow
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Orange"></a>
+    <strong>Orange (a)</strong>
+    </dt>
+    <dd>
+    Orange
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Pink"></a>
+    <strong>Pink (a)</strong>
+    </dt>
+    <dd>
+    Pink
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Blue"></a>
+    <strong>Blue (a)</strong>
+    </dt>
+    <dd>
+    Blue
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Tint"></a>
+    <strong>Tint (a, tint)</strong>
+    </dt>
+    <dd>
+    Tint
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+        <li><span class="parameter">tint</span>
+         color
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Police"></a>
+    <strong>Police (a)</strong>
+    </dt>
+    <dd>
+    Police color.  Depends of current time.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         transparency
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LightTheme"></a>
+    <strong>LightTheme (self)</strong>
+    </dt>
+    <dd>
+    LightTheme color
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DarkTheme"></a>
+    <strong>DarkTheme (self)</strong>
+    </dt>
+    <dd>
+    DarkTheme color
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LightThemeText"></a>
+    <strong>LightThemeText (self)</strong>
+    </dt>
+    <dd>
+    LightThemeText color
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DarkThemeText"></a>
+    <strong>DarkThemeText (self)</strong>
+    </dt>
+    <dd>
+    DarkThemeText color
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsLightTheme"></a>
+    <strong>IsLightTheme (self, bReverse)</strong>
+    </dt>
+    <dd>
+    Is currently used LightTheme.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">self</span>
+
+
+        </li>
+        <li><span class="parameter">bReverse</span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ThemeInside"></a>
+    <strong>ThemeInside (bReverse)</strong>
+    </dt>
+    <dd>
+    ThemeInside color
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bReverse</span>
+         dynamic flag &ndash; true if you want to reverse theme
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ThemeText"></a>
+    <strong>ThemeText (bReverse)</strong>
+    </dt>
+    <dd>
+    ThemeText color
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bReverse</span>
+         dynamic flag &ndash; true if you want to reverse theme
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2024-04-14 09:09:43 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

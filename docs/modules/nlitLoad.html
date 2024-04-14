@@ -41,7 +41,7 @@
 <ul class="nowrap">
   <li><a href="../modules/nlit.html">nlit</a></li>
   <li><a href="../modules/nlitLib.html">nlitLib</a></li>
-  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
+  <li><strong>nlitLoad</strong></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
@@ -56,7 +56,7 @@
   <li><a href="../modules/GUIPanels.html">GUIPanels</a></li>
   <li><a href="../modules/GUIText.html">GUIText</a></li>
   <li><a href="../modules/Lang.html">Lang</a></li>
-  <li><strong>Translator</strong></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -67,18 +67,13 @@
 
 <div id="content">
 
-<h1>Module <code>Translator</code></h1>
-<p>Translates text</p>
-<p>
-</p>
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/Translator.html#AddTranslation">Translator:AddTranslation</a>
-    </ul>
+<h1>Module <code>nlitLoad</code></h1>
+<p>Global shared module.</p>
+<p> Allows run code on start, and reload it on save</p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local Translator = nlitLib:Load(&apos;translator&apos;)
- -- Translations must be added to folder nlit-langs using Translator:AddTranslation() function.
+        <pre class="example">local load = nlitLoad
+ load:EnsureLoad(&apos;MyHook&apos;,0,function() print(&apos;Hello&apos;) end)
 </pre>
     </ul>
 
@@ -86,16 +81,12 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#AddTranslation">AddTranslation (lang, tbl)</a></td>
-	<td class="summary">Adds translation to language.</td>
+	<td class="name" nowrap><a href="#EnsureLoad">EnsureLoad (hookName, loadTime, doCode)</a></td>
+	<td class="summary">Load code after entities was initialized.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Format">Format (lang)</a></td>
-	<td class="summary">Formats language to 2-chars code</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#GetLocalLang">GetLocalLang ()</a></td>
-	<td class="summary">Returns local player language.</td>
+	<td class="name" nowrap><a href="#WhenGMLoaded">WhenGMLoaded (hookName, loadTime, doCode)</a></td>
+	<td class="summary">Load code after gamemode was initialized.</td>
 	</tr>
 </table>
 
@@ -107,74 +98,53 @@
 
     <dl class="function">
     <dt>
-    <a name = "AddTranslation"></a>
-    <strong>AddTranslation (lang, tbl)</strong>
+    <a name = "EnsureLoad"></a>
+    <strong>EnsureLoad (hookName, loadTime, doCode)</strong>
     </dt>
     <dd>
-    Adds translation to language.  Can be used anywhere.
+    Load code after entities was initialized.  Global function.
+ Former deprecated name is DefinetlyLoad
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">lang</span>
-         string 2-char language code
+        <li><span class="parameter">hookName</span>
+         string unique name for future removal
         </li>
-        <li><span class="parameter">tbl</span>
-         table Translations from English (key-value pairs)
+        <li><span class="parameter">loadTime</span>
+         number [optional] &ndash; delay for loading code
         </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">Translator:<span class="function-name">AddTranslation</span>(<span class="string">'ru'</span>,{
-     [<span class="string">'Save items'</span>] = <span class="string">'Сохранить предметы'</span>,
-     [<span class="string">'Add items'</span>] = <span class="string">'Добавить предметы'</span>
- })</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "Format"></a>
-    <strong>Format (lang)</strong>
-    </dt>
-    <dd>
-    Formats language to 2-chars code
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">lang</span>
-         string Full language code
+        <li><span class="parameter">doCode</span>
+         function
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        string Formatted 2-char language code
-    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "GetLocalLang"></a>
-    <strong>GetLocalLang ()</strong>
+    <a name = "WhenGMLoaded"></a>
+    <strong>WhenGMLoaded (hookName, loadTime, doCode)</strong>
     </dt>
     <dd>
-    Returns local player language.  Client function.
+    Load code after gamemode was initialized.  Global function.
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">hookName</span>
+         string unique name for future removal
+        </li>
+        <li><span class="parameter">loadTime</span>
+         number [optional] &ndash; delay for loading code
+        </li>
+        <li><span class="parameter">doCode</span>
+         function
+        </li>
+    </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        string The 2-char language code of the local player
-    </ol>
 
 
 

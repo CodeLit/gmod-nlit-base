@@ -40,7 +40,7 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/nlit.html">nlit</a></li>
-  <li><a href="../modules/nlitLib.html">nlitLib</a></li>
+  <li><strong>nlitLib</strong></li>
   <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
@@ -56,7 +56,7 @@
   <li><a href="../modules/GUIPanels.html">GUIPanels</a></li>
   <li><a href="../modules/GUIText.html">GUIText</a></li>
   <li><a href="../modules/Lang.html">Lang</a></li>
-  <li><strong>Translator</strong></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -67,18 +67,16 @@
 
 <div id="content">
 
-<h1>Module <code>Translator</code></h1>
-<p>Translates text</p>
-<p>
-</p>
+<h1>Module <code>nlitLib</code></h1>
+<p>The libfiner is an importer module for nlit libraries.</p>
+<p> Global shared module.</p>
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/Translator.html#AddTranslation">Translator:AddTranslation</a>
+         <a href="../modules/nlit.html#">nlit</a>
     </ul>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local Translator = nlitLib:Load(&apos;translator&apos;)
- -- Translations must be added to folder nlit-langs using Translator:AddTranslation() function.
+        <pre class="example">local libs = nlitLib
 </pre>
     </ul>
 
@@ -86,16 +84,8 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#AddTranslation">AddTranslation (lang, tbl)</a></td>
-	<td class="summary">Adds translation to language.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Format">Format (lang)</a></td>
-	<td class="summary">Formats language to 2-chars code</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#GetLocalLang">GetLocalLang ()</a></td>
-	<td class="summary">Returns local player language.</td>
+	<td class="name" nowrap><a href="#Load">Load (libName)</a></td>
+	<td class="summary">Using of Nlit lib.</td>
 	</tr>
 </table>
 
@@ -107,77 +97,36 @@
 
     <dl class="function">
     <dt>
-    <a name = "AddTranslation"></a>
-    <strong>AddTranslation (lang, tbl)</strong>
+    <a name = "Load"></a>
+    <strong>Load (libName)</strong>
     </dt>
     <dd>
-    Adds translation to language.  Can be used anywhere.
+    Using of Nlit lib.  Basic fucntion.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">lang</span>
-         string 2-char language code
-        </li>
-        <li><span class="parameter">tbl</span>
-         table Translations from English (key-value pairs)
+        <li><span class="parameter">libName</span>
+         string
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        table lib
+    </ol>
 
 
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">Translator:<span class="function-name">AddTranslation</span>(<span class="string">'ru'</span>,{
-     [<span class="string">'Save items'</span>] = <span class="string">'Сохранить предметы'</span>,
-     [<span class="string">'Add items'</span>] = <span class="string">'Добавить предметы'</span>
- })</pre>
+        <pre class="example"><span class="keyword">local</span> libs = nlitLib
+<span class="keyword">local</span> colors = libs.Colors
+Button:<span class="function-name">SetBackgroundColor</span>(colors:<span class="function-name">White</span>())
+<span class="keyword">local</span> Strings = libs:<span class="function-name">Lib</span>(<span class="string">'strings'</span>)
+...</pre>
     </ul>
-
-</dd>
-    <dt>
-    <a name = "Format"></a>
-    <strong>Format (lang)</strong>
-    </dt>
-    <dd>
-    Formats language to 2-chars code
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">lang</span>
-         string Full language code
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        string Formatted 2-char language code
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "GetLocalLang"></a>
-    <strong>GetLocalLang ()</strong>
-    </dt>
-    <dd>
-    Returns local player language.  Client function.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        string The 2-char language code of the local player
-    </ol>
-
-
-
 
 </dd>
 </dl>

@@ -46,19 +46,17 @@
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
   <li><a href="../modules/nlitCommands.html">nlitCommands</a></li>
-  <li><strong>Buttons</strong></li>
-  <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
-  <li><a href="../modules/nlit-libs.gui.icons_cl.html">nlit-libs.gui.icons_cl</a></li>
-  <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
-  <li><a href="../modules/nlit-libs.gui.lists_cl.html">nlit-libs.gui.lists_cl</a></li>
-  <li><a href="../modules/nlit-libs.gui.menus_cl.html">nlit-libs.gui.menus_cl</a></li>
-  <li><a href="../modules/nlit-libs.gui.panels_cl.html">nlit-libs.gui.panels_cl</a></li>
-  <li><a href="../modules/nlit-libs.gui.text_cl.html">nlit-libs.gui.text_cl</a></li>
-  <li><a href="../modules/nlit-libs.translator.html">nlit-libs.translator</a></li>
-</ul>
-<h2>Classes</h2>
-<ul class="nowrap">
-  <li><a href="../classes/Editable.html">Editable</a></li>
+  <li><strong>GUIButtons</strong></li>
+  <li><a href="../modules/GUIEditable.html">GUIEditable</a></li>
+  <li><a href="../modules/GUIFrames.html">GUIFrames</a></li>
+  <li><a href="../modules/GUIIcons.html">GUIIcons</a></li>
+  <li><a href="../modules/GUIInputs.html">GUIInputs</a></li>
+  <li><a href="../modules/GUILists.html">GUILists</a></li>
+  <li><a href="../modules/GUIMenus.html">GUIMenus</a></li>
+  <li><a href="../modules/GUIPanels.html">GUIPanels</a></li>
+  <li><a href="../modules/GUIText.html">GUIText</a></li>
+  <li><a href="../modules/Lang.html">Lang</a></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -69,9 +67,8 @@
 
 <div id="content">
 
-<h1>Module <code>Buttons</code></h1>
-<p>Creates GUI Buttons
- This module provides functions to create and manage GUI buttons.</p>
+<h1>Module <code>GUIButtons</code></h1>
+<p>This module provides functions to create and manage GUI buttons.</p>
 <p>
 </p>
     <h3>Usage:</h3>
@@ -84,23 +81,23 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Create">Create (text, clickFunc)</a></td>
+	<td class="name" nowrap><a href="#Buttons:Create">Buttons:Create (text, clickFunc)</a></td>
 	<td class="summary">Creates a button</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Accept">Accept (text, clickFunc)</a></td>
+	<td class="name" nowrap><a href="#Buttons:Accept">Buttons:Accept (text, clickFunc)</a></td>
 	<td class="summary">Accept button green colored</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Decline">Decline (text, clickFunc)</a></td>
+	<td class="name" nowrap><a href="#Buttons:Decline">Buttons:Decline (text, clickFunc)</a></td>
 	<td class="summary">Decline button red colored</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#AddToCMenu">AddToCMenu (title, icon, iconSize, func)</a></td>
+	<td class="name" nowrap><a href="#Buttons:AddToCMenu">Buttons:AddToCMenu (title, icon, iconSize, func)</a></td>
 	<td class="summary">Adds button to C button menu</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#HudSettings">HudSettings ()</a></td>
+	<td class="name" nowrap><a href="#Buttons:HudSettings">Buttons:HudSettings ()</a></td>
 	<td class="summary">Specific HUD Settings button</td>
 	</tr>
 </table>
@@ -113,8 +110,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "Create"></a>
-    <strong>Create (text, clickFunc)</strong>
+    <a name = "Buttons:Create"></a>
+    <strong>Buttons:Create (text, clickFunc)</strong>
     </dt>
     <dd>
     Creates a button
@@ -143,8 +140,8 @@
 
 </dd>
     <dt>
-    <a name = "Accept"></a>
-    <strong>Accept (text, clickFunc)</strong>
+    <a name = "Buttons:Accept"></a>
+    <strong>Buttons:Accept (text, clickFunc)</strong>
     </dt>
     <dd>
     Accept button green colored
@@ -166,14 +163,14 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/Buttons.html#Create">Buttons:Create</a>
+         <a href="../modules/GUIButtons.html#Buttons:Create">Buttons:Create</a>
     </ul>
 
 
 </dd>
     <dt>
-    <a name = "Decline"></a>
-    <strong>Decline (text, clickFunc)</strong>
+    <a name = "Buttons:Decline"></a>
+    <strong>Buttons:Decline (text, clickFunc)</strong>
     </dt>
     <dd>
     Decline button red colored
@@ -195,14 +192,14 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/Buttons.html#Create">Buttons:Create</a>
+         <a href="../modules/GUIButtons.html#Buttons:Create">Buttons:Create</a>
     </ul>
 
 
 </dd>
     <dt>
-    <a name = "AddToCMenu"></a>
-    <strong>AddToCMenu (title, icon, iconSize, func)</strong>
+    <a name = "Buttons:AddToCMenu"></a>
+    <strong>Buttons:AddToCMenu (title, icon, iconSize, func)</strong>
     </dt>
     <dd>
     Adds button to C button menu
@@ -230,8 +227,8 @@
 
 </dd>
     <dt>
-    <a name = "HudSettings"></a>
-    <strong>HudSettings ()</strong>
+    <a name = "Buttons:HudSettings"></a>
+    <strong>Buttons:HudSettings ()</strong>
     </dt>
     <dd>
     Specific HUD Settings button
@@ -242,7 +239,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/Buttons.html#Create">Buttons:Create</a>
+         <a href="../modules/GUIButtons.html#Buttons:Create">Buttons:Create</a>
     </ul>
 
 
@@ -254,7 +251,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2024-04-14 09:02:37 </i>
+<i style="float:right;">Last updated 2024-04-14 09:09:43 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

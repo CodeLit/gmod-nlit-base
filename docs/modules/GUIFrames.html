@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Nlit's Base Framework documentation</title>
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Nlit's Base</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/nlit.html">nlit</a></li>
+  <li><a href="../modules/nlitLib.html">nlitLib</a></li>
+  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
+  <li><a href="../modules/nlitString.html">nlitString</a></li>
+  <li><a href="../modules/nlitColors.html">nlitColors</a></li>
+  <li><a href="../modules/nlitTest.html">nlitTest</a></li>
+  <li><a href="../modules/nlitCommands.html">nlitCommands</a></li>
+  <li><a href="../modules/GUIButtons.html">GUIButtons</a></li>
+  <li><a href="../modules/GUIEditable.html">GUIEditable</a></li>
+  <li><strong>GUIFrames</strong></li>
+  <li><a href="../modules/GUIIcons.html">GUIIcons</a></li>
+  <li><a href="../modules/GUIInputs.html">GUIInputs</a></li>
+  <li><a href="../modules/GUILists.html">GUILists</a></li>
+  <li><a href="../modules/GUIMenus.html">GUIMenus</a></li>
+  <li><a href="../modules/GUIPanels.html">GUIPanels</a></li>
+  <li><a href="../modules/GUIText.html">GUIText</a></li>
+  <li><a href="../modules/Lang.html">Lang</a></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>GUIFrames</code></h1>
+<p>This module provides functions to create and manage GUI frames.</p>
+<p>
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Frames = NGUI.Frames
+</pre>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Frames:Create">Frames:Create (title)</a></td>
+	<td class="summary">Returns a newly created frame with the specified title.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:AddBehavior">Frames:AddBehavior (fr, title)</a></td>
+	<td class="summary">Adds standard behaviors to a frame like draggable, no resize, and custom close button.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:Resize">Frames:Resize (fr)</a></td>
+	<td class="summary">Resizes the frame to a standard size based on screen dimensions.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:Unfocused">Frames:Unfocused (title)</a></td>
+	<td class="summary">Creates an unfocused frame, usually for background use.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:Input">Frames:Input (title, acceptFunc, typeOfInput)</a></td>
+	<td class="summary">Creates a frame dedicated to input fields.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:Binder">Frames:Binder (title, command)</a></td>
+	<td class="summary">Creates a frame specifically for binding commands or actions.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:Rules">Frames:Rules (title, checkBoxes, acceptFunc)</a></td>
+	<td class="summary">Creates a rules editor frame with checkboxes for various options.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:AcceptDialogue">Frames:AcceptDialogue (text, textYes, textNo, acceptFunc)</a></td>
+	<td class="summary">Creates a dialogue frame with accept and decline options.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:List">Frames:List (title)</a></td>
+	<td class="summary">Creates a frame containing a list derived from a specified source.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Frames:ManyFields">Frames:ManyFields (text, tblFields, acceptFunc)</a></td>
+	<td class="summary">Creates a frame with multiple input fields.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Frames:Create"></a>
+    <strong>Frames:Create (title)</strong>
+    </dt>
+    <dd>
+    Returns a newly created frame with the specified title.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         string The title of the frame.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        frame Newly created frame.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:AddBehavior"></a>
+    <strong>Frames:AddBehavior (fr, title)</strong>
+    </dt>
+    <dd>
+    Adds standard behaviors to a frame like draggable, no resize, and custom close button.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fr</span>
+         framePanel The frame to which the behavior will be added.
+        </li>
+        <li><span class="parameter">title</span>
+         string The title of the frame.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:Resize"></a>
+    <strong>Frames:Resize (fr)</strong>
+    </dt>
+    <dd>
+    Resizes the frame to a standard size based on screen dimensions.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fr</span>
+         frame The frame to resize.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:Unfocused"></a>
+    <strong>Frames:Unfocused (title)</strong>
+    </dt>
+    <dd>
+    Creates an unfocused frame, usually for background use.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         string The title of the frame.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        frame The newly created unfocused frame.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:Input"></a>
+    <strong>Frames:Input (title, acceptFunc, typeOfInput)</strong>
+    </dt>
+    <dd>
+    Creates a frame dedicated to input fields.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         string The title for the input field.
+        </li>
+        <li><span class="parameter">acceptFunc</span>
+         function The function to call on input accept.
+        </li>
+        <li><span class="parameter">typeOfInput</span>
+         string Specifies the type of input.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        frame The frame containing the input.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:Binder"></a>
+    <strong>Frames:Binder (title, command)</strong>
+    </dt>
+    <dd>
+    Creates a frame specifically for binding commands or actions.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         string The title of the frame.
+        </li>
+        <li><span class="parameter">command</span>
+         string The command to bind.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        frame, binder The frame and the binder panel.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:Rules"></a>
+    <strong>Frames:Rules (title, checkBoxes, acceptFunc)</strong>
+    </dt>
+    <dd>
+    Creates a rules editor frame with checkboxes for various options.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         string The title of the rules editor.
+        </li>
+        <li><span class="parameter">checkBoxes</span>
+         table A table of checkboxes to include.
+        </li>
+        <li><span class="parameter">acceptFunc</span>
+         function The function to call when changes are accepted.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        frame The rules editor frame.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:AcceptDialogue"></a>
+    <strong>Frames:AcceptDialogue (text, textYes, textNo, acceptFunc)</strong>
+    </dt>
+    <dd>
+    Creates a dialogue frame with accept and decline options.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string The text to display in the dialogue.
+        </li>
+        <li><span class="parameter">textYes</span>
+         string The text for the accept button.
+        </li>
+        <li><span class="parameter">textNo</span>
+         string The text for the decline button.
+        </li>
+        <li><span class="parameter">acceptFunc</span>
+         function The function to execute on accept.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        frame The dialogue frame.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:List"></a>
+    <strong>Frames:List (title)</strong>
+    </dt>
+    <dd>
+    Creates a frame containing a list derived from a specified source.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         any The title of the list frame.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        frame The frame containing the list.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Frames:ManyFields"></a>
+    <strong>Frames:ManyFields (text, tblFields, acceptFunc)</strong>
+    </dt>
+    <dd>
+    Creates a frame with multiple input fields.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         any The title or main text for the frame.
+        </li>
+        <li><span class="parameter">tblFields</span>
+         any The table of fields for inputs.
+        </li>
+        <li><span class="parameter">acceptFunc</span>
+         any The function to call when inputs are accepted.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        frame, inputs The frame and the collection of inputs.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2024-04-14 09:09:43 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -50,13 +50,13 @@
   <li><a href="../modules/GUIEditable.html">GUIEditable</a></li>
   <li><a href="../modules/GUIFrames.html">GUIFrames</a></li>
   <li><a href="../modules/GUIIcons.html">GUIIcons</a></li>
-  <li><a href="../modules/GUIInputs.html">GUIInputs</a></li>
+  <li><strong>GUIInputs</strong></li>
   <li><a href="../modules/GUILists.html">GUILists</a></li>
   <li><a href="../modules/GUIMenus.html">GUIMenus</a></li>
   <li><a href="../modules/GUIPanels.html">GUIPanels</a></li>
   <li><a href="../modules/GUIText.html">GUIText</a></li>
   <li><a href="../modules/Lang.html">Lang</a></li>
-  <li><strong>Translator</strong></li>
+  <li><a href="../modules/Translator.html">Translator</a></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -67,18 +67,13 @@
 
 <div id="content">
 
-<h1>Module <code>Translator</code></h1>
-<p>Translates text</p>
+<h1>Module <code>GUIInputs</code></h1>
+<p>This module provides functions to create various input panels within a GUI.</p>
 <p>
 </p>
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/Translator.html#AddTranslation">Translator:AddTranslation</a>
-    </ul>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local Translator = nlitLib:Load(&apos;translator&apos;)
- -- Translations must be added to folder nlit-langs using Translator:AddTranslation() function.
+        <pre class="example">local Inputs = NGUI.Inputs
 </pre>
     </ul>
 
@@ -86,16 +81,16 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#AddTranslation">AddTranslation (lang, tbl)</a></td>
-	<td class="summary">Adds translation to language.</td>
+	<td class="name" nowrap><a href="#Inputs:Bool">Inputs:Bool (title, defaultValue)</a></td>
+	<td class="summary">Boolean input field creator</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Format">Format (lang)</a></td>
-	<td class="summary">Formats language to 2-chars code</td>
+	<td class="name" nowrap><a href="#Inputs:Resize">Inputs:Resize (inp)</a></td>
+	<td class="summary">Resizes input panel based on text length and type of input</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#GetLocalLang">GetLocalLang ()</a></td>
-	<td class="summary">Returns local player language.</td>
+	<td class="name" nowrap><a href="#Inputs:Fields">Inputs:Fields (tblFields, acceptFunc)</a></td>
+	<td class="summary">Creates a panel with many inputs grouped by categories</td>
 	</tr>
 </table>
 
@@ -107,54 +102,27 @@
 
     <dl class="function">
     <dt>
-    <a name = "AddTranslation"></a>
-    <strong>AddTranslation (lang, tbl)</strong>
+    <a name = "Inputs:Bool"></a>
+    <strong>Inputs:Bool (title, defaultValue)</strong>
     </dt>
     <dd>
-    Adds translation to language.  Can be used anywhere.
+    Boolean input field creator
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">lang</span>
-         string 2-char language code
+        <li><span class="parameter">title</span>
+         string The label for the checkbox
         </li>
-        <li><span class="parameter">tbl</span>
-         table Translations from English (key-value pairs)
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">Translator:<span class="function-name">AddTranslation</span>(<span class="string">'ru'</span>,{
-     [<span class="string">'Save items'</span>] = <span class="string">'Сохранить предметы'</span>,
-     [<span class="string">'Add items'</span>] = <span class="string">'Добавить предметы'</span>
- })</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "Format"></a>
-    <strong>Format (lang)</strong>
-    </dt>
-    <dd>
-    Formats language to 2-chars code
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">lang</span>
-         string Full language code
+        <li><span class="parameter">defaultValue</span>
+         boolean Default state of the checkbox (checked or not)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string Formatted 2-char language code
+        panel Returns a panel containing a checkbox
     </ol>
 
 
@@ -162,18 +130,47 @@
 
 </dd>
     <dt>
-    <a name = "GetLocalLang"></a>
-    <strong>GetLocalLang ()</strong>
+    <a name = "Inputs:Resize"></a>
+    <strong>Inputs:Resize (inp)</strong>
     </dt>
     <dd>
-    Returns local player language.  Client function.
+    Resizes input panel based on text length and type of input
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">inp</span>
+         panel The input panel to resize
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Inputs:Fields"></a>
+    <strong>Inputs:Fields (tblFields, acceptFunc)</strong>
+    </dt>
+    <dd>
+    Creates a panel with many inputs grouped by categories
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tblFields</span>
+         table Key-values of input definitions
+        </li>
+        <li><span class="parameter">acceptFunc</span>
+         function Callback function for when inputs are accepted
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string The 2-char language code of the local player
+        panel Panel containing categorized inputs
     </ol>
 
 

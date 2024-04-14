@@ -46,11 +46,11 @@
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
   <li><a href="../modules/nlitCommands.html">nlitCommands</a></li>
-  <li><strong>Buttons</strong></li>
+  <li><a href="../modules/Buttons.html">Buttons</a></li>
   <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.icons_cl.html">nlit-libs.gui.icons_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
-  <li><a href="../modules/nlit-libs.gui.lists_cl.html">nlit-libs.gui.lists_cl</a></li>
+  <li><strong>nlit-libs.gui.lists_cl</strong></li>
   <li><a href="../modules/nlit-libs.gui.menus_cl.html">nlit-libs.gui.menus_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.panels_cl.html">nlit-libs.gui.panels_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.text_cl.html">nlit-libs.gui.text_cl</a></li>
@@ -69,14 +69,13 @@
 
 <div id="content">
 
-<h1>Module <code>Buttons</code></h1>
-<p>Creates GUI Buttons
- This module provides functions to create and manage GUI buttons.</p>
+<h1>Module <code>nlit-libs.gui.lists_cl</code></h1>
+<p>Lists is GUI module for list panels</p>
 <p>
 </p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local Buttons = NGUI.Buttons
+        <pre class="example">local Lists = NGUI.Lists
 </pre>
     </ul>
 
@@ -84,24 +83,28 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Create">Create (text, clickFunc)</a></td>
-	<td class="summary">Creates a button</td>
+	<td class="name" nowrap><a href="#Lists:VariantsFrame">Lists:VariantsFrame (title, tblVariants, action)</a></td>
+	<td class="summary">Variant selector frame</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Accept">Accept (text, clickFunc)</a></td>
-	<td class="summary">Accept button green colored</td>
+	<td class="name" nowrap><a href="#Lists:ListVariant">Lists:ListVariant (tblVariants)</a></td>
+	<td class="summary">List variant</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Decline">Decline (text, clickFunc)</a></td>
-	<td class="summary">Decline button red colored</td>
+	<td class="name" nowrap><a href="#Lists:EditableTable">Lists:EditableTable (tblData)</a></td>
+	<td class="summary">Editable Table</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#AddToCMenu">AddToCMenu (title, icon, iconSize, func)</a></td>
-	<td class="summary">Adds button to C button menu</td>
+	<td class="name" nowrap><a href="#Lists:ListVariantsFrame">Lists:ListVariantsFrame (title, tblVariants, action)</a></td>
+	<td class="summary">List variants frame</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#HudSettings">HudSettings ()</a></td>
-	<td class="summary">Specific HUD Settings button</td>
+	<td class="name" nowrap><a href="#Lists:List">Lists:List ()</a></td>
+	<td class="summary">Returns new DListLayout</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Lists:Tile">Lists:Tile ()</a></td>
+	<td class="summary">Returns new DTileLayout</td>
 	</tr>
 </table>
 
@@ -113,99 +116,11 @@
 
     <dl class="function">
     <dt>
-    <a name = "Create"></a>
-    <strong>Create (text, clickFunc)</strong>
+    <a name = "Lists:VariantsFrame"></a>
+    <strong>Lists:VariantsFrame (title, tblVariants, action)</strong>
     </dt>
     <dd>
-    Creates a button
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">text</span>
-         string Button text
-        </li>
-        <li><span class="parameter">clickFunc</span>
-         function OnClick function
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">Buttons:<span class="function-name">Create</span>(<span class="string">'Accept'</span>,<span class="keyword">function</span>(btn)
-     <span class="comment">-- OnClick function
-</span>	btn:<span class="function-name">SetColor</span>(NC:<span class="function-name">Red</span>())
-<span class="keyword">end</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "Accept"></a>
-    <strong>Accept (text, clickFunc)</strong>
-    </dt>
-    <dd>
-    Accept button green colored
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">text</span>
-
-
-        </li>
-        <li><span class="parameter">clickFunc</span>
-
-
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/Buttons.html#Create">Buttons:Create</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "Decline"></a>
-    <strong>Decline (text, clickFunc)</strong>
-    </dt>
-    <dd>
-    Decline button red colored
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">text</span>
-
-
-        </li>
-        <li><span class="parameter">clickFunc</span>
-
-
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/Buttons.html#Create">Buttons:Create</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "AddToCMenu"></a>
-    <strong>AddToCMenu (title, icon, iconSize, func)</strong>
-    </dt>
-    <dd>
-    Adds button to C button menu
+    Variant selector frame
 
 
     <h3>Parameters:</h3>
@@ -213,36 +128,154 @@
         <li><span class="parameter">title</span>
          string
         </li>
-        <li><span class="parameter">icon</span>
-         string
+        <li><span class="parameter">tblVariants</span>
+         table
         </li>
-        <li><span class="parameter">iconSize</span>
-         number
-        </li>
-        <li><span class="parameter">func</span>
+        <li><span class="parameter">action</span>
          function
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        panel
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "HudSettings"></a>
-    <strong>HudSettings ()</strong>
+    <a name = "Lists:ListVariant"></a>
+    <strong>Lists:ListVariant (tblVariants)</strong>
     </dt>
     <dd>
-    Specific HUD Settings button
+    List variant
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tblVariants</span>
+         table
+        </li>
+    </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        panel
+    </ol>
 
 
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/Buttons.html#Create">Buttons:Create</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Lists:EditableTable"></a>
+    <strong>Lists:EditableTable (tblData)</strong>
+    </dt>
+    <dd>
+    Editable Table
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tblData</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Lists:ListVariantsFrame"></a>
+    <strong>Lists:ListVariantsFrame (title, tblVariants, action)</strong>
+    </dt>
+    <dd>
+    List variants frame
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">title</span>
+         string
+        </li>
+        <li><span class="parameter">tblVariants</span>
+         table
+        </li>
+        <li><span class="parameter">action</span>
+         function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/nlit-libs.gui.lists_cl.html#Lists:ListVariant">ListVariant</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Lists:List"></a>
+    <strong>Lists:List ()</strong>
+    </dt>
+    <dd>
+    Returns new DListLayout
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/nlit-libs.gui.lists_cl.html#Lists:Tile">Tile</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Lists:Tile"></a>
+    <strong>Lists:Tile ()</strong>
+    </dt>
+    <dd>
+    Returns new DTileLayout
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/nlit-libs.gui.lists_cl.html#Lists:List">List</a>
     </ul>
 
 

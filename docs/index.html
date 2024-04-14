@@ -3,8 +3,8 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <title>CyberWolf's Framework</title>
-    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+    <title>Nlit's Base Framework documentation</title>
+    <link rel="stylesheet" href="ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -24,32 +24,36 @@
 
 <div id="navigation">
 <br/>
-<h1>CW Framework</h1>
+<h1>Nlit's Base</h1>
+
 
 
 
 
 <h2>Modules</h2>
 <ul class="nowrap">
-  <li><a href="modules/CW.html">CW</a></li>
-  <li><a href="modules/Libs.html">Libs</a></li>
-  <li><a href="modules/LoadCode.html">LoadCode</a></li>
-  <li><a href="modules/Debug.html">Debug</a></li>
-  <li><a href="modules/CWCfg.html">CWCfg</a></li>
-  <li><a href="modules/Colors.html">Colors</a></li>
-  <li><a href="modules/DateTime.html">DateTime</a></li>
-  <li><a href="modules/DB.html">DB</a></li>
-  <li><a href="modules/Draw.html">Draw</a></li>
-  <li><a href="modules/Buttons.html">Buttons</a></li>
-  <li><a href="modules/Editable.html">Editable</a></li>
-  <li><a href="modules/Frames.html">Frames</a></li>
-  <li><a href="modules/Inputs.html">Inputs</a></li>
-  <li><a href="modules/Lists.html">Lists</a></li>
-  <li><a href="modules/Requests.html">Requests</a></li>
-  <li><a href="modules/Language.html">Language</a></li>
-  <li><a href="modules/Strings.html">Strings</a></li>
+  <li><a href="modules/nlit.html">nlit</a></li>
+  <li><a href="modules/nlitLib.html">nlitLib</a></li>
+  <li><a href="modules/nlitLoad.html">nlitLoad</a></li>
+  <li><a href="modules/nlitString.html">nlitString</a></li>
+  <li><a href="modules/nlitColors.html">nlitColors</a></li>
+  <li><a href="modules/nlitTest.html">nlitTest</a></li>
+  <li><a href="modules/nlitCommands.html">nlitCommands</a></li>
+  <li><a href="modules/GUIButtons.html">GUIButtons</a></li>
+  <li><a href="modules/GUIEditable.html">GUIEditable</a></li>
+  <li><a href="modules/GUIFrames.html">GUIFrames</a></li>
+  <li><a href="modules/GUIIcons.html">GUIIcons</a></li>
+  <li><a href="modules/GUIInputs.html">GUIInputs</a></li>
+  <li><a href="modules/GUILists.html">GUILists</a></li>
+  <li><a href="modules/GUIMenus.html">GUIMenus</a></li>
+  <li><a href="modules/GUIPanels.html">GUIPanels</a></li>
+  <li><a href="modules/GUIText.html">GUIText</a></li>
+  <li><a href="modules/Lang.html">Lang</a></li>
   <li><a href="modules/Translator.html">Translator</a></li>
-  <li><a href="modules/Vectors.html">Vectors</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="manual/README.md.html">README</a></li>
 </ul>
 
 </div>
@@ -57,92 +61,96 @@
 <div id="content">
 
 
+  <h2>this framework contains a lot of useful functions for easy development of UI, working with database, and other things that programmers is usually do</h2>
 
 <h2>Modules</h2>
 <table class="module_list">
 	<tr>
-		<td class="name"  nowrap><a href="modules/CW.html">CW</a></td>
-		<td class="summary">Main global module of cyberwolf's addons</td>
+		<td class="name" nowrap><a href="modules/nlit.html">nlit</a></td>
+		<td class="summary">Main global module of Nlit&rsquo;s addons</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/Libs.html">Libs</a></td>
-		<td class="summary">The libfiner will find CW libs for you.</td>
+		<td class="name" nowrap><a href="modules/nlitLib.html">nlitLib</a></td>
+		<td class="summary">The libfiner is an importer module for nlit libraries.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/LoadCode.html">LoadCode</a></td>
+		<td class="name" nowrap><a href="modules/nlitLoad.html">nlitLoad</a></td>
 		<td class="summary">Global shared module.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/Debug.html">Debug</a></td>
-		<td class="summary">Globals for easy debugging</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/CWCfg.html">CWCfg</a></td>
-		<td class="summary">Addons Configurator global module</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Colors.html">Colors</a></td>
-		<td class="summary">The module that contains colors.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/DateTime.html">DateTime</a></td>
-		<td class="summary">The module for working with dates.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/DB.html">DB</a></td>
-		<td class="summary">Databases module.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Draw.html">Draw</a></td>
-		<td class="summary">Draw module.</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Buttons.html">Buttons</a></td>
-		<td class="summary">Creates GUI Buttons</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Editable.html">Editable</a></td>
-		<td class="summary">Creates GUI Editable panels</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Frames.html">Frames</a></td>
-		<td class="summary">Creates GUI Frames</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Inputs.html">Inputs</a></td>
-		<td class="summary">Creates GUI Inputs</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Lists.html">Lists</a></td>
-		<td class="summary">Lists is GUI module for list panels</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Requests.html">Requests</a></td>
-		<td class="summary">Jobs with HTTP Requests module</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Language.html">Language</a></td>
-		<td class="summary">Global singleton class for working with languages</td>
-	</tr>
-	<tr>
-		<td class="name"  nowrap><a href="modules/Strings.html">Strings</a></td>
+		<td class="name" nowrap><a href="modules/nlitString.html">nlitString</a></td>
 		<td class="summary">The module for working with strings</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/Translator.html">Translator</a></td>
+		<td class="name" nowrap><a href="modules/nlitColors.html">nlitColors</a></td>
+		<td class="summary">The module that contains colors.</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/nlitTest.html">nlitTest</a></td>
+		<td class="summary">Test module for writing a unit tests</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/nlitCommands.html">nlitCommands</a></td>
+		<td class="summary">Commands for gmod-nlit-base</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUIButtons.html">GUIButtons</a></td>
+		<td class="summary">This module provides functions to create and manage GUI buttons.</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUIEditable.html">GUIEditable</a></td>
+		<td class="summary">Creates GUI Editable panels</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUIFrames.html">GUIFrames</a></td>
+		<td class="summary">This module provides functions to create and manage GUI frames.</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUIIcons.html">GUIIcons</a></td>
+		<td class="summary">This module provides functions to create and manage icons within GUI panels.</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUIInputs.html">GUIInputs</a></td>
+		<td class="summary">This module provides functions to create various input panels within a GUI.</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUILists.html">GUILists</a></td>
+		<td class="summary">Lists is GUI module for list panels</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUIMenus.html">GUIMenus</a></td>
+		<td class="summary">Menus is GUI module for menu panels</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUIPanels.html">GUIPanels</a></td>
+		<td class="summary">Panels is GUI module for panels</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/GUIText.html">GUIText</a></td>
+		<td class="summary">Text is GUI module for text panels</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/Lang.html">Lang</a></td>
 		<td class="summary">Translates text</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/Vectors.html">Vectors</a></td>
-		<td class="summary">Vectors module</td>
+		<td class="name" nowrap><a href="modules/Translator.html">Translator</a></td>
+		<td class="summary">Translates text</td>
+	</tr>
+</table>
+<h2>Manual</h2>
+<table class="module_list">
+	<tr>
+		<td class="name" nowrap><a href="manual/README.md.html">README.md</a></td>
+		<td class="summary"></td>
 	</tr>
 </table>
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-02-25 14:57:52 </i>
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2024-04-14 09:09:43 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Nlit's Base Framework documentation</title>
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Nlit's Base</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/nlit.html">nlit</a></li>
+  <li><a href="../modules/nlitLib.html">nlitLib</a></li>
+  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
+  <li><a href="../modules/nlitString.html">nlitString</a></li>
+  <li><a href="../modules/nlitColors.html">nlitColors</a></li>
+  <li><a href="../modules/nlitTest.html">nlitTest</a></li>
+  <li><a href="../modules/nlit-libs.gui.buttons_cl.html">nlit-libs.gui.buttons_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.editable_cl.html">nlit-libs.gui.editable_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.icons_cl.html">nlit-libs.gui.icons_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.lists_cl.html">nlit-libs.gui.lists_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.menus_cl.html">nlit-libs.gui.menus_cl</a></li>
+  <li><strong>nlitPanels</strong></li>
+  <li><a href="../modules/nlit-libs.gui.text_cl.html">nlit-libs.gui.text_cl</a></li>
+  <li><a href="../modules/nlitLang.html">nlitLang</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>nlitPanels</code></h1>
+<p>Panels is GUI module for panels</p>
+<p>
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local Panels = nlitLib:Load(&apos;panels&apos;)
+</pre>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Panels:DockScroll">Panels:DockScroll ()</a></td>
+	<td class="summary">Create a scrollable panel</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Panels:AttachToC">Panels:AttachToC (pnl)</a></td>
+	<td class="summary">Attaches panel to the C menu</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Panels:BinderPanel">Panels:BinderPanel (command)</a></td>
+	<td class="summary">Creates a panel for binding keys</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Panels:FacePanel">Panels:FacePanel (mdl)</a></td>
+	<td class="summary">Creates a panel to display a model&rsquo;s face</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Panels:CharacterPanel">Panels:CharacterPanel (mdl)</a></td>
+	<td class="summary">Creates a panel to display a full character model</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Panels:ItemPanel">Panels:ItemPanel (mdl)</a></td>
+	<td class="summary">Creates a panel to display an item model</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Panels:DockScroll"></a>
+    <strong>Panels:DockScroll ()</strong>
+    </dt>
+    <dd>
+    Create a scrollable panel
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel A DScrollPanel instance docked to fill its parent
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Panels:AttachToC"></a>
+    <strong>Panels:AttachToC (pnl)</strong>
+    </dt>
+    <dd>
+    Attaches panel to the C menu
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">pnl</span>
+         Panel to attach
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Panels:BinderPanel"></a>
+    <strong>Panels:BinderPanel (command)</strong>
+    </dt>
+    <dd>
+    Creates a panel for binding keys
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">command</span>
+         The command to bind to a key
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel A DBinder panel
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Panels:FacePanel"></a>
+    <strong>Panels:FacePanel (mdl)</strong>
+    </dt>
+    <dd>
+    Creates a panel to display a model&rsquo;s face
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mdl</span>
+         Model path
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel A DModelPanel configured to focus on the model&rsquo;s face
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Panels:CharacterPanel"></a>
+    <strong>Panels:CharacterPanel (mdl)</strong>
+    </dt>
+    <dd>
+    Creates a panel to display a full character model
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mdl</span>
+         Model path
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel A DModelPanel configured to display the character
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Panels:ItemPanel"></a>
+    <strong>Panels:ItemPanel (mdl)</strong>
+    </dt>
+    <dd>
+    Creates a panel to display an item model
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mdl</span>
+         Model path
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel A DModelPanel configured to display the item
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2024-04-14 07:01:51 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

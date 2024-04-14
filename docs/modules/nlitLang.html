@@ -45,18 +45,16 @@
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
-  <li><a href="../modules/nlitCommands.html">nlitCommands</a></li>
-  <li><a href="../modules/GUIButtons.html">GUIButtons</a></li>
-  <li><a href="../modules/GUIEditable.html">GUIEditable</a></li>
-  <li><a href="../modules/GUIFrames.html">GUIFrames</a></li>
-  <li><a href="../modules/GUIIcons.html">GUIIcons</a></li>
-  <li><a href="../modules/GUIInputs.html">GUIInputs</a></li>
-  <li><a href="../modules/GUILists.html">GUILists</a></li>
-  <li><a href="../modules/GUIMenus.html">GUIMenus</a></li>
-  <li><a href="../modules/GUIPanels.html">GUIPanels</a></li>
-  <li><a href="../modules/GUIText.html">GUIText</a></li>
-  <li><a href="../modules/Lang.html">Lang</a></li>
-  <li><strong>Translator</strong></li>
+  <li><a href="../modules/nlit-libs.gui.buttons_cl.html">nlit-libs.gui.buttons_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.editable_cl.html">nlit-libs.gui.editable_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.icons_cl.html">nlit-libs.gui.icons_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.lists_cl.html">nlit-libs.gui.lists_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.menus_cl.html">nlit-libs.gui.menus_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.panels_cl.html">nlit-libs.gui.panels_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.text_cl.html">nlit-libs.gui.text_cl</a></li>
+  <li><strong>nlitLang</strong></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -67,18 +65,19 @@
 
 <div id="content">
 
-<h1>Module <code>Translator</code></h1>
+<h1>Module <code>nlitLang</code></h1>
 <p>Translates text</p>
 <p>
 </p>
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/Translator.html#AddTranslation">Translator:AddTranslation</a>
+         <a href="../modules/nlitLang.html#Lang:AddTranslation">Lang:AddTranslation</a>
     </ul>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local Translator = nlitLib:Load(&apos;translator&apos;)
- -- Translations must be added to folder nlit-langs using Translator:AddTranslation() function.
+        <pre class="example">local Lang = require &apos;nlitLang&apos;
+local text = Lang:l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate this text to Russian
+-- Translations must be added to folder nlit-langs using Lang:AddTranslation() function.
 </pre>
     </ul>
 
@@ -86,16 +85,20 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#AddTranslation">AddTranslation (lang, tbl)</a></td>
+	<td class="name" nowrap><a href="#Lang:AddTranslation">Lang:AddTranslation (lang, tbl)</a></td>
 	<td class="summary">Adds translation to language.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Format">Format (lang)</a></td>
+	<td class="name" nowrap><a href="#Lang:Format">Lang:Format (lang)</a></td>
 	<td class="summary">Formats language to 2-chars code</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#GetLocalLang">GetLocalLang ()</a></td>
+	<td class="name" nowrap><a href="#Lang:GetLocalLang">Lang:GetLocalLang ()</a></td>
 	<td class="summary">Returns local player language.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Lang:l">Lang:l (text, langCode)</a></td>
+	<td class="summary">Translates text</td>
 	</tr>
 </table>
 
@@ -107,8 +110,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "AddTranslation"></a>
-    <strong>AddTranslation (lang, tbl)</strong>
+    <a name = "Lang:AddTranslation"></a>
+    <strong>Lang:AddTranslation (lang, tbl)</strong>
     </dt>
     <dd>
     Adds translation to language.  Can be used anywhere.
@@ -129,7 +132,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">Translator:<span class="function-name">AddTranslation</span>(<span class="string">'ru'</span>,{
+        <pre class="example">Lang:<span class="function-name">AddTranslation</span>(<span class="string">'ru'</span>,{
      [<span class="string">'Save items'</span>] = <span class="string">'Сохранить предметы'</span>,
      [<span class="string">'Add items'</span>] = <span class="string">'Добавить предметы'</span>
  })</pre>
@@ -137,8 +140,8 @@
 
 </dd>
     <dt>
-    <a name = "Format"></a>
-    <strong>Format (lang)</strong>
+    <a name = "Lang:Format"></a>
+    <strong>Lang:Format (lang)</strong>
     </dt>
     <dd>
     Formats language to 2-chars code
@@ -162,8 +165,8 @@
 
 </dd>
     <dt>
-    <a name = "GetLocalLang"></a>
-    <strong>GetLocalLang ()</strong>
+    <a name = "Lang:GetLocalLang"></a>
+    <strong>Lang:GetLocalLang ()</strong>
     </dt>
     <dd>
     Returns local player language.  Client function.
@@ -180,6 +183,34 @@
 
 
 </dd>
+    <dt>
+    <a name = "Lang:l"></a>
+    <strong>Lang:l (text, langCode)</strong>
+    </dt>
+    <dd>
+    Translates text
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         string Text to translate
+        </li>
+        <li><span class="parameter">langCode</span>
+         string Optional language code, defaults to local player&rsquo;s language
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string Translated text
+    </ol>
+
+
+
+
+</dd>
 </dl>
 
 
@@ -187,7 +218,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2024-04-14 09:09:43 </i>
+<i style="float:right;">Last updated 2024-04-14 07:02:27 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
