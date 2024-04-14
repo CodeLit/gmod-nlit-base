@@ -41,7 +41,7 @@
 <ul class="nowrap">
   <li><a href="../modules/nlit.html">nlit</a></li>
   <li><a href="../modules/nlitLib.html">nlitLib</a></li>
-  <li><strong>nlitLoad</strong></li>
+  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitLang.html">nlitLang</a></li>
@@ -54,7 +54,7 @@
   <li><a href="../modules/nlitLists.html">nlitLists</a></li>
   <li><a href="../modules/nlitMenus.html">nlitMenus</a></li>
   <li><a href="../modules/nlitPanels.html">nlitPanels</a></li>
-  <li><a href="../modules/nlitText.html">nlitText</a></li>
+  <li><strong>nlitText</strong></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -65,13 +65,13 @@
 
 <div id="content">
 
-<h1>Module <code>nlitLoad</code></h1>
-<p>Global shared module.</p>
-<p> Allows run code on start, and reload it on save</p>
+<h1>Module <code>nlitText</code></h1>
+<p>Text is GUI module for text panels</p>
+<p>
+</p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local load = nlitLoad
- load:EnsureLoad(&apos;MyHook&apos;,0,function() print(&apos;Hello&apos;) end)
+        <pre class="example">local Text = require &apos;nlitText&apos;
 </pre>
     </ul>
 
@@ -79,12 +79,8 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#EnsureLoad">EnsureLoad (hookName, loadTime, doCode)</a></td>
-	<td class="summary">Load code after entities was initialized.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#WhenGMLoaded">WhenGMLoaded (hookName, loadTime, doCode)</a></td>
-	<td class="summary">Load code after gamemode was initialized.</td>
+	<td class="name" nowrap><a href="#Text:Create">Text:Create (text)</a></td>
+	<td class="summary">Creates a text label</td>
 	</tr>
 </table>
 
@@ -96,53 +92,25 @@
 
     <dl class="function">
     <dt>
-    <a name = "EnsureLoad"></a>
-    <strong>EnsureLoad (hookName, loadTime, doCode)</strong>
+    <a name = "Text:Create"></a>
+    <strong>Text:Create (text)</strong>
     </dt>
     <dd>
-    Load code after entities was initialized.  Global function.
- Former deprecated name is DefinetlyLoad
+    Creates a text label
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">hookName</span>
-         string unique name for future removal
-        </li>
-        <li><span class="parameter">loadTime</span>
-         number [optional] &ndash; delay for loading code
-        </li>
-        <li><span class="parameter">doCode</span>
-         function
+        <li><span class="parameter">text</span>
+         The text to display on the label
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
 
-
-
-
-</dd>
-    <dt>
-    <a name = "WhenGMLoaded"></a>
-    <strong>WhenGMLoaded (hookName, loadTime, doCode)</strong>
-    </dt>
-    <dd>
-    Load code after gamemode was initialized.  Global function.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">hookName</span>
-         string unique name for future removal
-        </li>
-        <li><span class="parameter">loadTime</span>
-         number [optional] &ndash; delay for loading code
-        </li>
-        <li><span class="parameter">doCode</span>
-         function
-        </li>
-    </ul>
-
+        l The created DLabel instance
+    </ol>
 
 
 

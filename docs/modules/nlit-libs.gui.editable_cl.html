@@ -41,13 +41,13 @@
 <ul class="nowrap">
   <li><a href="../modules/nlit.html">nlit</a></li>
   <li><a href="../modules/nlitLib.html">nlitLib</a></li>
-  <li><strong>nlitLoad</strong></li>
+  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitLang.html">nlitLang</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
   <li><a href="../modules/nlitButtons.html">nlitButtons</a></li>
-  <li><a href="../modules/nlit-libs.gui.editable_cl.html">nlit-libs.gui.editable_cl</a></li>
+  <li><strong>nlit-libs.gui.editable_cl</strong></li>
   <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
   <li><a href="../modules/nlitIcons.html">nlitIcons</a></li>
   <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
@@ -65,13 +65,13 @@
 
 <div id="content">
 
-<h1>Module <code>nlitLoad</code></h1>
-<p>Global shared module.</p>
-<p> Allows run code on start, and reload it on save</p>
+<h1>Module <code>nlit-libs.gui.editable_cl</code></h1>
+<p>Creates GUI Editable panels</p>
+<p>
+</p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local load = nlitLoad
- load:EnsureLoad(&apos;MyHook&apos;,0,function() print(&apos;Hello&apos;) end)
+        <pre class="example">local Editable = require &apos;nlitEditable&apos;
 </pre>
     </ul>
 
@@ -79,12 +79,17 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#EnsureLoad">EnsureLoad (hookName, loadTime, doCode)</a></td>
-	<td class="summary">Load code after entities was initialized.</td>
+	<td class="name" nowrap><a href="#Editable:EditPanel">Editable:EditPanel (text, acceptFunc)</a></td>
+	<td class="summary">
+</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#WhenGMLoaded">WhenGMLoaded (hookName, loadTime, doCode)</a></td>
-	<td class="summary">Load code after gamemode was initialized.</td>
+	<td class="name" nowrap><a href="#Editable:NumPanel">Editable:NumPanel (text, acceptFunc)</a></td>
+	<td class="summary">Creates editable number panel</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Editable:NumSlider">Editable:NumSlider (text, min, max, decimal)</a></td>
+	<td class="summary">Creates editable slider panel</td>
 	</tr>
 </table>
 
@@ -96,24 +101,21 @@
 
     <dl class="function">
     <dt>
-    <a name = "EnsureLoad"></a>
-    <strong>EnsureLoad (hookName, loadTime, doCode)</strong>
+    <a name = "Editable:EditPanel"></a>
+    <strong>Editable:EditPanel (text, acceptFunc)</strong>
     </dt>
     <dd>
-    Load code after entities was initialized.  Global function.
- Former deprecated name is DefinetlyLoad
+
+
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">hookName</span>
-         string unique name for future removal
+        <li><span class="parameter">text</span>
+         string Placeholder text
         </li>
-        <li><span class="parameter">loadTime</span>
-         number [optional] &ndash; delay for loading code
-        </li>
-        <li><span class="parameter">doCode</span>
-         function
+        <li><span class="parameter">acceptFunc</span>
+         function OnEnterPressed function
         </li>
     </ul>
 
@@ -123,28 +125,68 @@
 
 </dd>
     <dt>
-    <a name = "WhenGMLoaded"></a>
-    <strong>WhenGMLoaded (hookName, loadTime, doCode)</strong>
+    <a name = "Editable:NumPanel"></a>
+    <strong>Editable:NumPanel (text, acceptFunc)</strong>
     </dt>
     <dd>
-    Load code after gamemode was initialized.  Global function.
+    Creates editable number panel
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">hookName</span>
-         string unique name for future removal
+        <li><span class="parameter">text</span>
+
+
         </li>
-        <li><span class="parameter">loadTime</span>
-         number [optional] &ndash; delay for loading code
-        </li>
-        <li><span class="parameter">doCode</span>
-         function
+        <li><span class="parameter">acceptFunc</span>
+
+
         </li>
     </ul>
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/nlit-libs.gui.editable_cl.html#Editable:EditPanel">EditPanel</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Editable:NumSlider"></a>
+    <strong>Editable:NumSlider (text, min, max, decimal)</strong>
+    </dt>
+    <dd>
+    Creates editable slider panel
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+
+
+        </li>
+        <li><span class="parameter">min</span>
+
+
+        </li>
+        <li><span class="parameter">max</span>
+
+
+        </li>
+        <li><span class="parameter">decimal</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/nlit-libs.gui.editable_cl.html#Editable:EditPanel">EditPanel</a>
+    </ul>
 
 
 </dd>

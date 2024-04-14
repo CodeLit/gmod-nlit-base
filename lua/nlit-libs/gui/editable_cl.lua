@@ -14,9 +14,9 @@ local function PrepareTextArea(pnl)
     pnl:SetTextColor(NC:ThemeText())
 end
 
----Creates editable panel
----@param text string Placeholder text
----@param acceptFunc function OnEnterPressed function
+--- Creates editable panel
+-- @param text string Placeholder text
+-- @param acceptFunc function OnEnterPressed function
 function Editable:EditPanel(text, acceptFunc)
     local e = TDLib('DTextEntry')
     e:SetPlaceholderText(text or l('Введите текст') .. '...')
@@ -26,8 +26,8 @@ function Editable:EditPanel(text, acceptFunc)
     return e
 end
 
----Creates editable number panel
----@see EditPanel
+--- Creates editable number panel
+-- @see EditPanel
 function Editable:NumPanel(text, acceptFunc)
     local e = TDLib('DNumberWang')
     e:SetPlaceholderText(text or l('Введите число') .. '...')
@@ -41,8 +41,8 @@ function Editable:NumPanel(text, acceptFunc)
     return e
 end
 
----Creates editable slider panel
----@see EditPanel
+--- Creates editable slider panel
+-- @see EditPanel
 function Editable:NumSlider(text, min, max, decimal)
     local numslider = vgui.Create("DNumSlider")
     numslider:SetSize(100, 100)

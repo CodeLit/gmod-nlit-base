@@ -1,6 +1,7 @@
 --- Lists is GUI module for list panels
----@module nlitLists
-module('nlitLists', package.seeall)
+-- @module nlitLists
+-- @usage local Lists = require 'nlitLists'
+local Lists = {}
 local vgui = vgui
 local math = math
 local SortedPairs = SortedPairs
@@ -12,12 +13,12 @@ local Frames = nlitFrames
 local Panels = nlitPanels
 local strings = nlitString
 local l = nlitLang.l
----Variant selector
----@param tblVariants table
----@param action function
----@return panel
----@see ListVariant
-function Variant(self, tblVariants, action)
+--- Variant selector
+-- @param tblVariants table
+-- @param action function
+-- @return panel
+-- @see ListVariant
+function Lists:Variant(tblVariants, action)
     local CBox = vgui.Create('DComboBox')
     CBox:SetSize(100, 20)
     tblVariants = tblVariants or {}
@@ -39,12 +40,12 @@ function Variant(self, tblVariants, action)
     return CBox
 end
 
----Variant selector frame
----@param title string
----@param tblVariants table
----@param action function
----@return panel
-function VariantsFrame(self, title, tblVariants, action)
+--- Variant selector frame
+-- @param title string
+-- @param tblVariants table
+-- @param action function
+-- @return panel
+function Lists:VariantsFrame(title, tblVariants, action)
     local fr = Frames:Frame(title)
     fr:SetSize(500, 85)
     fr:Center()
@@ -66,11 +67,11 @@ function VariantsFrame(self, title, tblVariants, action)
     return fr
 end
 
----Variant selector
----@param tblVariants table
----@return panel
----@see Variant
-function ListVariant(self, tblVariants)
+--- List variant
+-- @param tblVariants table
+-- @return panel
+-- @see Variant
+function Lists:ListVariant(tblVariants)
     local list = vgui.Create('DListView')
     list:SetSize(300, 600)
     list:SetMultiSelect(false)
@@ -89,10 +90,10 @@ function ListVariant(self, tblVariants)
     return list
 end
 
----Editable Table
----@param tblData table
----@return panel
-function EditableTable(self, tblData)
+--- Editable Table
+-- @param tblData table
+-- @return panel
+function Lists:EditableTable(tblData)
     local pnl = Panels:Create()
     pnl:SetSize(300, 500)
     if isstring(tblData) then tblData = strings:FromJson(tblData) or {} end
@@ -132,14 +133,14 @@ function EditableTable(self, tblData)
     return pnl
 end
 
----List variants frame
----@param title string
----@param tblVariants table
----@param action function
----@return panel
----@see Variant
----@see ListVariant
-function ListVariantsFrame(self, title, tblVariants, action)
+--- List variants frame
+-- @param title string
+-- @param tblVariants table
+-- @param action function
+-- @return panel
+-- @see Variant
+-- @see ListVariant
+function Lists:ListVariantsFrame(title, tblVariants, action)
     local fr = Frames:Frame(title)
     fr:SetSize(500, 500)
     fr:Center()
@@ -164,16 +165,17 @@ function ListVariantsFrame(self, title, tblVariants, action)
     return fr
 end
 
----Returns new DListLayout
----@return panel
----@see Tile
-function List()
+--- Returns new DListLayout
+-- @return panel
+-- @see Tile
+function Lists:List()
     return vgui.Create('DListLayout')
 end
 
----Returns new DTileLayout
----@return panel
----@see List
-function Tile()
+--- Returns new DTileLayout
+-- @return panel
+-- @see List
+function Lists:Tile()
     return vgui.Create('DTileLayout')
 end
+return Lists

@@ -44,13 +44,13 @@
   <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
-  <li><strong>nlitLang</strong></li>
+  <li><a href="../modules/nlitLang.html">nlitLang</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
   <li><a href="../modules/nlitButtons.html">nlitButtons</a></li>
   <li><a href="../modules/nlit-libs.gui.editable_cl.html">nlit-libs.gui.editable_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
   <li><a href="../modules/nlitIcons.html">nlitIcons</a></li>
-  <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
+  <li><strong>nlit-libs.gui.inputs_cl</strong></li>
   <li><a href="../modules/nlitLists.html">nlitLists</a></li>
   <li><a href="../modules/nlitMenus.html">nlitMenus</a></li>
   <li><a href="../modules/nlitPanels.html">nlitPanels</a></li>
@@ -65,19 +65,14 @@
 
 <div id="content">
 
-<h1>Module <code>nlitLang</code></h1>
-<p>Translates text</p>
+<h1>Module <code>nlit-libs.gui.inputs_cl</code></h1>
+<p>Creates GUI Inputs
+ This module provides functions to create various input panels within a GUI.</p>
 <p>
 </p>
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/nlitLang.html#AddTranslation">nlitLang:AddTranslation</a>
-    </ul>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local l = nlitLang.l
-local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate this text to russian
--- translations must be added to folder nlit-langs using nlitLang:AddTranslation() function.
+        <pre class="example">local Inputs = require &apos;nlitInputs&apos;
 </pre>
     </ul>
 
@@ -85,20 +80,16 @@ local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#AddTranslation">AddTranslation (lang, tbl)</a></td>
-	<td class="summary">Adds translation to language.</td>
+	<td class="name" nowrap><a href="#Inputs:Bool">Inputs:Bool (title, defaultValue)</a></td>
+	<td class="summary">Boolean input field creator</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Format">Format (lang)</a></td>
-	<td class="summary">Formats language to 2-chars code</td>
+	<td class="name" nowrap><a href="#Inputs:Resize">Inputs:Resize (inp)</a></td>
+	<td class="summary">Resizes input panel based on text length and type of input</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#GetLocalLang">GetLocalLang (self)</a></td>
-	<td class="summary">Returns local player language.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#l">l (text, langCode)</a></td>
-	<td class="summary">Translates text</td>
+	<td class="name" nowrap><a href="#Inputs:Fields">Inputs:Fields (tblFields, acceptFunc)</a></td>
+	<td class="summary">Creates a panel with many inputs grouped by categories</td>
 	</tr>
 </table>
 
@@ -110,58 +101,27 @@ local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate 
 
     <dl class="function">
     <dt>
-    <a name = "AddTranslation"></a>
-    <strong>AddTranslation (lang, tbl)</strong>
+    <a name = "Inputs:Bool"></a>
+    <strong>Inputs:Bool (title, defaultValue)</strong>
     </dt>
     <dd>
-    Adds translation to language.  Can be used anywhere.
+    Boolean input field creator
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">lang</span>
-         string 2-char lang
+        <li><span class="parameter">title</span>
+         string The label for the checkbox
         </li>
-        <li><span class="parameter">tbl</span>
-         table translations from english (key-value)
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/nlitLang.html#">nlitLang</a>
-    </ul>
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">Lang:<span class="function-name">AddTranslation</span>(<span class="string">'ru'</span>,{
-     [<span class="string">'Save items'</span>] = <span class="string">'Сохранить предметы'</span>,
-     [<span class="string">'Add items'</span>] = <span class="string">'Добавить предметы'</span>
- })</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "Format"></a>
-    <strong>Format (lang)</strong>
-    </dt>
-    <dd>
-    Formats language to 2-chars code
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">lang</span>
-         string
+        <li><span class="parameter">defaultValue</span>
+         boolean Default state of the checkbox (checked or not)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string formatted lang
+        panel Returns a panel containing a checkbox
     </ol>
 
 
@@ -169,53 +129,47 @@ local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate 
 
 </dd>
     <dt>
-    <a name = "GetLocalLang"></a>
-    <strong>GetLocalLang (self)</strong>
+    <a name = "Inputs:Resize"></a>
+    <strong>Inputs:Resize (inp)</strong>
     </dt>
     <dd>
-    Returns local player language.  Client function.
+    Resizes input panel based on text length and type of input
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-
-
+        <li><span class="parameter">inp</span>
+         panel The input panel to resize
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        string
-    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "l"></a>
-    <strong>l (text, langCode)</strong>
+    <a name = "Inputs:Fields"></a>
+    <strong>Inputs:Fields (tblFields, acceptFunc)</strong>
     </dt>
     <dd>
-    Translates text
+    Creates a panel with many inputs grouped by categories
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">text</span>
-         string
+        <li><span class="parameter">tblFields</span>
+         table Key-values of input definitions
         </li>
-        <li><span class="parameter">langCode</span>
-         string
+        <li><span class="parameter">acceptFunc</span>
+         function Callback function for when inputs are accepted
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string Translated text
+        panel Panel containing categorized inputs
     </ol>
 
 

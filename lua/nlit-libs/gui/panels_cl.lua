@@ -1,6 +1,7 @@
 --- Panels is GUI module for panels
----@module nlitPanels
-module('nlitPanels', package.seeall)
+-- @module nlitPanels
+-- @usage local Panels = require 'nlitPanels'
+local Panels = {}
 local vgui = vgui
 local draw = draw
 local surface = surface
@@ -13,7 +14,12 @@ local Vector = Vector
 local IsValid = IsValid
 local string = string
 local timer = timer
-function Create(self, text, font)
+local NC = NC -- Ensure NC (your theme color handler) is globally accessible or passed appropriately
+--- Create a simple panel
+-- @param text Optional text to display on the panel
+-- @param font Font used for text
+-- @return panel The created panel
+function Panels:Create(text, font)
     local p = vgui.Create('DPanel')
     p.text = text
     p.Paint = function(pnl)
@@ -43,31 +49,39 @@ function Create(self, text, font)
     return p
 end
 
-function DockScroll(self)
+--- Create a scrollable panel
+-- @return panel A DScrollPanel instance docked to fill its parent
+function Panels:DockScroll()
     local scr = vgui.Create('DScrollPanel')
     scr:Dock(FILL)
     return scr
 end
 
--- Даёт доступ к панели через кнопку C
-function AttachToC(self, pnl)
+--- Attaches panel to the C menu
+-- @param pnl Panel to attach
+function Panels:AttachToC(pnl)
     pnl:SetParent(g_ContextMenu)
     pnl:SetMouseInputEnabled(true)
     pnl.attachedToCMenu = true
 end
 
-function BinderPanel(self, command)
+--- Creates a panel for binding keys
+-- @param command The command to bind to a key
+-- @return panel A DBinder panel
+function Panels:BinderPanel(command)
     local binder = vgui.Create('DBinder')
     binder:SetSize(200, 50)
     binder:SetPos(25, 35)
     function binder:OnChange(num)
         RunConsoleCommand('bind', input.GetKeyName(num), command)
-        -- LocalPlayer():ChatPrint("New bound key: "..input.GetKeyName( num ))
     end
     return binder
 end
 
-function FacePanel(self, mdl)
+--- Creates a panel to display a model's face
+-- @param mdl Model path
+-- @return panel A DModelPanel configured to focus on the model's face
+function Panels:FacePanel(mdl)
     local pnl = vgui.Create('DModelPanel')
     pnl:SetModel(mdl)
     pnl:SetFOV(40)
@@ -95,7 +109,10 @@ function FacePanel(self, mdl)
     return pnl
 end
 
-function CharacterPanel(self, mdl)
+--- Creates a panel to display a full character model
+-- @param mdl Model path
+-- @return panel A DModelPanel configured to display the character
+function Panels:CharacterPanel(mdl)
     local pnl = vgui.Create('DModelPanel')
     pnl:SetModel(mdl)
     pnl:SetFOV(40)
@@ -116,11 +133,13 @@ function CharacterPanel(self, mdl)
     eyepos:Add(Vector(-5, 0, 4)) -- Move up slightly
     pnl:SetCamPos(eyepos + Vector(85, -10, 10)) -- Move cam in front of eyes
     pnl:SetLookAt(eyepos + Vector(0, 0, -5))
-    -- ent:SetSequence(ent:LookupSequence('drive_pd'))
     return pnl
 end
 
-function ItemPanel(self, mdl)
+--- Creates a panel to display an item model
+-- @param mdl Model path
+-- @return panel A DModelPanel configured to display the item
+function Panels:ItemPanel(mdl)
     local pnl = vgui.Create('DModelPanel')
     pnl:SetModel(mdl)
     local ent = pnl.Entity
@@ -147,9 +166,11 @@ function DMultiline:Init()
 end
 
 vgui.Register('DMultiline', DMultiline, 'DTextEntry')
-function Multiline(self, text)
+-- Multiline text panel
+function Panels:Multiline(self, text)
     local m = vgui.Create('DMultiline')
     m:SetText(text or '')
     m:SetFont('N_small')
     return m
 end
+return Panels

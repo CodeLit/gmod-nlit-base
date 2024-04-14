@@ -16,9 +16,9 @@ local D = nlitLib:Load('draw')
 local Icons = nlitIcons
 local l = nlitLang.l
 --- Creates a button
----@param text string Button text
----@param clickFunc function OnClick function
---- @usage Buttons:Create('Accept',function(btn)
+-- @param text string Button text
+-- @param clickFunc function OnClick function
+-- @usage Buttons:Create('Accept',function(btn)
 --      -- OnClick function
 --		btn:SetColor(NC:Red())
 -- end)
@@ -52,7 +52,7 @@ function Buttons:Create(text, clickFunc)
 end
 
 --- Accept button green colored
---- @see Buttons:Create
+-- @see Buttons:Create
 function Buttons:Accept(text, clickFunc)
     local b = self:Create(text or 'Подтвердить', clickFunc)
     b:SetTextColor(NC:White())
@@ -61,7 +61,7 @@ function Buttons:Accept(text, clickFunc)
 end
 
 --- Decline button red colored
---- @see Buttons:Create
+-- @see Buttons:Create
 function Buttons:Decline(text, clickFunc)
     local b = self:Create(text or 'Отменить', clickFunc)
     b:SetTextColor(NC:White())
@@ -69,11 +69,11 @@ function Buttons:Decline(text, clickFunc)
     return b
 end
 
----Adds button to C button menu
----@param title string
----@param icon string
----@param iconSize number
----@param func function
+--- Adds button to C button menu
+-- @param title string
+-- @param icon string
+-- @param iconSize number
+-- @param func function
 function Buttons:AddToCMenu(title, icon, iconSize, func)
     list.Set('DesktopWindows', 'NContext Button ' .. title, {
         title = title,
@@ -89,7 +89,8 @@ function Buttons:AddToCMenu(title, icon, iconSize, func)
     })
 end
 
----Specific HUD Settings button
+--- Specific HUD Settings button
+-- @see Buttons:Create
 function Buttons:HudSettings()
     local button = vgui.Create('DImageButton')
     button:SetSize(16, 16)

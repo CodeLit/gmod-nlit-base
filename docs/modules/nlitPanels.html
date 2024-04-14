@@ -44,7 +44,7 @@
   <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
-  <li><strong>nlitLang</strong></li>
+  <li><a href="../modules/nlitLang.html">nlitLang</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
   <li><a href="../modules/nlitButtons.html">nlitButtons</a></li>
   <li><a href="../modules/nlit-libs.gui.editable_cl.html">nlit-libs.gui.editable_cl</a></li>
@@ -53,7 +53,7 @@
   <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
   <li><a href="../modules/nlitLists.html">nlitLists</a></li>
   <li><a href="../modules/nlitMenus.html">nlitMenus</a></li>
-  <li><a href="../modules/nlitPanels.html">nlitPanels</a></li>
+  <li><strong>nlitPanels</strong></li>
   <li><a href="../modules/nlitText.html">nlitText</a></li>
 </ul>
 <h2>Manual</h2>
@@ -65,19 +65,13 @@
 
 <div id="content">
 
-<h1>Module <code>nlitLang</code></h1>
-<p>Translates text</p>
+<h1>Module <code>nlitPanels</code></h1>
+<p>Panels is GUI module for panels</p>
 <p>
 </p>
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/nlitLang.html#AddTranslation">nlitLang:AddTranslation</a>
-    </ul>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local l = nlitLang.l
-local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate this text to russian
--- translations must be added to folder nlit-langs using nlitLang:AddTranslation() function.
+        <pre class="example">local Panels = require &apos;nlitPanels&apos;
 </pre>
     </ul>
 
@@ -85,20 +79,28 @@ local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#AddTranslation">AddTranslation (lang, tbl)</a></td>
-	<td class="summary">Adds translation to language.</td>
+	<td class="name" nowrap><a href="#Panels:DockScroll">Panels:DockScroll ()</a></td>
+	<td class="summary">Create a scrollable panel</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Format">Format (lang)</a></td>
-	<td class="summary">Formats language to 2-chars code</td>
+	<td class="name" nowrap><a href="#Panels:AttachToC">Panels:AttachToC (pnl)</a></td>
+	<td class="summary">Attaches panel to the C menu</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#GetLocalLang">GetLocalLang (self)</a></td>
-	<td class="summary">Returns local player language.</td>
+	<td class="name" nowrap><a href="#Panels:BinderPanel">Panels:BinderPanel (command)</a></td>
+	<td class="summary">Creates a panel for binding keys</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#l">l (text, langCode)</a></td>
-	<td class="summary">Translates text</td>
+	<td class="name" nowrap><a href="#Panels:FacePanel">Panels:FacePanel (mdl)</a></td>
+	<td class="summary">Creates a panel to display a model&rsquo;s face</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Panels:CharacterPanel">Panels:CharacterPanel (mdl)</a></td>
+	<td class="summary">Creates a panel to display a full character model</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Panels:ItemPanel">Panels:ItemPanel (mdl)</a></td>
+	<td class="summary">Creates a panel to display an item model</td>
 	</tr>
 </table>
 
@@ -110,58 +112,18 @@ local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate 
 
     <dl class="function">
     <dt>
-    <a name = "AddTranslation"></a>
-    <strong>AddTranslation (lang, tbl)</strong>
+    <a name = "Panels:DockScroll"></a>
+    <strong>Panels:DockScroll ()</strong>
     </dt>
     <dd>
-    Adds translation to language.  Can be used anywhere.
+    Create a scrollable panel
 
 
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">lang</span>
-         string 2-char lang
-        </li>
-        <li><span class="parameter">tbl</span>
-         table translations from english (key-value)
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../modules/nlitLang.html#">nlitLang</a>
-    </ul>
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">Lang:<span class="function-name">AddTranslation</span>(<span class="string">'ru'</span>,{
-     [<span class="string">'Save items'</span>] = <span class="string">'Сохранить предметы'</span>,
-     [<span class="string">'Add items'</span>] = <span class="string">'Добавить предметы'</span>
- })</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "Format"></a>
-    <strong>Format (lang)</strong>
-    </dt>
-    <dd>
-    Formats language to 2-chars code
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">lang</span>
-         string
-        </li>
-    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string formatted lang
+        panel A DScrollPanel instance docked to fill its parent
     </ol>
 
 
@@ -169,25 +131,44 @@ local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate 
 
 </dd>
     <dt>
-    <a name = "GetLocalLang"></a>
-    <strong>GetLocalLang (self)</strong>
+    <a name = "Panels:AttachToC"></a>
+    <strong>Panels:AttachToC (pnl)</strong>
     </dt>
     <dd>
-    Returns local player language.  Client function.
+    Attaches panel to the C menu
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">self</span>
+        <li><span class="parameter">pnl</span>
+         Panel to attach
+        </li>
+    </ul>
 
 
+
+
+
+</dd>
+    <dt>
+    <a name = "Panels:BinderPanel"></a>
+    <strong>Panels:BinderPanel (command)</strong>
+    </dt>
+    <dd>
+    Creates a panel for binding keys
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">command</span>
+         The command to bind to a key
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string
+        panel A DBinder panel
     </ol>
 
 
@@ -195,27 +176,74 @@ local text = l(&apos;my long story text&apos;,&apos;ru&apos;) -- will translate 
 
 </dd>
     <dt>
-    <a name = "l"></a>
-    <strong>l (text, langCode)</strong>
+    <a name = "Panels:FacePanel"></a>
+    <strong>Panels:FacePanel (mdl)</strong>
     </dt>
     <dd>
-    Translates text
+    Creates a panel to display a model&rsquo;s face
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">text</span>
-         string
-        </li>
-        <li><span class="parameter">langCode</span>
-         string
+        <li><span class="parameter">mdl</span>
+         Model path
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        string Translated text
+        panel A DModelPanel configured to focus on the model&rsquo;s face
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Panels:CharacterPanel"></a>
+    <strong>Panels:CharacterPanel (mdl)</strong>
+    </dt>
+    <dd>
+    Creates a panel to display a full character model
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mdl</span>
+         Model path
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel A DModelPanel configured to display the character
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Panels:ItemPanel"></a>
+    <strong>Panels:ItemPanel (mdl)</strong>
+    </dt>
+    <dd>
+    Creates a panel to display an item model
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mdl</span>
+         Model path
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        panel A DModelPanel configured to display the item
     </ol>
 
 

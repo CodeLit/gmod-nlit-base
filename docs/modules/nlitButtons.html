@@ -42,13 +42,19 @@
   <li><a href="../modules/nlit.html">nlit</a></li>
   <li><a href="../modules/nlitLib.html">nlitLib</a></li>
   <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
+  <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitLang.html">nlitLang</a></li>
-  <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitTest.html">nlitTest</a></li>
   <li><strong>nlitButtons</strong></li>
-  <li><a href="../modules/Editable.html">Editable</a></li>
-  <li><a href="../modules/Frames.html">Frames</a></li>
+  <li><a href="../modules/nlit-libs.gui.editable_cl.html">nlit-libs.gui.editable_cl</a></li>
+  <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
+  <li><a href="../modules/nlitIcons.html">nlitIcons</a></li>
+  <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
+  <li><a href="../modules/nlitLists.html">nlitLists</a></li>
+  <li><a href="../modules/nlitMenus.html">nlitMenus</a></li>
+  <li><a href="../modules/nlitPanels.html">nlitPanels</a></li>
+  <li><a href="../modules/nlitText.html">nlitText</a></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -65,7 +71,7 @@
 </p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local Buttons = nlitButtons
+        <pre class="example">local Buttons = nlitLib:Load(&apos;buttons&apos;)
 </pre>
     </ul>
 
@@ -73,23 +79,23 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Create">Create (text, clickFunc)</a></td>
+	<td class="name" nowrap><a href="#Buttons:Create">Buttons:Create (text, clickFunc)</a></td>
 	<td class="summary">Creates a button</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Accept">Accept (self, text, clickFunc)</a></td>
+	<td class="name" nowrap><a href="#Buttons:Accept">Buttons:Accept (text, clickFunc)</a></td>
 	<td class="summary">Accept button green colored</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Decline">Decline (self, text, clickFunc)</a></td>
+	<td class="name" nowrap><a href="#Buttons:Decline">Buttons:Decline (text, clickFunc)</a></td>
 	<td class="summary">Decline button red colored</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#AddToCMenu">AddToCMenu (title, icon, iconSize, func)</a></td>
+	<td class="name" nowrap><a href="#Buttons:AddToCMenu">Buttons:AddToCMenu (title, icon, iconSize, func)</a></td>
 	<td class="summary">Adds button to C button menu</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#HudSettings">HudSettings (self)</a></td>
+	<td class="name" nowrap><a href="#Buttons:HudSettings">Buttons:HudSettings ()</a></td>
 	<td class="summary">Specific HUD Settings button</td>
 	</tr>
 </table>
@@ -102,8 +108,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "Create"></a>
-    <strong>Create (text, clickFunc)</strong>
+    <a name = "Buttons:Create"></a>
+    <strong>Buttons:Create (text, clickFunc)</strong>
     </dt>
     <dd>
     Creates a button
@@ -124,7 +130,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="function-name">Create</span>(<span class="string">'Accept'</span>,<span class="keyword">function</span>(btn)
+        <pre class="example">Buttons:<span class="function-name">Create</span>(<span class="string">'Accept'</span>,<span class="keyword">function</span>(btn)
      <span class="comment">-- OnClick function
 </span>	btn:<span class="function-name">SetColor</span>(NC:<span class="function-name">Red</span>())
 <span class="keyword">end</span>)</pre>
@@ -132,8 +138,8 @@
 
 </dd>
     <dt>
-    <a name = "Accept"></a>
-    <strong>Accept (self, text, clickFunc)</strong>
+    <a name = "Buttons:Accept"></a>
+    <strong>Buttons:Accept (text, clickFunc)</strong>
     </dt>
     <dd>
     Accept button green colored
@@ -141,10 +147,6 @@
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-
-
-        </li>
         <li><span class="parameter">text</span>
 
 
@@ -159,14 +161,14 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/nlitButtons.html#Create">Create</a>
+         <a href="../modules/nlitButtons.html#Buttons:Create">Buttons:Create</a>
     </ul>
 
 
 </dd>
     <dt>
-    <a name = "Decline"></a>
-    <strong>Decline (self, text, clickFunc)</strong>
+    <a name = "Buttons:Decline"></a>
+    <strong>Buttons:Decline (text, clickFunc)</strong>
     </dt>
     <dd>
     Decline button red colored
@@ -174,10 +176,6 @@
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-
-
-        </li>
         <li><span class="parameter">text</span>
 
 
@@ -192,14 +190,14 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../modules/nlitButtons.html#Create">Create</a>
+         <a href="../modules/nlitButtons.html#Buttons:Create">Buttons:Create</a>
     </ul>
 
 
 </dd>
     <dt>
-    <a name = "AddToCMenu"></a>
-    <strong>AddToCMenu (title, icon, iconSize, func)</strong>
+    <a name = "Buttons:AddToCMenu"></a>
+    <strong>Buttons:AddToCMenu (title, icon, iconSize, func)</strong>
     </dt>
     <dd>
     Adds button to C button menu
@@ -227,20 +225,13 @@
 
 </dd>
     <dt>
-    <a name = "HudSettings"></a>
-    <strong>HudSettings (self)</strong>
+    <a name = "Buttons:HudSettings"></a>
+    <strong>Buttons:HudSettings ()</strong>
     </dt>
     <dd>
     Specific HUD Settings button
 
 
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">self</span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -254,7 +245,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2024-04-13 15:47:03 </i>
+<i style="float:right;">Last updated 2024-04-14 06:33:02 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

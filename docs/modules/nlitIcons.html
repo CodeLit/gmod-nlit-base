@@ -41,7 +41,7 @@
 <ul class="nowrap">
   <li><a href="../modules/nlit.html">nlit</a></li>
   <li><a href="../modules/nlitLib.html">nlitLib</a></li>
-  <li><strong>nlitLoad</strong></li>
+  <li><a href="../modules/nlitLoad.html">nlitLoad</a></li>
   <li><a href="../modules/nlitString.html">nlitString</a></li>
   <li><a href="../modules/nlitColors.html">nlitColors</a></li>
   <li><a href="../modules/nlitLang.html">nlitLang</a></li>
@@ -49,7 +49,7 @@
   <li><a href="../modules/nlitButtons.html">nlitButtons</a></li>
   <li><a href="../modules/nlit-libs.gui.editable_cl.html">nlit-libs.gui.editable_cl</a></li>
   <li><a href="../modules/nlit-libs.gui.frames_cl.html">nlit-libs.gui.frames_cl</a></li>
-  <li><a href="../modules/nlitIcons.html">nlitIcons</a></li>
+  <li><strong>nlitIcons</strong></li>
   <li><a href="../modules/nlit-libs.gui.inputs_cl.html">nlit-libs.gui.inputs_cl</a></li>
   <li><a href="../modules/nlitLists.html">nlitLists</a></li>
   <li><a href="../modules/nlitMenus.html">nlitMenus</a></li>
@@ -65,13 +65,14 @@
 
 <div id="content">
 
-<h1>Module <code>nlitLoad</code></h1>
-<p>Global shared module.</p>
-<p> Allows run code on start, and reload it on save</p>
+<h1>Module <code>nlitIcons</code></h1>
+<p>
+</p>
+<p>
+</p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local load = nlitLoad
- load:EnsureLoad(&apos;MyHook&apos;,0,function() print(&apos;Hello&apos;) end)
+        <pre class="example">local Icons = require &apos;nlitIcons&apos;
 </pre>
     </ul>
 
@@ -79,12 +80,12 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#EnsureLoad">EnsureLoad (hookName, loadTime, doCode)</a></td>
-	<td class="summary">Load code after entities was initialized.</td>
+	<td class="name" nowrap><a href="#Icons:Create">Icons:Create (icon)</a></td>
+	<td class="summary">Returns a panel with an icon displayed.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#WhenGMLoaded">WhenGMLoaded (hookName, loadTime, doCode)</a></td>
-	<td class="summary">Load code after gamemode was initialized.</td>
+	<td class="name" nowrap><a href="#Icons:GetPath">Icons:GetPath (icon)</a></td>
+	<td class="summary">Constructs the full path to an icon file.</td>
 	</tr>
 </table>
 
@@ -96,53 +97,51 @@
 
     <dl class="function">
     <dt>
-    <a name = "EnsureLoad"></a>
-    <strong>EnsureLoad (hookName, loadTime, doCode)</strong>
+    <a name = "Icons:Create"></a>
+    <strong>Icons:Create (icon)</strong>
     </dt>
     <dd>
-    Load code after entities was initialized.  Global function.
- Former deprecated name is DefinetlyLoad
+    Returns a panel with an icon displayed.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">hookName</span>
-         string unique name for future removal
-        </li>
-        <li><span class="parameter">loadTime</span>
-         number [optional] &ndash; delay for loading code
-        </li>
-        <li><span class="parameter">doCode</span>
-         function
+        <li><span class="parameter">icon</span>
+         string The filename of the icon to display.
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        panel The panel with the icon painted on it.
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "WhenGMLoaded"></a>
-    <strong>WhenGMLoaded (hookName, loadTime, doCode)</strong>
+    <a name = "Icons:GetPath"></a>
+    <strong>Icons:GetPath (icon)</strong>
     </dt>
     <dd>
-    Load code after gamemode was initialized.  Global function.
+    Constructs the full path to an icon file.
+ This function assumes all icons are stored in the &lsquo;materials/icons/&rsquo; directory.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">hookName</span>
-         string unique name for future removal
-        </li>
-        <li><span class="parameter">loadTime</span>
-         number [optional] &ndash; delay for loading code
-        </li>
-        <li><span class="parameter">doCode</span>
-         function
+        <li><span class="parameter">icon</span>
+         string The filename of the icon.
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        string The full path to the icon.
+    </ol>
 
 
 
