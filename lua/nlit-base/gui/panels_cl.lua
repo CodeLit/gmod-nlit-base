@@ -1,3 +1,6 @@
+--- Panels is GUI module for panels
+---@module nlitPanels
+module('nlitPanels', package.seeall)
 local vgui = vgui
 local draw = draw
 local surface = surface
@@ -10,8 +13,7 @@ local Vector = Vector
 local IsValid = IsValid
 local string = string
 local timer = timer
-local Panels = {}
-function Panels:Create(text, font)
+function Create(self, text, font)
     local p = vgui.Create('DPanel')
     p.text = text
     p.Paint = function(pnl)
@@ -41,20 +43,20 @@ function Panels:Create(text, font)
     return p
 end
 
-function Panels:DockScroll()
+function DockScroll(self)
     local scr = vgui.Create('DScrollPanel')
     scr:Dock(FILL)
     return scr
 end
 
 -- Даёт доступ к панели через кнопку C
-function Panels:AttachToC(pnl)
+function AttachToC(self, pnl)
     pnl:SetParent(g_ContextMenu)
     pnl:SetMouseInputEnabled(true)
     pnl.attachedToCMenu = true
 end
 
-function Panels:BinderPanel(command)
+function BinderPanel(self, command)
     local binder = vgui.Create('DBinder')
     binder:SetSize(200, 50)
     binder:SetPos(25, 35)
@@ -65,7 +67,7 @@ function Panels:BinderPanel(command)
     return binder
 end
 
-function Panels:FacePanel(mdl)
+function FacePanel(self, mdl)
     local pnl = vgui.Create('DModelPanel')
     pnl:SetModel(mdl)
     pnl:SetFOV(40)
@@ -93,7 +95,7 @@ function Panels:FacePanel(mdl)
     return pnl
 end
 
-function Panels:CharacterPanel(mdl)
+function CharacterPanel(self, mdl)
     local pnl = vgui.Create('DModelPanel')
     pnl:SetModel(mdl)
     pnl:SetFOV(40)
@@ -118,7 +120,7 @@ function Panels:CharacterPanel(mdl)
     return pnl
 end
 
-function Panels:ItemPanel(mdl)
+function ItemPanel(self, mdl)
     local pnl = vgui.Create('DModelPanel')
     pnl:SetModel(mdl)
     local ent = pnl.Entity
@@ -145,10 +147,9 @@ function DMultiline:Init()
 end
 
 vgui.Register('DMultiline', DMultiline, 'DTextEntry')
-function Panels:Multiline(text)
+function Multiline(self, text)
     local m = vgui.Create('DMultiline')
     m:SetText(text or '')
     m:SetFont('N_small')
     return m
 end
-return Panels

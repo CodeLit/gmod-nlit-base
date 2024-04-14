@@ -17,7 +17,7 @@ end
 ---Creates editable panel
 ---@param text string Placeholder text
 ---@param acceptFunc function OnEnterPressed function
-function Editable:EditPanel(self, text, acceptFunc)
+function EditPanel(self, text, acceptFunc)
     local e = TDLib('DTextEntry')
     e:SetPlaceholderText(text or l('Введите текст') .. '...')
     e:SetPlaceholderColor(NC:ThemeText())
@@ -28,7 +28,7 @@ end
 
 ---Creates editable number panel
 ---@see EditPanel
-function Editable:NumPanel(self, text, acceptFunc)
+function NumPanel(self, text, acceptFunc)
     local e = TDLib('DNumberWang')
     e:SetPlaceholderText(text or l('Введите число') .. '...')
     e:SetPlaceholderColor(NC:ThemeText())
@@ -43,19 +43,19 @@ end
 
 ---Creates editable slider panel
 ---@see EditPanel
-function Editable:NumSlider(self, text, min, max, decimal)
+function NumSlider(self, text, min, max, decimal)
     local numslider = vgui.Create("DNumSlider")
     numslider:SetSize(100, 100)
     numslider:SetPos(10, 10)
     numslider:SetMin(min or 0)
     numslider:SetMax(max or 1)
     numslider:SetDecimals(decimal or 0)
-    numslider.Paint = function(self, w, h)
+    numslider.Paint = function(el, w, h)
         surface.SetDrawColor(NC:ThemeInside())
         numslider:DrawFilledRect()
         draw.DrawText(l(text) or "", 'N', w / 2, 0, NC:ThemeText(), 1)
     end
 
-    numslider.PerformLayout = function(self) self:SizeToContents() end
+    numslider.PerformLayout = function(el) el:SizeToContents() end
     return numslider
 end

@@ -1,29 +1,23 @@
+--- Menus is GUI module for menu panels
+-- @module nlitMenus
+-- @usage local Menus = nlitMenus
+module('nlitMenus', package.seeall)
 local DermaMenu = DermaMenu
 local input = input
 local timer = timer
 local ScrW = ScrW
 local ScrH = ScrH
-local Menus = {}
-
-function Menus:Menu()
+function Menu(self)
     local menu = DermaMenu()
     menu:SetPos(input.GetCursorPos())
-
-    timer.Simple(0, function()
-        if self then
-            self:UpdateMenuPos(menu)
-        end
-    end)
-
+    timer.Simple(0, function() if self then self:UpdateMenuPos(menu) end end)
     menu:MakePopup()
-
     return menu
 end
 
-function Menus:UpdateMenuPos(menu)
+function UpdateMenuPos(self, menu)
     local x, y = input.GetCursorPos()
     local overScreen
-
     if x + menu:GetWide() > ScrW() then
         x = ScrW() - menu:GetWide()
         overScreen = true
@@ -34,9 +28,5 @@ function Menus:UpdateMenuPos(menu)
         overScreen = true
     end
 
-    if overScreen then
-        menu:SetPos(x, y)
-    end
+    if overScreen then menu:SetPos(x, y) end
 end
-
-return Menus

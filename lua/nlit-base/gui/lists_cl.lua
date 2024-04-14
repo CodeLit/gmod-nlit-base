@@ -1,16 +1,15 @@
+--- Lists is GUI module for list panels
+---@module nlitLists
+module('nlitLists', package.seeall)
 local vgui = vgui
 local math = math
 local SortedPairs = SortedPairs
 local table = table
 local pairs = pairs
 local isstring = isstring
---- Lists is GUI module for list panels
----@module Lists
-local Lists = {}
 local Buttons = nlitButtons
 local Frames = nlitFrames
 local Panels = nlitPanels
-local Inputs = nlitInputs
 local strings = nlitString
 local l = nlitLang.l
 ---Variant selector
@@ -18,7 +17,7 @@ local l = nlitLang.l
 ---@param action function
 ---@return panel
 ---@see ListVariant
-function Lists:Variant(tblVariants, action)
+function Variant(self, tblVariants, action)
     local CBox = vgui.Create('DComboBox')
     CBox:SetSize(100, 20)
     tblVariants = tblVariants or {}
@@ -45,7 +44,7 @@ end
 ---@param tblVariants table
 ---@param action function
 ---@return panel
-function Lists:VariantsFrame(title, tblVariants, action)
+function VariantsFrame(self, title, tblVariants, action)
     local fr = Frames:Frame(title)
     fr:SetSize(500, 85)
     fr:Center()
@@ -71,7 +70,7 @@ end
 ---@param tblVariants table
 ---@return panel
 ---@see Variant
-function Lists:ListVariant(tblVariants)
+function ListVariant(self, tblVariants)
     local list = vgui.Create('DListView')
     list:SetSize(300, 600)
     list:SetMultiSelect(false)
@@ -93,7 +92,7 @@ end
 ---Editable Table
 ---@param tblData table
 ---@return panel
-function Lists:EditableTable(tblData)
+function EditableTable(self, tblData)
     local pnl = Panels:Create()
     pnl:SetSize(300, 500)
     if isstring(tblData) then tblData = strings:FromJson(tblData) or {} end
@@ -140,7 +139,7 @@ end
 ---@return panel
 ---@see Variant
 ---@see ListVariant
-function Lists:ListVariantsFrame(title, tblVariants, action)
+function ListVariantsFrame(self, title, tblVariants, action)
     local fr = Frames:Frame(title)
     fr:SetSize(500, 500)
     fr:Center()
@@ -168,14 +167,13 @@ end
 ---Returns new DListLayout
 ---@return panel
 ---@see Tile
-function Lists:List()
+function List()
     return vgui.Create('DListLayout')
 end
 
 ---Returns new DTileLayout
 ---@return panel
 ---@see List
-function Lists:Tile()
+function Tile()
     return vgui.Create('DTileLayout')
 end
-return Lists

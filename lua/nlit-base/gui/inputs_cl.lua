@@ -1,3 +1,7 @@
+--- Creates GUI Inputs
+--- @module nlitInputs
+--- @usage local Inputs = nlitInputs
+module('nlitInputs', package.seeall)
 local IsValid = IsValid
 local vgui = vgui
 local tonumber = tonumber
@@ -7,12 +11,8 @@ local isstring = isstring
 local tobool = tobool
 local surface = surface
 local pairs = pairs
---- Creates GUI Inputs
---- @module Inputs
---- @usage local Inputs = nlitInputs
-local Inputs = {}
 local Panels = nlitPanels
-local Editable = NGUI.Editable
+local Editable = nlitEditable
 local l = nlitLang.l
 local Lists = nlitLists
 ---Creates an input panel
@@ -22,7 +22,7 @@ local Lists = nlitLists
 ---@param inputParent panel or frame
 ---@param inputValue any default value
 ---@return input panel
-function Inputs:Create(title, acceptFunc, typeOfInput, inputParent, inputValue)
+function Create(self, title, acceptFunc, typeOfInput, inputParent, inputValue)
     title = l(title)
     local mainP = Panels:Create()
     if IsValid(inputParent) then mainP:SetSize(inputParent:GetWide(), 25) end
@@ -91,7 +91,7 @@ end
 ---@param title string
 ---@param defaultValue string
 ---@return panel
-function Inputs:Bool(title, defaultValue)
+function Bool(self, title, defaultValue)
     local pnl = Panels:Create()
     pnl:Dock(FILL)
     pnl:SetBackgroundColor(NC:Theme())
@@ -113,7 +113,7 @@ end
 
 ---Resizes input by text
 ---@param inp panel
-function Inputs:Resize(inp)
+function Resize(self, inp)
     local titleP = inp.titlePanel
     local editP = inp.editPanel
     local w, h = 200, 20
@@ -129,11 +129,11 @@ end
 ---Creates many inputs panel
 ---@param tblFields table keyvalues name => data
 ---@param acceptFunc function
----@usage Inputs:Fields({age={inputType='num',min=0,max=100,category='personal',value=50}}, function()
+---@usage Fields({age={inputType='num',min=0,max=100,category='personal',value=50}}, function()
 ---	
 ---end)
 ---@return panel
-function Inputs:Fields(tblFields, acceptFunc)
+function Fields(self, tblFields, acceptFunc)
     -- TODO: Сделать работоспособной acceptFunc
     local cats = {}
     local mainPanel = Panels:DockScroll()
@@ -173,4 +173,3 @@ function Inputs:Fields(tblFields, acceptFunc)
     end
     return mainPanel
 end
-return Inputs

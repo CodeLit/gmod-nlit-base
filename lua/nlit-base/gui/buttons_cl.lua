@@ -13,7 +13,7 @@ local hook = hook
 local table = table
 local RunConsoleCommand = RunConsoleCommand
 local D = nlitLib:Lib('draw')
-local Icons = nlitLib:Lib('icons')
+local Icons = nlitIcons
 local l = nlitLang.l
 --- Creates a button
 ---@param text string Button text

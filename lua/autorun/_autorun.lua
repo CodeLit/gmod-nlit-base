@@ -44,4 +44,5 @@ function AddAllInFolder(self, folderpath, bDontinclude)
 end
 
 AddAllInFolder(self, 'nlit-base')
+AddAllInFolder(self, 'nlit-config')
 AddAllInFolder(self, 'nlit-tests')
