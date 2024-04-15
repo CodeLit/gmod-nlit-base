@@ -1,6 +1,7 @@
 --- The libfiner is an importer module for nlit libraries. Global shared module.
 -- @module nlitLib
--- @usage local libs = nlitLib
+-- @usage local html = nlitLib:Load('html')
+-- ...
 -- @see nlit
 module('nlitLib', package.seeall)
 local tobool = tobool
@@ -10,13 +11,11 @@ local pairs = pairs
 local file = file
 local nlit = nlit
 local pathToLibs = 'nlit-libs'
---- Using of Nlit lib. Basic fucntion.
+--- Using of any library. Basic fucntion.
 -- @param libName string
 -- @return table lib
--- @usage local libs = nlitLib
--- local colors = libs.Colors
--- Button:SetBackgroundColor(colors:White())
--- local Strings = libs:Lib('strings')
+-- @usage local strings = nlitLib:Load('strings')
+-- strings:FromJson(json)
 -- ...
 function Load(self, libName)
     local found = FindLibPathInFolder(self, pathToLibs, string.lower(libName))
