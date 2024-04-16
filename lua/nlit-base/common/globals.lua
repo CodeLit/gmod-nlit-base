@@ -1,3 +1,3 @@
-NC = NC or nlitColors
-nlitLang = nlitLang or nlitLib:Load('lang')
-nlitDraw = nlitDraw or nlitLib:Load('draw')
+NC = nlitColors
+nlitLang = nlitLib:Load('lang')
+nlitDraw = nlitLib:Load('draw')

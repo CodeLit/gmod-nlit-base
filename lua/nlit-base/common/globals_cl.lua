@@ -1,4 +1,4 @@
-NGUI = NGUI or {
+NGUI = {
     Buttons = nlitLib:Load('buttons'),
     Frames = nlitLib:Load('frames'),
     Icons = nlitLib:Load('icons'),

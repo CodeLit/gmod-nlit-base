@@ -43,7 +43,7 @@ end
 -- @param action function
 -- @return panel
 function Lists:VariantsFrame(title, tblVariants, action)
-    local fr = NGUI.Frames:Frame(title)
+    local fr = NGUI.Frames:Create(title)
     fr:SetSize(500, 85)
     fr:Center()
     local var = fr:Add(self:Variant(tblVariants))
@@ -138,7 +138,7 @@ end
 -- @see Variant
 -- @see ListVariant
 function Lists:ListVariantsFrame(title, tblVariants, action)
-    local fr = NGUI.Frames:Frame(title)
+    local fr = NGUI.Frames:Create(title)
     fr:SetSize(500, 500)
     fr:Center()
     local var = fr:Add(self:ListVariant(tblVariants))

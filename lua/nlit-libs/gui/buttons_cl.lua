@@ -15,6 +15,7 @@ local RunConsoleCommand = RunConsoleCommand
 local D = nlitLib:Load('draw')
 local Icons = nlitLib:Load('icons')
 local l = nlitLib:Load('lang')
+local Panels = nlitLib:Load('panels')
 --- Creates a button
 -- @param text string Button text
 -- @param clickFunc function OnClick function
@@ -102,7 +103,7 @@ function Buttons:HudSettings()
             return
         end
 
-        local btnPanel = Panel()
+        local btnPanel = Panels:Panel()
         btnPanel:SetSize(200, 200)
         local mixer = btnPanel:Add('DColorMixer')
         mixer:SetPalette(false)

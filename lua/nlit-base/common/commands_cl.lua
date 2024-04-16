@@ -1,6 +1,6 @@
 --- Commands for gmod-nlit-base
 -- @module nlitCommands
-local Frames = Frames
+local Frames = NGUI.Frames
 --- Clears all opened frames by closing them.
 -- This command is intended for debugging or resetting UI state.
 -- @usage nlit_clear_frames (in gmod console)
