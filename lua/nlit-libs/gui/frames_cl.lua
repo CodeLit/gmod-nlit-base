@@ -84,7 +84,11 @@ function Frames:Input(title, acceptFunc, typeOfInput)
     local c = inp.subPanel:Add(Buttons:Accept())
     c:Dock(RIGHT)
     c:SetWide(fr:GetWide() / 4)
-    c.DoClick = function() inp.editPanel.OnEnter() end
+    c.DoClick = function()
+        inp.editPanel.OnEnter()
+        fr:Close()
+    end
+
     for _, v in pairs(inp.subPanel:GetChildren()) do
         v:DockMargin(2, 0, 2, 0)
     end

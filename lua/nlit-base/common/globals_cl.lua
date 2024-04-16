@@ -1,5 +1,6 @@
 NGUI = {
     Buttons = nlitLib:Load('buttons'),
+    Editable = nlitLib:Load('editable'),
     Frames = nlitLib:Load('frames'),
     Icons = nlitLib:Load('icons'),
     Inputs = nlitLib:Load('inputs'),
