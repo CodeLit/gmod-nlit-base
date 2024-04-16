@@ -15,6 +15,7 @@ local Panels = nlitLib:Load('panels')
 local Editable = nlitLib:Load('editable')
 local l = nlitLib:Load('lang')
 local Lists = nlitLib:Load('lists')
+local strings = nlitString
 local NC = NC -- Make sure NC is defined or imported if needed
 --- Creates an input panel
 -- @param title string Title or label for the input
