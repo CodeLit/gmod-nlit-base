@@ -11,7 +11,7 @@ local print = print
 ---@module DB
 local DB = {}
 local NStr = nlitString
-local dbg_prefix = '[CWDB]'
+local dbg_prefix = '[nlit:DB]'
 local nlitUtf8 = nlitLib:Load('utf8')
 ---Generates SQL string from table. Input must be in counted non-associative array.
 ---@param tbl table non-associative
