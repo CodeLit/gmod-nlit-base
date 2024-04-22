@@ -45,7 +45,7 @@ function WhenGMLoaded(hookName, loadTime, doCode)
 
     DoIfGM()
     if CLIENT then
-        -- TODO: Оптимизировать так, чтобы таймер был один, но хуки вызывались все
+        -- TODO: To optimize it, so that the timer was one, but the hooks called all
         timer.Create('NCommon GM Loading ' .. hookName, 0.05, 0, function()
             if GAMEMODE then
                 timer.Remove('NCommon GM Loading ' .. hookName)
